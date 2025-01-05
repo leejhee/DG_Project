@@ -1,0 +1,4 @@
+﻿Index,# 맵 시작 위치,#위치,# 맵 인덱스 1:1 대응,맵 인덱스,X 위치 (만배율),Y 위치 (만배율),Z 위치 (만배율),캐릭터 프리팹 이름
+index,#,"#(xPos, yPos, zPos)",#,mapScene,xPos,yPos,zPos,charPrefab
+long,#,#vector,#,eScene,int,int,int,string
+1,1번맵 위치 시작점,,,GameScene,0,5000,0,ArcherChar

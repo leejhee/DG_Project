@@ -13,67 +13,31 @@ namespace DataGenerator
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             string folderPath = "../../../DataGenerator/XLSXS";
-            string tempFolderPath = "../../../DataGenerator/TempXLSXS";
             string[] excelFiles = Directory.GetFiles(folderPath, "*.xlsx");
 
-            // ----- 1. 임시 폴더 생성 -----
-            if (!Directory.Exists(tempFolderPath))
-            {
-                Directory.CreateDirectory(tempFolderPath);
-            }
-
-            // ----- 2. 파일 복사 -----
             foreach (string file in excelFiles)
             {
-                // 파일 이름이 ~$로 시작하는 경우 건너뜀
-                if (Path.GetFileName(file).StartsWith("~$"))
-                {
-                    continue;
-                }
-
-                string tempFile = Path.Combine(tempFolderPath, Path.GetFileName(file));
-
-                File.Copy(file, tempFile, true);
-                Console.WriteLine("Copied file: " + Path.GetFileName(file));
-            }
-
-            // ----- 3. 복사한 파일로 csv 생성 -----
-            foreach (string tempFile in Directory.GetFiles(tempFolderPath, "*.xlsx"))
-            {
-
-                // 파일 이름이 ~$로 시작하는 경우 건너뜀
-                if (Path.GetFileName(tempFile).StartsWith("~$"))
-                {
-                    continue;
-                }
-
-                // 파싱 및 CSV 파일 생성
-                Console.WriteLine("csv 생성: " + Path.GetFileName(tempFile));
-                ParseExcel(tempFile);
+                Console.WriteLine("Generate file: " + Path.GetFileName(file));
+                ParseExcel(file);
 
                 // Workbook 클래스의 인스턴스 생성
                 Workbook workbook = new Workbook();
 
                 // Excel 파일 로드
-                workbook.LoadFromFile(tempFile);
+                workbook.LoadFromFile(file);
 
                 // 첫 번째 워크시트 가져오기
                 Worksheet sheet = workbook.Worksheets[0];
 
                 // 워크시트를 CSV로 저장
-                sheet.SaveToFile($"../../../Client/Assets/Resources/CSV/{Path.GetFileNameWithoutExtension(Path.GetFileName(tempFile))}.csv", ",", Encoding.UTF8);
+                sheet.SaveToFile($"../../../DesireGame/Assets/Resources/CSV/{Path.GetFileNameWithoutExtension(Path.GetFileName(file))}.csv", ",", Encoding.UTF8);
             }
-
-
-            // 임시 폴더 및 폴더 내부의 파일 삭제
-            Directory.Delete(tempFolderPath, true);
-            Console.WriteLine("TempXLSXS 삭제 완료");
 
             Console.WriteLine("CSV파일 생성 & 코드 생성 완료");
             Console.ReadKey();
             Environment.Exit(0);
         }
-         
+
         public static void ParseExcel(string file)
         {
             string excelName = Path.GetFileNameWithoutExtension(Path.GetFileName(file));
@@ -151,7 +115,7 @@ namespace DataGenerator
             dataParse = dataParse.Replace("\n", "\n\t\t\t\t\t");
             var dataManagerText = string.Format(DataFormat.dataFormat, excelName, dataRegister, dataParse);
 
-            File.WriteAllText($"../../../Client/Assets/Scripts/DataSheets/{excelName}.cs", dataManagerText);
+            File.WriteAllText($"../../../DesireGame/Assets/Scripts/DataSheets/{excelName}.cs", dataManagerText);
         }
 
 

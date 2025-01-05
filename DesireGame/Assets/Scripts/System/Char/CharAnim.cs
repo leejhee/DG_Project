@@ -10,13 +10,12 @@ using UnityEngine.AI;
 
 namespace Client
 {
-    public class CharAnim 
+    public class CharAnim
     {
-        protected Animator  _Animator;       // 애니메이터
+        protected Animator _Animator;       // 애니메이터
 
         public Animator Animator => _Animator;
-
-
+        
         /// <summary>
         /// 초기화
         /// </summary>

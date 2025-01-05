@@ -1,0 +1,7 @@
+﻿아이템Index,#캐릭터 설명 ,스킬명,스킬타입,스킬시작Execution,스킬아이콘이미지,스킬타임라인명
+index,#,skillName,skillType,skillExecutionList,skillPortraitImage,skillTimeLineName
+long,#,string,eSkillType,long[],string,string
+100000,돌진,돌진,Dash,[100101.100102],WarriorDash,WarriorDash_tl
+100001,패링,패링,Parrying,[100201],WarriorDef,WarriorDef_tl
+100002,종베기,종베기,Attack,[100301],WarriorAttack,WarriorAttack_tl
+100003,전투의 함성,전투의 함성,Buff,[100401.100402.100403],WarriorBuff,WarriorBuff_tl

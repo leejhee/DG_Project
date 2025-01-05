@@ -9,15 +9,12 @@ using System.Linq;
 
 namespace Client
 {
-    public partial class CharPositionData : SheetData
+    public partial class StringData : SheetData
     {
-public long index; // Index
-		
-		public SystemEnum.eScene mapScene; // 맵 인덱스
-		public int xPos; // X 위치 (만배율)
-		public int yPos; // Y 위치 (만배율)
-		public int zPos; // Z 위치 (만배율)
-		public string charPrefab; // 캐릭터 프리팹 이름
+public long Index; // Index
+		public string stringCode; // 스트링코드
+		public string stringKor; // 한국어
+		public string stringEng; // 영어
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -39,38 +36,28 @@ public long index; // Index
                     string[] values = lines[i].Trim().Split(',');
                     line = i;
 
-                    CharPositionData data = new CharPositionData();
+                    StringData data = new StringData();
 
                     
 					if(values[0] == "")
-					    data.index = default;
+					    data.Index = default;
 					else
-					    data.index = Convert.ToInt64(values[0]);
+					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[4] == "")
-					    data.mapScene = default;
+					if(values[1] == "")
+					    data.stringCode = default;
 					else
-					    data.mapScene = (SystemEnum.eScene)Enum.Parse(typeof(SystemEnum.eScene), values[4]);
+					    data.stringCode = Convert.ToString(values[1]);
 					
-					if(values[5] == "")
-					    data.xPos = default;
+					if(values[2] == "")
+					    data.stringKor = default;
 					else
-					    data.xPos = Convert.ToInt32(values[5]);
+					    data.stringKor = Convert.ToString(values[2]);
 					
-					if(values[6] == "")
-					    data.yPos = default;
+					if(values[3] == "")
+					    data.stringEng = default;
 					else
-					    data.yPos = Convert.ToInt32(values[6]);
-					
-					if(values[7] == "")
-					    data.zPos = default;
-					else
-					    data.zPos = Convert.ToInt32(values[7]);
-					
-					if(values[8] == "")
-					    data.charPrefab = default;
-					else
-					    data.charPrefab = Convert.ToString(values[8]);
+					    data.stringEng = Convert.ToString(values[3]);
 					
 
                     dataList[data.index] = data;

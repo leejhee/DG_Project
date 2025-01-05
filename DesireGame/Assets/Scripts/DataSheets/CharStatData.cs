@@ -38,12 +38,6 @@ public long index; // 캐릭터Index
                     string[] values = lines[i].Trim().Split(',');
                     line = i;
 
-					if (values.Length <= 0)
-						continue;
-
-					if (values[0].Contains("#"))
-						continue;
-
                     CharStatData data = new CharStatData();
 
                     
@@ -77,7 +71,7 @@ public long index; // 캐릭터Index
 					else
 					    data.Attack = Convert.ToInt64(values[6]);
 					
-                    
+
                     dataList[data.index] = data;
                 }
 

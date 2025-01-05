@@ -1,0 +1,4 @@
+﻿몬스터Index,#몬스터 설명 ,맵위치,캐릭터 인덱스,#위치,시작 위치
+index,#,,charIndex,"#[x,y]", startPos
+long,#,,long,#vector,int[]
+1,코볼트,,10001,,[1.0]

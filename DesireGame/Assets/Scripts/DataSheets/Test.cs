@@ -34,12 +34,6 @@ public long index; // 인덱스
                     string[] values = lines[i].Trim().Split(',');
                     line = i;
 
-					if (values.Length <= 0)
-						continue;
-
-					if (values[0].Contains("#"))
-						continue;
-
                     Test data = new Test();
 
                     
@@ -53,7 +47,7 @@ public long index; // 인덱스
 					else
 					    data.test1 = Convert.ToString(values[1]);
 					
-                    
+
                     dataList[data.index] = data;
                 }
 

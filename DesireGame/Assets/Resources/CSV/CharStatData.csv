@@ -1,0 +1,4 @@
+﻿캐릭터Index,#캐릭터 설명 ,HP,Def,SP,Speed,Attack
+index,#,HP,Def,SP,Speed,Attack
+long,#,long,long,long,long,long
+10000,전사 Stat,1000000,10000,1000000,50000,120000

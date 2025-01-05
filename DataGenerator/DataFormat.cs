@@ -90,16 +90,10 @@ namespace Client
                     string[] values = lines[i].Trim().Split(',');
                     line = i;
 
-					if (values.Length <= 0)
-						continue;
-
-					if (values[0].Contains(""#""))
-						continue;
-
                     {0} data = new {0}();
 
                     {2}
-                    
+
                     dataList[data.index] = data;
                 }}
 
