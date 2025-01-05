@@ -1,7 +1,0 @@
-﻿아이템Index,#아이템 설명,아이템명,아이템프리팹명,아이템스프라이트명,아이템 타입,일회용여부,아이템효과(Execution),사용가능스킬그룹
-index,#,itemName,itemPrefabName,itemSpriteName,itemType,itemDisposable,itemEffectExecutionList,skillIndex
-long,#,string,string,string,eItemType,bool,long[],long
-2001,방어력 +30,파란색 가운,blueGown,blueGown,Equipment,FALSE,[0],0
-2002,공격력 +50,태극 부채,taegeukFan,taegeukFan,Equipment,FALSE,[0],1003
-2003,HP 50 회복,빨간 포션,redPotion,redPotion,Consumable,TRUE,[0],0
-2004,MP 100 회복,파란 포션,bluePotion,bluePotion,Consumable,TRUE,[0],0

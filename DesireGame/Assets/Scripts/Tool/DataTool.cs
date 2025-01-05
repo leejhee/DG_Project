@@ -13,6 +13,15 @@ namespace Client
         {
             DataManager.Instance.DataLoad();
         }
+
+        [MenuItem("Data/Verify Dialougue")]
+        public static void DialogueDataVerification()
+        {
+            //dialougedata의 모든 레코드 기본적으로 순회하기
+            DataManager.Instance.DataLoad();
+
+
+        }
     }
 }
 #endif

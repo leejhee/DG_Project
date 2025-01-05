@@ -25,29 +25,7 @@ namespace Client
         {
             MaxCount
         }
-        public enum eState
-        {
-            None,
-            HP, // 기본 HP
-            NHP, // 현재 HP
-            NMHP, // 현재 최고 HP
-
-            Defence, // 기본 방어력
-            NDefence, // 현재 방어력
-
-            SP, // 기본 SP
-            NSP, // 현재 SP
-            NMSP, // 현재 최고 SP
-
-            Speed, // 기본 스피드 
-            NSpeed, // 현재 Speed
-
-            Attack, // 공격력
-            NAttack, // 현재 공격력
-
-            MaxCount
-        }
-
+        
         public enum eTag
         {
             MaxCount
@@ -73,106 +51,32 @@ namespace Client
 
             MaxCount
         }
-        public enum eCharType
+        
+        public enum EGameData
         {
             None,
-            Player,
-            PlayerSide,
-            Monster,
-            NPC,
-            Projectal,
-
-            MaxCount
         }
 
-        public enum eExecutionGroupType
-        { 
-            None,
-            Buff,
-            Debuff,
-            Create,
-            Action,
-
-            MaxCount,
-        }
-
-        public enum eExecutionType
+        public enum ERound
         {
             None,
-            Avoidance, // 무적
-            StateBuff, // 상수값 버프 증감 
-            StateBuffPer, // 기본State 버프 퍼센트 증감
-            StateBuffNPer, // 현재State 버프 퍼센트 증감
-            Parrying, // 방향 패링
-            DotDamage, // 도트 데미지
-
-            MaxCount
         }
 
-
-        public enum eExecutionCondition
-        { 
-            None,
-            ParryingSuccess,
-
-            MaxCount
-        }
-        public enum eSkillType
-        {
-            None,
-            BasicAttack,
-            CharSkill,
-            Dash,
-            Parrying,
-            Attack,
-            Buff,
-
-            MaxCount
-        }
-
-        public enum eIsAttack
+        public enum EKeywordType
         {
             None,
 
-            Player,
-            Monster,
-
-            MaxCount
         }
 
-        public enum eItemType
+        public enum ECharImg
         {
             None,
 
-            Equipment,
-            Consumable,
-            ETC,
-
-            MaxCount
         }
 
-
-        public enum PlayerAnim
+        public enum EDialougeEff
         {
-            idle,
-            move,
-            attack,
-            damaged,
-            debuff,
-            death,
-
-            MaxCount
-        }
-
-        public enum PlayerState
-        {
-            IDLE,
-            MOVE,
-            ATTACK,
-            DAMAGED,
-            DEBUFF,
-            DEATH,
-            OTHER,
+            None,
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Client
 {
     public partial class StringData : SheetData
     {
-public long index; // Index
+public long Index; // Index
 		public string stringCode; // 스트링코드
 		public string stringKor; // 한국어
 		public string stringEng; // 영어
@@ -33,16 +33,16 @@ public long index; // Index
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = lines[i].Trim().Split(',');
+                    string[] values = lines[i].Trim().Split('\t');
                     line = i;
 
                     StringData data = new StringData();
 
                     
 					if(values[0] == "")
-					    data.index = default;
+					    data.Index = default;
 					else
-					    data.index = Convert.ToInt64(values[0]);
+					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[1] == "")
 					    data.stringCode = default;
@@ -60,7 +60,7 @@ public long index; // Index
 					    data.stringEng = Convert.ToString(values[3]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;
