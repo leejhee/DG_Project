@@ -54,7 +54,7 @@ public long index; // 몬스터Index
 					data. startPos =  startPosData;
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

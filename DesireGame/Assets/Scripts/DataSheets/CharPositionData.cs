@@ -73,7 +73,7 @@ public long index; // Index
 					    data.charPrefab = Convert.ToString(values[8]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

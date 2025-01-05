@@ -85,7 +85,7 @@ public long index; // 아이템Index
 					    data.skillIndex = Convert.ToInt64(values[8]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

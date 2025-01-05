@@ -1,6 +1,6 @@
-﻿Index,스트링코드,한국어,영어,,,,,,,,,,,,,,,,
-Index,stringCode,stringKor,stringEng,,,,,,,,,,,,,,,,
-long,string,string,string,,,,,,,,,,,,,,,,
-0,StringCode_Dialog1,"솔직히 말할게, {0}이야.","Honestly, it's {0}.",,,,,,,,,,,,,,,,
+﻿Index	스트링코드	한국어	영어																
+index	stringCode	stringKor	stringEng																
+long	string	string	string																
+0	StringCode_Dialog1	솔직히 말할게, {0}이야.	Honestly, it's {0}.																
 
 

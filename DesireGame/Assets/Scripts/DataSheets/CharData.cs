@@ -85,7 +85,7 @@ public long index; // 캐릭터Index
 					    data.charStatId = Convert.ToInt64(values[8]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

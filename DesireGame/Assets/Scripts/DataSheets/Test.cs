@@ -48,7 +48,7 @@ public long index; // 인덱스
 					    data.test1 = Convert.ToString(values[1]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

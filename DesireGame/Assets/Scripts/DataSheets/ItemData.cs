@@ -73,7 +73,7 @@ public long index; // 아이템Index
 					    data.skillTimeLineName = Convert.ToString(values[6]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

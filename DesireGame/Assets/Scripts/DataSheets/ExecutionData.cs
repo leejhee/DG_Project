@@ -107,7 +107,7 @@ public long index; // ExecutionIndex
 					    data.ChainExecutionCondition = (SystemEnum.eExecutionCondition)Enum.Parse(typeof(SystemEnum.eExecutionCondition), values[11]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

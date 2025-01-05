@@ -72,7 +72,7 @@ public long index; // 캐릭터Index
 					    data.Attack = Convert.ToInt64(values[6]);
 					
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;

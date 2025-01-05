@@ -94,7 +94,60 @@ namespace Client
 
                     {2}
 
-                    dataList[data.index] = data;
+                    dataList[data.Index] = data;
+                }}
+
+                return dataList;
+            }}
+			catch (Exception e)
+			{{
+				Debug.LogError($""{{this.GetType().Name}}의 {{line}}전후로 데이터 문제 발생"");
+				return new Dictionary<long, SheetData>();
+			}}
+        }}
+    }}
+}}";
+
+        public static string dataStringDataFormat =
+@"using Client;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using System.Data;
+using System.Linq;
+
+namespace Client
+{{
+    public partial class {0} : SheetData
+    {{
+{1}
+
+        public override Dictionary<long, SheetData> LoadData()
+        {{
+            var dataList = new Dictionary<long, SheetData>();
+
+            string ListStr = null;
+			int line = 0;
+            TextAsset csvFile = Resources.Load<TextAsset>($""CSV/{{this.GetType().Name}}"");
+            try
+			{{            
+                string csvContent = csvFile.text;
+                string[] lines = csvContent.Split('\n');
+                for (int i = 3; i < lines.Length; i++)
+                {{
+                    if (string.IsNullOrWhiteSpace(lines[i]))
+                        continue;
+
+                    string[] values = lines[i].Trim().Split('\t');
+                    line = i;
+
+                    {0} data = new {0}();
+
+                    {2}
+
+                    dataList[data.Index] = data;
                 }}
 
                 return dataList;

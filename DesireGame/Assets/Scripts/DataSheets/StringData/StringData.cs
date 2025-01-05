@@ -33,7 +33,7 @@ public long index; // Index
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = lines[i].Trim().Split('\t');
+                    string[] values = lines[i].Trim().Split(',');
                     line = i;
 
                     StringData data = new StringData();
@@ -60,7 +60,7 @@ public long index; // Index
 					    data.stringEng = Convert.ToString(values[3]);
 					
 
-                    dataList[data.Index] = data;
+                    dataList[data.index] = data;
                 }
 
                 return dataList;

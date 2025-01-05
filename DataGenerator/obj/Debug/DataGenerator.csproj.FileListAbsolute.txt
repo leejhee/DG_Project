@@ -49,3 +49,4 @@ D:\Unity\DG_Project\DataGenerator\obj\Debug\DataGenerator.csproj.CoreCompileInpu
 D:\Unity\DG_Project\DataGenerator\obj\Debug\DataGenerator.csproj.CopyComplete
 D:\Unity\DG_Project\DataGenerator\obj\Debug\DataGenerator.exe
 D:\Unity\DG_Project\DataGenerator\obj\Debug\DataGenerator.pdb
+D:\Unity\DG_Project\DataGenerator\obj\Debug\DataGenerator.csproj.AssemblyReference.cache
