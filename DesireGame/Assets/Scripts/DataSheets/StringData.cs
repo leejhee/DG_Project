@@ -6,6 +6,7 @@ using System.IO;
 using UnityEngine;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Client
 {
@@ -14,7 +15,6 @@ namespace Client
 public long Index; // Index
 		public string stringCode; // 스트링코드
 		public string stringKor; // 한국어
-		public string stringEng; // 영어
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -27,7 +27,7 @@ public long Index; // Index
             try
 			{            
                 string csvContent = csvFile.text;
-                string[] lines = csvContent.Split('\n');
+                var lines = Regex.Split(csvContent, @"(?<!""[^""]*)\r?\n");
                 for (int i = 3; i < lines.Length; i++)
                 {
                     if (string.IsNullOrWhiteSpace(lines[i]))
@@ -53,11 +53,6 @@ public long Index; // Index
 					    data.stringKor = default;
 					else
 					    data.stringKor = Convert.ToString(values[2]);
-					
-					if(values[3] == "")
-					    data.stringEng = default;
-					else
-					    data.stringEng = Convert.ToString(values[3]);
 					
 
                     dataList[data.Index] = data;

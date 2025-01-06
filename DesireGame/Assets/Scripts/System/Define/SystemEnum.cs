@@ -54,24 +54,39 @@ namespace Client
         
         public enum EGameData
         {
-            None,
+            GAME1,
+            GAME2,
+                        
+            EMax
         }
 
         public enum ERound
         {
-            None,
+            ROUND1,
+            ROUND2,
+            ROUND3,
+
+            EMax
         }
 
         public enum EKeywordType
         {
-            None,
+            STRATEGY_KEY,
+            CHARACTER_KEY,
 
+            EMax
         }
 
         public enum ECharImg
         {
-            None,
+            DEFAULT,
+            SMILE,
+            SOB,
+            RAGE,
+            WORRY,
+            SHOCK,
 
+            EMax
         }
 
         public enum EDialougeEff

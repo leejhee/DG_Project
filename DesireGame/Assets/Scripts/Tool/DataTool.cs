@@ -19,7 +19,17 @@ namespace Client
         {
             //dialougedata의 모든 레코드 기본적으로 순회하기
             DataManager.Instance.DataLoad();
+            var DialogueDict = DataManager.Instance.GetDictionary("DialogueData");
 
+            foreach(var kvp in DialogueDict )
+            {
+                //Debug.Log(kvp.Key);
+                Debug.Log(DataManager.Instance.GetData<StringData>(kvp.Key).stringKor);
+            }
+
+
+
+            
 
         }
     }

@@ -64,6 +64,7 @@ using System.IO;
 using UnityEngine;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Client
 {{
@@ -81,13 +82,13 @@ namespace Client
             try
 			{{            
                 string csvContent = csvFile.text;
-                string[] lines = csvContent.Split('\n');
+                var lines = Regex.Split(csvContent, @""\r?\n"");
                 for (int i = 3; i < lines.Length; i++)
                 {{
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = lines[i].Trim().Split(',');
+                    string[] values = Regex.Split(lines[i], @"",(?=(?:[^""""]*""""[^""""]*"""")*[^""""]*$)"");
                     line = i;
 
                     {0} data = new {0}();
@@ -117,6 +118,7 @@ using System.IO;
 using UnityEngine;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Client
 {{
@@ -134,7 +136,7 @@ namespace Client
             try
 			{{            
                 string csvContent = csvFile.text;
-                string[] lines = csvContent.Split('\n');
+                var lines = Regex.Split(csvContent, @""(?<!""""[^""""]*)\r?\n"");
                 for (int i = 3; i < lines.Length; i++)
                 {{
                     if (string.IsNullOrWhiteSpace(lines[i]))
