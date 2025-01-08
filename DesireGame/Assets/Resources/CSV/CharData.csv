@@ -1,0 +1,5 @@
+﻿캐릭터Index,#캐릭터 설명 ,캐릭터 이름,캐릭터타입,케릭터스킬,캐릭터프리팹명,캐릭터 기본 버프,캐릭터아이콘이미지,캐릭터 Stat
+Index,#,charName,charType,charSkillList,charPrefab,charDefaultBuffList,charPortraitImage,charStatId
+long,#,string,eCharType,long[],string,long[],string,long
+1,궁수,ArcherChar,Player,[1001],ArcherChar,[],ArcherChar,10000
+10001,코볼트,Kobold,Monster,[10001001],Kobold,,warrior,10000
