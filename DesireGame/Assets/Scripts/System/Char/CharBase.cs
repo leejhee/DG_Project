@@ -26,7 +26,6 @@ namespace Client
         [SerializeField] protected Animator _Animator;       // 애니메이터\
 
         //private ExecutionInfo _executionInfo = null; // 기능 정보
-        private CharFSMInfo   _charFSM;              // 캐릭터 현재 유한상태 머신
         //private CharSKillInfo _charSKillInfo;        // 캐릭터 스킬
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
         private CharStat     _charStat = null;       // Stat 정보
@@ -58,7 +57,6 @@ namespace Client
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         //public ExecutionInfo ExecutionInfo => _executionInfo;  // 기능 정보
-        public CharFSMInfo CharFSM => _charFSM; // 캐릭터 현재 유한상태 머신
         //public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
@@ -75,7 +73,6 @@ namespace Client
             _uid = CharManager.Instance.GetNextID();
             //_executionInfo = new ExecutionInfo();
             //_executionInfo.Init();
-            _charFSM = new CharFSMInfo(this);
             _charData = DataManager.Instance.GetData<CharData>(_index);
             _NavMeshAgent = GetComponent<NavMeshAgent>();
             _charAnim = new();
@@ -168,32 +165,6 @@ namespace Client
             deltaMove = deltaMove * Time.deltaTime;
             _NavMeshAgent.Move(deltaMove);
             //transform.position += deltaMove;
-        }
-
-        public void FSMCharMove(Vector2 vector)
-        {
-            FSMParameter fSMParameter = new FSMParameter();
-            if (vector == Vector2.zero)
-            {
-                fSMParameter.charAction = CharAction.Idle;
-                fSMParameter.action = null;
-                fSMParameter.isPlayAnim = true;
-                fSMParameter.AnimName = AnimDefine.IDLE.AnimationEnumToString();
-                _charFSM.CharAction(fSMParameter);
-                return;
-            }
-
-            fSMParameter.charAction = CharAction.Move;
-            fSMParameter.action = () => CharMove(vector);
-            fSMParameter.isPlayAnim = true;
-            fSMParameter.AnimName = AnimDefine.MOVE.AnimationEnumToString();
-            _charFSM.CharAction(fSMParameter);
-        }
-        public void FSMCharSkill(long skillID)
-        {
-            FSMParameter fSMParameter = new FSMParameter();
-            fSMParameter.charAction = CharAction.Attack;
-            _charFSM.CharAction(fSMParameter);
         }
 
         public void SetStateAnimationIndex(PlayerState state, int index = 0)
