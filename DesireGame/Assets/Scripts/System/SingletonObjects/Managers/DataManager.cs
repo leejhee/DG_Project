@@ -113,7 +113,7 @@ namespace Client
 #if UNITY_EDITOR
         // 데이터 검증용(에디터에서만 사용)
         public Dictionary<long, SheetData> GetDictionary(string typeName)
-        {
+        {            
             return _cache[typeName];
         }
 #endif

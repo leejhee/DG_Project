@@ -4482,8 +4482,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2090265339238617762}
   - component: {fileID: 126871562583523403}
+  - component: {fileID: 2620252674054270701}
   m_Layer: 5
-  m_Name: SPUM_20240911224628540
+  m_Name: Kobold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7474,6 +7475,25 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
   - {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
   - {fileID: 7400000, guid: fabe4f140fdb9cb448bc941c7c93e8b6, type: 2}
+--- !u!114 &2620252674054270701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8031950329497136686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b906c4630d4a24ab2d68ad6f3897e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _index: 0
+  _FightCollider: {fileID: 0}
+  _MoveCollider: {fileID: 0}
+  _SkillRoot: {fileID: 0}
+  _NavMeshAgent: {fileID: 0}
+  _CharCamaraPos: {fileID: 0}
+  _Animator: {fileID: 0}
 --- !u!1 &8137005091377023685
 GameObject:
   m_ObjectHideFlags: 0
