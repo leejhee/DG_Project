@@ -23,6 +23,10 @@ namespace Client
         // 고유 ID 생성
         public long GetNextID() => _nextID++;
 
+        // 필드 위 캐릭터, 몬스터 접근용(키가 uid)
+        private Dictionary<long, CharPlayer> _playerDict = new Dictionary<long, CharPlayer>();
+        private Dictionary<long, CharMonster> _monsterDict = new Dictionary<long, CharMonster>();
+
        public T GetChar<T>(long ID) where T : CharBase
        {
             var key = typeof(T);
@@ -141,5 +145,103 @@ namespace Client
 
             return charBase;
         }
+
+        /// <summary>
+        /// 필드 내 몬스터 또는 플레이어 캐릭터 등록
+        /// 일단 전투 시작 시에만 호출(예비 목록도 다 해야함.)</summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public bool RegisterFieldChar<T>(T unit) where T : CharBase
+        {
+            if(unit is CharPlayer)
+            {
+                if (_playerDict.ContainsKey(unit.GetID()))
+                {
+                    Debug.LogError($"uid {unit.GetID()} 이미 존재함");
+                    return false;
+                }
+                _playerDict.Add(unit.GetID(), unit as CharPlayer);
+                return true;
+            }
+
+            if(unit is CharMonster)
+            {
+                if (_monsterDict.ContainsKey(unit.GetID()))
+                {
+                    Debug.LogError($"uid {unit.GetID()} 이미 존재함");
+                    return false;
+                }
+                _monsterDict.Add(unit.GetID(), unit as CharMonster);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 필드에 있는 Char 삭제
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public bool ClearFieldChar<T>(long uid) where T  : CharBase
+        {
+            if(typeof(T) == typeof(CharPlayer))
+            {
+                if (!_playerDict.ContainsKey(uid))
+                {
+                    Debug.LogError($"해당 uid {uid} 없음");
+                    return false;
+                }
+                _playerDict.Remove(uid);
+                return true;
+            }
+
+            if(typeof(T) == typeof(CharMonster))
+            {
+                if (!_monsterDict.ContainsKey(uid))
+                {
+                    Debug.LogError($"해당 uid {uid} 없음");
+                    return false;
+                }
+                _monsterDict.Remove(uid);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 필드에 있는 몬스터 캐릭터 가져오기
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public CharMonster GetFieldMonster(long uid)
+        {
+            if (!_monsterDict.ContainsKey(uid))
+            {
+                Debug.LogError($"uid {uid} 몬스터 없음");
+                return null;
+            }
+            return _monsterDict[uid];
+        }
+
+        /// <summary>
+        /// 필드에 있는 플레이어 캐릭터 가져오기
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public CharPlayer GetFieldPlayer(long uid)
+        {
+            if(! _playerDict.ContainsKey(uid))
+            {
+                Debug.LogError($"uid {uid} 몬스터 없음");
+                return null;
+            }
+            return _playerDict[uid];
+        }
+
+       
     }
 }
