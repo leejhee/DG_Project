@@ -1,0 +1,6 @@
+﻿ID	StringCode	한국어	영어
+Index	StringCode	KOR	ENG
+long	string	string	string
+1	COMMON_OK	확인	OK
+2	COMMON_CANCEL	취소	CANCEL
+3	Tmp_sentence	문장. 또한! 대응. 가능!	tmp.tmp.tmp

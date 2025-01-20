@@ -48,7 +48,7 @@ namespace Client
 
                 _instance = gm.GetComponent<GameManager>();
                 DontDestroyOnLoad(gm);
-                //DataManager.Instance.Init();
+                DataManager.Instance.Init();
                 //_instance._networkManager.Init();
 
                 //GoogleSheet googleSheet = _instance._networkManager.data;

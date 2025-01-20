@@ -217,6 +217,15 @@ namespace Client
             DEBUFF,
             DEATH,
             OTHER,
+
+            MaxCount
+        }
+        public enum eLocalize
+        {
+            KOR,
+            ENG,
+
+            MaxCount
         }
     }
 }

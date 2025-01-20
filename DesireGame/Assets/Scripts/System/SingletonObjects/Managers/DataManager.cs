@@ -27,12 +27,23 @@ namespace Client
         private Dictionary<SystemEnum.eScene, Vector3> _positionMap = new Dictionary<SystemEnum.eScene, Vector3>();
         public Dictionary<SystemEnum.eScene, Vector3> PositionMap => _positionMap;
 
+        // 번역정보
+        private Dictionary<string, Dictionary<SystemEnum.eLocalize, string>> _localizeStringCodeMap = new();
+        public Dictionary<string, Dictionary<SystemEnum.eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
+
+        public SystemEnum.eLocalize Localize { get; set; } = SystemEnum.eLocalize.KOR;
 
         #endregion
+
+        // 데이터 로딩 중 행동 예약
+        public Action DoAfterLoadActon;
+        // 로드가 끝났는지 확인
+        public bool EndLoad { get; private set; } = false;
 
         public override void Init()
         {
             DataLoad();
+            DoAfterDataLoad();
         }
         public void DataLoad()
         {
@@ -58,9 +69,19 @@ namespace Client
                 {
                     _cache.Add(type.Name, sheet);
                 }
-            }
-        }
 
+                SetTypeData(type.Name);
+            }
+            EndLoad = true;
+        }
+        public void DoAfterDataLoad()
+        {
+            if (DoAfterLoadActon == null)
+                return;
+
+            DoAfterLoadActon.Invoke();
+            DoAfterLoadActon = null;
+        }
         public T GetData<T>(long Index) where T : SheetData
         {
             string key = typeof(T).ToString();
@@ -117,7 +138,69 @@ namespace Client
             return _cache[typeName];
         }
 #endif
+         #region 개별 데이터
 
+        // 개별 데이터 가공
+        private void SetTypeData(string data)
+        {
+            if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
+            if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
+        }
+        // 플레이어 위치정보
+        private void SetCharPositionData()
+        {
+            string key = typeof(CharPositionData).Name;
+            Dictionary<long, SheetData> charPositionMap = _cache[key];
+            if (charPositionMap == null)
+            { 
+                return; 
+            }
+               
+            
+            foreach (var posMap in charPositionMap.Values)
+            {
+                CharPositionData charPosition = posMap as CharPositionData;
+                float xPos = (float)charPosition.xPos / SystemConst.Persent;
+                float yPos = (float)charPosition.yPos / SystemConst.Persent;
+                float zPos = (float)charPosition.zPos / SystemConst.Persent;
+                
+                Vector3 vector = new Vector3(xPos, yPos, zPos);
+                _positionMap.Add(charPosition.mapScene, vector);
+            }
+        }
+        // 스트링 코드
+        private void SetStringCodeData()
+        {
+            string key = typeof(StringCodeData).Name;
+
+            Dictionary<long, SheetData> stringCodeMap = _cache[key];
+            if(stringCodeMap == null)
+            { 
+                return; 
+            }
+
+            foreach (var _stringCode in stringCodeMap.Values)
+            {
+                StringCodeData stringCode = _stringCode as StringCodeData;
+                Dictionary<SystemEnum.eLocalize, string> keyValuePairs = new();
+                keyValuePairs.Add(SystemEnum.eLocalize.KOR, stringCode.KOR);
+                keyValuePairs.Add(SystemEnum.eLocalize.ENG, stringCode.ENG);
+
+                _localizeStringCodeMap.Add(stringCode.StringCode, keyValuePairs);
+            }
+        }
+        public static string GetStringCode(string stringCode)
+        {
+            if (Instance._localizeStringCodeMap.ContainsKey(stringCode))
+            {
+                if (Instance._localizeStringCodeMap[stringCode].ContainsKey(Instance.Localize))
+                {
+                    return Instance._localizeStringCodeMap[stringCode][Instance.Localize];
+                }
+            }
+            return $"(스트링 코드가 없습니다!){stringCode}";
+        }
+        #endregion
 
     }
 }
