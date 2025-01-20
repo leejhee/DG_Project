@@ -17,6 +17,8 @@ namespace Client
 
         string targetPath = "Assets/Resources/Prefabs/";
 
+        Editor SPUMEditor;
+
         [MenuItem("Tools/CharGenerator")]
         public static void ShowWindow()
         {
@@ -36,29 +38,54 @@ namespace Client
             Options = options.ToArray();
         }
 
+        void OnDisable()
+        {
+            AssetDatabase.SaveAssets();
+            DataManager.Instance.ClearCache();
+        }
+
         void OnGUI()
         {
             GUILayout.Label("캐릭터 생성 툴", EditorStyles.boldLabel);
 
+            #region Put SPUM Object
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("SPUM 원형 캐릭터를 넣어주세요.");
             GUILayout.FlexibleSpace();
             SPUM_Object = EditorGUILayout.ObjectField(SPUM_Object, typeof(GameObject), false, GUILayout.MaxWidth(300));
             EditorGUILayout.EndHorizontal();
-           
+            #endregion
+
             EditorGUILayout.HelpBox("SPUM 원형 캐릭터에 캐릭터 필수 기능을 제작하여 넣습니다.", MessageType.Info);
 
+            #region Select Data for New Prefab
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("어떤 캐릭터의 프리팹인가요?");
             GUILayout.FlexibleSpace();
             selectedOptionIndex = EditorGUILayout.Popup(selectedOptionIndex, Options, GUILayout.MaxWidth(300));
             EditorGUILayout.EndHorizontal();
+            #endregion
 
+            #region Select Path
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("프리팹 이름을 제외하고 입력해주세요.");
             GUILayout.FlexibleSpace();
             EditorGUILayout.TextField(targetPath, GUILayout.MaxWidth(500));
             EditorGUILayout.EndHorizontal();
+            #endregion
+
+            #region Set Preview of Prefab
+            if (SPUM_Object != null)
+            {
+                if (SPUMEditor == null || SPUMEditor.target != SPUM_Object)
+                {
+                    DestroyImmediate(SPUMEditor); // 주석 처리된 부분 그대로 유지
+                    SPUMEditor = Editor.CreateEditor(SPUM_Object);
+                }
+                SPUMEditor.OnInteractivePreviewGUI(GUILayoutUtility.GetRect(100, 100), GUIStyle.none);
+            }
+            #endregion
+
 
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("캐릭터 생성 또는 기능 추가", GUILayout.Width(300)))
@@ -98,7 +125,8 @@ namespace Client
 
             #region LOAD COPIED ASSET AND EDIT
 
-            GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab(PrefabUtility.SaveAsPrefabAsset(SPUM_Object as GameObject, savePath)) as GameObject;
+            GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab
+                (PrefabUtility.SaveAsPrefabAsset(SPUM_Object as GameObject, savePath)) as GameObject;
             if (!SPUMPrefab)
             {
                 Debug.LogError("복사하고 로드했는데 null? 뭔가 잘못됨. 여기에 걸리면 안됨.");
@@ -132,6 +160,7 @@ namespace Client
                 Debug.LogError($"{renameResult}의 오류입니다. {targetPath}에 같은 이름의 에셋이 없는지 확인하세요.");
 
             AssetDatabase.SaveAssets();
+            DestroyImmediate(SPUMPrefab);
             #endregion
         }
 

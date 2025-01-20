@@ -137,6 +137,13 @@ namespace Client
         {            
             return _cache[typeName];
         }
+
+        public void ClearCache()
+        {
+            _cache.Clear();
+            _positionMap.Clear();
+            _localizeStringCodeMap.Clear();
+        }
 #endif
          #region 개별 데이터
 

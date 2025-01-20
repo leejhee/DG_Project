@@ -88,7 +88,13 @@ namespace Client
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i], @"",(?=(?:[^""""]*""""[^""""]*"""")*[^""""]*$)"");
+                    string[] values = Regex.Split(lines[i].Trim(),
+                                        @"",(?=(?:[^""""\[\]]*(?:""""[^""""]*""""|[\[][^\]]*[\]])?)*[^""""\[\]]*$)"");
+  
+                    for (int j = 0; j < values.Length; j++)
+                    {{
+                        values[j] = Regex.Replace(values[j], @""^""""|""""$"", """");
+                    }}
                     line = i;
 
                     {0} data = new {0}();
