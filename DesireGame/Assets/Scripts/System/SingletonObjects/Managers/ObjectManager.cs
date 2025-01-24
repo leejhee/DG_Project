@@ -53,7 +53,12 @@ namespace Client
         public GameObject Instantiate(string path, Transform parent = null) => Instantiate<GameObject>(path, parent);
 
         /// <summary> GameObject 생성 </summary>
-        public GameObject Instantiate(GameObject gm, Transform parent = null) => GameObject.Instantiate(gm, parent);
+        public GameObject Instantiate(GameObject gm, Transform parent = null)
+        {
+            GameObject instance = GameObject.Instantiate(gm, parent);
+            instance.name = gm.name;
+            return instance;
+        }
 
         /// <summary> GameObject 생성 </summary>
         public GameObject Instantiate(GameObject gm, Vector3 position) => GameObject.Instantiate(gm, position, Quaternion.identity);

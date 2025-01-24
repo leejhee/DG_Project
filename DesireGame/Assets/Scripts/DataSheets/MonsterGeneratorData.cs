@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Client
 {
+    [Serializable]
     public partial class MonsterGeneratorData : SheetData
     {
 public long Index; // 몬스터Index
@@ -33,7 +34,13 @@ public long Index; // 몬스터Index
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i], @",(?=(?:[^""]*""[^""]*"")*[^""]*$)");
+                    string[] values = Regex.Split(lines[i].Trim(),
+                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
+  
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
+                    }
                     line = i;
 
                     MonsterGeneratorData data = new MonsterGeneratorData();

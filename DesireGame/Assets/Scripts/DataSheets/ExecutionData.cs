@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Client
 {
+    [Serializable]
     public partial class ExecutionData : SheetData
     {
 public long Index; // ExecutionIndex
@@ -46,7 +47,13 @@ public long Index; // ExecutionIndex
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i], @",(?=(?:[^""]*""[^""]*"")*[^""]*$)");
+                    string[] values = Regex.Split(lines[i].Trim(),
+                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
+  
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
+                    }
                     line = i;
 
                     ExecutionData data = new ExecutionData();

@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Client
 {
+    [Serializable]
     public partial class SkillData : SheetData
     {
 public long Index; // 스킬Index
@@ -37,7 +38,13 @@ public long Index; // 스킬Index
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i], @",(?=(?:[^""]*""[^""]*"")*[^""]*$)");
+                    string[] values = Regex.Split(lines[i].Trim(),
+                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
+  
+                    for (int j = 0; j < values.Length; j++)
+                    {
+                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
+                    }
                     line = i;
 
                     SkillData data = new SkillData();

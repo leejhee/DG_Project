@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace Client
 {
+    [Serializable]
     public partial class StringCodeData : SheetData
     {
 public long Index; // ID

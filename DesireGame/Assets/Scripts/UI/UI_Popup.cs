@@ -19,5 +19,7 @@ namespace Client
 
         /// <summary> pop up 다시 열 때마다 실행</summary>
         public virtual void ReOpenPopupUI() { }
+
+        public virtual void SetParameter(UIParameter param) { }
     }
 }

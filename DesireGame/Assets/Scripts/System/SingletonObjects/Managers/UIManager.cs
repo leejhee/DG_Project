@@ -47,7 +47,7 @@ namespace Client
         }
 
         /// <summary>
-        /// game object에 canvas 속성 부여, 정렬 설정
+        /// game object에 canvas 속성 부여, 정렬 설정 - 쓸듯
         /// </summary>
         /// <param name="go">canvas 속성이 있는 게임 오브젝트</param>
         /// <param name="sort">canvas 정렬 여부(popup->true, scene->false)</param>
@@ -64,8 +64,19 @@ namespace Client
                 canvas.sortingOrder = order;
         }
 
+        
+        public void ShowUI(GameObject UIObject)
+        {
+            if (UIObject)
+            {
+                ObjectManager.Instance.Instantiate(UIObject, Root.transform);
+            }            
+        }
+
+
+        #region Legacy
         /// <summary>
-        /// Scene UI 띄우기
+        /// Scene UI 띄우기 - 안씀
         /// </summary>
         /// <typeparam name="T">UI_Scene을 상속받은 각 Scene의 UI</typeparam>
         /// <param name="name">Scene UI 이름, null이면 T 이름</param>
@@ -83,11 +94,11 @@ namespace Client
         }
 
         /// <summary>
-        /// Pop Up UI 띄우기
+        /// Pop Up UI 띄우기 - 안씀
         /// </summary>
         /// <typeparam name="T">UI_PopUp을 상속받은 Pop up UI</typeparam>
         /// <param name="name">Pop Up UI 이름, null이면 T 이름</param>
-        public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+        public T ShowPopupUI<T>(UIParameter param, string name = null) where T : UI_Popup
         {
             if(string.IsNullOrEmpty(name))
                 name = typeof(T).Name;
@@ -117,11 +128,12 @@ namespace Client
             popup.transform.SetParent(Root.transform);
             popup.SetActive(true);
 
+            popupUI.SetParameter(param);
             return popupUI;
         }
 
         /// <summary>
-        /// 가장 위의 pop up UI 닫기
+        /// 가장 위의 pop up UI 닫기 - 안씀
         /// </summary>
         public void ClosePopupUI()
         {
@@ -134,7 +146,7 @@ namespace Client
         }
 
         /// <summary>
-        /// 모든 pop up UI 닫기
+        /// 모든 pop up UI 닫기 - 안씀
         /// </summary>
         public void CloseAllPopUpUI()
         {
@@ -173,6 +185,8 @@ namespace Client
 
             return sceneUI;
         }
+        #endregion
+
 
         /// <summary>
         /// UI 초기화
