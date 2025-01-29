@@ -17,8 +17,7 @@ namespace Client
 
         private void Start()
         {
-            //UIManager.Instance.ShowSceneUI<UI_GameScene>();
-            UIManager.Instance.ShowUI(GameSceneUIPrefab);
+            //UIManager.Instance.ShowUI(GameSceneUIPrefab);
         }
     }
 }

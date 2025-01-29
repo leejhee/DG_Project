@@ -125,43 +125,42 @@ namespace Client
 
             #region LOAD COPIED ASSET AND EDIT
 
-            GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab
-                (PrefabUtility.SaveAsPrefabAsset(SPUM_Object as GameObject, savePath)) as GameObject;
+            GameObject CharPrefab = new GameObject(targetData.charPrefab);
+
+            #region TEMPORARY OBJECT - SPUMPrefab
+            GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab(SPUM_Object) as GameObject;
             if (!SPUMPrefab)
             {
                 Debug.LogError("복사하고 로드했는데 null? 뭔가 잘못됨. 여기에 걸리면 안됨.");
                 return;
             }
-            CharBase[] existingCharBases = SPUMPrefab.GetComponents<CharBase>();
-            foreach (var charBase in existingCharBases)
-            {
-                DestroyImmediate(charBase);
-            }
+            PrefabUtility.UnpackPrefabInstance(SPUMPrefab, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
-            CharBase newCharBase = CharFactory.AddCharBase(targetData, SPUMPrefab);
+            List<Transform> children = new List<Transform>();
+            foreach(Transform t in SPUMPrefab.transform.GetComponentInChildren<Transform>())
+                children.Add(t);           
+            foreach (Transform child in children)                
+                child.SetParent(CharPrefab.transform);
+                
+            DestroyImmediate(SPUMPrefab);
+            #endregion
+
+            CharBase newCharBase = CharFactory.AddCharBase(targetData, CharPrefab);
             SerializedObject serialized = new SerializedObject(newCharBase);
             SerializedProperty Index = serialized.FindProperty("_index");
             Index.longValue = targetData.Index;
             serialized.ApplyModifiedProperties();
 
-            CharFactory.AddDescendant(SPUMPrefab);
+            CharFactory.CharacterizeBase(CharPrefab);
+            CharPrefab.name = targetData.charPrefab;
 
-            PrefabUtility.ApplyPrefabInstance(SPUMPrefab, InteractionMode.AutomatedAction);
-
+            PrefabUtility.SaveAsPrefabAsset(CharPrefab, savePath);
             #endregion
-
-            #region RENAME ASSET WITH DATA
-            // 프리팹 에셋 이름 바꾸기
-            SPUMPrefab.name = targetData.charPrefab;
-            string renameResult = AssetDatabase.RenameAsset(savePath, targetData.charPrefab);
-            if (string.IsNullOrEmpty(renameResult))
-                Debug.Log($"성공적으로 프리팹이 {SPUMPrefab.name}으로 등록되었습니다! 저장 경로에서 확인해주세요.");
-            else
-                Debug.LogError($"{renameResult}의 오류입니다. {targetPath}에 같은 이름의 에셋이 없는지 확인하세요.");
-
+            Debug.Log($"성공적으로 {CharPrefab.name} 저장했습니다");
+            DestroyImmediate(CharPrefab);            
             AssetDatabase.SaveAssets();
-            DestroyImmediate(SPUMPrefab);
-            #endregion
+            AssetDatabase.Refresh();
+
         }
 
     }
@@ -186,8 +185,8 @@ namespace Client
             //NavMesh는 기획 결정에 따라 추가할 것.
         }
 
-        // 캐릭터 내 필요한 하위 오브젝트 
-        public static void AddDescendant(GameObject go)
+        // 캐릭터 내 필요한 하위 오브젝트 및 컴포넌트 조정
+        public static void CharacterizeBase(GameObject go)
         {
             GameObject Descendant = new GameObject("FightCollider");
             Descendant.transform.SetParent(go.transform, false);
