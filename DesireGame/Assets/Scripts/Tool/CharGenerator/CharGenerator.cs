@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Client
 {
@@ -126,6 +128,7 @@ namespace Client
             #region LOAD COPIED ASSET AND EDIT
 
             GameObject CharPrefab = new GameObject(targetData.charPrefab);
+            CharPrefab.transform.position = new Vector3(0, 1f, 0);
 
             #region TEMPORARY OBJECT - SPUMPrefab
             GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab(SPUM_Object) as GameObject;
@@ -139,14 +142,20 @@ namespace Client
             List<Transform> children = new List<Transform>();
             foreach(Transform t in SPUMPrefab.transform.GetComponentInChildren<Transform>())
                 children.Add(t);           
-            foreach (Transform child in children)                
-                child.SetParent(CharPrefab.transform);
-                
+            foreach (Transform child in children)
+            {
+                child.SetParent(CharPrefab.transform);                
+                Quaternion rotY = Quaternion.Euler(0f, 90f, 0f);
+                Quaternion rotX = Quaternion.Euler(270f, 0f, 0f);
+                child.SetPositionAndRotation(new Vector3(0, 1f, 0), rotY * rotX);
+            }
+
             DestroyImmediate(SPUMPrefab);
             #endregion
 
-            CharBase newCharBase = CharFactory.AddCharBase(targetData, CharPrefab);
+            CharBase newCharBase = CharFactory.AddBaseComponent(targetData, CharPrefab);
             SerializedObject serialized = new SerializedObject(newCharBase);
+
             SerializedProperty Index = serialized.FindProperty("_index");
             Index.longValue = targetData.Index;
             serialized.ApplyModifiedProperties();
@@ -168,8 +177,10 @@ namespace Client
     /// <summary> 에디터에서 CharBase 상속하는 캐릭터 뽑는 용 </summary>
     public static class CharFactory
     {
-        public static CharBase AddCharBase(CharData data, GameObject go)
+        public static CharBase AddBaseComponent(CharData data, GameObject go)
         {
+            var nav = go.AddComponent<NavMeshAgent>();
+            nav.baseOffset = 0.5f;
             switch (data.charType)
             {
                 case SystemEnum.eCharType.NPC:
@@ -187,7 +198,7 @@ namespace Client
 
         // 캐릭터 내 필요한 하위 오브젝트 및 컴포넌트 조정
         public static void CharacterizeBase(GameObject go)
-        {
+        {            
             GameObject Descendant = new GameObject("FightCollider");
             Descendant.transform.SetParent(go.transform, false);
             Descendant.AddComponent<CapsuleCollider>();
@@ -201,6 +212,7 @@ namespace Client
 
             Descendant = new GameObject("CameraPos");
             Descendant.transform.SetParent(go.transform, false);
+                    
         }
     }
 }

@@ -26,14 +26,16 @@ namespace Client
         [SerializeField] protected Animator _Animator;       // 애니메이터\
 
         //private ExecutionInfo _executionInfo = null; // 기능 정보
-        //private CharSKillInfo _charSKillInfo;        // 캐릭터 스킬
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
-        private CharStat     _charStat = null;       // Stat 정보
-        private CharData     _charData = null;       // 캐릭터 데이터
-        private CharAnim     _charAnim = null;       // 캐릭터 애니메이션 리스트
 
-        private GameObject _LWeapon = null;       // 왼손 무기
-        private GameObject _RWeapon = null;       // 오른손 무기
+        private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
+        private CharStat     _charStat = null;      // Stat 정보
+        private CharData     _charData = null;      // 캐릭터 데이터
+        private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
+        private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
+
+        //private GameObject _LWeapon = null;       // 왼손 무기
+        //private GameObject _RWeapon = null;       // 오른손 무기
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
 
@@ -57,12 +59,15 @@ namespace Client
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         //public ExecutionInfo ExecutionInfo => _executionInfo;  // 기능 정보
-        //public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
+        public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
         //public CharItemInfo CharItemInfo => _charItemInfo;
         public GameObject CharCamaraPos => _CharCamaraPos; // 카메라 위치
         public CharAnim CharAnim => _charAnim; // 카메라 위치
+        public NavMeshAgent Nav => _NavMeshAgent;
+        public CharStat CharStat => _charStat;
+        public CharAction CharAction => _charAction;
 
         protected CharBase() { }
 
@@ -76,6 +81,7 @@ namespace Client
             _charData = DataManager.Instance.GetData<CharData>(_index);
             _NavMeshAgent = GetComponent<NavMeshAgent>();
             _charAnim = new();
+            _charAction = new(this);
             if (_charData != null)
             {
                 CharStatData charStat = DataManager.Instance.GetData<CharStatData>(_charData.charStatId);
@@ -121,7 +127,7 @@ namespace Client
         {
             CharManager.Instance.SetChar<CharBase>(this);
             
-            // 스킬
+            //// 스킬
             //_charSKillInfo = new CharSKillInfo(this);
             //if (_charSKillInfo != null)
             //{
@@ -145,62 +151,62 @@ namespace Client
             return CharType;
         }
 
-        public void CharMove(Vector2 vector)
-        {
-            if (vector == Vector2.zero)
-                return;
-            if (_charStat == null)
-            {
-                Debug.LogWarning($"{transform.name} 의 Stat가 없음");
-                return;
-            }
-            float angle = Mathf.Atan2(vector.x, vector.y) * Mathf.Rad2Deg;
+        //public void CharMove(Vector2 vector)
+        //{
+        //    if (vector == Vector2.zero)
+        //        return;
+        //    if (_charStat == null)
+        //    {
+        //        Debug.LogWarning($"{transform.name} 의 Stat가 없음");
+        //        return;
+        //    }
+        //    float angle = Mathf.Atan2(vector.x, vector.y) * Mathf.Rad2Deg;
             
-            // Y축을 기준으로 회전 (2D 평면에서 바라보는 방향)
-            Vector3 deltaRotation = new Vector3(0, angle, 0);
-            transform.eulerAngles += deltaRotation * Time.deltaTime;
+        //    // Y축을 기준으로 회전 (2D 평면에서 바라보는 방향)
+        //    Vector3 deltaRotation = new Vector3(0, angle, 0);
+        //    transform.eulerAngles += deltaRotation * Time.deltaTime;
             
-            Vector3 deltaMove = transform.forward * _charStat.GetStat(eState.NSpeed);
+        //    Vector3 deltaMove = transform.forward * _charStat.GetStat(eState.NSpeed);
             
-            deltaMove = deltaMove * Time.deltaTime;
-            _NavMeshAgent.Move(deltaMove);
-        }
+        //    deltaMove = deltaMove * Time.deltaTime;
+        //    _NavMeshAgent.Move(deltaMove);
+        //}
 
-        /// <summary>
-        /// 호출 시점 해당 위치로 이동
-        /// </summary>
-        /// <param name="vector"></param>
-        public void CharMoveTo(Vector2 vector)
-        {
-            if (_NavMeshAgent == false)
-                return;
+        ///// <summary>
+        ///// 호출 시점 해당 위치로 이동
+        ///// </summary>
+        ///// <param name="vector"></param>
+        //public void CharMoveTo(Vector2 vector)
+        //{
+        //    if (_NavMeshAgent == false)
+        //        return;
 
-            _NavMeshAgent.SetDestination(vector);
-        }
+        //    _NavMeshAgent.SetDestination(vector);
+        //}
 
-        /// <summary>
-        /// 호출 시점 캐릭터의 위치로 이동
-        /// </summary>
-        /// <param name="targetChar"></param>
-        public void CharMoveTo(CharBase targetChar)
-        {
-            if (targetChar == false || _NavMeshAgent == false)
-                return;
+        ///// <summary>
+        ///// 호출 시점 캐릭터의 위치로 이동
+        ///// </summary>
+        ///// <param name="targetChar"></param>
+        //public void CharMoveTo(CharBase targetChar)
+        //{
+        //    if (targetChar == false || _NavMeshAgent == false)
+        //        return;
 
-            _NavMeshAgent.SetDestination(targetChar.transform.position);
-        }
+        //    _NavMeshAgent.SetDestination(targetChar.transform.position);
+        //}
 
-        /// <summary>
-        /// 호출 시점 캐릭터의 위치로 이동
-        /// </summary>
-        /// <param name="targetChar"></param>
-        public void CharMoveTo(long targetCharUID)
-        {
-            CharBase charBase = CharManager.Instance.GetFieldChar(targetCharUID);
-            if (charBase == false)
-                return;
-            CharMoveTo(charBase);
-        }
+        ///// <summary>
+        ///// 호출 시점 캐릭터의 위치로 이동
+        ///// </summary>
+        ///// <param name="targetChar"></param>
+        //public void CharMoveTo(long targetCharUID)
+        //{
+        //    CharBase charBase = CharManager.Instance.GetFieldChar(targetCharUID);
+        //    if (charBase == false)
+        //        return;
+        //    CharMoveTo(charBase);
+        //}
 
         public void SetStateAnimationIndex(PlayerState state, int index = 0)
         {
