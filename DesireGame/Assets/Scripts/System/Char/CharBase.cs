@@ -155,16 +155,51 @@ namespace Client
                 return;
             }
             float angle = Mathf.Atan2(vector.x, vector.y) * Mathf.Rad2Deg;
-
+            
             // Y축을 기준으로 회전 (2D 평면에서 바라보는 방향)
             Vector3 deltaRotation = new Vector3(0, angle, 0);
             transform.eulerAngles += deltaRotation * Time.deltaTime;
-
+            
             Vector3 deltaMove = transform.forward * _charStat.GetStat(eState.NSpeed);
             
             deltaMove = deltaMove * Time.deltaTime;
             _NavMeshAgent.Move(deltaMove);
-            //transform.position += deltaMove;
+        }
+
+        /// <summary>
+        /// 호출 시점 해당 위치로 이동
+        /// </summary>
+        /// <param name="vector"></param>
+        public void CharMoveTo(Vector2 vector)
+        {
+            if (_NavMeshAgent == false)
+                return;
+
+            _NavMeshAgent.SetDestination(vector);
+        }
+
+        /// <summary>
+        /// 호출 시점 캐릭터의 위치로 이동
+        /// </summary>
+        /// <param name="targetChar"></param>
+        public void CharMoveTo(CharBase targetChar)
+        {
+            if (targetChar == false || _NavMeshAgent == false)
+                return;
+
+            _NavMeshAgent.SetDestination(targetChar.transform.position);
+        }
+
+        /// <summary>
+        /// 호출 시점 캐릭터의 위치로 이동
+        /// </summary>
+        /// <param name="targetChar"></param>
+        public void CharMoveTo(long targetCharUID)
+        {
+            CharBase charBase = CharManager.Instance.GetFieldChar(targetCharUID);
+            if (charBase == false)
+                return;
+            CharMoveTo(charBase);
         }
 
         public void SetStateAnimationIndex(PlayerState state, int index = 0)

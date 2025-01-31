@@ -242,6 +242,16 @@ namespace Client
             return _playerDict[uid];
         }
 
-       
+        public CharBase GetFieldChar(long uid)
+        {
+            foreach (var dict in _cache.Values)
+            {
+                if (dict.ContainsKey(uid))
+                {
+                    return dict[uid];
+                }
+            }
+            return null;
+        }
     }
 }
