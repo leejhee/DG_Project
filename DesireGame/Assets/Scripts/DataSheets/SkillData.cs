@@ -13,13 +13,10 @@ namespace Client
     [Serializable]
     public partial class SkillData : SheetData
     {
-public long Index; // 스킬Index
-		public string skillName; // 스킬명
-		
-		public SystemEnum.eSkillType skillType; // 스킬타입
-		public List<long> skillExecutionList; // 스킬시작Execution
-		public string skillPortraitImage; // 스킬아이콘이미지
-		public string skillTimeLineName; // 스킬타임라인명
+public long Index; // ID
+		public string nameStringCode; // 이름 스트링 코드
+		public string skillTimeLineName; // 스킬 애니메이션
+		public long functionIndex; // 펑션 인덱스
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -55,30 +52,20 @@ public long Index; // 스킬Index
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[2] == "")
-					    data.skillName = default;
+					if(values[1] == "")
+					    data.nameStringCode = default;
 					else
-					    data.skillName = Convert.ToString(values[2]);
+					    data.nameStringCode = Convert.ToString(values[1]);
 					
 					if(values[3] == "")
-					    data.skillType = default;
-					else
-					    data.skillType = (SystemEnum.eSkillType)Enum.Parse(typeof(SystemEnum.eSkillType), values[3]);
-					
-					ListStr = values[4].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var skillExecutionListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.skillExecutionList = skillExecutionListData;
-					
-					if(values[5] == "")
-					    data.skillPortraitImage = default;
-					else
-					    data.skillPortraitImage = Convert.ToString(values[5]);
-					
-					if(values[6] == "")
 					    data.skillTimeLineName = default;
 					else
-					    data.skillTimeLineName = Convert.ToString(values[6]);
+					    data.skillTimeLineName = Convert.ToString(values[3]);
+					
+					if(values[4] == "")
+					    data.functionIndex = default;
+					else
+					    data.functionIndex = Convert.ToInt64(values[4]);
 					
 
                     dataList[data.Index] = data;

@@ -17,12 +17,12 @@ namespace Client
 
         public void CharMoveAction(CharMoveParameter param)
         {
-            var speed = Actor.CharStat.GetStat(SystemEnum.eState.Speed);
-            var direction = param.Destination - Actor.transform.position;
-            if(direction.sqrMagnitude > 0.1f)
+            var interval = (param.Destination - Actor.transform.position).sqrMagnitude;
+            Nav.updateRotation = false;
+            if(interval > 0.1f)
             {
-                Nav.isStopped = false; ;
-                Nav.Move(speed * Time.deltaTime * direction.normalized);
+                Nav.isStopped = false;
+                Nav.SetDestination(param.Destination);
             }
             else
             {

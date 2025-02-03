@@ -13,15 +13,23 @@ namespace Client
     [Serializable]
     public partial class CharData : SheetData
     {
-public long Index; // 캐릭터Index
+public long Index; // charID
 		public string charName; // 캐릭터 이름
+		public string charPrefab; // 캐릭터 프리팹
 		
-		public SystemEnum.eCharType charType; // 캐릭터타입
-		public List<long> charSkillList; // 케릭터스킬
-		public string charPrefab; // 캐릭터프리팹명
-		public List<long> charDefaultBuffList; // 캐릭터 기본 버프
-		public string charPortraitImage; // 캐릭터아이콘이미지
-		public long charStatId; // 캐릭터 Stat
+		public SystemEnum.ECharTier charTier; // 캐릭터 등급
+		public long specIndex; // 기본스펙
+		
+		public SystemEnum.ESynergy synergy1; // 시너지1
+		
+		public SystemEnum.ESynergy synergy2; // 시너지2
+		
+		public SystemEnum.ESynergy synergy3; // 시너지3
+		public long autoAttack; // 스킬1(평타)
+		public long skillAttack; // 스킬2(고유 스킬)
+		public List<long> func; // 초기 기능(패시브)
+		
+		public SystemEnum.eCharType charType; // 포트레이트 이미지 string
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -57,40 +65,60 @@ public long Index; // 캐릭터Index
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[2] == "")
+					if(values[1] == "")
 					    data.charName = default;
 					else
-					    data.charName = Convert.ToString(values[2]);
+					    data.charName = Convert.ToString(values[1]);
 					
-					if(values[3] == "")
-					    data.charType = default;
-					else
-					    data.charType = (SystemEnum.eCharType)Enum.Parse(typeof(SystemEnum.eCharType), values[3]);
-					
-					ListStr = values[4].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var charSkillListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.charSkillList = charSkillListData;
-					
-					if(values[5] == "")
+					if(values[2] == "")
 					    data.charPrefab = default;
 					else
-					    data.charPrefab = Convert.ToString(values[5]);
+					    data.charPrefab = Convert.ToString(values[2]);
 					
-					ListStr = values[6].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var charDefaultBuffListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.charDefaultBuffList = charDefaultBuffListData;
+					if(values[3] == "")
+					    data.charTier = default;
+					else
+					    data.charTier = (SystemEnum.ECharTier)Enum.Parse(typeof(SystemEnum.ECharTier), values[3]);
+					
+					if(values[4] == "")
+					    data.specIndex = default;
+					else
+					    data.specIndex = Convert.ToInt64(values[4]);
+					
+					if(values[5] == "")
+					    data.synergy1 = default;
+					else
+					    data.synergy1 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[5]);
+					
+					if(values[6] == "")
+					    data.synergy2 = default;
+					else
+					    data.synergy2 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[6]);
 					
 					if(values[7] == "")
-					    data.charPortraitImage = default;
+					    data.synergy3 = default;
 					else
-					    data.charPortraitImage = Convert.ToString(values[7]);
+					    data.synergy3 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[7]);
 					
 					if(values[8] == "")
-					    data.charStatId = default;
+					    data.autoAttack = default;
 					else
-					    data.charStatId = Convert.ToInt64(values[8]);
+					    data.autoAttack = Convert.ToInt64(values[8]);
+					
+					if(values[9] == "")
+					    data.skillAttack = default;
+					else
+					    data.skillAttack = Convert.ToInt64(values[9]);
+					
+					ListStr = values[10].Replace('[',' ');
+					ListStr = ListStr.Replace(']', ' ');
+					var funcData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
+					data.func = funcData;
+					
+					if(values[11] == "")
+					    data.charType = default;
+					else
+					    data.charType = (SystemEnum.eCharType)Enum.Parse(typeof(SystemEnum.eCharType), values[11]);
 					
 
                     dataList[data.Index] = data;

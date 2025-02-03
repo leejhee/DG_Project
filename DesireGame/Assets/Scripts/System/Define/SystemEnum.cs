@@ -106,6 +106,32 @@ namespace Client
             MaxCount
         }
 
+        public enum ECharTier
+        {
+            NORMAL,
+            RARE,
+            UNIQUE,
+            EPIC,
+            LEGEND,
+            EMax,
+        }
+
+        public enum ESynergy
+        {
+            None,
+            SWORD,
+            RANGED,
+            SHIELD,
+            DUAL_BALDE,
+            MAGIC_WAND,
+            LAPLACIAN,
+            TIMER,
+            QUANTUM_WASHER,
+            TIDY,
+            TEAM6,
+            EMax,
+        }
+
         public enum eState
         {
             None,
@@ -195,7 +221,15 @@ namespace Client
             MaxCount
         }
 
-
+        public enum EItemTier
+        {
+            NORMAL,
+            RARE,
+            UNIQUE,
+            EPIC,
+            LEGEND,
+            EMax,
+        }
         public enum PlayerAnim
         {
             idle,

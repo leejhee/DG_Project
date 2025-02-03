@@ -1,8 +1,17 @@
-﻿스킬Index,#캐릭터 설명 ,스킬명,스킬타입,스킬시작Execution,스킬아이콘이미지,스킬타임라인명
-Index,#,skillName,skillType,skillExecutionList,skillPortraitImage,skillTimeLineName
-long,#,string,eSkillType,long[],string,string
-1001,아처 공격,아처 공격,BasicAttack,[],ArcherAttack,ArcherAttack_1001tl
-1002,패링,패링,CharSkill,[100201],WarriorDef,WarriorDef_1002tl
-1003,종베기,종베기,Attack,[100301],WarriorAttack,WarriorAttack_1003tl
-1004,전투의 함성,전투의 함성,Buff,[100401.100402.100403],WarriorBuff,WarriorBuff_1004tl
-10001001,코볼트 공격,코볼트 공격,BasicAttack,,,
+﻿ID,이름 스트링 코드,설명 스트링 코드,스킬 애니메이션,펑션 인덱스,,,,,,,
+Index,nameStringCode,,skillTimeLineName,functionIndex,,,,,,,
+long,string,,string,long,,,,,,,
+0500000,SKILL_NORMAL_AD,DESC_SKILL_NORMAL_AD,,0600000,,,,,,,
+0500001,SKILL_NORMAL_AP,DESC_SKILL_NORMAL_AP,,0600001,,,,,,,
+0500002,SKILL_L,DESC_SKILL_L,,0600002,,,,,,,
+
+
+
+
+
+
+
+
+
+
+

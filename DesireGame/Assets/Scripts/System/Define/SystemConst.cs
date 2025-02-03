@@ -20,6 +20,9 @@ namespace Client
     public class SystemString
     {
         public const string AudioSystem = "AudioSystem";
-
+        public const string PlayerHitCollider = "PlayerHitCollider";
+        public const string MonsterHitCollider = "MonsterHitCollider";
     }
+
+
 }

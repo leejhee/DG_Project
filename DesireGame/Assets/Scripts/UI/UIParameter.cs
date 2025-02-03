@@ -5,7 +5,6 @@ using System.Collections.Specialized;
 
 namespace Client
 {
-
     public abstract class UIParameter
     {
         

@@ -1,5 +1,17 @@
-﻿캐릭터Index,#캐릭터 설명 ,캐릭터 이름,캐릭터타입,케릭터스킬,캐릭터프리팹명,캐릭터 기본 버프,캐릭터아이콘이미지,캐릭터 Stat
-Index,#,charName,charType,charSkillList,charPrefab,charDefaultBuffList,charPortraitImage,charStatId
-long,#,string,eCharType,long[],string,long[],string,long
-1,궁수,ArcherChar,Player,[1001],ArcherChar,[],ArcherChar,10000
-10001,코볼트,Kobold,Monster,[10001001],Kobold,,warrior,10000
+﻿charID,캐릭터 이름,캐릭터 프리팹,캐릭터 등급,기본스펙,시너지1,시너지2,시너지3,스킬1(평타),스킬2(고유 스킬),초기 기능(패시브),포트레이트 이미지 string
+Index,charName,charPrefab,charTier,specIndex,synergy1,synergy2,synergy3,autoAttack,skillAttack,func,charType
+long,string,string,ECharTier,long,ESynergy,ESynergy,ESynergy,long,long,long[],eCharType
+0000000,L,L_Prefab,NORMAL,0100000,LAPLACIAN,SWORD,,0500000,0500002,,Player
+0000001,K,K_Prefab,NORMAL,0100001,LAPLACIAN,MAGIC_WAND,,0500001,,,Player
+0000002,J,J_Prefab,UNIQUE,0100002,LAPLACIAN,SHIELD,,0500000,,,Player
+0000003,M,M_Prefab,RARE,0100003,LAPLACIAN,RANGED,,0500000,,,Player
+0000004,비비안,,NORMAL,0100004,TIMER,SWORD,,0500000,,,Player
+0000005,그레이스,,EPIC,0100005,TIMER,RANGED,,0500000,,,Player
+0000006,샤나,,RARE,0100006,TIMER,DUAL_BALDE,,0500000,,,Player
+0000007,엠마,,UNIQUE,0100007,TIMER,MAGIC_WAND,,0500001,,,Player
+0000008,베이,,UNIQUE,0100008,QUANTUM_WASHER,SWORD,,,,,Player
+0000009,키,,RARE,0100009,QUANTUM_WASHER,RANGED,,,,,Player
+0000010,럼,,UNIQUE,0100010,QUANTUM_WASHER,DUAL_BALDE,,,,,Player
+0000011,마이,,NORMAL,0100011,QUANTUM_WASHER,MAGIC_WAND,,,,,Player
+0000012,고블린,,,0100000,,,,,,,Monster
+0000013,바알,,,0100000,,,,,,,Monster

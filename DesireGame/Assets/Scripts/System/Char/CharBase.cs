@@ -84,10 +84,10 @@ namespace Client
             _charAction = new(this);
             if (_charData != null)
             {
-                CharStatData charStat = DataManager.Instance.GetData<CharStatData>(_charData.charStatId);
+                CharStatData charStat = DataManager.Instance.GetData<CharStatData>(_charData.specIndex);
                 if (charStat == null)
                 {
-                    Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.charStatId} 데이터 Get 실패");
+                    Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.specIndex} 데이터 Get 실패");
                 }
                 _charStat = new CharStat(charStat);
             }

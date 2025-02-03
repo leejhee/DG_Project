@@ -23,7 +23,7 @@ namespace Client
         private void Start()
         {
             //UIManager.Instance.ShowUI(GameSceneUIPrefab);
-            TestChar = CharManager.Instance.CharGenerate(new CharParameter(SystemEnum.eScene.GameScene, new Vector3(-5, 1, 0), 1));
+            TestChar = CharManager.Instance.CharGenerate(new CharParameter(SystemEnum.eScene.GameScene, new Vector3(-5, 1, 0), 0));
 
             float radian = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             float x = Mathf.Cos(radian);
