@@ -23,7 +23,7 @@ namespace Client
                 return null;
             }
 
-            skillBase = ObjectManager.Instance.Instantiate<SkillBase>($"Skill/{_skillData.skillTimeLineName}");
+            skillBase = ObjectManager.Instance.Instantiate<SkillBase>($"Skill/{_skillData.animPath}");
 
             if (_skillData == null)
             {

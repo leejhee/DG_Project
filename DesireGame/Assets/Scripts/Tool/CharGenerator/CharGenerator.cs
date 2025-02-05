@@ -17,7 +17,7 @@ namespace Client
         string[] Options;
         int selectedOptionIndex;
 
-        string targetPath = "Assets/Resources/Prefabs/Char";
+        string targetPath = "Assets/Resources/Prefabs/Char/";
 
         Editor SPUMEditor;
 

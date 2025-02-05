@@ -22,11 +22,13 @@ namespace Client
         {
             base.CreatePlayable(graph, owner);
 
-            AttackColliderGeneratorPlayableBehavior playableBehaviour = new AttackColliderGeneratorPlayableBehavior();
-            playableBehaviour.charBase = charBase;
-            playableBehaviour.skillBase = skillBase;
-            playableBehaviour.OffSet = offSet;
-            playableBehaviour.Size = size;
+            AttackColliderGeneratorPlayableBehavior playableBehaviour = new()
+            {
+                charBase = charBase,
+                skillBase = skillBase,
+                OffSet = offSet,
+                Size = size
+            };
 
             switch (IsAttack)
             {

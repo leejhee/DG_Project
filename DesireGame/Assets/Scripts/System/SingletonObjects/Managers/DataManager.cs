@@ -167,9 +167,9 @@ namespace Client
             foreach (var posMap in charPositionMap.Values)
             {
                 CharPositionData charPosition = posMap as CharPositionData;
-                float xPos = (float)charPosition.xPos / SystemConst.Persent;
-                float yPos = (float)charPosition.yPos / SystemConst.Persent;
-                float zPos = (float)charPosition.zPos / SystemConst.Persent;
+                float xPos = (float)charPosition.xPos / SystemConst.PER_TEN_THOUSAND;
+                float yPos = (float)charPosition.yPos / SystemConst.PER_TEN_THOUSAND;
+                float zPos = (float)charPosition.zPos / SystemConst.PER_TEN_THOUSAND;
                 
                 Vector3 vector = new Vector3(xPos, yPos, zPos);
                 _positionMap.Add(charPosition.mapScene, vector);

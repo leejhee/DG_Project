@@ -52,48 +52,6 @@ namespace Client
             MaxCount
         }
        
-        public enum EGameData
-        {
-            GAME1,
-            GAME2,
-                        
-            EMax
-        }
-
-        public enum ERound
-        {
-            ROUND1,
-            ROUND2,
-            ROUND3,
-
-            EMax
-        }
-
-        public enum EKeywordType
-        {
-            STRATEGY_KEY,
-            CHARACTER_KEY,
-
-            EMax
-        }
-
-        public enum ECharImg
-        {
-            DEFAULT,
-            SMILE,
-            SOB,
-            RAGE,
-            WORRY,
-            SHOCK,
-
-            EMax
-        }
-
-        public enum EDialougeEff
-        {
-            None,
-        }
-       
         public enum eCharType
         {
             None,
@@ -106,7 +64,7 @@ namespace Client
             MaxCount
         }
 
-        public enum ECharTier
+        public enum eCharTier
         {
             NORMAL,
             RARE,
@@ -116,7 +74,7 @@ namespace Client
             EMax,
         }
 
-        public enum ESynergy
+        public enum eSynergy
         {
             None,
             SWORD,
@@ -131,6 +89,100 @@ namespace Client
             TEAM6,
             EMax,
         }
+        public enum eItemTier
+        {
+            NORMAL,
+            RARE,
+            UNIQUE,
+            EPIC,
+            LEGEND,
+            EMax,
+        }
+
+        public enum eStats
+        {
+            AD,
+            NAD,
+
+            AP,
+            NAP,
+            
+            HP,
+            NHP,
+            NMHP,
+
+            AS,
+            NAS,
+
+            CRIT_CHANCE,
+            NCRIT_CHANCE,
+
+            CRIT_DAMAGE,
+            NCRIT_DAMAGE,
+
+            DAMAGE_INCREASE,
+            BONUS_DAMAGE,
+
+            ARMOR,
+            NARMOR,
+
+            MAGIC_RESIST,
+            NMAGIC_RESIST,
+
+            ARMOR_PENETRATION,
+            MAGIC_PENETRATION,
+
+            RANGE,
+            NRANGE,
+
+            MOVE_SPEED,
+            NMOVE_SPEED,
+
+            START_MANA,
+            N_MANA,
+            MAX_MANA,
+
+            EMax,
+        }
+
+        public enum eProjectileTargetType
+        {
+            NEAR_TARGET,
+            CURRENT_TARGET,
+            FARTHEST_TARGET,
+            NEAR_TARGET_2,
+            NEAR_TARGET_3,
+            FARTHEST_TARGET_2,
+            LOW_HP_TARGET,
+            EMax,
+        }
+
+        public enum eProjectilePathType
+        {
+            STRAIGHT,
+            TARGET_POSITION,
+            PINGPONG,
+            UNTIL_WALL,
+            WALL_BOUNCE,
+            EMax,
+        }
+
+        public enum eProjectileRangeType
+        {
+            SINGLE,
+            SPLASH,
+            EMax,
+        }
+
+        public enum eLocalize
+        {
+            KOR,
+            ENG,
+
+            MaxCount
+        }
+
+        #region 교체될 수 있는 enum들이므로 용도가 겹칠 경우 삭제해줄 것
 
         public enum eState
         {
@@ -179,7 +231,6 @@ namespace Client
             MaxCount
         }
 
-
         public enum eExecutionCondition
         {
             None,
@@ -187,6 +238,7 @@ namespace Client
 
             MaxCount
         }
+
         public enum eSkillType
         {
             None,
@@ -220,16 +272,7 @@ namespace Client
 
             MaxCount
         }
-
-        public enum EItemTier
-        {
-            NORMAL,
-            RARE,
-            UNIQUE,
-            EPIC,
-            LEGEND,
-            EMax,
-        }
+        
         public enum PlayerAnim
         {
             idle,
@@ -254,12 +297,8 @@ namespace Client
 
             MaxCount
         }
-        public enum eLocalize
-        {
-            KOR,
-            ENG,
+        
 
-            MaxCount
-        }
+        #endregion
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Client
 {
-    public class CharProjectal : CharBase
+    public class CharProjectile : CharBase
     {
         [SerializeField]
         protected float gravity;

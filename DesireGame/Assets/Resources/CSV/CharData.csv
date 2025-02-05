@@ -1,6 +1,6 @@
 ﻿charID,캐릭터 이름,캐릭터 프리팹,캐릭터 등급,기본스펙,시너지1,시너지2,시너지3,스킬1(평타),스킬2(고유 스킬),초기 기능(패시브),포트레이트 이미지 string
 Index,charName,charPrefab,charTier,specIndex,synergy1,synergy2,synergy3,autoAttack,skillAttack,func,charType
-long,string,string,ECharTier,long,ESynergy,ESynergy,ESynergy,long,long,long[],eCharType
+long,string,string,eCharTier,long,eSynergy,eSynergy,eSynergy,long,long,long[],eCharType
 0000000,L,L_Prefab,NORMAL,0100000,LAPLACIAN,SWORD,,0500000,0500002,,Player
 0000001,K,K_Prefab,NORMAL,0100001,LAPLACIAN,MAGIC_WAND,,0500001,,,Player
 0000002,J,J_Prefab,UNIQUE,0100002,LAPLACIAN,SHIELD,,0500000,,,Player

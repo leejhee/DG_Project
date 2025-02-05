@@ -84,7 +84,7 @@ namespace Client
             _charAction = new(this);
             if (_charData != null)
             {
-                CharStatData charStat = DataManager.Instance.GetData<CharStatData>(_charData.specIndex);
+                StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.specIndex);
                 if (charStat == null)
                 {
                     Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.specIndex} 데이터 Get 실패");
@@ -127,14 +127,13 @@ namespace Client
         {
             CharManager.Instance.SetChar<CharBase>(this);
             
-            //// 스킬
-            //_charSKillInfo = new CharSKillInfo(this);
-            //if (_charSKillInfo != null)
-            //{
-            //    _charSKillInfo.Init(_charData.charSkillList);
-            //}
-
-
+            // 스킬
+            _charSKillInfo = new CharSKillInfo(this);
+            if (_charSKillInfo != null)
+            {               
+                _charSKillInfo.Init(new List<long>() 
+                { _charData.autoAttack, _charData.skillAttack});
+            }
         }
 
         public virtual void CharDistroy()

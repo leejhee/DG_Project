@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client
 {
     // 따로 포물선 궤도를 고집하지 않음.
-    public class CharTarget : CharProjectal
+    public class CharTarget : CharProjectile
     {
         [SerializeField]
         private CharBase Target;

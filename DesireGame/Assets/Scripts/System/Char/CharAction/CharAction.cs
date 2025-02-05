@@ -23,6 +23,7 @@ namespace Client
             {
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);
+                Nav.speed = Actor.CharStat.GetStat(SystemEnum.eStats.NMOVE_SPEED);
             }
             else
             {

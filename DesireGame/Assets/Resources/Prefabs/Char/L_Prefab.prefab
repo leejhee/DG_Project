@@ -4422,10 +4422,10 @@ MonoBehaviour:
   _index: 0
   _FightCollider: {fileID: 0}
   _MoveCollider: {fileID: 0}
-  _SkillRoot: {fileID: 0}
-  _NavMeshAgent: {fileID: 0}
+  _SkillRoot: {fileID: 1092025774992422127}
+  _NavMeshAgent: {fileID: 4408894775234483391}
   _CharCamaraPos: {fileID: 0}
-  _Animator: {fileID: 0}
+  _Animator: {fileID: 440283880810252892}
 --- !u!1 &8076370218336030097
 GameObject:
   m_ObjectHideFlags: 0

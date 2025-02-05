@@ -17,14 +17,14 @@ public long Index; // charID
 		public string charName; // 캐릭터 이름
 		public string charPrefab; // 캐릭터 프리팹
 		
-		public SystemEnum.ECharTier charTier; // 캐릭터 등급
+		public SystemEnum.eCharTier charTier; // 캐릭터 등급
 		public long specIndex; // 기본스펙
 		
-		public SystemEnum.ESynergy synergy1; // 시너지1
+		public SystemEnum.eSynergy synergy1; // 시너지1
 		
-		public SystemEnum.ESynergy synergy2; // 시너지2
+		public SystemEnum.eSynergy synergy2; // 시너지2
 		
-		public SystemEnum.ESynergy synergy3; // 시너지3
+		public SystemEnum.eSynergy synergy3; // 시너지3
 		public long autoAttack; // 스킬1(평타)
 		public long skillAttack; // 스킬2(고유 스킬)
 		public List<long> func; // 초기 기능(패시브)
@@ -78,7 +78,7 @@ public long Index; // charID
 					if(values[3] == "")
 					    data.charTier = default;
 					else
-					    data.charTier = (SystemEnum.ECharTier)Enum.Parse(typeof(SystemEnum.ECharTier), values[3]);
+					    data.charTier = (SystemEnum.eCharTier)Enum.Parse(typeof(SystemEnum.eCharTier), values[3]);
 					
 					if(values[4] == "")
 					    data.specIndex = default;
@@ -88,17 +88,17 @@ public long Index; // charID
 					if(values[5] == "")
 					    data.synergy1 = default;
 					else
-					    data.synergy1 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[5]);
+					    data.synergy1 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[5]);
 					
 					if(values[6] == "")
 					    data.synergy2 = default;
 					else
-					    data.synergy2 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[6]);
+					    data.synergy2 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[6]);
 					
 					if(values[7] == "")
 					    data.synergy3 = default;
 					else
-					    data.synergy3 = (SystemEnum.ESynergy)Enum.Parse(typeof(SystemEnum.ESynergy), values[7]);
+					    data.synergy3 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[7]);
 					
 					if(values[8] == "")
 					    data.autoAttack = default;

@@ -1,0 +1,17 @@
+﻿ID,타겟,날아가는 방식,폭발 범위타입,관통 수,폭발범위,이펙트 경로,,,,,
+Index,target,path,rangeType,penetrationCount,,,,,,,
+long,eProjectileTargetType,eProjectilePathType,eProjectileRangeType,int,int,string,,,,,
+1100002,NEAR_TARGET,STRAIGHT,SINGLE,0,0,0,,,,,
+
+
+
+
+
+
+
+
+
+
+
+
+
