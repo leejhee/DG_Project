@@ -23,10 +23,6 @@ namespace Client
         // 고유 ID 생성
         public long GetNextID() => _nextID++;
 
-        // 필드 위 캐릭터, 몬스터 접근용(키가 uid)
-        private Dictionary<long, CharPlayer> _playerDict = new Dictionary<long, CharPlayer>();
-        private Dictionary<long, CharMonster> _monsterDict = new Dictionary<long, CharMonster>();
-
        public T GetChar<T>(long ID) where T : CharBase
        {
             var key = typeof(T);
@@ -146,102 +142,6 @@ namespace Client
             return charBase;
         }
 
-        /// <summary>
-        /// 필드 내 몬스터 또는 플레이어 캐릭터 등록
-        /// 일단 전투 시작 시에만 호출(예비 목록도 다 해야함.)</summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="unit"></param>
-        /// <returns></returns>
-        public bool RegisterFieldChar<T>(T unit) where T : CharBase
-        {
-            if(unit is CharPlayer)
-            {
-                if (_playerDict.ContainsKey(unit.GetID()))
-                {
-                    Debug.LogError($"uid {unit.GetID()} 이미 존재함");
-                    return false;
-                }
-                _playerDict.Add(unit.GetID(), unit as CharPlayer);
-                return true;
-            }
-
-            if(unit is CharMonster)
-            {
-                if (_monsterDict.ContainsKey(unit.GetID()))
-                {
-                    Debug.LogError($"uid {unit.GetID()} 이미 존재함");
-                    return false;
-                }
-                _monsterDict.Add(unit.GetID(), unit as CharMonster);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 필드에 있는 Char 삭제
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public bool ClearFieldChar<T>(long uid) where T  : CharBase
-        {
-            if(typeof(T) == typeof(CharPlayer))
-            {
-                if (!_playerDict.ContainsKey(uid))
-                {
-                    Debug.LogError($"해당 uid {uid} 없음");
-                    return false;
-                }
-                _playerDict.Remove(uid);
-                return true;
-            }
-
-            if(typeof(T) == typeof(CharMonster))
-            {
-                if (!_monsterDict.ContainsKey(uid))
-                {
-                    Debug.LogError($"해당 uid {uid} 없음");
-                    return false;
-                }
-                _monsterDict.Remove(uid);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 필드에 있는 몬스터 캐릭터 가져오기
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public CharMonster GetFieldMonster(long uid)
-        {
-            if (!_monsterDict.ContainsKey(uid))
-            {
-                Debug.LogError($"uid {uid} 몬스터 없음");
-                return null;
-            }
-            return _monsterDict[uid];
-        }
-
-        /// <summary>
-        /// 필드에 있는 플레이어 캐릭터 가져오기
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <returns></returns>
-        public CharPlayer GetFieldPlayer(long uid)
-        {
-            if(! _playerDict.ContainsKey(uid))
-            {
-                Debug.LogError($"uid {uid} 몬스터 없음");
-                return null;
-            }
-            return _playerDict[uid];
-        }
-
         public CharBase GetFieldChar(long uid)
         {
             foreach (var dict in _cache.Values)
@@ -252,6 +152,45 @@ namespace Client
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// 가장 가까운 적 가져오기
+        /// </summary>
+        /// <param name="ClientChar"></param>
+        /// <returns></returns>
+        public CharBase GetNearestEnemy(CharBase ClientChar)
+        {
+            eCharType clientType = ClientChar.GetCharType();
+            Vector3 clientPosition = ClientChar.CharTransform.position;
+            var enemyDict = new Dictionary<long, CharBase>();
+
+            if (clientType == eCharType.Player)
+            {
+                enemyDict = _cache[typeof(CharMonster)];
+            }
+            else if (clientType == eCharType.Monster)
+            {
+                enemyDict = _cache[typeof(CharPlayer)];
+            }
+
+            CharBase nearestEnemy = null;
+            float minDistanceSqr = float.MaxValue;  // 제곱 거리 비교를 위해
+
+            foreach (var kvp in enemyDict)
+            {
+                CharBase enemy = kvp.Value;
+                Vector3 enemyPosition = enemy.CharTransform.position;
+                float distanceSqr = (clientPosition - enemyPosition).sqrMagnitude; // 거리 제곱
+
+                if (distanceSqr < minDistanceSqr)
+                {
+                    minDistanceSqr = distanceSqr;
+                    nearestEnemy = enemy;
+                }
+            }
+
+            return nearestEnemy;
         }
     }
 }

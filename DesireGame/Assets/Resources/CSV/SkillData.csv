@@ -1,14 +1,14 @@
-﻿ID,이름 스트링 코드,설명 스트링 코드,스킬 애니메이션,펑션 인덱스,,,,,,,
-Index,nameStringCode,,skillTimeLineName,functionIndex,,,,,,,
-long,string,,string,long,,,,,,,
-0500000,SKILL_NORMAL_AD,DESC_SKILL_NORMAL_AD,,0600000,,,,,,,
-0500001,SKILL_NORMAL_AP,DESC_SKILL_NORMAL_AP,,0600001,,,,,,,
-0500002,SKILL_L,DESC_SKILL_L,,0600002,,,,,,,
-
-
-
-
-
+﻿ID,이름 스트링 코드,설명 스트링 코드,펑션 인덱스,스킬 사거리,애니메이션 경로,이펙트 경로,SFX 경로,,,,
+Index,nameStringCode,desStringCode,funcIndex,skillRange,animPath,fxPath,sfxPath,,,,
+long,string,string,long,int,string,string,string,,,,
+500000,SKILL_MELEE_AD,DES_SKILL_MELEE_AD,600000,1,,,,,,,
+500001,SKILL_MELEE_AP,DES_SKILL_MELEE_AP,600001,1,,,,,,,
+500002,SKILL_RANGED_AD,DES_SKILL_RANGED_AD,600002,4,,,,,,,
+500003,SKILL_RANGED_AP,DES_SKILL_RANGED_AP,600003,4,,,,,,,
+500100,SKILL_L,DES_SKILL_L,600100,1,,,,,,,
+500101,SKILL_K,DES_SKILL_K,600101,4,,,,,,,
+500102,SKILL_J,DES_SKILL_J,600102,1,,,,,,,
+500103,SKILL_M,DES_SKILL_M,600103,4,,,,,,,
 
 
 
