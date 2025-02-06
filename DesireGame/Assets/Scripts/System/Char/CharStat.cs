@@ -48,7 +48,6 @@ namespace Client
             _charStat[(int)eStats.RANGE] = charStat.Range;  // 공격 사거리
             _charStat[(int)eStats.NRANGE] = charStat.Range; // 현재 공격 사거리
 
-
             _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // 이동 속도
             _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도
 

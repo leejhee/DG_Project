@@ -13,7 +13,7 @@ namespace Client
     [Serializable]
     public partial class ProjectileData : SheetData
     {
-public long Index; // ID
+		public long Index; // ID
 		
 		public SystemEnum.eProjectileTargetType target; // 타겟
 		

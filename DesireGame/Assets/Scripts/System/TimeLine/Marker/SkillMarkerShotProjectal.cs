@@ -8,16 +8,17 @@ namespace Client
     public class SkillMarkerShotProjectal : SkillTimeLineMarker
     {
         [Header("발사할 투사체")]
-        [SerializeField] protected CharProjectile _projectal;
+        [SerializeField] protected CharProjectile _projectile;
         [SerializeField] protected Vector3 _offSet;
 
         public override void MarkerAction()
         {
             Debug.Log("시작!");
 
-            CharProjectile projectal = GameObject.Instantiate<CharProjectile>(_projectal);
-
+            CharProjectile projectile = GameObject.Instantiate<CharProjectile>(_projectile);
+            
         }
+
         public override void SkillInitialize()
         {
 

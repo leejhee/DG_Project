@@ -145,6 +145,46 @@ namespace Client
             EMax,
         }
 
+        public enum eFunction
+        {
+            // 공속기반 투사체 생성
+            SpawnProjectileByAS,
+            // 공격력 기반 대미지
+            DamageByCasterAD,
+            // 주문력 기반 대미지
+            DamageByCasterAP,
+            // 다음 공격에 대한 버프
+            BuffDuringAttacks,
+            // 마나쓰는 스킬 투사체 생성
+            SpawnProjectileByMana,
+            // 주문력 기반 대미지와 디버프
+            DamageByCasterAPWithCC,
+            // 공속기반 근접공격
+            MeleeADByAS,
+            // 최대체력 비례 대미지 & 흡혈
+            DamageByTargetMaxHPAndHeal,
+            // 공격력 기반 확정크리티컬 대미지
+            DamageByCasterADWithCrit,
+            // 공격력 기반 일회성버프
+            BuffOnceByCasterAD,
+            // 여러 효과 동시 발동(최대 4개)
+            MultiCasting,
+            // 일회성 버프
+            BuffOnce,
+
+
+            MaxCount
+        }
+
+        public enum eDebuffType
+        {
+            통보,
+            가학,
+            치유력_감소,
+
+            eMax
+        }
+
         public enum eProjectileTargetType
         {
             NEAR_TARGET,
@@ -180,6 +220,12 @@ namespace Client
             ENG,
 
             MaxCount
+        }
+
+        public enum eTrackOrder
+        {
+            ANIM_TRACK,
+
         }
 
         #region 교체될 수 있는 enum들이므로 용도가 겹칠 경우 삭제해줄 것

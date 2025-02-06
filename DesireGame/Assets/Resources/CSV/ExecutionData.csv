@@ -1,9 +1,17 @@
-﻿ExecutionIndex,#기능설명,대분류,우선순위 (클수록 높은 우선순위),ExecutionType,영향받는 State,조건부Execution,ValueList,ValueStrList,Execution지속시간10000분율( -1 은 무한지속 ) ,연계Execution,연계Execution조건
-Index,#,GroupType,Priority,ExecutionType,State,ExecutionCondition,ValueList,ValueStrList,ExecutionTime,ChainExecution,ChainExecutionCondition
-long,#,eExecutionGroupType,int,eExecutionType,eState,eExecutionCondition,long[],string[],long,long[],eExecutionCondition
-100101,0.4초 무적판정,Action,,Avoidance,,,,,4000,,
-100102,3초간 10의 방어력 버프,Buff,,StateBuff,Defence,,[100000],,30000,,
-100201,0.5 전방 패링,Action,,Parrying,,,[0],,5000,[100204.100205],ParryingSuccess
-100204,3초간 20의 방어력 버프,Buff,,StateBuff,Defence,,[200000],,30000,,
-100205,3초간 40의 공격력 버프,Buff,,StateBuff,Attack,,[400000],,30000,,
-100301,5번 60% 상대 공격력으로 0.5초마다 출혈,Debuff,,DotDamage,Attack,,[6000.5.5000],,,,
+﻿ID,#이름 스트링 코드,#설명,기능,스테이트 타입,시간(MS)천분율,input1,input2,input3,input4,,
+Index,#nameStringCode,,functionType,effectState,duration,input1,input2,input3,input4,,
+long,#string,,eFunction,eState,long,long,long,long,long,,
+0600000,SKILL_MELEE_AD,AD 근접 공격(투사체 생성X),MeleeAD,,,10000,,,,,
+0600001,SKILL_MELEE_AP,AP 근접 공격 (투사체 생성X),MeleeAP,,,5000,,,,,
+0600002,SKILL_RANGED_AD,AD 원거리 투사체를 생성. 공격력의 100%,RangedAD,,,1100002,10000,,,,
+0600003,SKILL_RANGED_AP,AP 원거리 투사체를 생성. 주문력의 50%,RangedAP,,,,,,,,
+0600100,SKILL_L,L 스킬 (다음 두 번의 기본공격이 60의 추가피해를 입힌다),BuffDuringAttacks,BONUS_DAMAGE,,2,60,,,,
+0600101,SKILL_K,K 스킬(맵끝까지 가는 나비 던져 주문력 피해 + 통보 디버프 6초간 제공),SkillK,,,,,,,,
+0600102,SKILL_J,J 스킬 ,SkillJ,,,,,,,,
+0600103,SKILL_M,M 스킬 ,SkillM,,,,,,,,
+
+
+
+
+
+

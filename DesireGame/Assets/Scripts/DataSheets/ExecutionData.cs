@@ -13,22 +13,16 @@ namespace Client
     [Serializable]
     public partial class ExecutionData : SheetData
     {
-public long Index; // ExecutionIndex
+public long Index; // ID
 		
-		public SystemEnum.eExecutionGroupType GroupType; // 대분류
-		public int Priority; // 우선순위 (클수록 높은 우선순위)
+		public SystemEnum.eFunction functionType; // 기능
 		
-		public SystemEnum.eExecutionType ExecutionType; // ExecutionType
-		
-		public SystemEnum.eState State; // 영향받는 State
-		
-		public SystemEnum.eExecutionCondition ExecutionCondition; // 조건부Execution
-		public List<long> ValueList; // ValueList
-		public List<string> ValueStrList; // ValueStrList
-		public long ExecutionTime; // Execution지속시간10000분율( -1 은 무한지속 ) 
-		public List<long> ChainExecution; // 연계Execution
-		
-		public SystemEnum.eExecutionCondition ChainExecutionCondition; // 연계Execution조건
+		public SystemEnum.eStats effectState; // 스테이트 타입
+		public long duration; // 시간(MS)천분율
+		public long input1; // input1
+		public long input2; // input2
+		public long input3; // input3
+		public long input4; // input4
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -64,55 +58,40 @@ public long Index; // ExecutionIndex
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[2] == "")
-					    data.GroupType = default;
-					else
-					    data.GroupType = (SystemEnum.eExecutionGroupType)Enum.Parse(typeof(SystemEnum.eExecutionGroupType), values[2]);
-					
 					if(values[3] == "")
-					    data.Priority = default;
+					    data.functionType = default;
 					else
-					    data.Priority = Convert.ToInt32(values[3]);
+					    data.functionType = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[3]);
 					
 					if(values[4] == "")
-					    data.ExecutionType = default;
+					    data.effectState = default;
 					else
-					    data.ExecutionType = (SystemEnum.eExecutionType)Enum.Parse(typeof(SystemEnum.eExecutionType), values[4]);
+					    data.effectState = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[4]);
 					
 					if(values[5] == "")
-					    data.State = default;
+					    data.duration = default;
 					else
-					    data.State = (SystemEnum.eState)Enum.Parse(typeof(SystemEnum.eState), values[5]);
+					    data.duration = Convert.ToInt64(values[5]);
 					
 					if(values[6] == "")
-					    data.ExecutionCondition = default;
+					    data.input1 = default;
 					else
-					    data.ExecutionCondition = (SystemEnum.eExecutionCondition)Enum.Parse(typeof(SystemEnum.eExecutionCondition), values[6]);
+					    data.input1 = Convert.ToInt64(values[6]);
 					
-					ListStr = values[7].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var ValueListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.ValueList = ValueListData;
+					if(values[7] == "")
+					    data.input2 = default;
+					else
+					    data.input2 = Convert.ToInt64(values[7]);
 					
-					ListStr = values[8].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var ValueStrListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToString(x)).ToList();
-					data.ValueStrList = ValueStrListData;
+					if(values[8] == "")
+					    data.input3 = default;
+					else
+					    data.input3 = Convert.ToInt64(values[8]);
 					
 					if(values[9] == "")
-					    data.ExecutionTime = default;
+					    data.input4 = default;
 					else
-					    data.ExecutionTime = Convert.ToInt64(values[9]);
-					
-					ListStr = values[10].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var ChainExecutionData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.ChainExecution = ChainExecutionData;
-					
-					if(values[11] == "")
-					    data.ChainExecutionCondition = default;
-					else
-					    data.ChainExecutionCondition = (SystemEnum.eExecutionCondition)Enum.Parse(typeof(SystemEnum.eExecutionCondition), values[11]);
+					    data.input4 = Convert.ToInt64(values[9]);
 					
 
                     dataList[data.Index] = data;
