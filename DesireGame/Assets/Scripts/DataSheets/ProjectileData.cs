@@ -13,7 +13,7 @@ namespace Client
     [Serializable]
     public partial class ProjectileData : SheetData
     {
-		public long Index; // ID
+public long Index; // ID
 		
 		public SystemEnum.eProjectileTargetType target; // 타겟
 		
@@ -21,6 +21,9 @@ namespace Client
 		
 		public SystemEnum.eProjectileRangeType rangeType; // 폭발 범위타입
 		public int penetrationCount; // 관통 수
+		public int explosionRange; // 폭발범위
+		public string effect; // 이펙트 경로
+		public string projectilePrefab; // 프리팹 경로
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -39,13 +42,8 @@ namespace Client
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i].Trim(),
-                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
-  
-                    for (int j = 0; j < values.Length; j++)
-                    {
-                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
-                    }
+                    string[] values = CSVParser.Parse(lines[i].Trim());
+
                     line = i;
 
                     ProjectileData data = new ProjectileData();
@@ -75,6 +73,21 @@ namespace Client
 					    data.penetrationCount = default;
 					else
 					    data.penetrationCount = Convert.ToInt32(values[4]);
+					
+					if(values[5] == "")
+					    data.explosionRange = default;
+					else
+					    data.explosionRange = Convert.ToInt32(values[5]);
+					
+					if(values[6] == "")
+					    data.effect = default;
+					else
+					    data.effect = Convert.ToString(values[6]);
+					
+					if(values[7] == "")
+					    data.projectilePrefab = default;
+					else
+					    data.projectilePrefab = Convert.ToString(values[7]);
 					
 
                     dataList[data.Index] = data;

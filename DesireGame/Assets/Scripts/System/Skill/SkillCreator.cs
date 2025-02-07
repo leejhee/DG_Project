@@ -25,6 +25,7 @@ namespace Client
 
             skillBase = ObjectManager.Instance.Instantiate<SkillBase>($"Skill/{_skillData.animPath}");
 
+
             if (_skillData == null)
             {
                 Debug.LogWarning($"CreateSkill : {skillIndex} 스킬 생성 실패.");

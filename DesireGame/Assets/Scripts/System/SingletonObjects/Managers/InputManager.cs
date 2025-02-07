@@ -8,7 +8,7 @@ namespace Client
 {
     public struct InputParameter
     {
-
+        public CharBase skillTarget;
     }
 
     public class InputManager : Singleton<InputManager>

@@ -40,13 +40,8 @@ public long Index; // 아이템Index
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i].Trim(),
-                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
-  
-                    for (int j = 0; j < values.Length; j++)
-                    {
-                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
-                    }
+                    string[] values = CSVParser.Parse(lines[i].Trim());
+
                     line = i;
 
                     CharItemData data = new CharItemData();

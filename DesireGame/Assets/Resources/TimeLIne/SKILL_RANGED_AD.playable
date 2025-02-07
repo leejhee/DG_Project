@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
   m_Name: Skill Marker Shot Projectal
   m_EditorClassIdentifier: 
-  m_Time: 0.43333333333333335
+  m_Time: 0.21666666666666667
   _projectile: {fileID: -2365901413674412306, guid: 64d43b0be02aff94ebf5ed38bf730999, type: 3}
   _offSet: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000

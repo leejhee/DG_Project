@@ -59,7 +59,7 @@ namespace Client
         public void CheckTimeOver()
         {
             float runTime = Time.time - _StartTime;
-            float executionTime = _ExecutionData.duration / SystemConst.PER_THOUSAND;
+            float executionTime = _ExecutionData.time / SystemConst.PER_THOUSAND;
             if (runTime > executionTime)
             {
 

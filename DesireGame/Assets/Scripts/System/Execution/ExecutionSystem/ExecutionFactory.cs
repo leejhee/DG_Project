@@ -13,8 +13,8 @@ namespace Client
             {
                 case eFunction.SpawnProjectileByMana:
                 case eFunction.SpawnProjectileByAS: return new SpawnProjectileByAS(buffParam);
-                case eFunction.DamageByCasterAD:
-                case eFunction.DamageByCasterAP:
+                case eFunction.DamageByCasterAD: return new DamageByCasterAD(buffParam);
+                case eFunction.DamageByCasterAP: return new DamageByCasterAP(buffParam);
             }
 
             return null;

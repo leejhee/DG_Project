@@ -9,17 +9,30 @@ namespace Client
     /// <summary>
     /// 스킬 객체
     /// </summary>
-    public class SkillBase : MonoBehaviour
+    public class SkillBase : MonoBehaviour, IContextProvider
     {
         private PlayableDirector _PlayableDirector;
-        private CharBase _CharBase;
+        private CharBase _caster;
+
+        // 구조상 데이터를 포함해야 한다고 판단
+        private SkillData _skillData;
 
         public PlayableDirector PlayableDirector => _PlayableDirector;
-        public CharBase CharPlayer => _CharBase;
+        public CharBase CharPlayer => _caster;
 
-        public void SetCharBase(CharBase charBase)
+        // IContextProvider 구현. Execution의 적용 대상에 대한 파라미터 부여
+        public InputParameter InputParameter { get; private set; }
+        public BuffParameter BuffParameter { get; private set; }
+
+        public void SetCharBase(CharBase caster)
         {
-            _CharBase = charBase;
+            _caster = caster;
+        }
+
+        // 추후 데이터 포함할 방법이 있다면 반드시 이 코드 교체할 것
+        public void SetSkillData(SkillData data)
+        {
+            _skillData = data;
         }
 
         private void Awake()
@@ -45,7 +58,7 @@ namespace Client
             {
                 if (track is AnimationTrack animationTrack)
                 {
-                    _PlayableDirector.SetGenericBinding(animationTrack, _CharBase.CharAnim.Animator);
+                    _PlayableDirector.SetGenericBinding(animationTrack, _caster.CharAnim.Animator);
                     Debug.Log($"{track.name}' 트랙에 Animator 바인딩");
                 }
             }
@@ -56,7 +69,18 @@ namespace Client
             if (_PlayableDirector == null)
                 return;
 
+            InputParameter = parameter;
 
+            ExecutionData tempdata =
+                DataManager.Instance.GetData<ExecutionData>(_skillData.funcIndex);
+            BuffParameter = new BuffParameter()
+            {
+                eFunctionType = tempdata.functionType,
+                CastChar = CharPlayer,
+                TargetChar = InputParameter.skillTarget,
+                ExecutionIndex = tempdata.Index
+            };
+              
             _PlayableDirector.Play();
         }
     }

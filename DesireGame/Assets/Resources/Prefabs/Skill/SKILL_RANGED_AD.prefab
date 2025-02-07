@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4913400249362761074}
   - component: {fileID: 4100942634926461040}
   - component: {fileID: 8855530796117675502}
+  - component: {fileID: -2432506111854325915}
   m_Layer: 0
   m_Name: SKILL_RANGED_AD
   m_TagString: Untagged
@@ -64,3 +65,15 @@ PlayableDirector:
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &-2432506111854325915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2391092702632585257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0eb1e00b1411646a6881bc6d827135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

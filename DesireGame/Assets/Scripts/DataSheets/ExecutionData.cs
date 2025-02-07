@@ -17,8 +17,12 @@ public long Index; // ID
 		
 		public SystemEnum.eFunction functionType; // 기능
 		
-		public SystemEnum.eStats effectState; // 스테이트 타입
-		public long duration; // 시간(MS)천분율
+		public SystemEnum.eStats statsType; // 스테이트 타입
+		
+		public SystemEnum.eDamageType damageType; // 데미지 타입
+		
+		public SystemEnum.eCCType CCType; // CC 타입
+		public long time; // 시간(MS)천분율
 		public long input1; // input1
 		public long input2; // input2
 		public long input3; // input3
@@ -41,13 +45,8 @@ public long Index; // ID
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = Regex.Split(lines[i].Trim(),
-                                        @",(?=(?:[^""\[\]]*(?:""[^""]*""|[\[][^\]]*[\]])?)*[^""\[\]]*$)");
-  
-                    for (int j = 0; j < values.Length; j++)
-                    {
-                        values[j] = Regex.Replace(values[j], @"^""|""$", "");
-                    }
+                    string[] values = CSVParser.Parse(lines[i].Trim());
+
                     line = i;
 
                     ExecutionData data = new ExecutionData();
@@ -58,40 +57,50 @@ public long Index; // ID
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[3] == "")
+					if(values[2] == "")
 					    data.functionType = default;
 					else
-					    data.functionType = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[3]);
+					    data.functionType = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[2]);
+					
+					if(values[3] == "")
+					    data.statsType = default;
+					else
+					    data.statsType = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[3]);
 					
 					if(values[4] == "")
-					    data.effectState = default;
+					    data.damageType = default;
 					else
-					    data.effectState = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[4]);
+					    data.damageType = (SystemEnum.eDamageType)Enum.Parse(typeof(SystemEnum.eDamageType), values[4]);
 					
 					if(values[5] == "")
-					    data.duration = default;
+					    data.CCType = default;
 					else
-					    data.duration = Convert.ToInt64(values[5]);
+					    data.CCType = (SystemEnum.eCCType)Enum.Parse(typeof(SystemEnum.eCCType), values[5]);
 					
 					if(values[6] == "")
-					    data.input1 = default;
+					    data.time = default;
 					else
-					    data.input1 = Convert.ToInt64(values[6]);
+					    data.time = Convert.ToInt64(values[6]);
 					
 					if(values[7] == "")
-					    data.input2 = default;
+					    data.input1 = default;
 					else
-					    data.input2 = Convert.ToInt64(values[7]);
+					    data.input1 = Convert.ToInt64(values[7]);
 					
 					if(values[8] == "")
-					    data.input3 = default;
+					    data.input2 = default;
 					else
-					    data.input3 = Convert.ToInt64(values[8]);
+					    data.input2 = Convert.ToInt64(values[8]);
 					
 					if(values[9] == "")
+					    data.input3 = default;
+					else
+					    data.input3 = Convert.ToInt64(values[9]);
+					
+					if(values[10] == "")
 					    data.input4 = default;
 					else
-					    data.input4 = Convert.ToInt64(values[9]);
+					    data.input4 = Convert.ToInt64(values[10]);
 					
 
                     dataList[data.Index] = data;

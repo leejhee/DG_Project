@@ -12,7 +12,7 @@ namespace Client
     public class SkillTimeLineMarker : Marker, INotification
     {
         public PropertyName id => new PropertyName("SkillTimeLineMarker");
-
+        protected BuffParameter param;
 
         public virtual void  MarkerAction()
         {
@@ -29,6 +29,12 @@ namespace Client
             base.OnInitialize(aPent);
             SkillInitialize();
         }
+
+        public virtual void SetBuffParameter(BuffParameter buffParam)
+        {
+            param = buffParam;
+        }
+
     }
     
     

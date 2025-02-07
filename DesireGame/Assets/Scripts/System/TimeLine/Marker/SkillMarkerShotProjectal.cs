@@ -11,10 +11,12 @@ namespace Client
         [SerializeField] protected CharProjectile _projectile;
         [SerializeField] protected Vector3 _offSet;
 
+
         public override void MarkerAction()
         {
             Debug.Log("Ω√¿€!");
 
+            
             CharProjectile projectile = GameObject.Instantiate<CharProjectile>(_projectile);
             
         }

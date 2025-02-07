@@ -161,8 +161,8 @@ namespace Client
             DamageByCasterAPWithCC,
             // 공속기반 근접공격
             MeleeADByAS,
-            // 최대체력 비례 대미지 & 흡혈
-            DamageByTargetMaxHPAndHeal,
+            // 최대체력 비례 대미지
+            DamageByTargetMaxHP,
             // 공격력 기반 확정크리티컬 대미지
             DamageByCasterADWithCrit,
             // 공격력 기반 일회성버프
@@ -171,13 +171,37 @@ namespace Client
             MultiCasting,
             // 일회성 버프
             BuffOnce,
-
+            // CC 부여
+            ApplyCC,
 
             MaxCount
         }
 
+        public enum eDamageType
+        {
+            None = 0,
+            MAGIC,
+            PHYSICS,
+
+            eMax
+        }
+
+        public enum eCCType
+        {
+            None,
+
+            통보,
+            가학,
+            치유력_감소,
+
+            eMax
+        }
+
+
         public enum eDebuffType
         {
+            None,
+
             통보,
             가학,
             치유력_감소,

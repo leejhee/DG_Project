@@ -30,6 +30,7 @@ namespace Client
         private CharData     _charData = null;      // 캐릭터 데이터
         private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
         private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
+        private CharAI      _charAI = null;
 
         //private GameObject _LWeapon = null;       // 왼손 무기
         //private GameObject _RWeapon = null;       // 오른손 무기
@@ -65,6 +66,7 @@ namespace Client
         public NavMeshAgent Nav => _NavMeshAgent;
         public CharStat CharStat => _charStat;
         public CharAction CharAction => _charAction;
+        public CharAI CharAI => _charAI;
 
         protected CharBase() { }
 
