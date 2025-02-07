@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace Client
 {
-    public class SpawnProjectileByAS : FunctionBase
+    public class SpawnProjectileByMana : FunctionBase
     {
-        
 
-        public SpawnProjectileByAS(BuffParameter buffParam) : base(buffParam)
+
+        public SpawnProjectileByMana(BuffParameter buffParam) : base(buffParam)
         {
 
         }
@@ -18,7 +18,7 @@ namespace Client
             base.RunFunction(StartExecution);
             if (StartExecution)
             {
-                
+
             }
             else
             {

@@ -22,7 +22,7 @@ namespace Client
         [SerializeField] protected GameObject _CharCamaraPos; // 캐릭터 애니메이션 리스트
         [SerializeField] protected Animator _Animator;       // 애니메이터\
 
-        private ExecutionInfo _executionInfo = null; // 기능 정보
+        private FunctionInfo _functionInfo = null; // 기능 정보
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
         private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
@@ -53,10 +53,10 @@ namespace Client
 
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
-        public Dictionary<eFunction, List<ExecutionBase>> ExecutionBaseDic => _executionInfo.ExecutionBaseDic; // 행동 
+        public Dictionary<eFunction, List<FunctionBase>> functionBaseDic => _functionInfo.FunctionBaseDic; // 행동 
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
-        public ExecutionInfo ExecutionInfo => _executionInfo;  // 기능 정보
+        public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
         public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
@@ -75,8 +75,8 @@ namespace Client
             _CharTransform = transform;
             _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
             _uid = CharManager.Instance.GetNextID();
-            _executionInfo = new ExecutionInfo();
-            _executionInfo.Init();
+            _functionInfo = new FunctionInfo();
+            _functionInfo.Init();
             _charData = DataManager.Instance.GetData<CharData>(_index);
             _NavMeshAgent = GetComponent<NavMeshAgent>();
             _charAnim = new();
@@ -110,12 +110,12 @@ namespace Client
 
         void Update()
         {
-            foreach (var executionBaseList in ExecutionBaseDic)
+            foreach (var functionBaseList in functionBaseDic)
             {
-                foreach (var execution in executionBaseList.Value)
+                foreach (var function in functionBaseList.Value)
                 {
-                    execution.CheckTimeOver();
-                    execution.Update(Time.deltaTime);
+                    function.CheckTimeOver();
+                    function.Update(Time.deltaTime);
                 }
             }
             

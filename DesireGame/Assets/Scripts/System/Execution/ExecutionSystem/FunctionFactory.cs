@@ -5,13 +5,13 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    public static class ExecutionFactory
+    public static class FunctionFactory
     {
-        public static ExecutionBase ExecutionGenerate(BuffParameter buffParam)
+        public static FunctionBase FunctionGenerate(BuffParameter buffParam)
         {
             switch (buffParam.eFunctionType)
             {
-                case eFunction.SpawnProjectileByMana:
+                case eFunction.SpawnProjectileByMana: return new SpawnProjectileByMana(buffParam);
                 case eFunction.SpawnProjectileByAS: return new SpawnProjectileByAS(buffParam);
                 case eFunction.DamageByCasterAD: return new DamageByCasterAD(buffParam);
                 case eFunction.DamageByCasterAP: return new DamageByCasterAP(buffParam);

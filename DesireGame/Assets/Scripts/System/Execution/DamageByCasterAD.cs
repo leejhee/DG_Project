@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace Client
 {
-    public class DamageByCasterAD : ExecutionBase
+    public class DamageByCasterAD : FunctionBase
     {
         public DamageByCasterAD(BuffParameter buffParam) : base(buffParam)
         {
 
         }
-        public override void RunExecution(bool StartExecution)
+        public override void RunFunction(bool StartFunction)
         {
-            base.RunExecution(StartExecution);
-            if (StartExecution)
+            base.RunFunction(StartFunction);
+            if (StartFunction)
             {
             }
             else

@@ -22,7 +22,6 @@ namespace Client
 
         // IContextProvider 구현. Execution의 적용 대상에 대한 파라미터 부여
         public InputParameter InputParameter { get; private set; }
-        public BuffParameter BuffParameter { get; private set; }
 
         public void SetCharBase(CharBase caster)
         {
@@ -30,7 +29,7 @@ namespace Client
         }
 
         // 추후 데이터 포함할 방법이 있다면 반드시 이 코드 교체할 것
-        public void SetSkillData(SkillData data)
+        public void Init(SkillData data)
         {
             _skillData = data;
         }
@@ -71,16 +70,9 @@ namespace Client
 
             InputParameter = parameter;
 
-            ExecutionData tempdata =
-                DataManager.Instance.GetData<ExecutionData>(_skillData.funcIndex);
-            BuffParameter = new BuffParameter()
-            {
-                eFunctionType = tempdata.functionType,
-                CastChar = CharPlayer,
-                TargetChar = InputParameter.skillTarget,
-                ExecutionIndex = tempdata.Index
-            };
-              
+            FunctionData tempdata =
+                DataManager.Instance.GetData<FunctionData>(_skillData.funcIndex);
+
             _PlayableDirector.Play();
         }
     }

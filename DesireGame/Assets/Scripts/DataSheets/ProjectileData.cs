@@ -24,7 +24,7 @@ public long Index; // ID
 		public int explosionRange; // 폭발범위
 		public string effect; // 이펙트 경로
 		public string projectilePrefab; // 프리팹 경로
-		
+		public long funcIndex;
 
         public override Dictionary<long, SheetData> LoadData()
         {

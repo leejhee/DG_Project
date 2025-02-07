@@ -9,11 +9,11 @@ public class SkillMarkerReceiver : MonoBehaviour, INotificationReceiver
         if (notification is SkillTimeLineMarker skillMarker)
         {
             var director = origin.GetGraph().GetResolver() as PlayableDirector;
-            if(director == GetComponent<PlayableDirector>())
-            {
-                IContextProvider provider = GetComponent<IContextProvider>();
-                skillMarker.SetBuffParameter(provider.BuffParameter);
-            }
+            IContextProvider provider = GetComponent<IContextProvider>();
+            
+            skillMarker.InitInput(provider.InputParameter);
+            skillMarker.MarkerAction();
+           
             Debug.Log("여기까지 왔네요.");
         }
     }

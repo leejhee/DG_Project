@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class ExecutionData : SheetData
+    public partial class FunctionData : SheetData
     {
 public long Index; // ID
 		
@@ -49,7 +49,7 @@ public long Index; // ID
 
                     line = i;
 
-                    ExecutionData data = new ExecutionData();
+                    FunctionData data = new FunctionData();
 
                     
 					if(values[0] == "")

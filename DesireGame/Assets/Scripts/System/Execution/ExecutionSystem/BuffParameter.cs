@@ -11,6 +11,6 @@ namespace Client
         public eFunction eFunctionType;
         public CharBase TargetChar;
         public CharBase CastChar;
-        public long ExecutionIndex;
+        public long FunctionIndex;
     }
 }
