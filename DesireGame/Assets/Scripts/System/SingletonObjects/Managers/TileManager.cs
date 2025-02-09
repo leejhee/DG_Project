@@ -44,5 +44,20 @@ namespace Client
             GetTile(idx2)?.SetChar(charBase1);
         }
 
+        // 캐릭터 타일에 올리기
+        public void SetChar(int tileIndex, CharBase setChar)
+        {
+            // 왜 null 이 아닌 == false냐? MonoBehaviour fake null 이슈 
+            if (setChar == false)
+                return;
+
+            if (TileMap.ContainsKey(tileIndex) == false)
+            {
+                Debug.LogError($"TileManager.SetChar 타일 인덱스 : {tileIndex}는 존재하지 않는 타일 인덱스입니다.");
+                return;
+            }
+            var tile = TileMap[tileIndex];
+            tile.SetChar(setChar);
+        }
     }
 }

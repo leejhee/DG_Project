@@ -10,6 +10,8 @@ namespace Client
         [Header("발사할 투사체")]
         [SerializeField] protected ProjectileBase _projectile;
         [SerializeField] protected Vector3 _offSet;
+        [SerializeField] protected SystemEnum.eState _StateType;
+        [SerializeField] protected float _per;
 
         [Header("투사체에 반영할 시전자의 스탯과 비율")]
         [SerializeField] protected SystemEnum.eStats _statName;

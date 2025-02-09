@@ -37,10 +37,6 @@ namespace Client
         private void Awake()
         {
             _PlayableDirector = GetComponent<PlayableDirector>();
-            if (_PlayableDirector == null)
-            {
-                Debug.LogError($"{transform.name} PlayableDirector is Null");
-            }           
         }
 
         private void Start()

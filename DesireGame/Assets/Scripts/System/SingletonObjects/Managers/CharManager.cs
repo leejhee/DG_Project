@@ -104,10 +104,16 @@ namespace Client
 
         public CharBase CharGenerate(CharParameter charParam)
         {
-            CharData charData = DataManager.Instance.GetData<CharData>(charParam.CharIndex);
+            CharBase charBase = Instance.CharGenerate(charParam.CharIndex);
+            return charBase;
+        }
+
+        public CharBase CharGenerate(long charIndex)
+        {
+            CharData charData = DataManager.Instance.GetData<CharData>(charIndex);
             if (charData == null)
             {
-                Debug.LogWarning($"CharFactory : {charParam.CharIndex} 의 CharIndex를 찾을 수 없음");
+                Debug.LogWarning($"CharFactory : {charIndex} 의 CharIndex를 찾을 수 없음");
                 return null;
             }
             GameObject gameObject = ObjectManager.Instance.Instantiate($"Char/{charData.charPrefab}");

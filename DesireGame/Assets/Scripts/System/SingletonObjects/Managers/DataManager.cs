@@ -103,7 +103,7 @@ namespace Client
                 return null;
 
             }
-
+            
             return returnData;
         }
 
@@ -130,14 +130,34 @@ namespace Client
                 _cache[key].Add(id, data);
             }
         }
+        public List<SheetData> GetDataList<T>() where T : SheetData
+        {
+            string typeName = typeof(T).Name;
+            if (_cache.ContainsKey(typeName) == false)
+            {
+                Debug.LogWarning($"DataManager : {typeName} 타입 데이터가 존재하지 않습니다.");
+
+                return null;
+            }
+            // 그냥 _cache[typeName] 를 내보내지 않고 Linq를 이용하면 다른 List를 생성하므로
+            // List에서 객체 삭제, Sort 등에서 원본 데이터 오염을 막을 수 있다.
+            // 다만 객체 내부 대이터를 바꾸는건 문제가 있을 수 있는데
+            // 우리 데이터는 readonly 니까 이 문제도 없음 - 이 아니네!?!?!?!?!? 너무나 위험한데요!?!?!?
+            // 대신 Linq가 가비지를 상당히 생성하므로 Update에서 Linq 사용은 지양
+            return _cache[typeName].Values.ToList();
+        }
 
 #if UNITY_EDITOR
         // 데이터 검증용(에디터에서만 사용)
         public Dictionary<long, SheetData> GetDictionary(string typeName)
-        {            
+        {
+            if (_cache.ContainsKey(typeName) == false)
+            {
+                Debug.LogWarning($"DataManager : {typeName} 타입 데이터가 존재하지 않습니다.");
+                return null;
+            }
             return _cache[typeName];
         }
-
         public void ClearCache()
         {
             _cache.Clear();

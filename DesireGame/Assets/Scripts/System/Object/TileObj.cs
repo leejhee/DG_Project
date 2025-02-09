@@ -35,7 +35,10 @@ namespace Client
         {
             return _charBase;
         }
-
+        public bool IsCharSet()
+        {
+            return _charBase == true;
+        }
         public void ClearTile()
         {
             _charBase = null;
