@@ -21,10 +21,11 @@ public long Index; // ID
 		
 		public SystemEnum.eProjectileRangeType rangeType; // 폭발 범위타입
 		public int penetrationCount; // 관통 수
-		public int explosionRange; // 폭발범위
-		public string effect; // 이펙트 경로
-		public string projectilePrefab; // 프리팹 경로
-		public long funcIndex;
+		public int splashRange; // 폭발범위
+		public string FXPath; // 이펙트 경로
+		public string monsterHitPath; // 피격이펙트경로
+		public long funcIndex; // functionIndex
+		
 
         public override Dictionary<long, SheetData> LoadData()
         {
@@ -75,19 +76,24 @@ public long Index; // ID
 					    data.penetrationCount = Convert.ToInt32(values[4]);
 					
 					if(values[5] == "")
-					    data.explosionRange = default;
+					    data.splashRange = default;
 					else
-					    data.explosionRange = Convert.ToInt32(values[5]);
+					    data.splashRange = Convert.ToInt32(values[5]);
 					
 					if(values[6] == "")
-					    data.effect = default;
+					    data.FXPath = default;
 					else
-					    data.effect = Convert.ToString(values[6]);
+					    data.FXPath = Convert.ToString(values[6]);
 					
 					if(values[7] == "")
-					    data.projectilePrefab = default;
+					    data.monsterHitPath = default;
 					else
-					    data.projectilePrefab = Convert.ToString(values[7]);
+					    data.monsterHitPath = Convert.ToString(values[7]);
+					
+					if(values[8] == "")
+					    data.funcIndex = default;
+					else
+					    data.funcIndex = Convert.ToInt64(values[8]);
 					
 
                     dataList[data.Index] = data;

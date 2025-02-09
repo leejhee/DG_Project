@@ -101,6 +101,8 @@ namespace Client
 
         public enum eStats
         {
+            None,
+
             AD,
             NAD,
 

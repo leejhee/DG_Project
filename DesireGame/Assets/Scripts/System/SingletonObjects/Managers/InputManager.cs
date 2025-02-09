@@ -6,11 +6,6 @@ using System.Linq;
 
 namespace Client
 {
-    public struct InputParameter
-    {
-        public CharBase skillTarget;
-        public CharBase skillCaster;
-    }
 
     public class InputManager : Singleton<InputManager>
     {

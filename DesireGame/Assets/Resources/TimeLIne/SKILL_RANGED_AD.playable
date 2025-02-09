@@ -24,6 +24,39 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -880753278474403411}
+    - {fileID: -3294764532249090893}
+    - {fileID: 4959104048366802795}
+    - {fileID: -6188207029468405545}
+--- !u!114 &-6188207029468405545
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
+  m_EditorClassIdentifier: 
+  m_Time: 1
+  _projectile: {fileID: 0}
+  _offSet: {x: 0, y: 0, z: 0}
+--- !u!114 &-3294764532249090893
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
+  m_EditorClassIdentifier: 
+  m_Time: 0.75
+  _projectile: {fileID: 0}
+  _offSet: {x: 0, y: 0, z: 0}
 --- !u!114 &-1499918108895575569
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
   m_Name: Skill Marker Shot Projectal
   m_EditorClassIdentifier: 
-  m_Time: 0.21666666666666667
+  m_Time: 0.25
   _projectile: {fileID: -2365901413674412306, guid: 64d43b0be02aff94ebf5ed38bf730999, type: 3}
   _offSet: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
@@ -106,10 +139,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.01666666666666669
-    m_ClipIn: 0
+    m_Start: 0.16666666666666666
+    m_ClipIn: 0.14999999999999997
     m_Asset: {fileID: 8732788864366895756}
-    m_Duration: 0.41666666666666663
+    m_Duration: 0.26666666666666666
     m_TimeScale: 1
     m_ParentTrack: {fileID: 2268612195770210546}
     m_EaseInDuration: 0
@@ -172,7 +205,7 @@ MonoBehaviour:
     m_PostExtrapolationMode: 1
     m_PreExtrapolationMode: 1
     m_PostExtrapolationTime: Infinity
-    m_PreExtrapolationTime: 0.01666666666666669
+    m_PreExtrapolationTime: 0.16666666666666666
     m_DisplayName: 0_Attack_Normal
   m_Markers:
     m_Objects: []
@@ -194,6 +227,21 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &4959104048366802795
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
+  m_EditorClassIdentifier: 
+  m_Time: 0.5
+  _projectile: {fileID: 0}
+  _offSet: {x: 0, y: 0, z: 0}
 --- !u!114 &8732788864366895756
 MonoBehaviour:
   m_ObjectHideFlags: 1

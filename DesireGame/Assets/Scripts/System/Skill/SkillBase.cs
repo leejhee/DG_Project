@@ -64,11 +64,7 @@ namespace Client
             if (_PlayableDirector == null)
                 return;
 
-            InputParameter = parameter;
-
-            FunctionData tempdata =
-                DataManager.Instance.GetData<FunctionData>(_skillData.funcIndex);
-
+            InputParameter = parameter;         
             _PlayableDirector.Play();
         }
     }

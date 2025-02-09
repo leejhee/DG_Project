@@ -15,7 +15,7 @@ namespace Client
     {
 public long Index; // ID
 		
-		public SystemEnum.eFunction functionType; // 기능
+		public SystemEnum.eFunction function; // 기능
 		
 		public SystemEnum.eStats statsType; // 스테이트 타입
 		
@@ -58,9 +58,9 @@ public long Index; // ID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[2] == "")
-					    data.functionType = default;
+					    data.function = default;
 					else
-					    data.functionType = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[2]);
+					    data.function = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[2]);
 					
 					if(values[3] == "")
 					    data.statsType = default;

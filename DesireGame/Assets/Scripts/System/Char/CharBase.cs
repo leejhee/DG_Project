@@ -53,7 +53,7 @@ namespace Client
 
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
-        public Dictionary<eFunction, List<FunctionBase>> functionBaseDic => _functionInfo.FunctionBaseDic; // 행동 
+        public Dictionary<eFunction, List<FunctionBase>> FunctionBaseDic => _functionInfo.FunctionBaseDic; // 행동 
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
@@ -110,7 +110,7 @@ namespace Client
 
         void Update()
         {
-            foreach (var functionBaseList in functionBaseDic)
+            foreach (var functionBaseList in FunctionBaseDic)
             {
                 foreach (var function in functionBaseList.Value)
                 {

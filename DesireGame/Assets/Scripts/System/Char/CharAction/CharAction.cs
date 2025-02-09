@@ -34,13 +34,8 @@ namespace Client
         public void CharAttackAction(CharAttackParameter param)
         {
             var SkillInfo = Actor.CharSKillInfo;
-            SkillInfo.PlaySkill(param.skillIndex, 
-                new InputParameter() 
-                { 
-                    skillTarget = param.targetChar, 
-                    skillCaster = Actor
-                });
-          
+            SkillInfo.PlaySkill(param.skillIndex,
+                new InputParameter(param.targetChar, Actor));         
         }
     }
 

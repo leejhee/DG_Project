@@ -36,17 +36,17 @@ namespace Client
         {
             if (StartFunction)
             {
-                if (!_TargetChar.functionBaseDic[_FunctionData.functionType].Contains(this))
+                if (!_TargetChar.FunctionBaseDic[_FunctionData.function].Contains(this))
                 {
                     _StartTime = Time.time;
-                    _TargetChar.functionBaseDic[_FunctionData.functionType].Add(this);
+                    _TargetChar.FunctionBaseDic[_FunctionData.function].Add(this);
                 }
             }
             else
             {
-                if (_TargetChar.functionBaseDic[_FunctionData.functionType].Contains(this))
+                if (_TargetChar.FunctionBaseDic[_FunctionData.function].Contains(this))
                 {
-                    _TargetChar.functionBaseDic[_FunctionData.functionType].Remove(this);
+                    _TargetChar.FunctionBaseDic[_FunctionData.function].Remove(this);
                 }
             }
         }

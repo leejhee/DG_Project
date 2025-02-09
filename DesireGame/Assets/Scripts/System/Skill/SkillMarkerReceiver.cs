@@ -8,7 +8,6 @@ public class SkillMarkerReceiver : MonoBehaviour, INotificationReceiver
     {
         if (notification is SkillTimeLineMarker skillMarker)
         {
-            var director = origin.GetGraph().GetResolver() as PlayableDirector;
             IContextProvider provider = GetComponent<IContextProvider>();
             
             skillMarker.InitInput(provider.InputParameter);

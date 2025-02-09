@@ -11,9 +11,9 @@ namespace Client
     {
         [SerializeField] GameObject GameSceneUIPrefab;
 
-        CharBase TestChar;
-        float moveDistance = 5f;
-        CharMoveParameter moveParameter;
+        [Header("Test")]
+        private CharBase TestChar;
+        private CharBase TestEnemy;
 
         private void Awake()
         {
@@ -22,17 +22,11 @@ namespace Client
 
         private void Start()
         {
-            //UIManager.Instance.ShowUI(GameSceneUIPrefab);
-            TestChar = CharManager.Instance.CharGenerate(new CharParameter(SystemEnum.eScene.GameScene, new Vector3(-5, 1, 0), 0));
-
-            //TestChar.CharSKillInfo.PlaySkill(TestChar.)
+            TestChar = CharManager.Instance.CharGenerate
+                (new CharParameter(SystemEnum.eScene.GameScene, 
+                new Vector3(-5, 1, 0), 
+                0));
         }
-        private void FixedUpdate()
-        {
-            //TestChar.CharAction.CharMoveAction(moveParameter); 
-        }
-
-
 
     }
 }

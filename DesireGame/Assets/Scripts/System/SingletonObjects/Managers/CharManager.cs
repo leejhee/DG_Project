@@ -105,6 +105,7 @@ namespace Client
         public CharBase CharGenerate(CharParameter charParam)
         {
             CharBase charBase = Instance.CharGenerate(charParam.CharIndex);
+            charBase.transform.position = charParam.GeneratePos;
             return charBase;
         }
 

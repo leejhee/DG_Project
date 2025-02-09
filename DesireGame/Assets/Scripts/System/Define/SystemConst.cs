@@ -13,6 +13,7 @@ namespace Client
     {
         public static float PER_TEN_THOUSAND = 10000.0f;
         public static float PER_THOUSAND = 1000.0f;
+        public static float PER_CENT = 100.0f;
     }
 
     /// <summary>
