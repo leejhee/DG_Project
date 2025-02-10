@@ -28,6 +28,9 @@ public long Index; // charID
 		public float moveSpeed; // 이동속도
 		public int startMana; // 시작마나
 		public int maxMana; // 최대마나
+		public int effectiveADHealth; // 물리내구력(만분율)
+		public int effectiveAPHealth; // 마법내구력(만분율)
+		public int shield; // 보호막
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -127,6 +130,21 @@ public long Index; // charID
 					    data.maxMana = default;
 					else
 					    data.maxMana = Convert.ToInt32(values[15]);
+					
+					if(values[16] == "")
+					    data.effectiveADHealth = default;
+					else
+					    data.effectiveADHealth = Convert.ToInt32(values[16]);
+					
+					if(values[17] == "")
+					    data.effectiveAPHealth = default;
+					else
+					    data.effectiveAPHealth = Convert.ToInt32(values[17]);
+					
+					if(values[18] == "")
+					    data.shield = default;
+					else
+					    data.shield = Convert.ToInt32(values[18]);
 					
 
                     dataList[data.Index] = data;

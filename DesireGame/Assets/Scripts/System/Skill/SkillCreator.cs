@@ -24,7 +24,7 @@ namespace Client
             }
 
             skillBase = ObjectManager.Instance.Instantiate<SkillBase>($"Skill/{_skillData.animPath}");
-
+            skillBase.Init(_skillData);
 
             if (_skillData == null)
             {

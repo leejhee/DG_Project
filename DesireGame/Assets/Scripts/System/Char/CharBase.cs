@@ -83,10 +83,10 @@ namespace Client
             _charAction = new(this);
             if (_charData != null)
             {
-                StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.specIndex);
+                StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
                 if (charStat == null)
                 {
-                    Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.specIndex} 데이터 Get 실패");
+                    Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.statsIndex} 데이터 Get 실패");
                 }
                 _charStat = new CharStat(charStat);
             }
@@ -131,7 +131,7 @@ namespace Client
             if (_charSKillInfo != null)
             {               
                 _charSKillInfo.Init(new List<long>() 
-                { _charData.autoAttack, _charData.skillAttack});
+                { _charData.skill1, _charData.skill2});
             }
         }
 

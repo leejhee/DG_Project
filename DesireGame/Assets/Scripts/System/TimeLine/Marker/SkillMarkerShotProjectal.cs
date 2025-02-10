@@ -8,7 +8,7 @@ namespace Client
     public class SkillMarkerShotProjectal : SkillTimeLineMarker
     {
         [Header("발사할 투사체")]
-        [SerializeField] protected ProjectileBase _projectile;
+        [SerializeField] protected Projectile _projectile;
         [SerializeField] protected Vector3 _offSet;
         
         //만약 이걸 쓴다면 이 데이터들을 전송해줄 게 따로 필요하다.
@@ -20,7 +20,7 @@ namespace Client
         {
             Debug.Log("시작!");
            
-            ProjectileBase projectile = Instantiate(_projectile);
+            Projectile projectile = GameObject.Instantiate(_projectile, inputParam.skillCaster.transform.position, Quaternion.identity);
             projectile.InitProjectile(inputParam.ToStatPack(_statName, percent));        
         }
 

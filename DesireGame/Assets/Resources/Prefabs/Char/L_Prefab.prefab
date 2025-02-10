@@ -4419,7 +4419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a099b1452181e19499b3dd2fa2f37d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _index: 0
+  _index: 100
   _FightCollider: {fileID: 0}
   _MoveCollider: {fileID: 0}
   _SkillRoot: {fileID: 1092025774992422127}

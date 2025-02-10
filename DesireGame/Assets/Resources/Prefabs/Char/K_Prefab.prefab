@@ -4275,13 +4275,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a099b1452181e19499b3dd2fa2f37d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _index: 1
+  _index: 200
   _FightCollider: {fileID: 0}
   _MoveCollider: {fileID: 0}
-  _SkillRoot: {fileID: 0}
+  _SkillRoot: {fileID: 3200432473173287939}
   _NavMeshAgent: {fileID: 0}
   _CharCamaraPos: {fileID: 0}
-  _Animator: {fileID: 0}
+  _Animator: {fileID: 871300299301214826}
 --- !u!1 &7481743806185024260
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,15 +18,15 @@ public long Index; // charID
 		public string charPrefab; // 캐릭터 프리팹
 		
 		public SystemEnum.eCharTier charTier; // 캐릭터 등급
-		public long specIndex; // 기본스펙
+		public long statsIndex; // 기본스텟
 		
 		public SystemEnum.eSynergy synergy1; // 시너지1
 		
 		public SystemEnum.eSynergy synergy2; // 시너지2
 		
 		public SystemEnum.eSynergy synergy3; // 시너지3
-		public long autoAttack; // 스킬1(평타)
-		public long skillAttack; // 스킬2(고유 스킬)
+		public long skill1; // 스킬1(평타)
+		public long skill2; // 스킬2(고유 스킬)
 		public List<long> func; // 초기 기능(패시브)
 		
 		public SystemEnum.eCharType charType; // 포트레이트 이미지 string
@@ -76,9 +76,9 @@ public long Index; // charID
 					    data.charTier = (SystemEnum.eCharTier)Enum.Parse(typeof(SystemEnum.eCharTier), values[3]);
 					
 					if(values[4] == "")
-					    data.specIndex = default;
+					    data.statsIndex = default;
 					else
-					    data.specIndex = Convert.ToInt64(values[4]);
+					    data.statsIndex = Convert.ToInt64(values[4]);
 					
 					if(values[5] == "")
 					    data.synergy1 = default;
@@ -96,14 +96,14 @@ public long Index; // charID
 					    data.synergy3 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[7]);
 					
 					if(values[8] == "")
-					    data.autoAttack = default;
+					    data.skill1 = default;
 					else
-					    data.autoAttack = Convert.ToInt64(values[8]);
+					    data.skill1 = Convert.ToInt64(values[8]);
 					
 					if(values[9] == "")
-					    data.skillAttack = default;
+					    data.skill2 = default;
 					else
-					    data.skillAttack = Convert.ToInt64(values[9]);
+					    data.skill2 = Convert.ToInt64(values[9]);
 					
 					ListStr = values[10].Replace('[',' ');
 					ListStr = ListStr.Replace(']', ' ');

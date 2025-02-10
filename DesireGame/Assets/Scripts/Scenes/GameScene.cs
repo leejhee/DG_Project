@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static Client.SystemEnum;
 
 
 namespace Client
@@ -12,8 +13,10 @@ namespace Client
         [SerializeField] GameObject GameSceneUIPrefab;
 
         [Header("Test")]
-        private CharBase TestChar;
-        private CharBase TestEnemy;
+        [SerializeField] private CharBase TestChar;
+        [SerializeField] private Vector3 testPlayerPoint;
+        [SerializeField] private CharBase TestEnemy;
+        [SerializeField] private Vector3 testEnemyPoint;
 
         private void Awake()
         {
@@ -23,9 +26,22 @@ namespace Client
         private void Start()
         {
             TestChar = CharManager.Instance.CharGenerate
-                (new CharParameter(SystemEnum.eScene.GameScene, 
-                new Vector3(-5, 1, 0), 
-                0));
+                (new CharParameter(SystemEnum.eScene.GameScene,
+                testPlayerPoint,
+                200));
+
+            TestEnemy = CharManager.Instance.CharGenerate
+                (new CharParameter(SystemEnum.eScene.GameScene,
+                testEnemyPoint,
+                100)); 
+        }
+
+        [ContextMenu("투사체를 날려보아요")]
+        private void TestProjectileShoot()
+        {
+            long skillIndex = DataManager.Instance.GetData<CharData>(200).skill1;
+            TestChar.CharAction.CharAttackAction
+                (new CharAttackParameter(TestEnemy, skillIndex));
         }
 
     }
