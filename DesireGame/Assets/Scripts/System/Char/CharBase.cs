@@ -67,6 +67,8 @@ namespace Client
         public CharStat CharStat => _charStat;
         public CharAction CharAction => _charAction;
         public CharAI CharAI => _charAI;
+        public CharData CharData => _charData;
+        public PlayerState PlayerState => _currentState;
 
         protected CharBase() { }
 

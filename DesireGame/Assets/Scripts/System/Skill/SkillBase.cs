@@ -16,11 +16,12 @@ namespace Client
 
         // 구조상 데이터를 포함해야 한다고 판단
         private SkillData _skillData;
+        private int _nSkillRange; // 현재 사거리
 
         public PlayableDirector PlayableDirector => _PlayableDirector;
         public CharBase CharPlayer => _caster;
         public InputParameter InputParameter { get; private set; }
-
+        public int NSkillRange => _nSkillRange;
         public void SetCharBase(CharBase caster)
         {
             _caster = caster;
@@ -30,6 +31,7 @@ namespace Client
         public void Init(SkillData data)
         {
             _skillData = data;
+            _nSkillRange = data.skillRange;
         }
 
         private void Awake()
