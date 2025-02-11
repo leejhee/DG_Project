@@ -82,16 +82,24 @@ namespace Client
 
         public void ApplyEffect(CharBase target)
         {
+            ///// 대미지 적용하자.
+            target.CharStat.DamageHealth((int)_projectileDamageInput);
+            Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
+
+            ///// Function 있을 경우 : 오류 있으므로 대처할 것.
             var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
-            var ApplyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
+
+            if(!(functionData is null))
             {
-                eFunctionType = functionData.function,
-                CastChar = Caster,
-                TargetChar = target,
-                FunctionIndex = functionData.Index
-            });
-            Target.FunctionBaseDic[functionData.function].Add(ApplyFunction);
-            Debug.Log("자 난 도착했어 할일 다했어 더 짜렴");
+                var ApplyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
+                {
+                    eFunctionType = functionData.function,
+                    CastChar = Caster,
+                    TargetChar = target,
+                    FunctionIndex = functionData.Index
+                });
+                Target.FunctionBaseDic[functionData.function].Add(ApplyFunction);
+            }            
             Destroy(gameObject);
         }
 

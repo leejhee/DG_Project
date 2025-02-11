@@ -83,7 +83,14 @@ namespace Client
             return _charStat[(int)eState];
         }
 
-
+        public void DamageHealth(int amount)
+        {
+            _charStat[(int)eStats.NHP] -= amount;
+            if(_charStat[(int)eStats.NHP] < 0)
+            {
+                // 여기서 사망 처리 하기
+            }
+        }
 
     }
 }
