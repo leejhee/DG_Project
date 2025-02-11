@@ -13,7 +13,7 @@ long,string,string,eCharTier,long,eSynergy,eSynergy,eSynergy,long,long,long[],eC
 1000,키,,RARE,101000,QUANTUM_WASHER,RANGED,,500201,501010,,Player
 1100,럼,,UNIQUE,101100,QUANTUM_WASHER,DUAL_BALDE,,500202,501110,,Player
 1200,마이,,NORMAL,101200,QUANTUM_WASHER,MAGIC_WAND,,500203,501210,,Player
-10000,전투력측정기M,,NORMAL,110000,,,,,,,Monster
+10000,전투력측정기M,Link,NORMAL,110000,,,,,,,Monster
 10100,전투력측정기R,,NORMAL,110100,,,,,,,Monster
 10200,방어봇 D1,,RARE,110200,,,,,,,Monster
 10300,공격봇 A1,,RARE,110300,,,,,,,Monster

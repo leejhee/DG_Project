@@ -44,5 +44,10 @@ namespace Client
                 (new CharAttackParameter(TestEnemy, skillIndex));
         }
 
+        [ContextMenu("전투를 시작해보아요")]
+        public void TestAIInitialize()
+        {
+            CharManager.Instance.WakeAllCharAI();
+        }
     }
 }

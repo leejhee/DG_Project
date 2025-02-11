@@ -199,5 +199,20 @@ namespace Client
 
             return nearestEnemy;
         }
+
+        /// <summary>
+        /// _cache 안에 있는 캐릭터 AI 켜기
+        /// </summary>
+        public void WakeAllCharAI()
+        {
+            foreach (var kvp in _cache)
+            {
+                foreach(var unit in kvp.Value)
+                {
+                    Debug.Log($"AI - uid: {unit.Value.GetID()} 캐릭터 이름: {unit.Value.CharData.charName}");
+                    unit.Value.AISwitch(true);
+                }
+            }
+        }
     }
 }

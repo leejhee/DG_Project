@@ -17,9 +17,7 @@ namespace Client
         [SerializeField] protected float percent;
 
         public override void MarkerAction()
-        {
-            Debug.Log("시작!");
-           
+        {           
             Projectile projectile = GameObject.Instantiate(_projectile, inputParam.skillCaster.transform.position, Quaternion.identity);
             projectile.InitProjectile(inputParam.ToStatPack(_statName, percent));        
         }
@@ -27,7 +25,7 @@ namespace Client
         // 이건 에디터 상에서 호출되는 함수. 런타임 작업 아니면 건들지 맙시다.
         public override void SkillInitialize()
         {
-            Debug.Log("시작!");
+
         }
     }
 

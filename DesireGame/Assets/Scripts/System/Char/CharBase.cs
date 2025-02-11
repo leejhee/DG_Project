@@ -49,7 +49,9 @@ namespace Client
         private Vector3 _rightPos = new Vector3(1, 0, 0); // 오른쪽 방향
         private Vector2 _leftPos = new Vector3(-1, 0, 0); // 왼쪽 방향
 
+        private Coroutine _coroutine; // UpdateAI용,,
         public Vector3 LookAtPos { get; private set; } = Vector3.right; // 현재 방향성
+
 
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
@@ -83,6 +85,7 @@ namespace Client
             _NavMeshAgent = GetComponent<NavMeshAgent>();
             _charAnim = new();
             _charAction = new(this);
+            _charAI = new(this);
             if (_charData != null)
             {
                 StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
@@ -108,6 +111,11 @@ namespace Client
                 _indexPair[state] = 0;
             }
             CharInit();
+            // TODO : on off 기능
+            // turnonandoff 이런식으로 해서 껐다 켰다를 할 수 있게 해야하기 때문에
+            // 따로 뭔가를 해야 한다고 한다
+            // CharBase에 함수를 선언하여 CharManager에서 _cache 내 모든 CharBase를 대상으로 
+            // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
         }
 
         void Update()
@@ -126,7 +134,7 @@ namespace Client
         // Char의 Start시점에 불림
         protected virtual void CharInit()
         {
-            CharManager.Instance.SetChar<CharBase>(this);
+            //CharManager.Instance.SetChar<CharBase>(this);
             
             // 스킬
             _charSKillInfo = new CharSKillInfo(this);
@@ -207,6 +215,23 @@ namespace Client
         //        return;
         //    CharMoveTo(charBase);
         //}
+
+        /// <summary>
+        /// 캐릭터 AI on & off 기능
+        /// </summary>
+        public void AISwitch(bool turnOn = true)
+        {
+            // CharBase에 함수를 선언하여 CharManager에서(호출하는놈) _cache 내 모든 CharBase를 대상으로 
+            // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
+            if (turnOn)
+            {
+                _coroutine = StartCoroutine(CharAI.UpdateAI(_currentState));
+            }
+            else
+            {
+                StopCoroutine(_coroutine);
+            }
+        }
 
         public void SetStateAnimationIndex(PlayerState state, int index = 0)
         {
