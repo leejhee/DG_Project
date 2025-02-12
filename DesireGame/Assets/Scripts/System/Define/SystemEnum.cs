@@ -55,13 +55,11 @@ namespace Client
         public enum eCharType
         {
             None,
-            Player,
-            PlayerSide,
-            Monster,
-            NPC,
-            Projectal,
+            ALLY,
+            ENEMY,
+            NEUTRAL,
 
-            MaxCount
+            eMax
         }
 
         public enum eCharTier
@@ -71,7 +69,7 @@ namespace Client
             UNIQUE,
             EPIC,
             LEGEND,
-            EMax,
+            eMax,
         }
 
         public enum eSynergy
@@ -87,7 +85,7 @@ namespace Client
             QUANTUM_WASHER,
             TIDY,
             TEAM6,
-            EMax,
+            eMax,
         }
         public enum eItemTier
         {
@@ -96,7 +94,7 @@ namespace Client
             UNIQUE,
             EPIC,
             LEGEND,
-            EMax,
+            eMax,
         }
 
         public enum eStats
@@ -144,7 +142,7 @@ namespace Client
             N_MANA,
             MAX_MANA,
 
-            EMax,
+            eMax,
         }
 
         public enum eFunction
@@ -211,16 +209,21 @@ namespace Client
             eMax
         }
 
-        public enum eProjectileTargetType
+        public enum eSkillTargetType
         {
-            NEAR_TARGET,
-            CURRENT_TARGET,
-            FARTHEST_TARGET,
-            NEAR_TARGET_2,
-            NEAR_TARGET_3,
-            FARTHEST_TARGET_2,
-            LOW_HP_TARGET,
-            EMax,
+            None,
+
+            NEAR_ENEMY,
+            CURRENT_ENEMY,
+            FARTHEST_ENEMY,
+            NEAR_ENEMY_2,
+            NEAR_ENEMY_3,
+            FARTHEST_ENEMY_2,
+            LOW_HP_ENEMY,
+            LOW_HP_ALLY,
+            SELF,
+
+            eMax
         }
 
         public enum eProjectilePathType

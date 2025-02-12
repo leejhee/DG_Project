@@ -1,6 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7441374014839200748
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
+  m_Name: L_SKILL
+  m_EditorClassIdentifier: 
+  m_Version: 0
+  m_Tracks:
+  - {fileID: 8628758413562305280}
+  m_FixedDuration: 0
+  m_EditorSettings:
+    m_Framerate: 60
+    m_ScenePreview: 1
+  m_DurationMode: 0
+  m_MarkerTrack: {fileID: 0}
+--- !u!114 &698757325221915210
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,70 +33,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228aa9e44789164fb95cac594baada8, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: c66e5eb2778574f1abbd40dcb05e1df7, type: 2}
---- !u!114 &-7221540746383042565
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a16748d9461eae46a725db9776d5390, type: 3}
-  m_Name: Markers
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips: []
-  m_Markers:
-    m_Objects:
-    - {fileID: -880753278474403411}
---- !u!114 &-880753278474403411
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
-  m_Name: Skill Marker Shot Projectal
-  m_EditorClassIdentifier: 
-  m_Time: 2.1333333333333333
-  _projectile: {fileID: 1496515457595730074, guid: 64d43b0be02aff94ebf5ed38bf730999, type: 3}
-  _offSet: {x: 0, y: 0, z: 0}
-  _statName: 1
-  percent: 100
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: SKILL_RANGED_AP
-  m_EditorClassIdentifier: 
-  m_Version: 0
-  m_Tracks:
-  - {fileID: 2367879827041493062}
-  m_FixedDuration: 0
-  m_EditorSettings:
-    m_Framerate: 60
-    m_ScenePreview: 1
-  m_DurationMode: 0
-  m_MarkerTrack: {fileID: -7221540746383042565}
---- !u!114 &2367879827041493062
+  animationClip: {fileID: 7400000, guid: 4255d92a76dffad43a599ff71c2471aa, type: 2}
+--- !u!114 &8628758413562305280
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,12 +56,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.35
+    m_Start: 1.5
     m_ClipIn: 0
-    m_Asset: {fileID: -7441374014839200748}
+    m_Asset: {fileID: 698757325221915210}
     m_Duration: 5
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 2367879827041493062}
+    m_ParentTrack: {fileID: 8628758413562305280}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
@@ -164,6 +123,6 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: 0_Attack_Normal
+    m_DisplayName: 2_Attack_Magic
   m_Markers:
     m_Objects: []

@@ -2,7 +2,7 @@ namespace Client
 {
     public struct TargettingStrategyParameter
     {
-        public SystemEnum.eProjectileTargetType type;
+        public SystemEnum.eSkillTargetType type;
         public CharBase Target;
     }
 
@@ -12,9 +12,9 @@ namespace Client
         {
             switch(param.type)
             {
-                case SystemEnum.eProjectileTargetType.NEAR_TARGET:
-                case SystemEnum.eProjectileTargetType.CURRENT_TARGET:
-                case SystemEnum.eProjectileTargetType.FARTHEST_TARGET:
+                case SystemEnum.eSkillTargetType.NEAR_ENEMY:
+                case SystemEnum.eSkillTargetType.CURRENT_ENEMY:
+                case SystemEnum.eSkillTargetType.FARTHEST_ENEMY:
                     return new TargetedStrategy(param.Target);
                 default:
                     return null;

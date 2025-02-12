@@ -183,11 +183,11 @@ namespace Client
             nav.baseOffset = 0.5f;
             switch (data.charType)
             {
-                case SystemEnum.eCharType.NPC:
+                case SystemEnum.eCharType.NEUTRAL:
                     return go.AddComponent<CharNPC>();
-                case SystemEnum.eCharType.Player:
+                case SystemEnum.eCharType.ALLY:
                     return go.AddComponent<CharPlayer>();
-                case SystemEnum.eCharType.Monster:
+                case SystemEnum.eCharType.ENEMY:
                     return go.AddComponent<CharMonster>();
                 default:
                     return null;

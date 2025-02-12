@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 5737053082130245525}
   - component: {fileID: 8265506895474891019}
   m_Layer: 0
-  m_Name: Link
+  m_Name: "\uC804\uD22C\uB825\uCE21\uC815\uAE30M_Prefab"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

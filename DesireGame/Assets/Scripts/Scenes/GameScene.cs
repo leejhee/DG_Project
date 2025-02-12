@@ -12,11 +12,12 @@ namespace Client
     {
         [SerializeField] GameObject GameSceneUIPrefab;
 
-        [Header("Test")]
+        [Header("Test(shootindex의 경우 편하게 하려고 임의로 이렇게 함)")]
         [SerializeField] private CharBase TestChar;
         [SerializeField] private Vector3 testPlayerPoint;
         [SerializeField] private CharBase TestEnemy;
         [SerializeField] private Vector3 testEnemyPoint;
+        [SerializeField] private long projectileShootIndex;
 
         private void Awake()
         {
@@ -39,9 +40,8 @@ namespace Client
         [ContextMenu("투사체를 날려보아요")]
         private void TestProjectileShoot()
         {
-            long skillIndex = DataManager.Instance.GetData<CharData>(200).skill1;
             TestChar.CharAction.CharAttackAction
-                (new CharAttackParameter(TestEnemy, skillIndex));
+                (new CharAttackParameter(TestEnemy, projectileShootIndex, eSkillTargetType.NEAR_ENEMY));
         }
 
         [ContextMenu("전투를 시작해보아요")]

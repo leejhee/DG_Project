@@ -135,7 +135,8 @@ namespace Client
         protected virtual void CharInit()
         {
             //CharManager.Instance.SetChar<CharBase>(this);
-            
+            // 캐시에서 이중으로 데이터 가지는 현상 저지
+
             // 스킬
             _charSKillInfo = new CharSKillInfo(this);
             if (_charSKillInfo != null)

@@ -17,6 +17,8 @@ public long Index; // charID
 		public string charName; // 캐릭터 이름
 		public string charPrefab; // 캐릭터 프리팹
 		
+		public SystemEnum.eCharType charType; // 캐릭터 타입
+		
 		public SystemEnum.eCharTier charTier; // 캐릭터 등급
 		public long statsIndex; // 기본스텟
 		
@@ -28,8 +30,6 @@ public long Index; // charID
 		public long skill1; // 스킬1(평타)
 		public long skill2; // 스킬2(고유 스킬)
 		public List<long> func; // 초기 기능(패시브)
-		
-		public SystemEnum.eCharType charType; // 포트레이트 이미지 string
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -71,49 +71,49 @@ public long Index; // charID
 					    data.charPrefab = Convert.ToString(values[2]);
 					
 					if(values[3] == "")
-					    data.charTier = default;
+					    data.charType = default;
 					else
-					    data.charTier = (SystemEnum.eCharTier)Enum.Parse(typeof(SystemEnum.eCharTier), values[3]);
+					    data.charType = (SystemEnum.eCharType)Enum.Parse(typeof(SystemEnum.eCharType), values[3]);
 					
 					if(values[4] == "")
-					    data.statsIndex = default;
+					    data.charTier = default;
 					else
-					    data.statsIndex = Convert.ToInt64(values[4]);
+					    data.charTier = (SystemEnum.eCharTier)Enum.Parse(typeof(SystemEnum.eCharTier), values[4]);
 					
 					if(values[5] == "")
-					    data.synergy1 = default;
+					    data.statsIndex = default;
 					else
-					    data.synergy1 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[5]);
+					    data.statsIndex = Convert.ToInt64(values[5]);
 					
 					if(values[6] == "")
-					    data.synergy2 = default;
+					    data.synergy1 = default;
 					else
-					    data.synergy2 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[6]);
+					    data.synergy1 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[6]);
 					
 					if(values[7] == "")
-					    data.synergy3 = default;
+					    data.synergy2 = default;
 					else
-					    data.synergy3 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[7]);
+					    data.synergy2 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[7]);
 					
 					if(values[8] == "")
-					    data.skill1 = default;
+					    data.synergy3 = default;
 					else
-					    data.skill1 = Convert.ToInt64(values[8]);
+					    data.synergy3 = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[8]);
 					
 					if(values[9] == "")
+					    data.skill1 = default;
+					else
+					    data.skill1 = Convert.ToInt64(values[9]);
+					
+					if(values[10] == "")
 					    data.skill2 = default;
 					else
-					    data.skill2 = Convert.ToInt64(values[9]);
+					    data.skill2 = Convert.ToInt64(values[10]);
 					
-					ListStr = values[10].Replace('[',' ');
+					ListStr = values[11].Replace('[',' ');
 					ListStr = ListStr.Replace(']', ' ');
 					var funcData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
 					data.func = funcData;
-					
-					if(values[11] == "")
-					    data.charType = default;
-					else
-					    data.charType = (SystemEnum.eCharType)Enum.Parse(typeof(SystemEnum.eCharType), values[11]);
 					
 
                     dataList[data.Index] = data;

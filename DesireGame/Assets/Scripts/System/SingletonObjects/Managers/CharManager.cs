@@ -172,11 +172,11 @@ namespace Client
             Vector3 clientPosition = ClientChar.CharTransform.position;
             var enemyDict = new Dictionary<long, CharBase>();
 
-            if (clientType == eCharType.Player)
+            if (clientType == eCharType.ALLY)
             {
                 enemyDict = _cache[typeof(CharMonster)];
             }
-            else if (clientType == eCharType.Monster)
+            else if (clientType == eCharType.ENEMY)
             {
                 enemyDict = _cache[typeof(CharPlayer)];
             }

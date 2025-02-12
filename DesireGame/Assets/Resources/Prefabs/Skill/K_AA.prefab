@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3174148246288145252
+--- !u!1 &2391092702632585257
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,57 +8,72 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2485530368026570619}
-  - component: {fileID: 2509940554765533863}
-  - component: {fileID: 4003450651465776149}
+  - component: {fileID: 4913400249362761074}
+  - component: {fileID: 4100942634926461040}
+  - component: {fileID: 8855530796117675502}
+  - component: {fileID: -2432506111854325915}
   m_Layer: 0
-  m_Name: SKILL_L
+  m_Name: K_AA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2485530368026570619
+--- !u!4 &4913400249362761074
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3174148246288145252}
+  m_GameObject: {fileID: 2391092702632585257}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.46346834, y: -0.086549275, z: -4.0702477}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2509940554765533863
+--- !u!114 &4100942634926461040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3174148246288145252}
+  m_GameObject: {fileID: 2391092702632585257}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f29187fa03d80174ab61ad16660f95e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!320 &4003450651465776149
+--- !u!320 &8855530796117675502
 PlayableDirector:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3174148246288145252}
+  m_GameObject: {fileID: 2391092702632585257}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 9019ffa611e7e7f46adb994f6fcf437f, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 6fe0a4b03e7105d4f9b6731002117d6a, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: 2268612195770210546, guid: 6fe0a4b03e7105d4f9b6731002117d6a, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &-2432506111854325915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2391092702632585257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0eb1e00b1411646a6881bc6d827135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

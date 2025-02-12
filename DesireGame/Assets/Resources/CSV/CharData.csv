@@ -1,20 +1,20 @@
-﻿charID,캐릭터 이름,캐릭터 프리팹,캐릭터 등급,기본스텟,시너지1,시너지2,시너지3,스킬1(평타),스킬2(고유 스킬),초기 기능(패시브),포트레이트 이미지 string
-Index,charName,charPrefab,charTier,statsIndex,synergy1,synergy2,synergy3,skill1,skill2,func,charType
-long,string,string,eCharTier,long,eSynergy,eSynergy,eSynergy,long,long,long[],eCharType
-100,L,L_Prefab,NORMAL,100100,LAPLACIAN,SWORD,,500100,500110,,Player
-200,K,K_Prefab,NORMAL,100200,LAPLACIAN,MAGIC_WAND,,500200,500210,,Player
-300,J,J_Prefab,UNIQUE,100300,LAPLACIAN,SHIELD,,500300,500310,,Player
-400,M,M_Prefab,RARE,100400,LAPLACIAN,RANGED,,500400,500410,,Player
-500,비비안,,NORMAL,100500,TIMER,SWORD,,500500,500510,,Player
-600,그레이스,,EPIC,100600,TIMER,RANGED,,500600,500610,,Player
-700,샤나,,RARE,100700,TIMER,DUAL_BALDE,,500700,500710,,Player
-800,엠마,,UNIQUE,100800,TIMER,MAGIC_WAND,,500800,500810,,Player
-900,베이,,UNIQUE,100900,QUANTUM_WASHER,SWORD,,500200,500910,,Player
-1000,키,,RARE,101000,QUANTUM_WASHER,RANGED,,500201,501010,,Player
-1100,럼,,UNIQUE,101100,QUANTUM_WASHER,DUAL_BALDE,,500202,501110,,Player
-1200,마이,,NORMAL,101200,QUANTUM_WASHER,MAGIC_WAND,,500203,501210,,Player
-10000,전투력측정기M,Link,NORMAL,110000,,,,,,,Monster
-10100,전투력측정기R,,NORMAL,110100,,,,,,,Monster
-10200,방어봇 D1,,RARE,110200,,,,,,,Monster
-10300,공격봇 A1,,RARE,110300,,,,,,,Monster
-10400,지원봇 S1,,RARE,110400,,,,,,,Monster
+﻿charID,캐릭터 이름,캐릭터 프리팹,캐릭터 타입,캐릭터 등급,기본스텟,시너지1,시너지2,시너지3,스킬1(평타),스킬2(고유 스킬),초기 기능(패시브),포트레이트 이미지 string
+Index,charName,charPrefab,charType,charTier,statsIndex,synergy1,synergy2,synergy3,skill1,skill2,func,
+long,string,string,eCharType,eCharTier,long,eSynergy,eSynergy,eSynergy,long,long,long[],string
+100,L,L_Prefab,ALLY,NORMAL,100100,LAPLACIAN,SWORD,,500100,500110,,
+200,K,K_Prefab,ALLY,NORMAL,100200,LAPLACIAN,MAGIC_WAND,,500200,500210,,
+300,J,J_Prefab,ALLY,UNIQUE,100300,LAPLACIAN,SHIELD,,,,,
+400,M,M_Prefab,ALLY,RARE,100400,LAPLACIAN,RANGED,,,,,
+500,비비안,비비안_Prefab,ALLY,NORMAL,100500,TIMER,SWORD,,,,,
+600,그레이스,그레이스_Prefab,ALLY,EPIC,100600,TIMER,RANGED,,,,,
+700,샤나,샤나_Prefab,ALLY,RARE,100700,TIMER,DUAL_BALDE,,,,,
+800,엠마,엠마_Prefab,ALLY,UNIQUE,100800,TIMER,MAGIC_WAND,,,,,
+900,베이,베이_Prefab,ALLY,UNIQUE,100900,QUANTUM_WASHER,SWORD,,,,,
+1000,키,키_Prefab,ALLY,RARE,101000,QUANTUM_WASHER,RANGED,,,,,
+1100,럼,럼_Prefab,ALLY,UNIQUE,101100,QUANTUM_WASHER,DUAL_BALDE,,,,,
+1200,마이,마이_Prefab,ALLY,NORMAL,101200,QUANTUM_WASHER,MAGIC_WAND,,,,,
+10000,전투력측정기M,전투력측정기M_Prefab,ENEMY,NORMAL,110000,,,,510000,,,
+10100,전투력측정기R,전투력측정기R_Prefab,ENEMY,NORMAL,110100,,,,510100,,,
+10200,방어봇 D1,방어봇 D1_Prefab,ENEMY,RARE,110200,,,,,,,
+10300,공격봇 A1,공격봇 A1_Prefab,ENEMY,RARE,110300,,,,,,,
+10400,지원봇 S1,지원봇 S1_Prefab,ENEMY,RARE,110400,,,,,,,

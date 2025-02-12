@@ -2,16 +2,36 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using static Client.SystemEnum;
+using System;
 
 namespace Client
 {
+    //[TODO] : 대미지 책임분리 할 지 결정 후 작업할 것
+
+    public struct DamageParameter
+    {
+        public float pureDamage;       // 공격자 측에서 계산된 대미지
+        public eDamageType damageType; // 공격자 측의 대미지 타입
+        public float penetration;      // 대미지 타입에 따른 관통
+    }
+
     /// <summary>
     /// char 스테이트
     /// </summary>
     public class CharStat
     {
-        private long[] _charStat = new long[(int)eStats.EMax];
-        
+        private long[] _charStat = new long[(int)eStats.eMax];
+
+        public eDamageType DamageType { get
+            {
+                if (_charStat[(int)eStats.AD] > 0 && _charStat[(int)eStats.AP] == 0)
+                    return eDamageType.PHYSICS;
+                else if (_charStat[(int)eStats.AP] > 0 && _charStat[(int)eStats.AD] == 0)
+                    return eDamageType.MAGIC;
+                else
+                    return eDamageType.None;
+            } }
+
         public CharStat(StatsData charStat)
         {
             _charStat[(int)eStats.AD] = charStat.AD;    // 공격력
@@ -83,14 +103,61 @@ namespace Client
             return _charStat[(int)eState];
         }
 
-        public void DamageHealth(int amount)
+
+        #region Damage Method
+
+        // UI에 사용하면 될듯...?
+        public Action OnDamaged;
+        public Action OnDeath;
+
+        /// <summary>
+        /// 공격자 기준 대미지 관여 요소들을 산출합니다.
+        /// </summary>
+        /// <param name="statMultiplied"> 대미지에 반영할 스탯 * 반영 계수 </param>
+        /// <param name="type"> None인 경우는 디폴트이므로, 평타인 경우입니다. 그 외는 스킬을 사용하면서 세팅합니다. </param>
+        public DamageParameter SendDamage(float statMultiplied, eDamageType type = eDamageType.None)
         {
-            _charStat[(int)eStats.NHP] -= amount;
-            if(_charStat[(int)eStats.NHP] < 0)
+            float pureDamage =
+                statMultiplied *                                        // 주스탯 * 계수
+                (1 + GetStat(eStats.DAMAGE_INCREASE)) *                 // 피해량 증가
+                (UnityEngine.Random.Range(0, 1) > GetStat(eStats.NCRIT_CHANCE) ?
+                    (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)             //치명타 확률 및 피해 계산
+                + GetStat(eStats.BONUS_DAMAGE);                         // 추가 대미지  
+
+            eDamageType damageType = type == eDamageType.None ? DamageType : type;
+
+            float penetration = DamageType == eDamageType.PHYSICS ? 
+                GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
+
+            return new DamageParameter()
             {
-                // 여기서 사망 처리 하기
+                pureDamage = pureDamage,
+                damageType = damageType,
+                penetration = penetration
+            };
+        }
+
+        // 내구력, 방어력 참고하여 쓸 것.
+        public void ReceiveDamage(DamageParameter damage)
+        {
+            float defender = damage.damageType == eDamageType.PHYSICS ?
+                GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
+
+            float finalDamage = 
+                damage.pureDamage * 
+                100f / (100 + defender - damage.penetration);
+
+            _charStat[(int)eStats.NHP] -= (long)finalDamage;
+            Debug.Log($"대미지 {(long)finalDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+            OnDamaged?.Invoke();
+
+            if (_charStat[(int)eStats.NHP] < 0)
+            {
+                Debug.Log("으엑 죽었다");
+                OnDeath?.Invoke();
             }
         }
 
+        #endregion
     }
 }

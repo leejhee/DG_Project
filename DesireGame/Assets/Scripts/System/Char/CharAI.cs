@@ -155,14 +155,15 @@ namespace Client
 
             charAgent.CharSKillInfo.DicSkill.TryGetValue(attackIndex, out skillBase);
             skillRange = skillBase.NSkillRange;
+            eSkillTargetType targetType = skillBase.TargetType;
 
             // transform 위치 기반 거리 측정
             float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
-            
+
             // 사거리와 비교 후 이동 결정
-            if (distanceSqr <= (skillRange^2))
+            if (distanceSqr <= (skillRange ^ 2))
             {
-                charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex));
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex, targetType));
                 Debug.Log($"캐릭터 {charAgent.CharData.charName}의 스킬 {attackIndex} 사용");
             }
             else

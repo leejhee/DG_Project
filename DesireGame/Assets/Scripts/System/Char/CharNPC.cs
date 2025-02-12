@@ -6,7 +6,7 @@ namespace Client
 {
     public class CharNPC : CharBase
     {
-        protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.NPC;
+        protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.NEUTRAL;
         protected override void CharInit()
         {
             base.CharInit();

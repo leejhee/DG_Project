@@ -55,7 +55,7 @@ namespace Client
         
         public void AddSkill(long skillIndex, int idx)
         {
-            if (_dicSkill == null)
+            if (_dicSkill == null || skillIndex == SystemConst.NO_CONTENT)
                 return;
 
             if (!_dicSkill.ContainsKey(idx + 1))

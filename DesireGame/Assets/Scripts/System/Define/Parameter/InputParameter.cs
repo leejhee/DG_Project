@@ -1,10 +1,12 @@
 ﻿
 namespace Client
 {
+    // [TODO] : 복수 타겟 작업할 때 skillTarget을 List<CharBase>로 변경할 것.
     public class InputParameter
     {
         public CharBase skillTarget;
         public CharBase skillCaster;
+        public SystemEnum.eSkillTargetType skillTargetType;
 
         // InputManager 사라지면 protected 전환 예정
         public InputParameter() { }
@@ -12,11 +14,14 @@ namespace Client
         public InputParameter
             (
                 CharBase skillTarget, 
-                CharBase skillCaster
+                CharBase skillCaster,
+                SystemEnum.eSkillTargetType skillTargetType = 
+                    SystemEnum.eSkillTargetType.None
             )
         {
             this.skillTarget = skillTarget;
             this.skillCaster = skillCaster;
+            this.skillTargetType = skillTargetType;
         }
     }
 
@@ -31,7 +36,7 @@ namespace Client
                 InputParameter param,
                 SystemEnum.eStats operand = SystemEnum.eStats.None,
                 float ratio = 0f
-            ): base(param.skillTarget, param.skillCaster)
+            ): base(param.skillTarget, param.skillCaster, param.skillTargetType)
         {
             statOperand = operand;
             percent = ratio;

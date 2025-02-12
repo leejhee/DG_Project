@@ -22,6 +22,8 @@ namespace Client
         public CharBase CharPlayer => _caster;
         public InputParameter InputParameter { get; private set; }
         public int NSkillRange => _nSkillRange;
+        public SystemEnum.eSkillTargetType TargetType => _skillData.skillTarget;
+
         public void SetCharBase(CharBase caster)
         {
             _caster = caster;

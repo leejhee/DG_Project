@@ -54,16 +54,10 @@ namespace Client
             _projectileDamageInput =
                 (param.percent / SystemConst.PER_CENT) * _caster.CharStat.GetStat(param.statOperand);
 
-            InitProjectileStrategy();
-        }
-
-        // [TODO] : 잠시 매직넘버를 썼는데, 스피드의 경우에는 마커에서 같이 패킹해줄지 생각해보자.
-        public void InitProjectileStrategy()
-        {
             targettingStrategy = TargetStrategyFactory.CreateTargetStrategy
                 (new TargettingStrategyParameter()
                 {
-                    type = _projectileData.target,
+                    type = param.skillTargetType,
                     Target = _target
                 });
             pathStrategy = PathStrategyFactory.CreatePathStrategy
@@ -72,8 +66,8 @@ namespace Client
                     type = _projectileData.path,
                     Speed = 2f,
                 });
-            
         }
+
         private void FixedUpdate()
         {
             targettingStrategy.CheckTargetPoint(this);
@@ -83,13 +77,13 @@ namespace Client
         public void ApplyEffect(CharBase target)
         {
             ///// 대미지 적용하자.
-            target.CharStat.DamageHealth((int)_projectileDamageInput);
+            target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
             Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
 
-            ///// Function 있을 경우 : 오류 있으므로 대처할 것.
+            ///// Function 있을 경우 : 오류 있으므로 대처할 것. queue로 된 버퍼 사용할 것.
             var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
 
-            if(!(functionData is null))
+            if(functionData is not null)
             {
                 var ApplyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
                 {

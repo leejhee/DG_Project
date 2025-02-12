@@ -6,7 +6,7 @@ namespace Client
 {
     public class CharPlayer : CharBase
     {
-        protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.Player;
+        protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
         protected override void CharInit()
         {
             base.CharInit();

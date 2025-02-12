@@ -6,15 +6,18 @@ namespace Client
     {
         public CharBase targetChar;
         public long skillIndex;
+        public SystemEnum.eSkillTargetType skillTargetType;
 
         public CharAttackParameter
             (
                 CharBase targetChar, 
-                long skillIndex               
+                long skillIndex,
+                SystemEnum.eSkillTargetType skillTargetType
             )
         {
             this.targetChar = targetChar;
             this.skillIndex = skillIndex;
+            this.skillTargetType = skillTargetType;
         }
 
 
