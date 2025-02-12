@@ -105,7 +105,6 @@ namespace Client
         {
             // 어느 상황에 None이 되어야 하지?
             // 1. finalTarget 없을 때
-            // 2. 
 
             if (finalTarget == null)
             {
@@ -135,9 +134,6 @@ namespace Client
             int skillRange = 0; // 스킬 사거리 받아옴
 
 
-            // TODO : 공격 끝나면 다시 None으로 바꿔주는 작업 해줘야 함
-
-
             // 어떤 공격을 할지에 따라 사거리 기준 설정하기
             attackMode = SetAttackMode();
             switch (attackMode)
@@ -164,15 +160,22 @@ namespace Client
             float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
             
             // 사거리와 비교 후 이동 결정
-            if (distanceSqr <= skillRange)
+            if (distanceSqr <= (skillRange^2))
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex));
                 Debug.Log($"캐릭터 {charAgent.CharData.charName}의 스킬 {attackIndex} 사용");
             }
             else
             {
-                Debug.Log($"{finalTarget.CharData.charName}쪽으로 이동합니다");
-                charAgent.CharAction.CharMoveAction(new CharMoveParameter(finalTarget));
+                Debug.Log($"{charAgent.CharData.charName}가 {finalTarget.CharData.charName}쪽으로 이동합니다");
+
+                // TODO: Vector3인 파라미터로 쓰기
+                // 타겟의 포지션보다 사거리만큼 떨어져 있어야 한다
+                Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
+                Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
+
+                charAgent.CharAction.CharMoveAction(new CharMoveParameter(destination));
+
             }
         }
     }
