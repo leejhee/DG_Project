@@ -15,6 +15,8 @@ namespace Client
         protected float _RunTime = 0; // 현재 시간
         protected float _LifeTime = -1; // 라이프타임 -1 은 무한 지속
 
+        public SystemEnum.eFunction functionType;
+
         // 버프 생성자
         public FunctionBase(BuffParameter buffParam)
         {
@@ -26,28 +28,30 @@ namespace Client
             {
                 Debug.LogError($"Execution : {buffParam.FunctionIndex} 데이터 획득 실패");
             }
+
+            // 데이터가 null일 때 프로퍼티로 했다가 피보면 안되기 때문에 생성자에서 초기화.
+            functionType = buffParam.eFunctionType;
+
+            _LifeTime = _FunctionData.time <= 0 ? 
+                _FunctionData.time / SystemConst.PER_THOUSAND : _FunctionData.time;
         }
+
+        public virtual void InitFunction() => _StartTime = Time.time;
+
 
         /// <summary>
         /// 버프 시작과 종료
         /// </summary>
         /// <param name="StartFunction"> true: 행동 시작 false 행동 종료 </param>
-        public virtual void RunFunction(bool StartFunction)
+        public virtual void RunFunction(bool StartFunction = true)
         {
             if (StartFunction)
             {
-                if (!_TargetChar.FunctionBaseDic[_FunctionData.function].Contains(this))
-                {
-                    _StartTime = Time.time;
-                    _TargetChar.FunctionBaseDic[_FunctionData.function].Add(this);
-                }
+                _TargetChar.FunctionInfo.EnqueueFunction(this);
             }
             else
             {
-                if (_TargetChar.FunctionBaseDic[_FunctionData.function].Contains(this))
-                {
-                    _TargetChar.FunctionBaseDic[_FunctionData.function].Remove(this);
-                }
+                _TargetChar.FunctionInfo.EnqueueKill(this);
             }
         }
 
@@ -58,11 +62,11 @@ namespace Client
         /// </summary>
         public void CheckTimeOver()
         {
-            float runTime = Time.time - _StartTime;
-            float executionTime = _FunctionData.time / SystemConst.PER_THOUSAND;
-            if (runTime > executionTime)
-            {
+            if (_LifeTime == -1f) return;
 
+            float runTime = Time.time - _StartTime;
+            if (runTime > _LifeTime || _LifeTime == 0f)
+            {
                 RunFunction(false);
             }
 

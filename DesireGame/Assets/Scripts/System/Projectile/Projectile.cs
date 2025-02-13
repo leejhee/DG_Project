@@ -80,7 +80,6 @@ namespace Client
             target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
             Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
 
-            ///// Function 있을 경우 : 오류 있으므로 대처할 것. queue로 된 버퍼 사용할 것.
             var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
 
             if(functionData is not null)
@@ -92,7 +91,7 @@ namespace Client
                     TargetChar = target,
                     FunctionIndex = functionData.Index
                 });
-                Target.FunctionBaseDic[functionData.function].Add(ApplyFunction);
+                ApplyFunction.RunFunction();
             }            
             Destroy(gameObject);
         }

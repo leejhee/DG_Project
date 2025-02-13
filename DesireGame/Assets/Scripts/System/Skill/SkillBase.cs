@@ -40,27 +40,7 @@ namespace Client
         {
             _PlayableDirector = GetComponent<PlayableDirector>();
         }
-
-        private void Start()
-        {
-            var timelineAsset = _PlayableDirector.playableAsset as TimelineAsset;
-            if (timelineAsset == null)
-            {
-                Debug.LogError("TimelineAsset 연결안됐다.");
-                return;
-            }
-
-            // 바인딩하려면 이렇게 순회를 해야한댄다... Find도 있을 텐데 어차피 다 순회해서 검색하는걸거다.
-            //foreach (TrackAsset track in timelineAsset.GetOutputTracks())
-            //{
-            //    if (track is AnimationTrack animationTrack)
-            //    {
-            //        _PlayableDirector.SetGenericBinding(animationTrack, _caster.CharAnim.Animator);
-            //        Debug.Log($"{track.name}' 트랙에 Animator 바인딩");
-            //    }
-            //}
-        }
-
+    
         public void PlaySkill(InputParameter parameter)
         {
             if (_PlayableDirector == null)

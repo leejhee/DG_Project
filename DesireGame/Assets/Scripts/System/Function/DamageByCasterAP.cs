@@ -20,5 +20,12 @@ namespace Client
             {
             }
         }
+
+        public override void Update(float delta)
+        {
+            base.Update(delta);
+            Debug.Log("시간만큼 떠야함. 즉 lifetime == 0이면 1번 떠야함");
+        }
+
     }
 }

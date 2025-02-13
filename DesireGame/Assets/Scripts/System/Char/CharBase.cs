@@ -55,7 +55,6 @@ namespace Client
 
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
-        public Dictionary<eFunction, List<FunctionBase>> FunctionBaseDic => _functionInfo.FunctionBaseDic; // 행동 
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
@@ -83,9 +82,9 @@ namespace Client
             _functionInfo.Init();
             _charData = DataManager.Instance.GetData<CharData>(_index);
             _NavMeshAgent = GetComponent<NavMeshAgent>();
-            _charAnim = new();
-            _charAction = new(this);
-            _charAI = new(this);
+            _charAnim =     new();
+            _charAction =   new(this);
+            _charAI =       new(this);
             if (_charData != null)
             {
                 StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
@@ -120,15 +119,7 @@ namespace Client
 
         void Update()
         {
-            foreach (var functionBaseList in FunctionBaseDic)
-            {
-                foreach (var function in functionBaseList.Value)
-                {
-                    function.CheckTimeOver();
-                    function.Update(Time.deltaTime);
-                }
-            }
-            
+            FunctionInfo?.UpdateFunctionDic();            
         }
 
         // Char의 Start시점에 불림
