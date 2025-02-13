@@ -808,10 +808,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &2139462480147899349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1169,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2606816733585875716}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1197,10 +1197,10 @@ MonoBehaviour:
   _index: 10000
   _FightCollider: {fileID: 0}
   _MoveCollider: {fileID: 0}
-  _SkillRoot: {fileID: 0}
+  _SkillRoot: {fileID: 2805514620485008378}
   _NavMeshAgent: {fileID: 0}
   _CharCamaraPos: {fileID: 0}
-  _Animator: {fileID: 0}
+  _Animator: {fileID: 6290040360209643895}
 --- !u!1 &2785718621132047708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4956,10 +4956,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &9162863063049715082
 GameObject:
   m_ObjectHideFlags: 0

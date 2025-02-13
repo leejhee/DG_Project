@@ -160,8 +160,11 @@ namespace Client
             // transform 위치 기반 거리 측정
             float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
 
+            // 내림 처리
+            distanceSqr = Mathf.Floor(distanceSqr * 100) / 100;
+
             // 사거리와 비교 후 이동 결정
-            if (distanceSqr <= (skillRange ^ 2))
+            if (distanceSqr <= Mathf.Pow(skillRange, 2))
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex, targetType));
                 Debug.Log($"캐릭터 {charAgent.CharData.charName}의 스킬 {attackIndex} 사용");
@@ -169,9 +172,8 @@ namespace Client
             else
             {
                 Debug.Log($"{charAgent.CharData.charName}가 {finalTarget.CharData.charName}쪽으로 이동합니다");
+                Debug.Log($"{charAgent.CharData.charName}와 {finalTarget.CharData.charName} 사이 거리 차이 : {distanceSqr} - {Mathf.Pow(skillRange, 2)} = {distanceSqr - Mathf.Pow(skillRange, 2)}");
 
-                // TODO: Vector3인 파라미터로 쓰기
-                // 타겟의 포지션보다 사거리만큼 떨어져 있어야 한다
                 Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
                 Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
 

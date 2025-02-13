@@ -2104,10 +2104,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &3382172404434828603
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,7 +4250,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7458167843753497052}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -4366,10 +4366,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
 --- !u!1 &7815228522986024889
 GameObject:
   m_ObjectHideFlags: 0
