@@ -11,6 +11,8 @@ namespace Client
     /// </summary>
     public class SystemConst 
     {
+        public static float EPSILON = 1e-3f;
+
         public static int NO_CONTENT = 0;   // ºó ÀÎµ¦½º¿ë
 
         public static float PER_TEN_THOUSAND = 10000.0f;
