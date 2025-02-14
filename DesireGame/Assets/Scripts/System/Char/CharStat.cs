@@ -6,8 +6,6 @@ using System;
 
 namespace Client
 {
-    //[TODO] : 대미지 책임분리 할 지 결정 후 작업할 것
-
     public struct DamageParameter
     {
         public float pureDamage;       // 공격자 측에서 계산된 대미지

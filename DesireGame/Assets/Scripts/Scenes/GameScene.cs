@@ -49,5 +49,11 @@ namespace Client
         {
             CharManager.Instance.WakeAllCharAI();
         }
+
+        [ContextMenu("시너지 조회")]
+        public void TestShowSynergy()
+        {
+            SynergyManager.Instance.ShowCurrentSynergies();
+        }
     }
 }

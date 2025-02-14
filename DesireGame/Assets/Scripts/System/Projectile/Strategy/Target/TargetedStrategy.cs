@@ -11,6 +11,7 @@ public class TargetedStrategy : ITargettingStrategy
 
     public void CheckTargetPoint(Projectile projectile)
     {
+        
         float displacement =( AbstractTarget - projectile.transform.position).sqrMagnitude;
         if (displacement <= 0.1f)
             projectile.ApplyEffect(_fixedTarget);

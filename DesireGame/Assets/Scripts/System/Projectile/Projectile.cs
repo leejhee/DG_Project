@@ -70,6 +70,8 @@ namespace Client
 
         private void FixedUpdate()
         {
+            if (_caster == null || _target == null)
+                Destroy(gameObject);
             targettingStrategy.CheckTargetPoint(this);
             pathStrategy.UpdatePosition(this);
         }

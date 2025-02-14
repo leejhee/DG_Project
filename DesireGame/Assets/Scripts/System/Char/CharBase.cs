@@ -145,6 +145,32 @@ namespace Client
                 _charSKillInfo.Init(new List<long>() 
                 { _charData.skill1, _charData.skill2});
             }
+
+            // 초기 패시브
+            foreach (long functionIndex in _charData.func)
+            {
+                var functiondata = DataManager.Instance.GetData<FunctionData>(functionIndex);
+                var passiveFunction = FunctionFactory.FunctionGenerate(
+                    new BuffParameter()
+                    {
+                        FunctionIndex = functiondata.Index,
+                        CastChar = this,
+                        TargetChar = this,
+                        eFunctionType = functiondata.function
+                    });
+            }
+
+            // 시너지
+            SynergyManager.Instance.RegisterCharSynergy(this);
+            
+
+            _charStat.OnDeath += () =>
+            {
+                Debug.Log($"캐릭터 사망 : uid {_uid}, 이름 {_charData.charName}");
+                SynergyManager.Instance.DeleteCharSynergy(this);
+                CharDistroy();
+            };
+
         }
 
         public virtual void CharDistroy()

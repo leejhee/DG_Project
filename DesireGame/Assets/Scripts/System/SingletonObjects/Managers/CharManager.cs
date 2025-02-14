@@ -69,7 +69,7 @@ namespace Client
                 Debug.LogWarning($"{myType.ToString()} 타입을 찾을 수 없음 삭제 실패");
                 return false;
             }
-            if (_cache[myType].ContainsKey(id))
+            if (!_cache[myType].ContainsKey(id))
             {
                 Debug.LogWarning($"{myType.ToString()} 타입의 ID: {id}을 찾을 수 없음 삭제 실패");
                 return false;
