@@ -102,6 +102,35 @@ namespace Client
             return true;
         }
 
+        public void Clear(CharBase charBase)
+        {
+            if (charBase == false)
+                return;
+            
+            eCharType charType = charBase.CharData.charType;
+            Clear(eCharTypeToType(charType), charBase.GetID());
+        }
+
+        public Type eCharTypeToType(eCharType charType)
+        {
+            switch (charType)
+            {
+                case eCharType.ALLY : return typeof(CharPlayer);
+                case eCharType.ENEMY: return typeof(CharMonster);
+            }
+            return null;
+        }
+        public eCharType TypeToECharType(Type type)
+        {
+            var typeName = type.Name;
+
+            if (typeof(CharPlayer).Name == typeName) return eCharType.ALLY;
+            if (typeof(CharMonster).Name == typeName) return eCharType.ENEMY;
+            
+            return eCharType.None;
+        }
+
+
         public CharBase CharGenerate(CharParameter charParam)
         {
             CharBase charBase = Instance.CharGenerate(charParam.CharIndex);
@@ -214,5 +243,29 @@ namespace Client
                 }
             }
         }
+
+        public void ClearAllChar()
+        {
+            if (_cache == null)
+                return;
+            foreach (var typeList in _cache.Values)
+            {
+                if (typeList == null)
+                    continue;
+
+                List<long> charIDList = new();
+                foreach (var charBase in typeList.Values)
+                {
+                    charIDList.Add(charBase.GetID());
+                }
+                foreach (var charID in charIDList)
+                {
+                    typeList[charID].Dead();
+                }
+            }
+        }
+
+
+
     }
 }

@@ -59,5 +59,6 @@ namespace Client
             var tile = TileMap[tileIndex];
             tile.SetChar(setChar);
         }
+
     }
 }

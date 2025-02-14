@@ -11,11 +11,11 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class MonsterGeneratorData : SheetData
+    public partial class StageData : SheetData
     {
-public long Index; // 몬스터Index
-		public long charIndex; // 캐릭터 인덱스
-		public List<int>  startPos; // 시작 위치
+public long Index; // StageID
+		public string SceneName; // Scene이름
+		public string SceneStartBGM; // Scene 시작 BGM 이름
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -38,7 +38,7 @@ public long Index; // 몬스터Index
 
                     line = i;
 
-                    MonsterGeneratorData data = new MonsterGeneratorData();
+                    StageData data = new StageData();
 
                     
 					if(values[0] == "")
@@ -46,15 +46,15 @@ public long Index; // 몬스터Index
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[3] == "")
-					    data.charIndex = default;
+					if(values[2] == "")
+					    data.SceneName = default;
 					else
-					    data.charIndex = Convert.ToInt64(values[3]);
+					    data.SceneName = Convert.ToString(values[2]);
 					
-					ListStr = values[5].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var  startPosData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt32(x)).ToList();
-					data. startPos =  startPosData;
+					if(values[3] == "")
+					    data.SceneStartBGM = default;
+					else
+					    data.SceneStartBGM = Convert.ToString(values[3]);
 					
 
                     dataList[data.Index] = data;
