@@ -42,7 +42,7 @@ namespace Client
         }
 
         // 외부에서 소환할 때 호출하자. 
-        public virtual void InitProjectile(StatPackParameter param)
+        public virtual void InitProjectile(StatPackedSkillParameter param)
         {
             _caster = param.skillCaster;
             _target = param.skillTarget;

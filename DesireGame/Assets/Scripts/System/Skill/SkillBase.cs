@@ -20,7 +20,7 @@ namespace Client
 
         public PlayableDirector PlayableDirector => _PlayableDirector;
         public CharBase CharPlayer => _caster;
-        public InputParameter InputParameter { get; private set; }
+        public SkillParameter InputParameter { get; private set; }
         public int NSkillRange => _nSkillRange;
         public SystemEnum.eSkillTargetType TargetType => _skillData.skillTarget;
 
@@ -41,7 +41,7 @@ namespace Client
             _PlayableDirector = GetComponent<PlayableDirector>();
         }
     
-        public void PlaySkill(InputParameter parameter)
+        public void PlaySkill(SkillParameter parameter)
         {
             if (_PlayableDirector == null)
                 return;

@@ -10,6 +10,11 @@ namespace Client
     {
         [SerializeField]
         private AnimationClip animationClip;
+
+        public AnimationClip AnimationClip => animationClip;
+        public override double duration => 
+            animationClip != null ? animationClip.length : base.duration;
+
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
             base.CreatePlayable(graph, owner);

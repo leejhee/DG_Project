@@ -75,6 +75,7 @@ namespace Client
         public enum eSynergy
         {
             None,
+
             SWORD,
             RANGED,
             SHIELD,
@@ -85,6 +86,7 @@ namespace Client
             QUANTUM_WASHER,
             TIDY,
             TEAM6,
+
             eMax,
         }
         public enum eItemTier

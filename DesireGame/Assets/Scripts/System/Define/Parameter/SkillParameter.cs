@@ -1,17 +1,16 @@
-﻿
-namespace Client
+﻿namespace Client
 {
     // [TODO] : 복수 타겟 작업할 때 skillTarget을 List<CharBase>로 변경할 것.
-    public class InputParameter
+    public class SkillParameter
     {
-        public CharBase skillTarget;
-        public CharBase skillCaster;
-        public SystemEnum.eSkillTargetType skillTargetType;
+        public CharBase skillTarget { get; private set; }
+        public CharBase skillCaster { get; private set; }
+        public SystemEnum.eSkillTargetType skillTargetType { get; private set; }
 
         // InputManager 사라지면 protected 전환 예정
-        public InputParameter() { }
+        public SkillParameter() { }
 
-        public InputParameter
+        public SkillParameter
             (
                 CharBase skillTarget, 
                 CharBase skillCaster,
@@ -26,14 +25,14 @@ namespace Client
     }
 
     // 스탯과 적용비율을 설정하는 부분에서 다시 패킹하기 위해 사용
-    public class StatPackParameter : InputParameter
+    public class StatPackedSkillParameter : SkillParameter
     {
-        public SystemEnum.eStats statOperand;
-        public float percent;
+        public SystemEnum.eStats statOperand { get; }
+        public float percent { get; }
 
-        public StatPackParameter
+        public StatPackedSkillParameter
             (
-                InputParameter param,
+                SkillParameter param,
                 SystemEnum.eStats operand = SystemEnum.eStats.None,
                 float ratio = 0f
             ): base(param.skillTarget, param.skillCaster, param.skillTargetType)
@@ -45,16 +44,12 @@ namespace Client
 
     public static class ParameterExtensions
     {
-        public static StatPackParameter ToStatPack(
-            this InputParameter param,
+        public static StatPackedSkillParameter ToStatPack(
+            this SkillParameter param,
             SystemEnum.eStats operand,
             float ratio)
         {
-            return new StatPackParameter(param)
-            {
-                statOperand = operand,
-                percent = ratio
-            };
+            return new StatPackedSkillParameter(param, operand, ratio);
         }
     }
 }

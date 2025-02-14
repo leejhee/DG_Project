@@ -18,7 +18,6 @@ namespace Client
         [SerializeField] private   Collider     _MoveCollider;  // 이동 콜라이더
         [SerializeField] private   GameObject   _SkillRoot;     // 스킬 루트
         [SerializeField] protected NavMeshAgent _NavMeshAgent;  // 네비 메쉬 에이전트
-        //[SerializeField] protected CharacterController _CharController; // 캐릭터 애니메이션 리스트
         [SerializeField] protected GameObject _CharCamaraPos; // 캐릭터 애니메이션 리스트
         [SerializeField] protected Animator _Animator;       // 애니메이터\
 
@@ -32,10 +31,10 @@ namespace Client
         private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
         private CharAI      _charAI = null;
 
-        //private GameObject _LWeapon = null;       // 왼손 무기
-        //private GameObject _RWeapon = null;       // 오른손 무기
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
+
+        private List<eSynergy> _charSynergies = null;
 
         private PlayerState _currentState; // 현재 상태
         private bool _isAction = false;    // 행동중인가? 판별
@@ -55,6 +54,7 @@ namespace Client
 
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
+        public long Index => _index;
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
@@ -70,6 +70,9 @@ namespace Client
         public CharAI CharAI => _charAI;
         public CharData CharData => _charData;
         public PlayerState PlayerState => _currentState;
+        public List<eSynergy> CharSynergies => _charSynergies;
+
+
 
         protected CharBase() { }
 
@@ -98,7 +101,14 @@ namespace Client
             {
                 Debug.LogError($"캐릭터 ID : {_index} Data 데이터 Get 실패");
             }
+            _charSynergies = new List<eSynergy>() 
+            { 
+                _charData.synergy1, 
+                _charData.synergy2, 
+                _charData.synergy3 
+            };
         }
+
         private void Start()
         {
             if (_charAnim != null)

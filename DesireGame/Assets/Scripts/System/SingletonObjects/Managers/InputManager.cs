@@ -42,7 +42,7 @@ namespace Client
         #endregion
         #region Containers 
         // SkillBindDict만 추후 스킬들 가지고 있는 스크립트에서 할당 필요할 때 사용 가능
-        public Dictionary<eInputSystem, Action<InputParameter>> SkillBindDict { get; set; } = new Dictionary<eInputSystem, Action<InputParameter>>();
+        public Dictionary<eInputSystem, Action<SkillParameter>> SkillBindDict { get; set; } = new Dictionary<eInputSystem, Action<SkillParameter>>();
 
         private Dictionary<eMiddleLevel, eInputSystem> MidKeyBind;
         private Dictionary<KeyCode, eMiddleLevel> WinKeyBind;
@@ -86,7 +86,7 @@ namespace Client
                     {eMiddleLevel.midLevel4, eInputSystem.Skill4},
                 };
 
-                SkillBindDict = new Dictionary<eInputSystem, Action<InputParameter>>()
+                SkillBindDict = new Dictionary<eInputSystem, Action<SkillParameter>>()
                 {
                     {eInputSystem.Skill1 , null},
                     {eInputSystem.Skill2 , null},
@@ -104,21 +104,21 @@ namespace Client
         }
 
         #region 스킬 디버깅용으로 하드코딩
-        void Skill1(InputParameter param)
+        void Skill1(SkillParameter param)
         {
             Debug.Log("스킬1번 발사.");
         }
 
-        void Skill2(InputParameter param)
+        void Skill2(SkillParameter param)
         {
             Debug.Log("스킬2번 발사.");
         }
 
-        void Skill3(InputParameter param)
+        void Skill3(SkillParameter param)
         {
             Debug.Log("스킬3번 발사.");
         }
-        void Skill4(InputParameter param)
+        void Skill4(SkillParameter param)
         {
             Debug.Log("스킬4번 발사.");
         }
@@ -262,14 +262,14 @@ namespace Client
         {
             if (AndBtnBind.ContainsKey(skillIndex))
             {
-                Action<InputParameter> targetAction = SkillBindDict[AndBtnBind[skillIndex]];
+                Action<SkillParameter> targetAction = SkillBindDict[AndBtnBind[skillIndex]];
                 if (targetAction == null)
                 {
                     Debug.Log($"으잉 스킬 {AndBtnBind[skillIndex]} 바인딩된거 없는뎁쇼");
                     return;
                 }
 
-                targetAction.Invoke(new InputParameter());
+                targetAction.Invoke(new SkillParameter());
                 //일단 아무것도 없으니까 저렇게 넣는다.
                 Debug.Log($"옛다 {targetAction} 스킬이나 먹어라~");
             }
@@ -289,7 +289,7 @@ namespace Client
                 {
                     eMiddleLevel midByKey =  WinKeyBind[keyCode];
                     eInputSystem inputByKey = MidKeyBind[midByKey];
-                    Action<InputParameter> targetAction = SkillBindDict[inputByKey];
+                    Action<SkillParameter> targetAction = SkillBindDict[inputByKey];
                     if (targetAction == null)
                     {
                         Debug.Log($"으잉 스킬 {keyCode}에 바인딩된거 없는뎁쇼");
@@ -302,7 +302,7 @@ namespace Client
                      * 각 장비/캐릭터에 붙은 스킬들에 대해 정보(InputParameter)들을 인스턴스화해서
                      * 나중엔 InputParameter param = InputParamGenererator(어쩌구);로 한 param을 인자에 넣으면 될것이다.
                      */
-                    targetAction.Invoke(new InputParameter());
+                    targetAction.Invoke(new SkillParameter());
                     Debug.Log($"옛다 {targetAction} 스킬이나 먹어라~");
                 }
             }            

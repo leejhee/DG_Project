@@ -69,7 +69,7 @@ namespace Client
                 skillBase.transform.parent = _SkillRoot;
             }
         }
-        public void PlaySkill(long skillIndex, InputParameter parameter)
+        public void PlaySkill(long skillIndex, SkillParameter parameter)
         {
             if (_dicSkill == null)
                 return;
