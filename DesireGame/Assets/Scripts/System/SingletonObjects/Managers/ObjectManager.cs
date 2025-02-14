@@ -13,6 +13,8 @@ namespace Client
         /// <summary> 로드한 적 있는 object cache 기본적으로 경로를 Key로 이용</summary>
         Dictionary<string, Object> _cache = new Dictionary<string, Object>();
 
+        // 이미 이미지를 로드했는가?
+        private bool isLoadSprite = false;
         #region 생성자
         ObjectManager() { }
         #endregion 생성자
@@ -47,6 +49,53 @@ namespace Client
             _cache.Add(name, obj);
 
             return obj as T;
+        }
+
+        public Sprite LoadSprite(string spriteName)
+        {
+            Object obj = null; 
+            if (_cache == null)
+            {
+                _cache = new Dictionary<string, Object>();
+            }
+
+            if (_cache.TryGetValue(spriteName + "_sprite", out obj))
+                return obj as Sprite;
+            
+            if (isLoadSprite)
+            {
+                Debug.LogError($"{spriteName} 이미지를 찾지 못했습니다.");
+                return null;
+            }
+            LoadAllSpriteToMemory();
+
+            return obj as Sprite;
+        }
+
+        // 데이터 매니저 데이터 로드 시점에 로딩
+        public void ObjectDataLoad()
+        {
+            LoadAllSpriteToMemory();
+        }
+
+        // 흠... 게임 시작할 때 돌릴까?
+        public void LoadAllSpriteToMemory()
+        {
+            isLoadSprite = true;
+            Sprite[] allSprites;
+            allSprites = Resources.LoadAll<Sprite>("Sprites");
+            if (_cache == null)
+            {
+                _cache = new Dictionary<string, Object>();
+            }
+            
+            if ((allSprites?.Length ?? 0) == 0)
+                return;
+            
+            foreach (var sprite in allSprites)
+            {
+                _cache.Add(sprite.name + "_sprite", sprite);
+            }
         }
 
         /// <summary> GameObject 생성 </summary>

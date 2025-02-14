@@ -43,6 +43,7 @@ namespace Client
         public override void Init()
         {
             DataLoad();
+            ObjectManager.Instance.ObjectDataLoad();
             DoAfterDataLoad();
         }
         public void DataLoad()
@@ -62,7 +63,6 @@ namespace Client
                 {
                     continue;
                 }
-                Debug.Log(type.Name);
                 Dictionary<long, SheetData> sheet = instance.LoadData();
 
                 if (_cache.ContainsKey(type.Name) == false)
