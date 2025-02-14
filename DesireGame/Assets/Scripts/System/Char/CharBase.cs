@@ -243,5 +243,13 @@ namespace Client
         {
             _charAnim.PlayAnimation(state);
         }
+
+        public void Dead()
+        {
+            //CharManager.Instance.Clear(this);
+            CharDistroy();
+
+        }
+
     }
 }
