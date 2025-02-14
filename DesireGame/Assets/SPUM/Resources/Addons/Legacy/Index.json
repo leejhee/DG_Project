@@ -497,6 +497,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/0_Eye/Eye_Close"
     },
     {
+      "Name": "Hair_J",
+      "UnitType": "Unit",
+      "PartType": "Hair",
+      "SubType": "Hair_J",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/0_Hair/Hair_J"
+    },
+    {
       "Name": "Hair_K",
       "UnitType": "Unit",
       "PartType": "Hair",
@@ -584,6 +592,55 @@
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/0_Hair/Hair_9"
     },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+    {
+      "Name": "Body_J",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Body_J"
+    },
+
     {
       "Name": "Body_L",
       "UnitType": "Unit",
@@ -1297,6 +1354,30 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_FaceHair/FaceHair_5"
     },
     {
+      "Name": "Cloth_J",
+      "UnitType": "Unit",
+      "PartType": "Cloth",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/2_Cloth/Cloth_J"
+    },
+    {
+      "Name": "Cloth_J",
+      "UnitType": "Unit",
+      "PartType": "Cloth",
+      "SubType": "Left",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/2_Cloth/Cloth_J"
+    },
+    {
+      "Name": "Cloth_J",
+      "UnitType": "Unit",
+      "PartType": "Cloth",
+      "SubType": "Right",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/2_Cloth/Cloth_J"
+    },
+    {
       "Name": "Cloth_L",
       "UnitType": "Unit",
       "PartType": "Cloth",
@@ -1640,6 +1721,22 @@
       "SubType": "Right",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/2_Cloth/F_SR_Cloth"
+    },
+    {
+      "Name": "Pants_J",
+      "UnitType": "Unit",
+      "PartType": "Pant",
+      "SubType": "Left",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/3_Pant/Pants_J"
+    },
+    {
+      "Name": "Pants_J",
+      "UnitType": "Unit",
+      "PartType": "Pant",
+      "SubType": "Right",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/3_Pant/Pants_J"
     },
     {
       "Name": "Pants_L",
@@ -2033,6 +2130,14 @@
       "SubType": "Bow_1",
       "PartSubType": "Bow",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/2_Bow/Bow_1"
+    },
+    {
+      "Name": "Shield_J",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Shield_J",
+      "PartSubType": "Shield",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_J"
     },
     {
       "Name": "Shield_1",
