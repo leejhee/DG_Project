@@ -45,7 +45,9 @@ namespace Client
             TestEnemy = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                 35,
-                100)); 
+                100));
+
+            MessageManager.SubscribeMessage<GameSceneMessageParam>(this, TestMessageSystem);
         }
 
         [ContextMenu("투사체를 날려보아요")]
@@ -65,6 +67,12 @@ namespace Client
         public void TestShowSynergy()
         {
             SynergyManager.Instance.ShowCurrentSynergies();
+        }
+
+
+        public void TestMessageSystem(GameSceneMessageParam param)
+        {
+            Debug.Log($"GameScene 에서 수신 완료 메시지 내용은 - {param.message} - ");
         }
     }
 }
