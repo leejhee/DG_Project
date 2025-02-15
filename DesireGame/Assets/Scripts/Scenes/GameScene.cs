@@ -26,14 +26,25 @@ namespace Client
 
         private void Start()
         {
-            TestChar = CharManager.Instance.CharGenerate
-                (new CharParameter(SystemEnum.eScene.GameScene,
-                testPlayerPoint,
-                200));
+            //TestChar = CharManager.Instance.CharGenerate
+            //    (new CharParameter(SystemEnum.eScene.GameScene,
+            //    testPlayerPoint,
+            //    200));
+            //
+            //TestEnemy = CharManager.Instance.CharGenerate
+            //    (new CharParameter(SystemEnum.eScene.GameScene,
+            //    testEnemyPoint,
+            //    100)); 
 
+            // 타일 시스템 결합
+            TestChar = CharManager.Instance.CharGenerate
+                (new CharTileParameter(SystemEnum.eScene.GameScene,
+                15,
+                200));
+            
             TestEnemy = CharManager.Instance.CharGenerate
-                (new CharParameter(SystemEnum.eScene.GameScene,
-                testEnemyPoint,
+                (new CharTileParameter(SystemEnum.eScene.GameScene,
+                35,
                 100)); 
         }
 

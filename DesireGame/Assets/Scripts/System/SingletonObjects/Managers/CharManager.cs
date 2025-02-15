@@ -19,6 +19,20 @@ namespace Client
         #region 생성자
         CharManager() { }
         #endregion
+        private Transform _charRoot = null;
+        public Transform CharRoot
+        {
+            get 
+            {
+                if (_charRoot == null)
+                {
+                    var gm = new GameObject { name = "UnitRoot" };
+                    _charRoot = gm.transform;
+                }
+                return _charRoot;
+            }
+        }
+        
         public long SelectedCharIndex { get; private set; } = 1;
         // 고유 ID 생성
         public long GetNextID() => _nextID++;
@@ -138,6 +152,14 @@ namespace Client
             return charBase;
         }
 
+        // 타일 시스템
+        public CharBase CharGenerate(CharTileParameter charParam)
+        {
+            CharBase charBase = Instance.CharGenerate(charParam.CharIndex);
+            TileManager.Instance.SetChar(charParam.TileIndex, charBase);
+            return charBase;
+        }
+
         public CharBase CharGenerate(long charIndex)
         {
             CharData charData = DataManager.Instance.GetData<CharData>(charIndex);
@@ -146,7 +168,7 @@ namespace Client
                 Debug.LogWarning($"CharFactory : {charIndex} 의 CharIndex를 찾을 수 없음");
                 return null;
             }
-            GameObject gameObject = ObjectManager.Instance.Instantiate($"Char/{charData.charPrefab}");
+            GameObject gameObject = ObjectManager.Instance.Instantiate($"Char/{charData.charPrefab}", CharRoot);
             if (gameObject == null)
             {
                 Debug.LogWarning($"CharFactory : {charData.charPrefab} 의 charPrefab을 찾을 수 없음");

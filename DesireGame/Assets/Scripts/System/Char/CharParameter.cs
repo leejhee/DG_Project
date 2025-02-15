@@ -17,4 +17,17 @@ namespace Client
             CharIndex = index;
         }
     }
+    public struct CharTileParameter
+    {
+        public SystemEnum.eScene Scene;
+        public int TileIndex;
+        public long CharIndex;
+
+        public CharTileParameter(SystemEnum.eScene scene, int tileIndex, long index)
+        {
+            Scene = scene;
+            TileIndex = tileIndex;
+            CharIndex = index;
+        }
+    }
 }
