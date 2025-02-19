@@ -14,7 +14,6 @@ namespace Client
         private PlayableDirector _PlayableDirector;
         private CharBase _caster;
 
-        // 구조상 데이터를 포함해야 한다고 판단
         private SkillData _skillData;
         private int _nSkillRange; // 현재 사거리
 

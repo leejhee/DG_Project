@@ -1,7 +1,7 @@
-using Client;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
 namespace Client
 {
     public partial class DataManager
@@ -9,19 +9,22 @@ namespace Client
         #region 개별 데이터
 
         // 플레이어 위치정보
-        private Dictionary<SystemEnum.eScene, Vector3> _positionMap = new Dictionary<SystemEnum.eScene, Vector3>();
-        public Dictionary<SystemEnum.eScene, Vector3> PositionMap => _positionMap;
+        private Dictionary<eScene, Vector3> _positionMap = new Dictionary<eScene, Vector3>();
+        public Dictionary<eScene, Vector3> PositionMap => _positionMap;
 
         // 번역정보
-        private Dictionary<string, Dictionary<SystemEnum.eLocalize, string>> _localizeStringCodeMap = new();
-        public Dictionary<string, Dictionary<SystemEnum.eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
+        private Dictionary<string, Dictionary<eLocalize, string>> _localizeStringCodeMap = new();
+        public Dictionary<string, Dictionary<eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
 
         // 스테이지 데이터 
         private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
-
         public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
 
-        public SystemEnum.eLocalize Localize { get; set; } = SystemEnum.eLocalize.KOR;
+        // 시너지 관련 function Data
+        private Dictionary<eSynergy, List<SynergyData>> _synergyTriggerMap = new();
+        public Dictionary<eSynergy, List<SynergyData>> SynergyTriggerMap => _synergyTriggerMap;
+
+        public eLocalize Localize { get; set; } = eLocalize.KOR;
 
         #endregion
 
@@ -33,7 +36,7 @@ namespace Client
             if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
             if (typeof(MonsterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
-
+            if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
 
         }
         // 플레이어 위치정보
@@ -60,6 +63,7 @@ namespace Client
                 _positionMap.Add(charPosition.mapScene, vector);
             }
         }
+
         // 스트링 코드
         private void SetStringCodeData()
         {
@@ -109,6 +113,25 @@ namespace Client
                     monsterSpawn.Index
                     );
                 _monsterSpawnStageMap[monsterSpawn.StageNum].Add(monsterSpawnInfo);
+            }
+        }
+
+        // 시너지 종류별 데이터 뭉텅이.
+        private void SetSynergyMappingData()
+        {
+            string key =  typeof(SynergyData).Name;
+            if (!_cache.ContainsKey(key))
+                return;
+
+            var synergyDict = _cache[key];
+            if (synergyDict is null) return;
+
+            foreach(var kvp in synergyDict)
+            {
+                var synergy = kvp.Value as SynergyData;
+                if (!_synergyTriggerMap.ContainsKey(synergy.synergyType))
+                    _synergyTriggerMap.Add(synergy.synergyType, new List<SynergyData>());
+                _synergyTriggerMap[synergy.synergyType].Add(synergy);
             }
         }
 

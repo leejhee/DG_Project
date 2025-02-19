@@ -15,6 +15,7 @@ namespace Client
                 case eFunction.SpawnProjectileByAS: return new SpawnProjectileByAS(buffParam);
                 case eFunction.DamageByCasterAD: return new DamageByCasterAD(buffParam);
                 case eFunction.DamageByCasterAP: return new DamageByCasterAP(buffParam);
+                case eFunction.SynergyTrigger:  return new SynergyTrigger(buffParam);
             }
 
             return null;

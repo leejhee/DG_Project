@@ -11,10 +11,11 @@ namespace Client
     /// </summary>
     public class SystemConst 
     {
-        public static float EPSILON = 1e-3f;
 
         public static int FPS = 60;
-        public static int NO_CONTENT = 0;   // ºó ÀÎµ¦½º¿ë
+
+        public static long NO_CONTENT = 0;              // ºó ÀÎµ¦½º¿ë
+        public static long SYNERGY_TRIGGER = 600001;    // ½Ã³ÊÁö Æ®¸®°Å¿ë
 
         public static float PER_TEN_THOUSAND = 10000.0f;
         public static float PER_THOUSAND = 1000.0f;

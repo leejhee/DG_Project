@@ -1,19 +1,22 @@
 using UnityEngine.Playables;
 using UnityEngine;
-using Client;
-
-public class SkillMarkerReceiver : MonoBehaviour, INotificationReceiver
+namespace Client
 {
-    public void OnNotify(Playable origin, INotification notification, object context)
+    public class SkillMarkerReceiver : MonoBehaviour, INotificationReceiver
     {
-        if (notification is SkillTimeLineMarker skillMarker)
+        public void OnNotify(Playable origin, INotification notification, object context)
         {
-            IContextProvider provider = GetComponent<IContextProvider>();
-            
-            skillMarker.InitInput(provider.InputParameter);
-            skillMarker.MarkerAction();
-           
-            Debug.Log("여기까지 왔네요.");
+            if (notification is SkillTimeLineMarker skillMarker)
+            {
+                IContextProvider provider = GetComponent<IContextProvider>();
+
+                skillMarker.InitInput(provider.InputParameter);
+                skillMarker.MarkerAction();
+
+                Debug.Log("여기까지 왔네요.");
+            }
         }
     }
 }
+
+

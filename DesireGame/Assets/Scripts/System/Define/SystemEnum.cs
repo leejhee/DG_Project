@@ -87,8 +87,21 @@ namespace Client
             TIDY,
             TEAM6,
 
-            eMax,
+            eMax, 
         }
+
+        public enum eSynergyLevel
+        {
+            None,
+
+            Bronze,
+            Silver,
+            Gold,
+            Prism,
+
+            eMax
+        }
+
         public enum eItemTier
         {
             NORMAL,
@@ -175,6 +188,8 @@ namespace Client
             BuffOnce,
             // CC 부여
             ApplyCC,
+
+            SynergyTrigger,
 
             MaxCount
         }

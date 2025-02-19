@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using static Client.SystemEnum;
 
 namespace Client
 {
     public class SynergyManager : Singleton<SynergyManager>
     {
-        private Dictionary<SystemEnum.eSynergy, SynergyContainer> _synergyActivator;
-        // eSynergy의 유닛이 registered될 때 
-        private readonly Action<SystemEnum.eSynergy> OnRegisterSynergy;
-        private readonly Action<SystemEnum.eSynergy> OnDeleteSynergy;
+        private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
+        
+        // 해당 구조는 그대로 유지.
+        private readonly Action<eSynergy> OnRegisterSynergy;
+        private readonly Action<eSynergy> OnDeleteSynergy;
 
         #region 생성자
         private SynergyManager() { }
@@ -23,34 +25,44 @@ namespace Client
             _synergyActivator = new();
         }
 
-        public void RegisterCharSynergy(CharBase charBase)
+        // 전제 : 덕지덕지 붙은 CharBase보다 걔가 가진 trigger가 가볍다.
+        public void RegisterCharSynergy(CharBase registrar, eSynergy synergy)
         {
-            foreach(var synergy in charBase.CharSynergies)
+            if (synergy == eSynergy.None) return;
+
+            if (!_synergyActivator.ContainsKey(synergy))
             {
-                if (synergy == SystemEnum.eSynergy.None) continue;
-
-                if (!_synergyActivator.ContainsKey(synergy))
-                {
-                    _synergyActivator.Add(synergy, new SynergyContainer());
-                }
-
-                _synergyActivator[synergy].SynergyMembers.Add(charBase);
-                OnRegisterSynergy?.Invoke(synergy);
+                _synergyActivator.Add(synergy, new SynergyContainer());
             }
+            _synergyActivator[synergy].SynergyMembers.Add(registrar);
+
+            OnRegisterSynergy?.Invoke(synergy);         
         }
 
         public void DeleteCharSynergy(CharBase charBase)
         {
             foreach (var synergy in charBase.CharSynergies)
             {
-                if (synergy == SystemEnum.eSynergy.None) continue;
+                if (synergy == eSynergy.None) continue;
 
                 _synergyActivator[synergy].SynergyMembers.Remove(charBase);              
                 OnDeleteSynergy?.Invoke(synergy); // 트리깅 쪽에서 구독한 사항.
             }
         }
 
-        
+        public void CheckTargetSynergyLevel(eSynergy targetSynergy)
+        {
+
+        }
+
+
+        public void DistributeSynergyBuff(eSynergy targetSynergy)
+        {
+
+        }
+
+
+        #region Test_Method
         // 씬상 테스트만 하는 용도
         public void ShowCurrentSynergies()
         {
@@ -58,13 +70,18 @@ namespace Client
             foreach(var kvp in _synergyActivator)
             {
                 view.AppendLine($"eSynergy : {kvp.Key}, " +
-                    $"distinctmembers : {kvp.Value.DistinctMembers}, " +
-                    $"members : {kvp.Value.SynergyMembers.Count}");
+                                $"distinctmembers : {kvp.Value.DistinctMembers}, " +
+                                $"members : {kvp.Value.SynergyMembers.Count}");
             }
             Debug.Log(view.ToString());
         }
+        #endregion
 
     }
+
+
+
+
 
     public class SynergyContainer
     {
@@ -77,11 +94,14 @@ namespace Client
             }
         }
 
+        public eSynergyLevel Level;
+
         public List<CharBase> SynergyMembers;
         
         public SynergyContainer()
         {
             SynergyMembers = new List<CharBase>();
+            Level = eSynergyLevel.None;
         }
 
     }

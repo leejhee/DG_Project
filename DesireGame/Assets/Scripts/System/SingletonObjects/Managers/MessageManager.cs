@@ -103,23 +103,23 @@ namespace Client
         //    Instance._messageSystemMap[typeof(T)] -= Instance._messageCache[recver][typeof(T)];
         //}
 
-        public static void RomoveMessageAll(object recver)
+        public static void RemoveMessageAll(object recver)
         {
             if (recver == null)
                 return;
             List<Type> removeType = new();
-            foreach(var tpye in Instance._messageCache[recver].Keys)
+            foreach(var type in Instance._messageCache[recver].Keys)
             {
-                if (tpye == null)
+                if (type == null)
                     return;
-                removeType.Add(tpye);
+                removeType.Add(type);
             }
-            foreach (var tpye in removeType)
+            foreach (var type in removeType)
             {
-                Instance._messageSystemMap[tpye] -= Instance._messageCache[recver][tpye];
-                if (Instance._messageSystemMap[tpye] == null)
+                Instance._messageSystemMap[type] -= Instance._messageCache[recver][type];
+                if (Instance._messageSystemMap[type] == null)
                 {
-                    Instance._messageSystemMap.Remove(tpye);
+                    Instance._messageSystemMap.Remove(type);
                 }
             }
             Instance._messageCache.Remove(recver);

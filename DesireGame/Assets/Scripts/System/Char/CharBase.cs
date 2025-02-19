@@ -138,15 +138,16 @@ namespace Client
             //CharManager.Instance.SetChar<CharBase>(this);
             // 캐시에서 이중으로 데이터 가지는 현상 저지
 
-            // 스킬
+            #region 스킬
             _charSKillInfo = new CharSKillInfo(this);
             if (_charSKillInfo != null)
             {               
                 _charSKillInfo.Init(new List<long>() 
                 { _charData.skill1, _charData.skill2});
             }
+            #endregion
 
-            // 초기 패시브
+            #region 초기 패시브
             foreach (long functionIndex in _charData.func)
             {
                 var functiondata = DataManager.Instance.GetData<FunctionData>(functionIndex);
@@ -159,10 +160,25 @@ namespace Client
                         eFunctionType = functiondata.function
                     });
             }
+            #endregion
 
-            // 시너지
-            SynergyManager.Instance.RegisterCharSynergy(this);
-            
+            #region 시너지
+            //SynergyManager.Instance.RegisterCharSynergy(this);
+
+            foreach(var synergy in _charSynergies)
+            {
+                if (synergy == eSynergy.None) continue;
+
+                SynergyTrigger trigger = FunctionFactory.FunctionGenerate(new BuffParameter()
+                {
+                    eFunctionType = eFunction.SynergyTrigger,
+                    CastChar = this,
+                    TargetChar = this,
+                    FunctionIndex = SystemConst.SYNERGY_TRIGGER
+                }) as SynergyTrigger;
+                trigger.InitTrigger(synergy);
+            }
+            #endregion
 
             _charStat.OnDeath += () =>
             {
