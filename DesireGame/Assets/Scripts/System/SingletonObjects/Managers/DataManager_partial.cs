@@ -21,8 +21,8 @@ namespace Client
         public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
 
         // 시너지 관련 function Data
-        private Dictionary<eSynergy, List<SynergyData>> _synergyTriggerMap = new();
-        public Dictionary<eSynergy, List<SynergyData>> SynergyTriggerMap => _synergyTriggerMap;
+        private Dictionary<eSynergy, Dictionary<int, SynergyData>> _synergyTriggerMap = new();
+        public Dictionary<eSynergy, Dictionary<int, SynergyData>> SynergyTriggerMap => _synergyTriggerMap;
 
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
@@ -126,12 +126,14 @@ namespace Client
             var synergyDict = _cache[key];
             if (synergyDict is null) return;
 
+            // 표현하는 시너지 단계별 인원수는 반드시 하나여야 함.!
             foreach(var kvp in synergyDict)
             {
                 var synergy = kvp.Value as SynergyData;
                 if (!_synergyTriggerMap.ContainsKey(synergy.synergyType))
-                    _synergyTriggerMap.Add(synergy.synergyType, new List<SynergyData>());
-                _synergyTriggerMap[synergy.synergyType].Add(synergy);
+                    _synergyTriggerMap.Add(synergy.synergyType, new Dictionary<int, SynergyData>());
+                if(!_synergyTriggerMap[synergy.synergyType].ContainsKey(synergy.levelThresholds))
+                    _synergyTriggerMap[synergy.synergyType].Add(synergy.levelThresholds, synergy);
             }
         }
 

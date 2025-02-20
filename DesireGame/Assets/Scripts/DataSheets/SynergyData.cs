@@ -17,6 +17,10 @@ public long Index; // synergyID
 		public List<long> functionList; // 기능
 		
 		public SystemEnum.eSynergy synergyType; // 시너지 종류
+		public int levelThresholds; // 해당 버프를 위한 문턱인원수
+		
+		public SystemEnum.eSynergyLevel level; // 무슨레벨인지
+		public string levelIcon; // 아이콘
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -56,6 +60,21 @@ public long Index; // synergyID
 					    data.synergyType = default;
 					else
 					    data.synergyType = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[2]);
+					
+					if(values[3] == "")
+					    data.levelThresholds = default;
+					else
+					    data.levelThresholds = Convert.ToInt32(values[3]);
+					
+					if(values[4] == "")
+					    data.level = default;
+					else
+					    data.level = (SystemEnum.eSynergyLevel)Enum.Parse(typeof(SystemEnum.eSynergyLevel), values[4]);
+					
+					if(values[5] == "")
+					    data.levelIcon = default;
+					else
+					    data.levelIcon = Convert.ToString(values[5]);
 					
 
                     dataList[data.Index] = data;

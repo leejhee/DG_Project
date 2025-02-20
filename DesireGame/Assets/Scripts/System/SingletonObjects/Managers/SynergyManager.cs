@@ -10,10 +10,9 @@ namespace Client
     public class SynergyManager : Singleton<SynergyManager>
     {
         private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
-        
+
         // 해당 구조는 그대로 유지.
-        private readonly Action<eSynergy> OnRegisterSynergy;
-        private readonly Action<eSynergy> OnDeleteSynergy;
+        private Action<SynergyParameter> OnSynergyChanges;
 
         #region 생성자
         private SynergyManager() { }
@@ -25,18 +24,31 @@ namespace Client
             _synergyActivator = new();
         }
 
-        // 전제 : 덕지덕지 붙은 CharBase보다 걔가 가진 trigger가 가볍다.
+        public void SubscribeToChanges(Action<SynergyParameter> trigging) => OnSynergyChanges += trigging;
+        
+        public void UnsubscribeToChanges(Action<SynergyParameter> trigging) => OnSynergyChanges -= trigging;
+
         public void RegisterCharSynergy(CharBase registrar, eSynergy synergy)
         {
             if (synergy == eSynergy.None) return;
 
             if (!_synergyActivator.ContainsKey(synergy))
             {
-                _synergyActivator.Add(synergy, new SynergyContainer());
+                _synergyActivator.Add(synergy, new SynergyContainer(synergy));
             }
             _synergyActivator[synergy].SynergyMembers.Add(registrar);
 
-            OnRegisterSynergy?.Invoke(synergy);         
+            CheckSynergyChange(synergy);
+        }
+
+        // 역할 따라 쪼개는거 스타일 리뷰받기.
+        public void CheckSynergyChange(eSynergy targetSynergy)
+        {
+            OnSynergyChanges.Invoke(new SynergyParameter()
+            {
+                triggingSynergy = targetSynergy,
+                functions = _synergyActivator[targetSynergy].GetSynergyByLevel().functionList
+            });
         }
 
         public void DeleteCharSynergy(CharBase charBase)
@@ -46,21 +58,9 @@ namespace Client
                 if (synergy == eSynergy.None) continue;
 
                 _synergyActivator[synergy].SynergyMembers.Remove(charBase);              
-                OnDeleteSynergy?.Invoke(synergy); // 트리깅 쪽에서 구독한 사항.
+                //OnDeleteSynergy?.Invoke(synergy); // 트리깅 쪽에서 구독한 사항.
             }
         }
-
-        public void CheckTargetSynergyLevel(eSynergy targetSynergy)
-        {
-
-        }
-
-
-        public void DistributeSynergyBuff(eSynergy targetSynergy)
-        {
-
-        }
-
 
         #region Test_Method
         // 씬상 테스트만 하는 용도
@@ -79,8 +79,15 @@ namespace Client
 
     }
 
-
-
+    // 경량 구조. 이 단서로 무조건 CharBase를 찾을 수 있으나, CharManagere에서 CharBase 리턴하는 함수가 필요.
+    // 왜 이걸 생각했느냐? SynergyManager의 CharBase에의 의존성을 줄이려고 Trigger을 만들었는데,
+    // CharBase로 등록하면 안되지 않을까 해서.
+    // [TODO] : 리뷰를 받고 씁시다.
+    public struct CharLightWeightInfo
+    {
+        public long index;
+        public long uid;
+    }
 
 
     public class SynergyContainer
@@ -94,14 +101,41 @@ namespace Client
             }
         }
 
-        public eSynergyLevel Level;
+        public eSynergy mySynergy;
+
+        public eSynergyLevel Level
+        {
+            get
+            {
+                return GetSynergyByLevel().level;
+            }
+        }
 
         public List<CharBase> SynergyMembers;
         
-        public SynergyContainer()
+        public SynergyContainer(eSynergy synergy)
         {
             SynergyMembers = new List<CharBase>();
-            Level = eSynergyLevel.None;
+            mySynergy = synergy;
+        }
+
+        public SynergyData GetSynergyByLevel()
+        {
+            var synergyInfo = DataManager.Instance.SynergyTriggerMap[mySynergy];
+            var sortedKeys = new List<int>(synergyInfo.Keys);
+            sortedKeys.Sort();
+
+            // 문턱이 1인 시너지는 시너지 종류별로 반드시 존재해야 함.
+            int levelThreshold = 1;
+            foreach (var threshold in sortedKeys)
+            {
+                levelThreshold = threshold;
+                if(levelThreshold < threshold)
+                {
+                    return synergyInfo[levelThreshold];
+                }
+            }
+            return synergyInfo[levelThreshold];
         }
 
     }

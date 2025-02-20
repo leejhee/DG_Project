@@ -94,10 +94,10 @@ namespace Client
         {
             None,
 
-            Bronze,
-            Silver,
-            Gold,
-            Prism,
+            bronze,
+            silver,
+            gold,
+            prism,
 
             eMax
         }
@@ -157,6 +157,8 @@ namespace Client
             N_MANA,
             MAX_MANA,
 
+            EFFECTIVE_HEALTH,
+
             eMax,
         }
 
@@ -190,6 +192,11 @@ namespace Client
             ApplyCC,
 
             SynergyTrigger,
+            BuffAA,
+            CreateShield,
+            TeleportToRear,
+            ExtendRange,
+            DamageOverTimeByCasterAP,
 
             MaxCount
         }

@@ -293,5 +293,11 @@ namespace Client
 
         }
 
+        public void Sell()
+        {
+
+            CharDistroy();
+        }
+
     }
 }
