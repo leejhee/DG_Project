@@ -37,6 +37,9 @@ namespace Client
         // 고유 ID 생성
         public long GetNextID() => _nextID++;
 
+        // 특정 타입의 캐릭터 수가 0이 되었을 때 발생하는 이벤트
+        public event Action<Type> OnCharTypeEmpty;
+
        public T GetChar<T>(long ID) where T : CharBase
        {
             var key = typeof(T);
@@ -95,6 +98,7 @@ namespace Client
                 return false;
             }
             _cache[myType].Remove(id);
+            CheckTypeEmpty(myType);
             return true;
         }
 
@@ -288,6 +292,14 @@ namespace Client
         }
 
 
+        private void CheckTypeEmpty(Type type)
+        {
+            if (_cache.ContainsKey(type) && _cache[type].Count == 0)
+            {
+                Debug.Log($"{type} 타입의 캐릭터가 0명이 됨.");
+                OnCharTypeEmpty?.Invoke(type);
+            }
+        }
 
     }
 }
