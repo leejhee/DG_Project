@@ -48,8 +48,14 @@ namespace Client
         public void SubscribeDistribution(SynergyParameter param)
         {
             if (mySynergy != param.triggingSynergy) return;
+            if (_distributedCache == null) return;
             foreach (var cached in _distributedCache)
+            {
+                if (cached == null)
+                    continue;
                 RunFunction(false);
+            }
+                
 
             foreach(var funcIndex in param.functions)
             {

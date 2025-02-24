@@ -44,10 +44,12 @@ namespace Client
         // 역할 따라 쪼개는거 스타일 리뷰받기.
         public void CheckSynergyChange(eSynergy targetSynergy)
         {
+            if (OnSynergyChanges == null)
+                return;
             OnSynergyChanges.Invoke(new SynergyParameter()
             {
                 triggingSynergy = targetSynergy,
-                functions = _synergyActivator[targetSynergy].GetSynergyByLevel().functionList
+                functions = _synergyActivator[targetSynergy]?.GetSynergyByLevel()?.functionList
             });
         }
 
