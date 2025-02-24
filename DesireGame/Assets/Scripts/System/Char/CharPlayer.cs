@@ -29,7 +29,7 @@ namespace Client
                 return;
             
             if (mainCamera == null) return;
-
+            SetNavMeshAgent(false);
             //// 마우스 클릭 위치와 캐릭터 위치의 차이 계산
             //offset = transform.position - GetMouseWorldPosition();
         }
@@ -50,6 +50,7 @@ namespace Client
             msg.beforeTileIndex = TileIndex;
             msg.moveChar = this;
             MessageManager.SendMessage<PlayerMove>(msg);
+            SetNavMeshAgent(true);
         }
 
         private Vector3 GetMouseWorldPosition()

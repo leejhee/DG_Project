@@ -280,6 +280,13 @@ namespace Client
             }
         }
 
+        public void SetNavMeshAgent(bool active)
+        {
+            if (_NavMeshAgent == false)
+                return;
+            _NavMeshAgent.enabled = active;
+        }
+
         public void SetStateAnimationIndex(PlayerState state, int index = 0)
         {
             _indexPair[state] = index;
