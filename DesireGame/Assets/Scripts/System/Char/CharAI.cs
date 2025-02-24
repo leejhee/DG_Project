@@ -16,6 +16,8 @@ namespace Client
         float timer;
         float interval;
 
+        public bool isAIRun { get; set; } = false; // 이 캐릭터는 현재 AI가 작동중입니다.
+
         public enum eAttackMode { None, Auto, Skill };
         public CharAI(CharBase charAgent) 
         { 

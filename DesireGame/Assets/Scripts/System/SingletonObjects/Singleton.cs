@@ -26,6 +26,7 @@ namespace Client
             }
         }
 
+        // 이걸 부르는걸 보장해줄 필요가 있어보임
         public virtual void Init() { }
         #region 생성자
         /// <summary>

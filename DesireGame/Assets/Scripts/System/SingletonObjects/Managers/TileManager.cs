@@ -8,9 +8,16 @@ namespace Client
     {
         private Dictionary<int, TileObj> TileMap = new();
 
+        private readonly float MaxDistSqrt = 10f;
         #region 积己磊
         TileManager() { }
         #endregion 
+
+        // 备赴单......
+        public void SubscribePlayerMove()
+        {
+            MessageManager.SubscribeMessage<PlayerMove>(this, VecToTileIndex);
+        }
 
         public void SetTile(int index, TileObj tile)
         {
@@ -60,5 +67,46 @@ namespace Client
             tile.SetChar(setChar);
         }
 
+        public void VecToTileIndex(PlayerMove mas)
+        {
+            if (mas == null)
+                return;
+
+            int index = NearTileIndex(mas.moveChar.transform.position);
+            if (index == -1 || index == mas.beforeTileIndex)
+            {
+                SetChar(mas.beforeTileIndex, mas.moveChar);
+                return;
+            }
+            TradeChar(mas.beforeTileIndex, index);
+        }
+
+        public int NearTileIndex(Vector3 vector3)
+        {
+            if (vector3 == null) return -1;
+
+            float final = float.MaxValue;
+            int index = -1;
+
+            if (TileMap == null) return -1;
+            foreach (var tile in TileMap.Values)
+            {
+                var distile = vector3 - tile.transform.position;
+                float dist = ((distile.x * distile.x) + (distile.z * distile.z));
+                if (dist < final)
+                {
+                    final = dist;
+                    index = tile.TileIndex;
+                }
+            }
+            if (final > MaxDistSqrt)
+            {
+                return -1;
+            }
+            else
+            {
+                return index;
+            }
+        }
     }
 }

@@ -55,8 +55,7 @@ namespace Client
                     continue;
                 RunFunction(false);
             }
-                
-
+            
             foreach(var funcIndex in param.functions)
             {
                 FunctionData synergyBuffData = DataManager.Instance.GetData<FunctionData>(funcIndex);

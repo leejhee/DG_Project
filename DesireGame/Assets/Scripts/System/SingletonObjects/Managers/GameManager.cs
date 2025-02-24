@@ -55,6 +55,9 @@ namespace Client
                 //GoogleSheet googleSheet = _instance._networkManager.data;
                 //_instance.StartCoroutine(_instance._networkManager.GoogleSheetsDataParsing(googleSheet.associatedSheet, googleSheet.GetData, googleSheet.associatedDataWorksheet));
                 //InputManager.Instance.Init();
+                
+                // 너무 구린데.....
+                TileManager.Instance.SubscribePlayerMove();
             }
         }
 

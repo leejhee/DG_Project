@@ -25,7 +25,7 @@ namespace Client
                 return null;
             }
             _charBase = charBase;
-
+            _charBase.TileIndex = _tileIndex;
             _charBase.transform.position = this.transform.position;
 
             return _charBase;

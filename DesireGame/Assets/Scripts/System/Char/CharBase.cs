@@ -24,12 +24,12 @@ namespace Client
         private FunctionInfo _functionInfo = null; // 기능 정보
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
-        private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
-        private CharStat     _charStat = null;      // Stat 정보
-        private CharData     _charData = null;      // 캐릭터 데이터
-        private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
-        private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
-        private CharAI      _charAI = null;
+        private   CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
+        private   CharStat     _charStat = null;      // Stat 정보
+        private   CharData     _charData = null;      // 캐릭터 데이터
+        private   CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
+        private   CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
+        protected CharAI      _charAI = null;
 
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
@@ -72,7 +72,7 @@ namespace Client
         public PlayerState PlayerState => _currentState;
         public List<eSynergy> CharSynergies => _charSynergies;
 
-
+        public int TileIndex { get; set; } = default;
 
         protected CharBase() { }
 
@@ -265,10 +265,13 @@ namespace Client
         /// </summary>
         public void AISwitch(bool turnOn = true)
         {
+            if (CharAI == null) return;
             // CharBase에 함수를 선언하여 CharManager에서(호출하는놈) _cache 내 모든 CharBase를 대상으로 
             // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
+            CharAI.isAIRun = turnOn;
             if (turnOn)
             {
+                
                 _coroutine = StartCoroutine(CharAI.UpdateAI(_currentState));
             }
             else
