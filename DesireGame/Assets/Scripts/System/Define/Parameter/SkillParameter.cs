@@ -1,14 +1,29 @@
-﻿namespace Client
+﻿using System.Collections.Generic;
+
+namespace Client
 {
     // [TODO] : 복수 타겟 작업할 때 skillTarget을 List<CharBase>로 변경할 것.
     public class SkillParameter
     {
-        public CharBase skillTarget { get; private set; }
+        public List<CharBase> skillTargets { get; private set; }
         public CharBase skillCaster { get; private set; }
         public SystemEnum.eSkillTargetType skillTargetType { get; private set; }
 
         // InputManager 사라지면 protected 전환 예정
         public SkillParameter() { }
+
+        public SkillParameter
+            (
+                List<CharBase> skillTargets,
+                CharBase skillCaster,
+                SystemEnum.eSkillTargetType skillTargetType =
+                    SystemEnum.eSkillTargetType.None
+            )
+        {
+            this.skillTargets = skillTargets;
+            this.skillCaster = skillCaster;
+            this.skillTargetType = skillTargetType;
+        }
 
         public SkillParameter
             (
@@ -18,7 +33,7 @@
                     SystemEnum.eSkillTargetType.None
             )
         {
-            this.skillTarget = skillTarget;
+            this.skillTargets = new List<CharBase>() { skillTarget };
             this.skillCaster = skillCaster;
             this.skillTargetType = skillTargetType;
         }
@@ -27,18 +42,21 @@
     // 스탯과 적용비율을 설정하는 부분에서 다시 패킹하기 위해 사용
     public class StatPackedSkillParameter : SkillParameter
     {
-        public SystemEnum.eStats statOperand { get; }
-        public float percent { get; }
+        public SystemEnum.eStats StatOperand { get; }
+        public float Percent { get; }
+        public int TargetIndex { get; }
 
         public StatPackedSkillParameter
             (
                 SkillParameter param,
                 SystemEnum.eStats operand = SystemEnum.eStats.None,
-                float ratio = 0f
-            ): base(param.skillTarget, param.skillCaster, param.skillTargetType)
+                float ratio = 0f,
+                int targetIdx = 0
+            ): base(param.skillTargets, param.skillCaster, param.skillTargetType)
         {
-            statOperand = operand;
-            percent = ratio;
+            StatOperand = operand;
+            Percent = ratio;
+            TargetIndex = targetIdx;
         }
     }
 
@@ -47,9 +65,10 @@
         public static StatPackedSkillParameter ToStatPack(
             this SkillParameter param,
             SystemEnum.eStats operand,
-            float ratio)
+            float ratio,
+            int index)
         {
-            return new StatPackedSkillParameter(param, operand, ratio);
+            return new StatPackedSkillParameter(param, operand, ratio, index);
         }
     }
 }

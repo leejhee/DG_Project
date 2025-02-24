@@ -9,6 +9,8 @@ namespace Client
     {
         CharBase charAgent;
         CharBase finalTarget; // 우선 순위 계산의 최종 결과
+        List<CharBase> cachedTargets;
+
         eAttackMode attackMode; // 공격 모드
         PlayerState currentState; // 새로운 모드 변경 여부
         

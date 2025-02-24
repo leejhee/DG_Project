@@ -45,14 +45,14 @@ namespace Client
         public virtual void InitProjectile(StatPackedSkillParameter param)
         {
             _caster = param.skillCaster;
-            _target = param.skillTarget;
+            _target = param.skillTargets[param.TargetIndex];
             if(_projectileData == null)
             {
                 Debug.LogError("이 데이터 없는거라는데요? 인덱스 제대로 확인바람");
                 return;
             }
             _projectileDamageInput =
-                (param.percent / SystemConst.PER_CENT) * _caster.CharStat.GetStat(param.statOperand);
+                (param.Percent / SystemConst.PER_CENT) * _caster.CharStat.GetStat(param.StatOperand);
 
             targettingStrategy = TargetStrategyFactory.CreateTargetStrategy
                 (new TargettingStrategyParameter()
