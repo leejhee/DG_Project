@@ -90,7 +90,11 @@ namespace Client
         public long index;
         public long uid;
     }
-
+    
+    // 캐릭터 - 트리거 - 매니저 이런식으로 연결이 느슨해졌는데
+    // 매니저에서 캐릭터 베이스 자체에 접근할 일이 잘 또는 아예 없다면
+    // 굳이 CharBase를 가지고 있어야 할까?
+    // 그냥 저 경량 정보로 가지고 있으면 어떨까? 라는 생각을 했다...
 
     public class SynergyContainer
     {

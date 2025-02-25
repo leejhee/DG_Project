@@ -17,12 +17,13 @@ namespace Client
         [SerializeField] protected float percent;
         
         public override void MarkerAction()
-        {           
-            Projectile projectile = GameObject.Instantiate(_projectile, inputParam.skillCaster.transform.position, Quaternion.identity);
+        {                      
             // 현재는 그냥 한번에 빵 쏘는거 한다.
-            // projectile이 따다당 식으로 나가면 서로 신호 보내서 적절한 애면 index 조절해서 쏘게 하는 식...어떰?
             for(int idx = 0; idx < inputParam.skillTargets.Count; idx++)
-                projectile.InitProjectile(inputParam.ToStatPack(_statName, percent, idx));        
+            {
+                Projectile projectile = GameObject.Instantiate(_projectile, inputParam.skillCaster.transform.position, Quaternion.identity);
+                projectile.InitProjectile(inputParam.ToStatPack(_statName, percent, idx));
+            }
         }
 
         // 이건 에디터 상에서 호출되는 함수. 런타임 작업 아니면 건들지 맙시다.

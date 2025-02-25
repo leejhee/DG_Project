@@ -12,8 +12,10 @@ namespace Client
         private Camera mainCamera;
 
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
-        private void Start()
+        
+        protected override void Start()
         {
+            base.Start();
             mainCamera = Camera.main;
         }
 
@@ -22,6 +24,7 @@ namespace Client
             base.CharInit();
             CharManager.Instance.SetChar<CharPlayer>(this);
         }
+
         void OnMouseDown()
         {
             // 캐릭터 AI 플래이 중 조작 금지

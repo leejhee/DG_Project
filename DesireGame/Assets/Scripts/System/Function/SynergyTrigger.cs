@@ -41,6 +41,7 @@ namespace Client
             else
             {
                 SynergyManager.Instance.UnsubscribeToChanges(SubscribeDistribution);
+
                 //더 할거 있나요
             }
         }

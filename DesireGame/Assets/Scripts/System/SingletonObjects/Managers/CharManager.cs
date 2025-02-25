@@ -223,6 +223,8 @@ namespace Client
         /// <returns></returns>
         public CharBase GetNearestEnemy(CharBase ClientChar)
         {
+            // TODO : N번째 selection으로 고쳐서 구현하기.
+
             eCharType clientType = ClientChar.GetCharType();
             Vector3 clientPosition = ClientChar.CharTransform.position;
             var enemyDict = new Dictionary<long, CharBase>();
@@ -254,6 +256,9 @@ namespace Client
 
             return nearestEnemy;
         }
+
+        
+
 
         /// <summary>
         /// _cache 안에 있는 캐릭터 AI 켜기

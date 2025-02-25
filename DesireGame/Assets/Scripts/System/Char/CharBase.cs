@@ -109,7 +109,7 @@ namespace Client
             };
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             if (_charAnim != null)
             {

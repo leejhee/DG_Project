@@ -20,7 +20,7 @@ namespace Client
         private DataManager()
         { }
         #endregion
-
+        
 
         // 데이터 로딩 중 행동 예약
         public Action DoAfterLoadActon;
