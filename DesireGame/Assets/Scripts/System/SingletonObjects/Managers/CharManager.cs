@@ -221,7 +221,7 @@ namespace Client
         /// </summary>
         /// <param name="ClientChar"></param>
         /// <returns></returns>
-        public CharBase GetNearestEnemy(CharBase ClientChar)
+        public CharBase GetNearestEnemy(CharBase ClientChar, int nTH=0)
         {
             // TODO : N번째 selection으로 고쳐서 구현하기.
 

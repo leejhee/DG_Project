@@ -28,7 +28,7 @@ namespace Client
         
         public void UnsubscribeToChanges(Action<SynergyParameter> trigging) => OnSynergyChanges -= trigging;
 
-        public void RegisterCharSynergy(CharBase registrar, eSynergy synergy)
+        public void RegisterCharSynergy(CharLightWeightInfo registrar, eSynergy synergy)
         {
             if (synergy == eSynergy.None) return;
 
@@ -53,15 +53,15 @@ namespace Client
             });
         }
 
-        public void DeleteCharSynergy(CharBase charBase)
-        {
-            foreach (var synergy in charBase.CharSynergies)
+        public void DeleteCharSynergy(CharLightWeightInfo charBase, eSynergy synergy)
+        {           
+            if (synergy == eSynergy.None) return;
+            if (_synergyActivator.ContainsKey(synergy))
             {
-                if (synergy == eSynergy.None) continue;
+                _synergyActivator[synergy].SynergyMembers.Remove(charBase);
 
-                _synergyActivator[synergy].SynergyMembers.Remove(charBase);              
-                //OnDeleteSynergy?.Invoke(synergy); // 트리깅 쪽에서 구독한 사항.
             }
+            CheckSynergyChange(synergy);
         }
 
         #region Test_Method
@@ -82,13 +82,16 @@ namespace Client
     }
 
     // 경량 구조. 이 단서로 무조건 CharBase를 찾을 수 있으나, CharManagere에서 CharBase 리턴하는 함수가 필요.
-    // 왜 이걸 생각했느냐? SynergyManager의 CharBase에의 의존성을 줄이려고 Trigger을 만들었는데,
-    // CharBase로 등록하면 안되지 않을까 해서.
-    // [TODO] : 리뷰를 받고 씁시다.
+    // 왜 이걸 생각했느냐? SynergyManager의 CharBase에의 의존성을 줄이려고 Trigger을 만들었는데, CharBase로 등록하면 안되지 않을까 해서.
     public struct CharLightWeightInfo
     {
         public long index;
         public long uid;
+
+        public readonly CharBase SpecifyCharBase()
+        {
+            return CharManager.Instance.GetFieldChar(uid);
+        }
     }
     
     // 캐릭터 - 트리거 - 매니저 이런식으로 연결이 느슨해졌는데
@@ -102,7 +105,10 @@ namespace Client
         {
             get
             {
-                var distinctList = SynergyMembers.Distinct(new CharComparer()).ToList();
+                var distinctList = SynergyMembers
+                    .GroupBy(member => member.index)
+                    .Select(g => g.First())
+                    .ToList();
                 return distinctList.Count;
             }
         }
@@ -117,11 +123,11 @@ namespace Client
             }
         }
 
-        public List<CharBase> SynergyMembers;
+        public List<CharLightWeightInfo> SynergyMembers;
         
         public SynergyContainer(eSynergy synergy)
         {
-            SynergyMembers = new List<CharBase>();
+            SynergyMembers = new List<CharLightWeightInfo>();
             mySynergy = synergy;
         }
 
@@ -131,15 +137,17 @@ namespace Client
             var sortedKeys = new List<int>(synergyInfo.Keys);
             sortedKeys.Sort();
 
+            int nowDistinct = DistinctMembers;
+
             // 문턱이 1인 시너지는 시너지 종류별로 반드시 존재해야 함.
             int levelThreshold = 1;
             foreach (var threshold in sortedKeys)
-            {
-                levelThreshold = threshold;
-                if(levelThreshold < threshold)
+            {               
+                if(nowDistinct < threshold)
                 {
                     return synergyInfo[levelThreshold];
                 }
+                levelThreshold = threshold;
             }
             return synergyInfo[levelThreshold];
         }

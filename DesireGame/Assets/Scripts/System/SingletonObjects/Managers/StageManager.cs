@@ -9,15 +9,21 @@ namespace Client
     {
         private StageManager() 
         {
-            CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
-            Stage = 0;
+            
         }
         
         // 현재 스테이지
         public int Stage { get; private set; }
         // 스테이지 시작 가능 상태
         public bool CanStartStage { get; private set; } = true;
-        
+
+        public override void Init()
+        {
+            base.Init();
+            CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
+            Stage = 0;
+        }
+
         public void StartStage(int stageNum)
         {
             if (CanStartStage == false)

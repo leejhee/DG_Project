@@ -24,7 +24,11 @@ namespace Client
         {
             mySynergy = synergy;
             // 이거 Index로 해서 distinct 할 수 있으면 하자. 굳이 charbase 넣을지 말지는 질문할 것.
-            SynergyManager.Instance.RegisterCharSynergy(_CastChar, mySynergy);
+            SynergyManager.Instance.RegisterCharSynergy(new CharLightWeightInfo()
+            {
+                index = _CastChar.Index,
+                uid = _CastChar.GetID()
+            }, mySynergy);
             RunFunction(true);
         }
 
@@ -33,16 +37,11 @@ namespace Client
             base.RunFunction(StartExecution);
             if (StartExecution)
             {
-                //이중 등록? 이대로 괜찮은가?
-                //저 매개변수들 경량 구조로 바꿔도 된다면 교체할 것.
                 SynergyManager.Instance.SubscribeToChanges(SubscribeDistribution);
-                SynergyManager.Instance.RegisterCharSynergy(_TargetChar, mySynergy);
             }
             else
             {
                 SynergyManager.Instance.UnsubscribeToChanges(SubscribeDistribution);
-
-                //더 할거 있나요
             }
         }
 

@@ -9,6 +9,7 @@ namespace Client
     /// <summary>
     /// ½ºÅ³ °´Ã¼
     /// </summary>
+    [RequireComponent(typeof(SkillMarkerReceiver))]
     public class SkillBase : MonoBehaviour, IContextProvider
     {
         private PlayableDirector _PlayableDirector;

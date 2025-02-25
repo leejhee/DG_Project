@@ -22,6 +22,7 @@ namespace Client
         private void Awake()
         {
             GameManager instance = GameManager.Instance;
+            StageManager.Instance.Init();
         }
 
         private void Start()

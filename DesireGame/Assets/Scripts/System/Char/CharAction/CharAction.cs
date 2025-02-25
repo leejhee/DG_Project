@@ -19,7 +19,7 @@ namespace Client
         {
             var interval = (param.Destination - Actor.transform.position).sqrMagnitude;
             Nav.updateRotation = false;
-            if(interval > 0.1f)
+            if(interval > 0.02f)
             {
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);

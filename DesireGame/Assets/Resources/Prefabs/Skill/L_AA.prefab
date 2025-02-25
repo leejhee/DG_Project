@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1109318060434346157}
   - component: {fileID: 9052418708722894054}
   - component: {fileID: 8668590160836736350}
+  - component: {fileID: 618118039387872104}
   m_Layer: 0
   m_Name: L_AA
   m_TagString: Untagged
@@ -62,3 +63,15 @@ PlayableDirector:
   m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
+--- !u!114 &618118039387872104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471706191396921367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0eb1e00b1411646a6881bc6d827135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
