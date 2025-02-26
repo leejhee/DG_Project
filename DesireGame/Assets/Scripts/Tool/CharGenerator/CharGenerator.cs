@@ -153,7 +153,7 @@ namespace Client
             DestroyImmediate(SPUMPrefab);
             #endregion
 
-            CharBase newCharBase = CharFactory.AddBaseComponent(targetData, CharPrefab);
+            CharBase newCharBase = CharFactory.SetBaseObject(targetData, CharPrefab);
             SerializedObject serialized = new SerializedObject(newCharBase);
 
             SerializedProperty Index = serialized.FindProperty("_index");
@@ -177,13 +177,18 @@ namespace Client
     /// <summary> 에디터에서 CharBase 상속하는 캐릭터 뽑는 용 </summary>
     public static class CharFactory
     {
-        public static CharBase AddBaseComponent(CharData data, GameObject go)
+        public static CharBase SetBaseObject(CharData data, GameObject go)
         {
+            //////////////Layer Setting////////////
+            go.layer = LayerMask.NameToLayer("Char");
+
             //////////////NavMeshAgent/////////////
             var nav = go.AddComponent<NavMeshAgent>();
             nav.baseOffset = 0.5f;
             nav.height = 1f;
             nav.radius = 0.25f;
+            ///////Colllider for Drag&Drop/////////
+            var dndCol = go.AddComponent<BoxCollider>();
 
             //////////////CharBase/////////////////
             switch (data.charType)
@@ -205,12 +210,14 @@ namespace Client
             SerializedObject obj = new SerializedObject(charGo);
 
             //////////UnitRoot(Animator)/////////
-            Animator anim = go.GetComponentInChildren<Animator>();
+            GameObject Descendant = GameObject.Find("UnitRoot");
+            Descendant.transform.position += new Vector3(0.24f, 0, 0);
+            Animator anim = Descendant.GetComponentInChildren<Animator>();
             SerializedProperty animator = obj.FindProperty("_Animator");
             animator.objectReferenceValue = anim;
 
             //////////FightCollider//////////////
-            GameObject Descendant = new GameObject("FightCollider");
+            Descendant = new GameObject("FightCollider");
             Descendant.transform.SetParent(go.transform, false);
             CapsuleCollider col = Descendant.AddComponent<CapsuleCollider>();
             col.radius = 0.25f;
