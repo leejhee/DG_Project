@@ -7,15 +7,13 @@ namespace Client
 {
     public class StageManager : Singleton<StageManager>
     {
-        private StageManager() 
-        {
-            
-        }
+        private StageManager() { }
         
         // 현재 스테이지
         public int Stage { get; private set; }
         // 스테이지 시작 가능 상태
         public bool CanStartStage { get; private set; } = true;
+        public bool IsStageFinished { get; private set; } = false;
 
         public override void Init()
         {
@@ -60,6 +58,10 @@ namespace Client
         /// </summary>
         public void CheckWinCondition(Type charType)
         {
+            // 전투 끝나고 한번만 체크하도록
+            if (!IsStageFinished) IsStageFinished = true;
+            else return;
+
             Debug.Log($"{charType} 타입의 모든 캐릭터가 제거되었습니다.");
 
             if (charType == typeof(CharPlayer))
@@ -70,6 +72,7 @@ namespace Client
             else if (charType == typeof(CharMonster))
             {
                 Debug.Log("모든 적이 사라졌습니다. 이겼당!!");
+                CharManager.Instance.CopyFieldPlayerID();
                 MoveToNextStage();
             }
         }
@@ -86,14 +89,23 @@ namespace Client
             {
                 return false;
             }
+            // 몬스터
             var stageList = DataManager.Instance.MonsterSpawnStageMap[nextStage];
             foreach (var stage in stageList)
             {
                 CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
                 TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
             }
+
+            // 플레이어
+            CharManager.Instance.ReturnToOriginPos();
             return true;
 
+        }
+
+        public void SetIsFinish(bool isFinish)
+        {
+            IsStageFinished = isFinish;
         }
     }
 }

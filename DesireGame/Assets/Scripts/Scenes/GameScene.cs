@@ -61,6 +61,8 @@ namespace Client
         [ContextMenu("전투를 시작해보아요")]
         public void TestAIInitialize()
         {
+            // 임시
+            StageManager.Instance.SetIsFinish(false); 
             CharManager.Instance.WakeAllCharAI();
         }
 

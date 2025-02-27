@@ -98,7 +98,9 @@ namespace Client
         public void SetFinalTarget()
         {
             finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
-            Debug.Log($"final target : {finalTarget.CharData.charName}");
+
+            if (finalTarget != null)
+                Debug.Log($"final target : {finalTarget.CharData.charName}");
         }
 
         /// <summary>
@@ -175,9 +177,6 @@ namespace Client
             }
             else
             {
-                Debug.Log($"{charAgent.CharData.charName}가 {finalTarget.CharData.charName}쪽으로 이동합니다");
-                Debug.Log($"{charAgent.CharData.charName}와 {finalTarget.CharData.charName} 사이 거리 차이 : {distanceSqr} - {Mathf.Pow(skillRange, 2)} = {distanceSqr - Mathf.Pow(skillRange, 2)}");
-
                 Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
                 Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
 

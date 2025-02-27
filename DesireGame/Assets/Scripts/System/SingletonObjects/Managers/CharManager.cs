@@ -14,6 +14,9 @@ namespace Client
     {
         // 존재하는 Char (Char Type을 Key1 Char ID를 Key2로 사용)
         private Dictionary<Type, Dictionary<long, CharBase>> _cache = new Dictionary<Type, Dictionary<long, CharBase>>();
+        // 플레이어 복사본이 들어갈 캐시, 다음 스테이지로 넘어갈 때 세팅용
+        private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
+
         // 고유 ID 생성 
         private long _nextID = 0;
         #region 생성자
@@ -257,9 +260,6 @@ namespace Client
             return nearestEnemy;
         }
 
-        
-
-
         /// <summary>
         /// _cache 안에 있는 캐릭터 AI 켜기
         /// </summary>
@@ -303,6 +303,32 @@ namespace Client
             {
                 Debug.Log($"{type} 타입의 캐릭터가 0명이 됨.");
                 OnCharTypeEmpty?.Invoke(type);
+            }
+        }
+
+        /// <summary>
+        /// 스테이지 종료 후 필드에 남아있는 플레이어의 ID를 복사
+        /// </summary>
+        public void CopyFieldPlayerID()
+        {
+            _playerCache.Clear();
+
+            foreach (var kvp in _cache[typeof(CharPlayer)])
+            {
+                _playerCache.Add(kvp.Key, kvp.Value);
+                Debug.Log($"필드에 있는 {kvp.Value.CharData.charName} ( 키 : {kvp.Key} ) 복제");
+            }
+        }
+
+        /// <summary>
+        /// 스테이지 시작마다 설정했던 타일로 플레이어 재배치
+        /// </summary>
+        public void ReturnToOriginPos()
+        {
+            foreach (var kvp in _cache[typeof(CharPlayer)])
+            {
+                CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.GetID()));
+                Debug.Log($"복사된 {kvp.Value.CharData.charName} 기존 위치로");
             }
         }
 

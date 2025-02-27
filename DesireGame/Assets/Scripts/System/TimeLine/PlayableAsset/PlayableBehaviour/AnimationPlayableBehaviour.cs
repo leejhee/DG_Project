@@ -37,7 +37,7 @@ namespace Client
                 playableGraph.Stop(); // 그래프 정지
                 playableGraph.Destroy(); // 그래프 리소스 해제
             }
-            animator.Play("IDLE",0,0);
+            //animator.Play("IDLE",0,0);
         }
     }
 }
