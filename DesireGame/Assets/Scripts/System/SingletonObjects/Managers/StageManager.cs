@@ -19,7 +19,7 @@ namespace Client
         {
             base.Init();
             CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
-            Stage = 0;
+            Stage = 1;
         }
 
         public void StartStage(int stageNum)
@@ -29,13 +29,14 @@ namespace Client
 
             if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(stageNum) == false)
                 return;
-            var StageMonsterList = DataManager.Instance.MonsterSpawnStageMap[stageNum];
 
-            foreach (var monsterInfo in StageMonsterList)
+            var stageList = DataManager.Instance.MonsterSpawnStageMap[stageNum];
+            foreach (var stage in stageList)
             {
-                CharBase charMoster = CharManager.Instance.CharGenerate(monsterInfo.MonsterID);
-                var tileObj = TileManager.Instance.GetTile(monsterInfo.PositionIndex);
+                CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
+                TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
             }
+
         }
 
         /// <summary>
@@ -46,6 +47,7 @@ namespace Client
             if(TryGetNextStage(Stage))
             {
                 StartStage(++Stage);
+                Debug.Log($"{Stage}번 스테이지 배치");
             }
             else
             {
@@ -89,16 +91,7 @@ namespace Client
             {
                 return false;
             }
-            // 몬스터
-            var stageList = DataManager.Instance.MonsterSpawnStageMap[nextStage];
-            foreach (var stage in stageList)
-            {
-                CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
-                TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
-            }
 
-            // 플레이어
-            CharManager.Instance.ReturnToOriginPos();
             return true;
 
         }
