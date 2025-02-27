@@ -119,7 +119,8 @@ namespace Client
             }
 
             // 스킬 사용 조건 : 현재 마나 >= 최대 마나
-            if (charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA))
+            if (charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0 &&
+                charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA))
             {
                 return eAttackMode.Skill;
             }

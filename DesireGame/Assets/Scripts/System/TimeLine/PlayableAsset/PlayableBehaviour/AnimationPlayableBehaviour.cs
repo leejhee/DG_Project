@@ -12,6 +12,11 @@ namespace Client
 
         PlayableGraph playableGraph;
 
+        public override void InitBehaviour(CharBase charBase, SkillBase skillBase)
+        {
+            base.InitBehaviour(charBase, skillBase);
+        }
+
         // 클립이 시작될 때 호출
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {

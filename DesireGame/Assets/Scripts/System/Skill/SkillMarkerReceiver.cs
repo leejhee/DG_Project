@@ -13,7 +13,6 @@ namespace Client
                 skillMarker.InitInput(provider.InputParameter);
                 skillMarker.MarkerAction();
 
-                Debug.Log("여기까지 왔네요.");
             }
         }
     }

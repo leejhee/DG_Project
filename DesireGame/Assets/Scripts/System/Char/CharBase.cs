@@ -113,7 +113,8 @@ namespace Client
         {
             if (_charAnim != null)
             {
-                _charAnim.Initialized(_Animator);
+                //_charAnim.Initialized(_Animator);
+                _charAnim.Initialized(GetComponentInChildren<Animator>());
             }
             foreach (PlayerState state in Enum.GetValues(typeof(PlayerState)))
             {
