@@ -12,7 +12,7 @@ namespace Client
     public class SkillTimeLineMarker : Marker, INotification
     {
         public PropertyName id => new PropertyName("SkillTimeLineMarker");
-        protected SkillParameter inputParam;
+        protected SkillParameter skillParam;
 
         public virtual void  MarkerAction()
         {
@@ -32,7 +32,7 @@ namespace Client
 
         public virtual void InitInput(SkillParameter input)
         {
-            inputParam = input;
+            skillParam = input;
         }
 
     }

@@ -18,6 +18,8 @@ namespace Client
     /// </summary>
     public class CharStat
     {
+        private CharBase StatOwner;
+
         private long[] _charStat = new long[(int)eStats.eMax];
 
         public eDamageType DamageType { get
@@ -30,8 +32,10 @@ namespace Client
                     return eDamageType.None;
             } }
 
-        public CharStat(StatsData charStat)
+        public CharStat(StatsData charStat, CharBase StatOwner)
         {
+            this.StatOwner = StatOwner;
+
             _charStat[(int)eStats.AD] = charStat.AD;    // 공격력
             _charStat[(int)eStats.NAD] = charStat.AD;   // 현재 공격력
 
@@ -66,33 +70,36 @@ namespace Client
             _charStat[(int)eStats.RANGE] = charStat.Range;  // 공격 사거리
             _charStat[(int)eStats.NRANGE] = charStat.Range; // 현재 공격 사거리
 
-            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // 이동 속도
-            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도
+            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // 이동 속도(천분율 처리함)
+            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도(천분율 처리함)
 
             _charStat[(int)eStats.START_MANA] = charStat.startMana; // 마나
             _charStat[(int)eStats.N_MANA] = charStat.startMana;     // 현재 마나
             _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // 현재 최대 마나
 
-
+            _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
+            _charStat[(int)eStats.EFFECTIVE_HEALTH] = 0;            // 내구력 [TODO] : 정확히 알아볼 것
         }
 
-        public float GetStat(eStats eState)
+        /// <summary> </summary>
+        /// [TODO] : N자 들어가는거에 버프치 계산하는 구조 넣어서 할 것.
+        public float GetStat(eStats eStats)
         {
-            switch (eState)
+            switch (eStats)
             {
                 case (eStats.AS):
                 case (eStats.NAS):
                 case (eStats.MOVE_SPEED):
                 case (eStats.NMOVE_SPEED):
-                    return _charStat[(int)eState] / SystemConst.PER_THOUSAND;
+                    return _charStat[(int)eStats] / SystemConst.PER_THOUSAND;
                 case (eStats.CRIT_CHANCE):
                 case (eStats.NCRIT_CHANCE):
                 case (eStats.CRIT_DAMAGE):
                 case (eStats.NCRIT_DAMAGE):
                 case (eStats.DAMAGE_INCREASE):
-                    return _charStat[(int)eState] / SystemConst.PER_TEN_THOUSAND;
+                    return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
-                    return _charStat[(int)eState];
+                    return _charStat[(int)eStats];
             }
         }
 
@@ -106,6 +113,7 @@ namespace Client
 
         // UI에 사용하면 될듯...?
         public Action OnDamaged;
+        public Action OnDealDamage;
         public Action OnDeath;
 
         /// <summary>
@@ -156,6 +164,106 @@ namespace Client
             }
         }
 
+        public void GainMana(int amount, bool isGain)
+        {
+            var increaseRatio = GetStat(eStats.MANA_RESTORE_INCREASE);
+            if (isGain)
+            {
+                _charStat[(int)eStats.N_MANA] += (int)((1 + increaseRatio) * amount);
+            }
+            else
+            {
+                _charStat[(int)eStats.N_MANA] -= amount;
+            }
+        }
+
+
         #endregion
+        
+        private Dictionary<eStats, StatCalculator> _buffCalculator = new();
+
+        public void PushBuffCalculator(OnStatBuff buff)
+        {
+            if (!_buffCalculator.ContainsKey(buff.buffStat))
+            {
+                _buffCalculator.Add(buff.buffStat, new StatCalculator());
+            }
+            _buffCalculator[buff.buffStat].PushBuffOperand(buff);
+            UpdateCurrentStat(buff.buffStat);
+        }
+
+        public void RemoveBuff(OnStatBuff buff)
+        {
+            if (_buffCalculator.ContainsKey(buff.buffStat))
+            {
+                _buffCalculator[buff.buffStat].KillBuffOperand(buff);
+                UpdateCurrentStat(buff.buffStat);
+            }
+        }
+
+
+        /// <summary> 스탯 버프 발생 및 제거 시 해당 스탯에 대한 업데이트 실시 </summary>
+        /// <remarks> 런타임 중 <b>'현재 스탯'</b> 에 대해서만 사용할 것</remarks>
+        public void UpdateCurrentStat(eStats targetStat)
+        {
+            _charStat[(int)targetStat] =
+                (long)_buffCalculator[targetStat].GetBuffedResult(GetStatRaw(targetStat));
+        }
+
+
+
+    }
+
+    public struct OnStatBuff : IDisposable
+    {
+        public eStats buffStat;
+        public eOperator opCode;
+        public int amount;
+
+        public readonly void Dispose(){}
+    }
+
+    /// <summary> 일단 롤체식 버프계산기로 가져옴 </summary>
+    public class StatCalculator
+    {       
+        private Dictionary<eOperator, List<OnStatBuff>> _operDict = new(); 
+        
+        public float GetBuffedResult(float input)
+        {
+            float result = input;
+            if(_operDict.TryGetValue(eOperator.Add, out var addBuffs))
+            {
+                foreach(var buff in addBuffs)
+                {
+                    result += buff.amount;
+                }
+            }
+            if(_operDict.TryGetValue(eOperator.Mul, out var mulBuffs))
+            {
+                float ratio = 0f;
+                foreach(var buff in mulBuffs)
+                {
+                    ratio += buff.amount;
+                }
+                ratio /= SystemConst.PER_TEN_THOUSAND;
+                result *= (1 + ratio);
+            }
+            return result;
+        }
+
+
+        public void PushBuffOperand(OnStatBuff buff)
+        {
+            if (!_operDict.ContainsKey(buff.opCode))
+            {
+                _operDict.Add(buff.opCode, new List<OnStatBuff>());
+            }
+            _operDict[buff.opCode].Add(buff);
+        }
+
+        public void KillBuffOperand(OnStatBuff buff)
+        {
+            _operDict[buff.opCode].Remove(buff);
+        }
     }
 }

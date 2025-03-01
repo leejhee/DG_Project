@@ -157,6 +157,8 @@ namespace Client
             N_MANA,
             MAX_MANA,
 
+            MANA_RESTORE_INCREASE,
+
             EFFECTIVE_HEALTH,
 
             eMax,
@@ -199,6 +201,13 @@ namespace Client
             DamageOverTimeByCasterAP,
 
             MaxCount
+        }
+
+        // 버프 시의 스탯이 계산되는 방식.
+        public enum eOperator
+        {
+            Add,
+            Mul,
         }
 
         public enum eDamageType

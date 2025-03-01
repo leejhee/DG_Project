@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2878407217346924061}
   - component: {fileID: 4219749635550587909}
   - component: {fileID: 2598051929746308259}
+  - component: {fileID: 8356623961205011232}
   m_Layer: 0
   m_Name: BOTR_AA
   m_TagString: Untagged
@@ -54,7 +55,7 @@ PlayableDirector:
   m_GameObject: {fileID: 7695055053980202930}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 595c49b8a30695f44852a9030745699d, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 9d0802ed2c082e448ab8cb9a840ef629, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -62,3 +63,15 @@ PlayableDirector:
   m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
+--- !u!114 &8356623961205011232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7695055053980202930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0eb1e00b1411646a6881bc6d827135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -95,7 +95,7 @@ namespace Client
                 {
                     Debug.LogError($"캐릭터 ID : {_index} 데이터 Get 성공 charStat {_charData.statsIndex} 데이터 Get 실패");
                 }
-                _charStat = new CharStat(charStat);
+                _charStat = new CharStat(charStat, this);
             }
             else
             {

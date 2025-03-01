@@ -16,6 +16,7 @@ namespace Client
                 case eFunction.DamageByCasterAD: return new DamageByCasterAD(buffParam);
                 case eFunction.DamageByCasterAP: return new DamageByCasterAP(buffParam);
                 case eFunction.SynergyTrigger:  return new SynergyTrigger(buffParam);
+                case eFunction.BuffAA:  return new Buff_AA(buffParam);
             }
 
             return null;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Client.SystemEnum;
 
@@ -219,15 +220,9 @@ namespace Client
             return null;
         }
 
-        /// <summary>
-        /// 가장 가까운 적 가져오기
-        /// </summary>
-        /// <param name="ClientChar"></param>
-        /// <returns></returns>
+
         public CharBase GetNearestEnemy(CharBase ClientChar, int nTH=0)
         {
-            // TODO : N번째 selection으로 고쳐서 구현하기.
-
             eCharType clientType = ClientChar.GetCharType();
             Vector3 clientPosition = ClientChar.CharTransform.position;
             var enemyDict = new Dictionary<long, CharBase>();
@@ -241,23 +236,21 @@ namespace Client
                 enemyDict = _cache[typeof(CharPlayer)];
             }
 
-            CharBase nearestEnemy = null;
-            float minDistanceSqr = float.MaxValue;  // 제곱 거리 비교를 위해
+            if (enemyDict.Count == 0 || nTH < 0 || nTH >= enemyDict.Count)
+                return null;
 
-            foreach (var kvp in enemyDict)
+            var enemyDistances = new List<(CharBase Enemy, float DistSqr)>(enemyDict.Count);
+
+            foreach (var enemy in enemyDict.Values)
             {
-                CharBase enemy = kvp.Value;
-                Vector3 enemyPosition = enemy.CharTransform.position;
-                float distanceSqr = (clientPosition - enemyPosition).sqrMagnitude; // 거리 제곱
-
-                if (distanceSqr < minDistanceSqr)
-                {
-                    minDistanceSqr = distanceSqr;
-                    nearestEnemy = enemy;
-                }
+                float distSqr = (clientPosition - enemy.CharTransform.position).sqrMagnitude;
+                enemyDistances.Add((enemy, distSqr));
             }
 
-            return nearestEnemy;
+            enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
+
+            return enemyDistances[nTH].Enemy;
+
         }
 
         /// <summary>

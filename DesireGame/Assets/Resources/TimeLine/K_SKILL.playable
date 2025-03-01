@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2461226905342150897
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee121db476314de4684df27ccf37d13e, type: 3}
+  m_Name: Skill Marker Mana Exchanger
+  m_EditorClassIdentifier: 
+  m_Time: 0.06666666666666667
+  Choice: 1
+  amount: 5
 --- !u!114 &-787675971485865961
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -33,7 +48,7 @@ MonoBehaviour:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
-  m_MarkerTrack: {fileID: 0}
+  m_MarkerTrack: {fileID: 5250413031663389579}
 --- !u!114 &2094542319575209362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,3 +141,27 @@ MonoBehaviour:
     m_DisplayName: 0_Attack_Magic
   m_Markers:
     m_Objects: []
+--- !u!114 &5250413031663389579
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a16748d9461eae46a725db9776d5390, type: 3}
+  m_Name: Markers
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects:
+    - {fileID: -2461226905342150897}
