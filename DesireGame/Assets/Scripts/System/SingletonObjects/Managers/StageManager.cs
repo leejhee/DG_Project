@@ -46,8 +46,8 @@ namespace Client
         {
             if(TryGetNextStage(Stage))
             {
+                CharManager.Instance.ReturnToOriginPos();
                 StartStage(++Stage);
-                Debug.Log($"{Stage}번 스테이지 배치");
             }
             else
             {

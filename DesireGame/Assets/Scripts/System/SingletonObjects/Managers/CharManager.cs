@@ -318,10 +318,12 @@ namespace Client
         /// </summary>
         public void ReturnToOriginPos()
         {
-            foreach (var kvp in _cache[typeof(CharPlayer)])
+            foreach (var kvp in _playerCache)
             {
-                CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.GetID()));
-                Debug.Log($"복사된 {kvp.Value.CharData.charName} 기존 위치로");
+                CharBase charBase = CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.Index));
+                TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
+
+                Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
             }
         }
 

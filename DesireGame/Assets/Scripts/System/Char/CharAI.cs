@@ -59,7 +59,7 @@ namespace Client
             // 상태 변경 감지 시 
             if (currentState != newState)
             {
-                Debug.Log($"{currentState}에서 {newState}으로 상태 변경");
+                Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()} : {currentState}에서 {newState}으로 상태 변경");
                 currentState = newState;
                 resetTimer = true; // 타이머 리셋 플래그 설정
             }
@@ -85,7 +85,7 @@ namespace Client
                     break;
                 
                 default:
-                    interval = Time.deltaTime; // SetState() 바로 호출 할 수 있도록
+                    interval = Time.deltaTime;
                     break;
             }
 
@@ -100,7 +100,7 @@ namespace Client
             finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
 
             if (finalTarget != null)
-                Debug.Log($"final target : {finalTarget.CharData.charName}");
+                Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}의 final target : {finalTarget.CharData.charName}");
         }
 
         /// <summary>
@@ -109,25 +109,19 @@ namespace Client
         /// <returns></returns>
         public eAttackMode SetAttackMode()
         {
-            // 어느 상황에 None이 되어야 하지?
-            // 1. finalTarget 없을 때
-
-            if (finalTarget == null)
-            {
-                SetFinalTarget();
+            if (finalTarget == null) 
                 return eAttackMode.None;
-            }
 
-            // 스킬 사용 조건 : 현재 마나 >= 최대 마나
-            if (charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0 &&
-                charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA))
-            {
+            // 스킬 사용 조건
+            // 1: 최대 마나가 0 이상
+            // 2: 현재 마나 >= 최대 마나
+            bool condition1 = charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
+            bool condition2 = charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA);
+
+            if (condition1 && condition2) 
                 return eAttackMode.Skill;
-            }
             else
-            {
                 return eAttackMode.Auto;
-            }
         }
 
         /// <summary>
@@ -136,12 +130,10 @@ namespace Client
         public void SetState()
         {
             long attackIndex = 0; // 평타 or 스킬 인덱스
+            SkillBase skillBase;
+            int skillRange = 0;
 
-            SkillBase skillBase; // 스킬 정보
-            int skillRange = 0; // 스킬 사거리 받아옴
-
-
-            // 어떤 공격을 할지에 따라 사거리 기준 설정하기
+            // 공격 종류에 따라 사거리 기준 설정하기
             attackMode = SetAttackMode();
             switch (attackMode)
             {
@@ -157,7 +149,8 @@ namespace Client
 
                 default:
                     ChangeState(PlayerState.IDLE);
-                    return; // 다시 타겟 찾아서 AI 돌릴 수 있도록
+                    SetFinalTarget();
+                    return;
             }
 
             charAgent.CharSKillInfo.DicSkill.TryGetValue(attackIndex, out skillBase);
@@ -174,7 +167,7 @@ namespace Client
             if (distanceSqr <= Mathf.Pow(skillRange, 2))
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex, targetType));
-                Debug.Log($"캐릭터 {charAgent.CharData.charName}의 스킬 {attackIndex} 사용");
+                Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {attackIndex} 사용");
             }
             else
             {
