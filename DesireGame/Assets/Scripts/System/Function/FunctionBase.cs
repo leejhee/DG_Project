@@ -47,11 +47,9 @@ namespace Client
         {
             if (StartFunction)
             {
-                _TargetChar.FunctionInfo.EnqueueFunction(this);
             }
             else
             {
-                _TargetChar.FunctionInfo.EnqueueKill(this);
             }
         }
 

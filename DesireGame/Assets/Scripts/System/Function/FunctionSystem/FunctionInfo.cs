@@ -26,9 +26,10 @@ namespace Client
             while(_functionReadyQueue.Count != 0)
             {
                 FunctionBase target = _functionReadyQueue.Dequeue();
-                if (!_functionBaseDic[target.functionType].Contains(target))
+                if (!_functionBaseDic[target.functionType].Contains(target)) //버프 중첩 불가 
                 {
                     target.InitFunction();
+                    target.RunFunction(true);
                     _functionBaseDic[target.functionType].Add(target);
                 }
                     
@@ -52,13 +53,19 @@ namespace Client
             }
         }
 
+        public void AddFunction(BuffParameter target)
+        {
+            FunctionBase func = FunctionFactory.FunctionGenerate(target);
+            EnqueueFunction(func);
+        }
+
         // Function Dictionary로의 접근 통제.
-        public void EnqueueFunction(FunctionBase target)
+        private void EnqueueFunction(FunctionBase target)
         {
             _functionReadyQueue.Enqueue(target);
         }
 
-        public void EnqueueKill(FunctionBase target)
+        private void EnqueueKill(FunctionBase target)
         {
             _functionKillQueue.Enqueue(target);
         }

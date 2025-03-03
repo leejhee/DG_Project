@@ -1,0 +1,6 @@
+﻿ID,# 주석,기능 함수 조건,value1,value2,value3,value4
+Index,,,value1,value2,value3,value4
+long,,eCondition,int,int,int,int
+790000,LAPLACIAN_SYNERGY,HP_UNDER_N,50,,,
+791200,SHIELD_SYNERGY,NO_ALLY_NEAR_N,2,,,
+
