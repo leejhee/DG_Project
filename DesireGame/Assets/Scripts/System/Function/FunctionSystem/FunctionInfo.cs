@@ -48,6 +48,7 @@ namespace Client
             while (_functionKillQueue.Count != 0)
             {
                 FunctionBase target = _functionKillQueue.Dequeue();
+                target.RunFunction(false);
                 if (_functionBaseDic[target.functionType].Contains(target))
                     _functionBaseDic[target.functionType].Remove(target);
             }
