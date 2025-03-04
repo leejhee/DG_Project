@@ -11,14 +11,16 @@ namespace Client
         {
             switch (buffParam.eFunctionType)
             {
-                case eFunction.SpawnProjectileByMana: return new SpawnProjectileByMana(buffParam);
-                case eFunction.SpawnProjectileByAS: return new SpawnProjectileByAS(buffParam);
-                case eFunction.DamageByCasterAD: return new DamageByCasterAD(buffParam);
-                case eFunction.DamageByCasterAP: return new DamageByCasterAP(buffParam);
-                case eFunction.SynergyTrigger:  return new SynergyTrigger(buffParam);
-                case eFunction.BuffAA:  return new Buff_AA(buffParam);
+                case eFunction.SpawnProjectileByMana:   return new SpawnProjectileByMana(buffParam);
+                case eFunction.SpawnProjectileByAS:     return new SpawnProjectileByAS(buffParam);
+                case eFunction.DamageByCasterAD:        return new DamageByCasterAD(buffParam);
+                case eFunction.DamageByCasterAP:        return new DamageByCasterAP(buffParam);
+                case eFunction.SynergyTrigger:          return new SynergyTrigger(buffParam);
+                case eFunction.BuffAA:                  return new Buff_AA(buffParam);
+                case eFunction.BuffOnce:                return new BuffOnce(buffParam);
+                default:
+                    break;
             }
-
             return null;
         }
 

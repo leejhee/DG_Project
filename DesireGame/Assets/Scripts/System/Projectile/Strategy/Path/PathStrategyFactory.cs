@@ -3,6 +3,7 @@ namespace Client
     public struct PathStrategyParameter
     {
         public SystemEnum.eProjectilePathType type;
+        public CharBase target;
         public float Speed;
     }
 
@@ -13,8 +14,9 @@ namespace Client
             switch (param.type)
             {
                 case SystemEnum.eProjectilePathType.STRAIGHT:
-                    return new StraightPathStrategy(param.Speed);                   
+                    return new StraightPathStrategy(param);                   
                 case SystemEnum.eProjectilePathType.TARGET_POSITION:
+
                 case SystemEnum.eProjectilePathType.PINGPONG:
                 case SystemEnum.eProjectilePathType.UNTIL_WALL:
                 case SystemEnum.eProjectilePathType.WALL_BOUNCE:

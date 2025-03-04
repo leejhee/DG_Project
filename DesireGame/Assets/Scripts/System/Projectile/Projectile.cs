@@ -17,7 +17,6 @@ namespace Client
         protected float _projectileDamageInput;
 
         // 3가지 고려할 경우 경우의 수가 너무 많아 상속보단 전략 패턴 채용하기로 함
-        private ITargettingStrategy targettingStrategy; // 타겟팅? 논타겟팅?
         private IPathStrategy       pathStrategy;       // 경로 이동 방식
         private IRangeStrategy      rangeStrategy;      // 위치 도달 후 범위 처리
         
@@ -26,7 +25,6 @@ namespace Client
         public FunctionInfo FunctionInfo => _functionInfo;
         public CharBase Caster => _caster;
         public CharBase Target => _target;
-        public ITargettingStrategy TargetGuide => targettingStrategy;
         public IPathStrategy PathGuide => pathStrategy;
         public IRangeStrategy RangeGuide => rangeStrategy;
 
@@ -54,15 +52,10 @@ namespace Client
             _projectileDamageInput =
                 (param.Percent / SystemConst.PER_CENT) * _caster.CharStat.GetStat(param.StatOperand);
 
-            targettingStrategy = TargetStrategyFactory.CreateTargetStrategy
-                (new TargettingStrategyParameter()
-                {
-                    type = param.skillTargetType,
-                    Target = _target
-                });
             pathStrategy = PathStrategyFactory.CreatePathStrategy
                 (new PathStrategyParameter()
                 {
+                    target = _target,
                     type = _projectileData.path,
                     Speed = 2f,
                 });
@@ -72,7 +65,6 @@ namespace Client
         {
             if (_caster == null || _target == null)
                 Destroy(gameObject);
-            targettingStrategy.CheckTargetPoint(this);
             pathStrategy.UpdatePosition(this);
         }
 
@@ -82,19 +74,19 @@ namespace Client
             target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
             Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
 
-            var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
-
-            if(functionData is not null)
-            {
-                var ApplyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
-                {
-                    eFunctionType = functionData.function,
-                    CastChar = Caster,
-                    TargetChar = target,
-                    FunctionIndex = functionData.Index
-                });
-                ApplyFunction.RunFunction();
-            }            
+            // 투사체 execution 데이터 없는 관계로 임시 주석 처리
+            //var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
+            //
+            //if(functionData is not null)
+            //{
+            //    target.FunctionInfo.AddFunction(new BuffParameter()
+            //    {
+            //        eFunctionType = functionData.function,
+            //        CastChar = Caster,
+            //        TargetChar = target,
+            //        FunctionIndex = functionData.Index
+            //    });
+            //}            
             Destroy(gameObject);
         }
 

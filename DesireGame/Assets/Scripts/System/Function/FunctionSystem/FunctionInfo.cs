@@ -59,6 +59,11 @@ namespace Client
             FunctionBase func = FunctionFactory.FunctionGenerate(target);
             EnqueueFunction(func);
         }
+        
+        public void KillFunction(FunctionBase target)
+        {
+            EnqueueKill(target);
+        }
 
         // Function Dictionary로의 접근 통제.
         private void EnqueueFunction(FunctionBase target)

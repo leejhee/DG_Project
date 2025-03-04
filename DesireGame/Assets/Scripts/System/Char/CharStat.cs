@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using static Client.SystemEnum;
 using System;
+using UnityEditor.U2D.Animation;
+using Unity.VisualScripting;
 
 namespace Client
 {
     public struct DamageParameter
     {
-        public float pureDamage;       // 공격자 측에서 계산된 대미지
+        public float rawDamage;        // 공격자 측에서 계산된 대미지
         public eDamageType damageType; // 공격자 측의 대미지 타입
         public float penetration;      // 대미지 타입에 따른 관통
     }
@@ -108,6 +110,33 @@ namespace Client
             return _charStat[(int)eState];
         }
 
+        public void ChangeStateByBuff(eStats stat, long delta)
+        {
+            eStats properTargetStat = CurrentStatByBaseStat(stat);         
+            var afterStat = GetStatRaw(properTargetStat) + delta;
+            _charStat[(int)properTargetStat] = afterStat;
+        }
+
+        // 스탯의 초기값이 같은 곳에 있기 때문에 이렇게 한다.
+        public eStats CurrentStatByBaseStat(eStats baseStat)
+        {
+            switch (baseStat)
+            {
+                case eStats.AD:             return eStats.NAD; 
+                case eStats.AP:             return eStats.NAP; 
+                case eStats.HP:             return eStats.NHP;
+                case eStats.AS:             return eStats.NAS;
+                case eStats.CRIT_CHANCE:    return eStats.NCRIT_CHANCE;
+                case eStats.CRIT_DAMAGE:    return eStats.NCRIT_CHANCE;
+                case eStats.ARMOR:          return eStats.NARMOR;
+                case eStats.MAGIC_RESIST:   return eStats.MAGIC_RESIST;
+                case eStats.RANGE:          return eStats.NRANGE;
+                case eStats.MOVE_SPEED:     return eStats.NMOVE_SPEED;
+                default:
+                    return baseStat;
+            }
+        }
+
 
         #region Damage Method
 
@@ -116,6 +145,16 @@ namespace Client
         public Action OnDealDamage;
         public Action OnDeath;
 
+        // 단순 '평타 강화' 등에 사용. AA 강화는 eStats로 써지지 않기 때문에.
+        //private float[] TemporaryAdditionalDamage = new float[(int)eDamageType.eMax];
+        //
+        //public void InjectAdditionalDamage(eDamageType type, float delta)
+        //{
+        //    TemporaryAdditionalDamage[(int)type] += delta;
+        //}
+
+
+
         /// <summary>
         /// 공격자 기준 대미지 관여 요소들을 산출합니다.
         /// </summary>
@@ -123,46 +162,87 @@ namespace Client
         /// <param name="type"> None인 경우는 디폴트이므로, 평타인 경우입니다. 그 외는 스킬을 사용하면서 세팅합니다. </param>
         public DamageParameter SendDamage(float statMultiplied, eDamageType type = eDamageType.None)
         {
-            float pureDamage =
+            float rawDamage =
                 statMultiplied *                                        // 주스탯 * 계수
                 (1 + GetStat(eStats.DAMAGE_INCREASE)) *                 // 피해량 증가
                 (UnityEngine.Random.Range(0, 1) > GetStat(eStats.NCRIT_CHANCE) ?
                     (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)             //치명타 확률 및 피해 계산
                 + GetStat(eStats.BONUS_DAMAGE);                         // 추가 대미지  
 
+            // 평타면 여기서 평타 강화에 쓰일 것이고, 스킬 뎀지 강화면 여기서 별도의 추뎀이 더해질 것이다.
+            //pureDamage += TemporaryAdditionalDamage[(int)type];
+
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
             float penetration = DamageType == eDamageType.PHYSICS ? 
                 GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
 
+            
+
+            OnDealDamage?.Invoke();
+
             return new DamageParameter()
             {
-                pureDamage = pureDamage,
+                rawDamage = rawDamage,
                 damageType = damageType,
                 penetration = penetration
             };
         }
 
         // 내구력, 방어력 참고하여 쓸 것.
+        // 실드에의 대미지는 다 다른가요??
+
         public void ReceiveDamage(DamageParameter damage)
         {
-            float defender = damage.damageType == eDamageType.PHYSICS ?
-                GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
+            // 최종대미지 계산 파트
+            float finalDamage = 0;
+            if(damage.damageType == eDamageType.TRUE)
+            {
+                finalDamage = damage.rawDamage;
+            }
+            else
+            {
+                float defender = damage.damageType == eDamageType.PHYSICS ?
+                    GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
 
-            float finalDamage = 
-                damage.pureDamage * 
-                100f / (100 + defender - damage.penetration);
+                finalDamage =
+                    damage.rawDamage *
+                    100f / (100 + defender - damage.penetration);
+            }
 
-            _charStat[(int)eStats.NHP] -= (long)finalDamage;
-            Debug.Log($"대미지 {(long)finalDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+            var appliedDamage = (long)finalDamage;
+
+            // 실드 계산 파트
+            if(_charStat[(int)eStats.SHIELD] > 0)
+            {
+                if (_charStat[(int)eStats.SHIELD] > appliedDamage)
+                {
+                    _charStat[(int)eStats.SHIELD] -= appliedDamage;
+                    Debug.Log($"보호막에 대미지 {appliedDamage}만큼 받음. 잔여 보호막 {GetStat(eStats.SHIELD)}");
+                }
+            }            
+            else
+            {                
+                appliedDamage -= _charStat[(int)eStats.SHIELD];
+                _charStat[(int)eStats.SHIELD] = 0;
+            }
+
+            // 실대미지 계산 파트
+            _charStat[(int)eStats.NHP] -= appliedDamage;
+            if(StatOwner.Index != 100)
+            {
+                Debug.Log($"대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+            }
             OnDamaged?.Invoke();
 
+            // 사망 검사 파트
             if (_charStat[(int)eStats.NHP] < 0)
             {
                 Debug.Log("으엑 죽었다");
                 OnDeath?.Invoke();
             }
         }
+
 
         public void GainMana(int amount, bool isGain)
         {
@@ -180,90 +260,6 @@ namespace Client
 
         #endregion
         
-        private Dictionary<eStats, StatCalculator> _buffCalculator = new();
-
-        public void PushBuffCalculator(OnStatBuff buff)
-        {
-            if (!_buffCalculator.ContainsKey(buff.buffStat))
-            {
-                _buffCalculator.Add(buff.buffStat, new StatCalculator());
-            }
-            _buffCalculator[buff.buffStat].PushBuffOperand(buff);
-            UpdateCurrentStat(buff.buffStat);
-        }
-
-        public void RemoveBuff(OnStatBuff buff)
-        {
-            if (_buffCalculator.ContainsKey(buff.buffStat))
-            {
-                _buffCalculator[buff.buffStat].KillBuffOperand(buff);
-                UpdateCurrentStat(buff.buffStat);
-            }
-        }
-
-
-        /// <summary> 스탯 버프 발생 및 제거 시 해당 스탯에 대한 업데이트 실시 </summary>
-        /// <remarks> 런타임 중 <b>'현재 스탯'</b> 에 대해서만 사용할 것</remarks>
-        public void UpdateCurrentStat(eStats targetStat)
-        {
-            _charStat[(int)targetStat] =
-                (long)_buffCalculator[targetStat].GetBuffedResult(GetStatRaw(targetStat));
-        }
-
-
-
     }
 
-    public struct OnStatBuff : IDisposable
-    {
-        public eStats buffStat;
-        public eOperator opCode;
-        public int amount;
-
-        public readonly void Dispose(){}
-    }
-
-    /// <summary> 일단 롤체식 버프계산기로 가져옴 </summary>
-    public class StatCalculator
-    {       
-        private Dictionary<eOperator, List<OnStatBuff>> _operDict = new(); 
-        
-        public float GetBuffedResult(float input)
-        {
-            float result = input;
-            if(_operDict.TryGetValue(eOperator.Add, out var addBuffs))
-            {
-                foreach(var buff in addBuffs)
-                {
-                    result += buff.amount;
-                }
-            }
-            if(_operDict.TryGetValue(eOperator.Mul, out var mulBuffs))
-            {
-                float ratio = 0f;
-                foreach(var buff in mulBuffs)
-                {
-                    ratio += buff.amount;
-                }
-                ratio /= SystemConst.PER_TEN_THOUSAND;
-                result *= (1 + ratio);
-            }
-            return result;
-        }
-
-
-        public void PushBuffOperand(OnStatBuff buff)
-        {
-            if (!_operDict.ContainsKey(buff.opCode))
-            {
-                _operDict.Add(buff.opCode, new List<OnStatBuff>());
-            }
-            _operDict[buff.opCode].Add(buff);
-        }
-
-        public void KillBuffOperand(OnStatBuff buff)
-        {
-            _operDict[buff.opCode].Remove(buff);
-        }
-    }
 }

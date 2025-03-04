@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4429908490653292540
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee121db476314de4684df27ccf37d13e, type: 3}
-  m_Name: Skill Marker Mana Exchanger
-  m_EditorClassIdentifier: 
-  m_Time: 0.16666666666666666
-  Choice: 1
-  amount: 5
 --- !u!114 &-2563299971242629409
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,7 +58,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 6692221965515699412}
-    - {fileID: -4429908490653292540}
 --- !u!114 &6692221965515699412
 MonoBehaviour:
   m_ObjectHideFlags: 1

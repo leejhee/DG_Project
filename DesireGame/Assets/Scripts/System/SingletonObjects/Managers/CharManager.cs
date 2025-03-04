@@ -221,7 +221,7 @@ namespace Client
         }
 
 
-        public CharBase GetNearestEnemy(CharBase ClientChar, int nTH=0)
+        public CharBase GetNearestEnemy(CharBase ClientChar, int nTH = 0, bool inverse = false)
         {
             eCharType clientType = ClientChar.GetCharType();
             Vector3 clientPosition = ClientChar.CharTransform.position;
@@ -248,6 +248,10 @@ namespace Client
             }
 
             enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
+            if (inverse)
+                enemyDistances.Sort((a, b) => b.DistSqr.CompareTo(a.DistSqr));
+            else
+                enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
 
             return enemyDistances[nTH].Enemy;
 

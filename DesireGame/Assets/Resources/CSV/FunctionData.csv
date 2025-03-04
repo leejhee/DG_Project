@@ -1,7 +1,7 @@
 ﻿ID,#skillID,#설명,기능,스테이트 타입,데미지 타입,CC 타입,시간(MS)천분율,input1,input2,input3,input4,조건,조건부Func
 Index,,#주석,function,statsType,damageType,CCType,time,input1,input2,input3,input4,ConditionCheck,ConditionFuncList
 long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long,long[]
-600110,500110,L 평타 강화,BuffAA,,,,,2,60,,,,
+600110,500110,L 평타 강화,BuffAA,,,,-1,2,60,,,,
 600210,500210,K 스킬 멀티캐스팅,MultiCasting,,,,,600211,600212,,,,
 600211,,K: 1) CC '통보' 6초간 부여,ApplyCC,,,통보,6000,,,,,,
 600212,,K: 2) 스킬 데미지 (시전자의 주문력 120%),DamageByCasterAP,,MAGIC,,,12000,,,,,
@@ -58,7 +58,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 600031,,듀블3명,,,,,-1,,,,,,
 600032,,듀블4명,,,,,-1,,,,,,
 600001,,st,SynergyTrigger,,,,-1,,,,,,
-698765,,성택컨디션체크테스트,,,,,,,,,,790000,"[600711,600712]"
+698765,,성택컨디션체크테스트,,,,,,,,,,790000,[600711.600712]
 
 
 

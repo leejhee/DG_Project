@@ -24,7 +24,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: -880753278474403411}
-    - {fileID: -5170120329511785000}
 --- !u!114 &-5879167673765232990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,21 +37,6 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: c66e5eb2778574f1abbd40dcb05e1df7, type: 2}
---- !u!114 &-5170120329511785000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee121db476314de4684df27ccf37d13e, type: 3}
-  m_Name: Skill Marker Mana Exchanger
-  m_EditorClassIdentifier: 
-  m_Time: 0.1
-  Choice: 0
-  amount: 5
 --- !u!114 &-880753278474403411
 MonoBehaviour:
   m_ObjectHideFlags: 1

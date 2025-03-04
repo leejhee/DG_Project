@@ -32,7 +32,7 @@ namespace Client
             // 데이터가 null일 때 프로퍼티로 했다가 피보면 안되기 때문에 생성자에서 초기화.
             functionType = buffParam.eFunctionType;
 
-            _LifeTime = _FunctionData.time <= 0 ? 
+            _LifeTime = _FunctionData.time > 0 ? 
                 _FunctionData.time / SystemConst.PER_THOUSAND : _FunctionData.time;
         }
 
@@ -65,7 +65,7 @@ namespace Client
             float runTime = Time.time - _StartTime;
             if (runTime > _LifeTime || _LifeTime == 0f)
             {
-                RunFunction(false);
+                _TargetChar.FunctionInfo.KillFunction(this);
             }
 
         }

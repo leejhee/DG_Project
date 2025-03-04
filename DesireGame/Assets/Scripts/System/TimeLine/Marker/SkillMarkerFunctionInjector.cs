@@ -27,15 +27,14 @@ namespace Client
             var targets = skillParam.skillTargets;
             for(int i = 0; i< targets.Count; i++)
             {
-                FunctionBase function = FunctionFactory.FunctionGenerate(new BuffParameter()
+                targets[i].FunctionInfo.AddFunction(new BuffParameter()
                 {
                     CastChar = skillParam.skillCaster,
                     TargetChar = targets[i],
                     eFunctionType = data.function,
                     FunctionIndex = functionIndex
                 });
-                function.RunFunction(true);
-                Debug.Log($"{skillParam.skillCaster.GetID()}번 캐릭터에서 {functionIndex}번 function 주입 완료");
+                Debug.Log($"{skillParam.skillCaster.GetID()}번 캐릭터에서 {targets[i].GetID()}번 캐릭터로 {functionIndex}번 function 주입 완료");
             }
 
         }

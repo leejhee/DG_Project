@@ -4,20 +4,34 @@ namespace Client
 {
     public class StraightPathStrategy : IPathStrategy
     {
-        public float Speed {  get; set; }
+        private readonly CharBase fixedTarget;
 
-        public StraightPathStrategy(float speed) => Speed = speed;
+        public Vector3 AbstractTarget => fixedTarget.transform.position;
 
-        // 왜 Projectile의 Target으로 접근 안함?
-        // 논타겟일 경우, 생성 당시 타겟의 '위치'가 목표 지점이 된다.
-        // 즉 CharBase를 끝까지 추적하지 않는다.
-        // 따라서 targetStrategy에 저장된 Transform을 참조해야 한다.
-        public void UpdatePosition(Projectile projectileBase)
+        public float Speed { get; private set; }
+        
+        public StraightPathStrategy(PathStrategyParameter param)
         {
-            Vector3 direction = 
-                (projectileBase.TargetGuide.AbstractTarget - projectileBase.transform.position).normalized;
-            projectileBase.transform.position += Speed * Time.deltaTime * direction;
-
+            fixedTarget = param.target;
+            Speed = param.Speed;
         }
+
+        public void UpdatePosition(Projectile projectile)
+        {
+            if (fixedTarget == false) return;
+
+            Vector3 displacement = AbstractTarget - projectile.transform.position;
+
+            // Check Target Point
+            float sqrDistance = displacement.sqrMagnitude;
+            if (sqrDistance <= 0.1f)
+                projectile.ApplyEffect(fixedTarget);
+
+            // Updtae Path
+            Vector3 direction = displacement.normalized;
+            projectile.transform.position += Speed * Time.deltaTime * direction;
+        }
+
+
     }
 }

@@ -161,6 +161,8 @@ namespace Client
 
             EFFECTIVE_HEALTH,
 
+            SHIELD,
+
             eMax,
         }
 
@@ -215,6 +217,7 @@ namespace Client
             None = 0,
             MAGIC,
             PHYSICS,
+            TRUE,
 
             eMax
         }

@@ -8,7 +8,7 @@ namespace Client
     public class CharAI
     {
         CharBase charAgent;
-        CharBase finalTarget; // 우선 순위 계산의 최종 결과
+        public CharBase finalTarget { get; private set; }// 우선 순위 계산의 최종 결과
         List<CharBase> cachedTargets;
 
         eAttackMode attackMode; // 공격 모드
@@ -113,7 +113,7 @@ namespace Client
                 return eAttackMode.None;
 
             // 스킬 사용 조건
-            // 1: 최대 마나가 0 이상
+            // 1: 최대 마나가 0보다 크다
             // 2: 현재 마나 >= 최대 마나
             bool condition1 = charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
             bool condition2 = charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA);
@@ -156,6 +156,12 @@ namespace Client
             charAgent.CharSKillInfo.DicSkill.TryGetValue(attackIndex, out skillBase);
             skillRange = skillBase.NSkillRange;
             eSkillTargetType targetType = skillBase.TargetType;
+            var targettingGuide = TargetStrategyFactory.CreateTargetStrategy(new TargettingStrategyParameter()
+            {
+                type = targetType,
+                Caster = charAgent
+            });
+            cachedTargets = targettingGuide.GetTargets();
 
             // transform 위치 기반 거리 측정
             float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
@@ -166,7 +172,21 @@ namespace Client
             // 사거리와 비교 후 이동 결정
             if (distanceSqr <= Mathf.Pow(skillRange, 2))
             {
-                charAgent.CharAction.CharAttackAction(new CharAttackParameter(finalTarget, attackIndex, targetType));
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, attackIndex, targetType));
+
+                var stat = charAgent.CharStat;
+
+                // 마나 exchange 파트
+                if (attackMode == eAttackMode.Auto)
+                {
+                    if(stat.GetStat(eStats.MAX_MANA)!= 0)
+                        stat.GainMana(5, true);
+                }                    
+                else if (attackMode == eAttackMode.Skill)
+                {
+                    stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
+                }
+
                 Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {attackIndex} 사용");
             }
             else
