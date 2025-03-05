@@ -190,6 +190,7 @@ namespace Client
         {
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
 

@@ -9,7 +9,7 @@ namespace Client
         
         private Collider        _projectileCollider;
         private Transform       _projectileTransform;
-        private FunctionInfo    _functionInfo;
+        //private FunctionInfo    _functionInfo;
         private CharBase        _caster;
         private CharBase        _target;
 
@@ -22,7 +22,7 @@ namespace Client
         
         public Collider Collider => _projectileCollider;
         public Transform ProjectileTransform => _projectileTransform;
-        public FunctionInfo FunctionInfo => _functionInfo;
+        //public FunctionInfo FunctionInfo => _functionInfo;
         public CharBase Caster => _caster;
         public CharBase Target => _target;
         public IPathStrategy PathGuide => pathStrategy;
@@ -35,8 +35,8 @@ namespace Client
             _projectileTransform = transform;
             _projectileCollider = GetComponent<Collider>();
             _projectileData = DataManager.Instance.GetData<ProjectileData>(_index);
-            _functionInfo = new();
-            _functionInfo.Init();
+            //_functionInfo = new();
+            //_functionInfo.Init();
         }
 
         // 외부에서 소환할 때 호출하자. 
@@ -73,10 +73,12 @@ namespace Client
             ///// 대미지 적용하자.
             target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
             Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
-
-            // 투사체 execution 데이터 없는 관계로 임시 주석 처리
+             
             //var functionData = DataManager.Instance.GetData<FunctionData>(_projectileData.funcIndex);
+            //if(functionData is null)
+            //{
             //
+            //}
             //if(functionData is not null)
             //{
             //    target.FunctionInfo.AddFunction(new BuffParameter()
@@ -87,6 +89,8 @@ namespace Client
             //        FunctionIndex = functionData.Index
             //    });
             //}            
+
+            // effect와 소멸 분리할 것.
             Destroy(gameObject);
         }
 

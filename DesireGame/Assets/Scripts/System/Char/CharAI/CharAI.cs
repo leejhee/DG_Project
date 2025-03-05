@@ -95,10 +95,9 @@ namespace Client
         /// <summary>
         /// 최종 타겟 정하기
         /// </summary>
-        public void SetFinalTarget()
-        {
-            finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
-
+        public void SetFinalTarget(eAttackMode mode=eAttackMode.None)
+        {           
+            finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);           
             if (finalTarget != null)
                 Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}의 final target : {finalTarget.CharData.charName}");
         }
@@ -140,19 +139,23 @@ namespace Client
                 case eAttackMode.Auto:
                     attackIndex = charAgent.CharData.skill1;
                     ChangeState(PlayerState.ATTACK);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
                     break;
 
                 case eAttackMode.Skill:
                     attackIndex = charAgent.CharData.skill2;
                     ChangeState(PlayerState.ATTACK);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
                     break;
 
                 default:
                     ChangeState(PlayerState.IDLE);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
                     SetFinalTarget();
                     return;
             }
 
+            // [TODO] : State setting, Target setting, Action 으로 나눠서 반드시 리팩토링 할 것.
             charAgent.CharSKillInfo.DicSkill.TryGetValue(attackIndex, out skillBase);
             skillRange = skillBase.NSkillRange;
             eSkillTargetType targetType = skillBase.TargetType;
@@ -162,15 +165,20 @@ namespace Client
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
+            finalTarget = cachedTargets[0]; // 가까운 순으로 넣게 했음.
+
 
             // transform 위치 기반 거리 측정
-            float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
+            //float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
 
             // 내림 처리
-            distanceSqr = Mathf.Floor(distanceSqr * 100) / 100;
+            //distanceSqr = Mathf.Floor(distanceSqr * 100) / 100;
 
+            var distance = Vector3.Distance(charAgent.CharTransform.position, finalTarget.CharTransform.position);
+            var tolerance = 0.01f;
             // 사거리와 비교 후 이동 결정
-            if (distanceSqr <= Mathf.Pow(skillRange, 2))
+            //if (distance <= Mathf.Pow(skillRange, 2))
+            if (distance <= skillRange + tolerance || skillRange == 0)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, attackIndex, targetType));
 
@@ -191,10 +199,12 @@ namespace Client
             }
             else
             {
-                Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
-                Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
-
-                charAgent.CharAction.CharMoveAction(new CharMoveParameter(destination));
+                //Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
+                //Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
+                //
+                //charAgent.CharAction.CharMoveAction(new CharMoveParameter(destination));
+                charAgent.Nav.stoppingDistance = skillRange;
+                charAgent.CharAction.CharMoveAction(new CharMoveParameter(finalTarget));
 
             }
         }

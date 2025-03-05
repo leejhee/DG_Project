@@ -227,6 +227,7 @@ namespace Client
             Vector3 clientPosition = ClientChar.CharTransform.position;
             var enemyDict = new Dictionary<long, CharBase>();
 
+            #region 적 설정
             if (clientType == eCharType.ALLY)
             {
                 enemyDict = _cache[typeof(CharMonster)];
@@ -235,9 +236,20 @@ namespace Client
             {
                 enemyDict = _cache[typeof(CharPlayer)];
             }
+            #endregion
 
-            if (enemyDict.Count == 0 || nTH < 0 || nTH >= enemyDict.Count)
+            #region 오류 탐지
+            if (enemyDict.Count == 0)
+            {
+                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {ClientChar.GetID()}");
                 return null;
+            }
+            else if (nTH < 0)
+            {
+                Debug.Log("0보다 작은 nTH는 안돼요!");
+                return null;
+            }
+            #endregion
 
             var enemyDistances = new List<(CharBase Enemy, float DistSqr)>(enemyDict.Count);
 
@@ -253,8 +265,11 @@ namespace Client
             else
                 enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
 
-            return enemyDistances[nTH].Enemy;
+            if (nTH > enemyDict.Count)
+                return enemyDistances[^1].Enemy;
 
+            return enemyDistances[nTH].Enemy;
+            
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace Client
         {
             var interval = (param.Destination - Actor.transform.position).sqrMagnitude;
             Nav.updateRotation = false;
-            if(interval > 0.02f)
+            if(interval > 0.02f * 0.02f)
             {
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);
@@ -27,6 +27,10 @@ namespace Client
             }
             else
             {
+                if (Nav.hasPath)
+                {
+                    Nav.ResetPath();
+                }
                 Nav.isStopped = true;
             }
         }

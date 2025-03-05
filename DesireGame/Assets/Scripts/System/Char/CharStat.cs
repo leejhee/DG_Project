@@ -228,11 +228,9 @@ namespace Client
             }
 
             // 실대미지 계산 파트
-            _charStat[(int)eStats.NHP] -= appliedDamage;
-            if(StatOwner.Index != 100)
-            {
-                Debug.Log($"대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
-            }
+            _charStat[(int)eStats.NHP] -= appliedDamage;           
+             Debug.Log($"대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+            
             OnDamaged?.Invoke();
 
             // 사망 검사 파트

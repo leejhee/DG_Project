@@ -15,6 +15,8 @@ namespace Client
         [Header("투사체에 반영할 시전자의 스탯과 비율")]
         [SerializeField] protected SystemEnum.eStats _statName;
         [SerializeField] protected float percent;
+
+        [SerializeField] protected List<long> indices;
         
         public override void MarkerAction()
         {                      
