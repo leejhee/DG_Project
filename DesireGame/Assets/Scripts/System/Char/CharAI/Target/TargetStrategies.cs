@@ -64,7 +64,7 @@ namespace Client
         {
             return new List<CharBase>()
             {
-                CharManager.Instance.GetNearestEnemy(Caster, 0, true)
+                CharManager.Instance.GetNearestEnemy(Caster, 0, inverse: true)
             };
         }
     }
@@ -76,8 +76,8 @@ namespace Client
         {
             return new List<CharBase>()
             {
-                CharManager.Instance.GetNearestEnemy(Caster, 0, true),
-                CharManager.Instance.GetNearestEnemy(Caster, 1, true)
+                CharManager.Instance.GetNearestEnemy(Caster, 1, inverse: true),
+                CharManager.Instance.GetNearestEnemy(Caster, 0, inverse: true)
             };
         }
     }

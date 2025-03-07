@@ -8,12 +8,12 @@ namespace Client
 
         public Vector3 AbstractTarget => fixedTarget.transform.position;
 
-        public float Speed { get; private set; }
+        public float InitialSpeed { get; private set; }
         
         public StraightPathStrategy(PathStrategyParameter param)
         {
             fixedTarget = param.target;
-            Speed = param.Speed;
+            InitialSpeed = param.Speed;
         }
 
         public void UpdatePosition(Projectile projectile)
@@ -25,11 +25,14 @@ namespace Client
             // Check Target Point
             float sqrDistance = displacement.sqrMagnitude;
             if (sqrDistance <= 0.1f)
+            {
                 projectile.ApplyEffect(fixedTarget);
-
-            // Updtae Path
+                projectile.SetDestroyFlag(true);
+            }
+                
+            // Update Path
             Vector3 direction = displacement.normalized;
-            projectile.transform.position += Speed * Time.deltaTime * direction;
+            projectile.transform.position += InitialSpeed * Time.deltaTime * direction;
         }
 
 

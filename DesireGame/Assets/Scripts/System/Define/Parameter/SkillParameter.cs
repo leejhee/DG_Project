@@ -7,7 +7,6 @@ namespace Client
     {
         public List<CharBase> skillTargets { get; private set; }
         public CharBase skillCaster { get; private set; }
-        public SystemEnum.eSkillTargetType skillTargetType { get; private set; }
 
         // InputManager 사라지면 protected 전환 예정
         public SkillParameter() { }
@@ -15,27 +14,21 @@ namespace Client
         public SkillParameter
             (
                 List<CharBase> skillTargets,
-                CharBase skillCaster,
-                SystemEnum.eSkillTargetType skillTargetType =
-                    SystemEnum.eSkillTargetType.None
+                CharBase skillCaster              
             )
         {
             this.skillTargets = skillTargets;
             this.skillCaster = skillCaster;
-            this.skillTargetType = skillTargetType;
         }
 
         public SkillParameter
             (
                 CharBase skillTarget, 
-                CharBase skillCaster,
-                SystemEnum.eSkillTargetType skillTargetType = 
-                    SystemEnum.eSkillTargetType.None
+                CharBase skillCaster
             )
         {
             this.skillTargets = new List<CharBase>() { skillTarget };
             this.skillCaster = skillCaster;
-            this.skillTargetType = skillTargetType;
         }
     }
 
@@ -52,7 +45,7 @@ namespace Client
                 SystemEnum.eStats operand = SystemEnum.eStats.None,
                 float ratio = 0f,
                 int targetIdx = 0
-            ): base(param.skillTargets, param.skillCaster, param.skillTargetType)
+            ): base(param.skillTargets, param.skillCaster)
         {
             StatOperand = operand;
             Percent = ratio;

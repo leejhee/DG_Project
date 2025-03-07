@@ -7,22 +7,21 @@ namespace Client
 {
     public class CharAI
     {
-        CharBase charAgent;
-        public CharBase finalTarget { get; private set; }// 우선 순위 계산의 최종 결과
-        List<CharBase> cachedTargets;
+        public enum eAttackMode { None, Auto, Skill };
 
-        eAttackMode attackMode; // 공격 모드
-        PlayerState currentState; // 새로운 모드 변경 여부
-        
+        private CharBase charAgent;
+
+        private List<CharBase> cachedTargets;
+        public CharBase finalTarget { get; private set; }// 우선 순위 계산의 최종 결과
+
+        private PlayerState currentState; // 새로운 모드 변경 여부
+
         bool resetTimer = false;
-        float timer;
-        float interval;
 
         public bool isAIRun { get; set; } = false; // 이 캐릭터는 현재 AI가 작동중입니다.
 
-        public enum eAttackMode { None, Auto, Skill };
-        public CharAI(CharBase charAgent) 
-        { 
+        public CharAI(CharBase charAgent)
+        {
             this.charAgent = charAgent;
         }
 
@@ -43,17 +42,103 @@ namespace Client
             while (true)
             {
                 // 상태가 변경되었을 경우 타이머를 리셋
-                if (resetTimer) 
+                if (resetTimer)
                 {
                     resetTimer = false;
                     actionInterval = GetActionInterval(currentState);
                     waitTime = new WaitForSeconds(actionInterval);
                 }
 
-                SetState();
+                eAttackMode attackMode = SetAttackMode();
+
+                SetStateByAttackMode(attackMode);
+                SetAction(attackMode);
+
                 yield return waitTime;
             }
         }
+        
+
+        /// <summary>
+        /// 현재 상태에 따른 호출 간격 리턴
+        /// </summary>
+        /// <param name="newState"></param>
+        /// <returns></returns>
+        public float GetActionInterval(PlayerState newState)
+        {
+            float interval = 0;
+
+            switch (newState)
+            {
+                case PlayerState.ATTACK:
+                    interval = 1 / charAgent.CharStat.GetStat(eStats.NAS);
+                    break;
+
+                case PlayerState.MOVE:
+                    interval = 1 / charAgent.CharStat.GetStat(eStats.NMOVE_SPEED); // TODO : 이동 거리 단위 기획에 물어보기
+                    break;
+
+                default:
+                    interval = Time.deltaTime;
+                    break;
+            }
+
+            return interval;
+        }
+
+        /// <summary>
+        /// 마나 양에 따라 공격 모드 판단
+        /// </summary>
+        /// <returns></returns>
+        public eAttackMode SetAttackMode()
+        {
+            // 스킬 사용 조건
+            // 1: 최대 마나가 0보다 크다
+            // 2: 현재 마나 >= 최대 마나
+            bool condition1 = charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
+            bool condition2 = charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA);
+
+            if (condition1 && condition2)
+                return eAttackMode.Skill;
+            else
+                return eAttackMode.Auto;
+        }
+
+        ///// <summary>
+        ///// 최종 타겟 정하기
+        ///// </summary>
+        //public void SetFinalTarget(eAttackMode mode = eAttackMode.None)
+        //{
+        //    finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
+        //    if (finalTarget != null)
+        //        Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}의 final target : {finalTarget.CharData.charName}");
+        //}
+
+        /// <summary>
+        /// 상태 계산 및 행동 설정
+        /// </summary>
+        public void SetStateByAttackMode(eAttackMode attackMode)
+        {
+            switch (attackMode)
+            {
+                case eAttackMode.Auto:
+                    ChangeState(PlayerState.ATTACK);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
+                    break;
+
+                case eAttackMode.Skill:
+                    ChangeState(PlayerState.ATTACK);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
+                    break;
+
+                default:
+                    ChangeState(PlayerState.IDLE);
+                    Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
+                    //SetFinalTarget();
+                    break;
+            }
+        }
+
         public void ChangeState(PlayerState newState)
         {
             // 상태 변경 감지 시 
@@ -65,148 +150,80 @@ namespace Client
             }
         }
 
-        /// <summary>
-        /// 현재 상태에 따른 호출 간격 리턴
-        /// </summary>
-        /// <param name="newState"></param>
-        /// <returns></returns>
-        public float GetActionInterval(PlayerState newState)
+        // 어택모드에 따른 스킬 인덱스 할당
+        public long ReloadSkill(eAttackMode mode)
         {
-            float interval = 0;
-
-            switch(newState)
+            if (mode == eAttackMode.Auto)
             {
-                case PlayerState.ATTACK:
-                    interval = 1/charAgent.CharStat.GetStat(eStats.NAS); 
-                    break;
-
-                case PlayerState.MOVE:
-                    interval = 1/charAgent.CharStat.GetStat(eStats.NMOVE_SPEED); // TODO : 이동 거리 단위 기획에 물어보기
-                    break;
-                
-                default:
-                    interval = Time.deltaTime;
-                    break;
+                return charAgent.CharData.skill1;
             }
-
-            return interval;
-        }
-
-        /// <summary>
-        /// 최종 타겟 정하기
-        /// </summary>
-        public void SetFinalTarget(eAttackMode mode=eAttackMode.None)
-        {           
-            finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);           
-            if (finalTarget != null)
-                Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}의 final target : {finalTarget.CharData.charName}");
-        }
-
-        /// <summary>
-        /// 마나 양에 따라 공격 모드 판단
-        /// </summary>
-        /// <returns></returns>
-        public eAttackMode SetAttackMode()
-        {
-            if (finalTarget == null) 
-                return eAttackMode.None;
-
-            // 스킬 사용 조건
-            // 1: 최대 마나가 0보다 크다
-            // 2: 현재 마나 >= 최대 마나
-            bool condition1 = charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
-            bool condition2 = charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA);
-
-            if (condition1 && condition2) 
-                return eAttackMode.Skill;
+            else if (mode == eAttackMode.Skill)
+            {
+                return charAgent.CharData.skill2;
+            }
             else
-                return eAttackMode.Auto;
+            {
+                Debug.Log("어택모드 할당 안되어 스킬 미사용");
+                return SystemConst.NO_CONTENT;
+            }
         }
 
-        /// <summary>
-        /// 상태 계산 및 행동 설정
-        /// </summary>
-        public void SetState()
+        public void SetTarget(eSkillTargetType targetType)
         {
-            long attackIndex = 0; // 평타 or 스킬 인덱스
-            SkillBase skillBase;
-            int skillRange = 0;
-
-            // 공격 종류에 따라 사거리 기준 설정하기
-            attackMode = SetAttackMode();
-            switch (attackMode)
-            {
-                case eAttackMode.Auto:
-                    attackIndex = charAgent.CharData.skill1;
-                    ChangeState(PlayerState.ATTACK);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
-                    break;
-
-                case eAttackMode.Skill:
-                    attackIndex = charAgent.CharData.skill2;
-                    ChangeState(PlayerState.ATTACK);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
-                    break;
-
-                default:
-                    ChangeState(PlayerState.IDLE);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
-                    SetFinalTarget();
-                    return;
-            }
-
-            // [TODO] : State setting, Target setting, Action 으로 나눠서 반드시 리팩토링 할 것.
-            charAgent.CharSKillInfo.DicSkill.TryGetValue(attackIndex, out skillBase);
-            skillRange = skillBase.NSkillRange;
-            eSkillTargetType targetType = skillBase.TargetType;
             var targettingGuide = TargetStrategyFactory.CreateTargetStrategy(new TargettingStrategyParameter()
             {
                 type = targetType,
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
-            finalTarget = cachedTargets[0]; // 가까운 순으로 넣게 했음.
+            finalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
+        }
 
+        public void ExchangeMana(eAttackMode mode)
+        {
+            var stat = charAgent.CharStat;
+            if (mode == eAttackMode.Auto)
+            {
+                if (stat.GetStat(eStats.MAX_MANA) != 0)
+                    stat.GainMana(5, true);
+            }
+            else if (mode == eAttackMode.Skill)
+            {
+                stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
+            }
+        }
 
-            // transform 위치 기반 거리 측정
-            //float distanceSqr =  (charAgent.CharTransform.position - finalTarget.CharTransform.position).sqrMagnitude;
+        public void SetAction(eAttackMode attackMode)
+        {
+            var skillIndex = ReloadSkill(attackMode);
+            var skillData = DataManager.Instance.GetData<SkillData>(skillIndex);
 
-            // 내림 처리
-            //distanceSqr = Mathf.Floor(distanceSqr * 100) / 100;
+            //데이터 기반 타겟 설정
+            SetTarget(skillData.skillTarget);
+            if (finalTarget == null)
+            {
+                Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 프레임에 타겟 할당합니다.");
+                return;
+            }
 
+            //데이터 기반 사거리 설정 및 행동 결정
+            int skillRange = skillData.skillRange;
             var distance = Vector3.Distance(charAgent.CharTransform.position, finalTarget.CharTransform.position);
             var tolerance = 0.01f;
             // 사거리와 비교 후 이동 결정
-            //if (distance <= Mathf.Pow(skillRange, 2))
             if (distance <= skillRange + tolerance || skillRange == 0)
             {
-                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, attackIndex, targetType));
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex));
+                ExchangeMana(attackMode);
 
-                var stat = charAgent.CharStat;
-
-                // 마나 exchange 파트
-                if (attackMode == eAttackMode.Auto)
-                {
-                    if(stat.GetStat(eStats.MAX_MANA)!= 0)
-                        stat.GainMana(5, true);
-                }                    
-                else if (attackMode == eAttackMode.Skill)
-                {
-                    stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
-                }
-
-                Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {attackIndex} 사용");
+                Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {skillIndex} 사용");
             }
             else
             {
-                //Vector3 displacement = finalTarget.CharTransform.position - charAgent.CharTransform.position;
-                //Vector3 destination = charAgent.CharTransform.position + displacement.normalized * (displacement.magnitude - skillRange);
-                //
-                //charAgent.CharAction.CharMoveAction(new CharMoveParameter(destination));
                 charAgent.Nav.stoppingDistance = skillRange;
                 charAgent.CharAction.CharMoveAction(new CharMoveParameter(finalTarget));
-
             }
         }
+
     }
 }

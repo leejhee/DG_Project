@@ -25,6 +25,7 @@ namespace Client
             {
                 Projectile projectile = GameObject.Instantiate(_projectile, skillParam.skillCaster.transform.position, Quaternion.identity);
                 projectile.InitProjectile(skillParam.ToStatPack(_statName, percent, idx));
+                projectile.InjectProjectileFunction(indices);            
             }
         }
 

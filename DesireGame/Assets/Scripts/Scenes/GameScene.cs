@@ -47,9 +47,9 @@ namespace Client
         private void TestProjectileShoot()
         {
             TestChar.CharAction.CharAttackAction
-                (new CharAttackParameter(TestEnemy, projectileShootIndex, eSkillTargetType.NEAR_ENEMY));
+                (new CharAttackParameter(TestEnemy, projectileShootIndex));
         }
-
+        
         [ContextMenu("전투를 시작해보아요")]
         public void TestAIInitialize()
         {

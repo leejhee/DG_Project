@@ -39,7 +39,7 @@ namespace Client
         {
             var SkillInfo = Actor.CharSKillInfo;
             SkillInfo.PlaySkill(param.skillIndex,
-                new SkillParameter(param.targetChar, Actor, param.skillTargetType));         
+                new SkillParameter(param.targetChar, Actor));         
         }
     }
 
