@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,12 +23,9 @@ namespace Client
         private bool destroyFlag = false;
         public void SetDestroyFlag(bool flag) => destroyFlag = flag;
 
-
-
-        // 3가지 고려할 경우 경우의 수가 너무 많아 상속보단 전략 패턴 채용하기로 함
         private IPathStrategy       pathStrategy;       // 경로 이동 방식
         private IRangeStrategy      rangeStrategy;      // 위치 도달 후 범위 처리
-        
+
         public Collider Collider => _projectileCollider;
         public Transform ProjectileTransform => _projectileTransform;
         public CharBase Caster => _caster;
@@ -42,7 +40,7 @@ namespace Client
             _projectileData = DataManager.Instance.GetData<ProjectileData>(_index);
         }
 
-        // 외부에서 소환할 때 호출하자. 
+        #region Initiallize Projectile(Call from Outside)
         public virtual void InitProjectile(StatPackedSkillParameter param)
         {
             _caster = param.skillCaster;
@@ -66,12 +64,14 @@ namespace Client
 
         public void InjectProjectileFunction(List<long> indices)
         {
-            foreach(long index in indices)
+            _functionDataList = new();
+            foreach (long index in indices)
             {
                 _functionDataList.Add(DataManager.Instance.GetData<FunctionData>(index));
             }
         }
-
+        #endregion
+        
         private void FixedUpdate()
         {
             if (_caster == null || destroyFlag == true)
@@ -106,12 +106,11 @@ namespace Client
             }
         }
 
+        // path type의 종류로 인해 선택함
         private void OnTriggerEnter(Collider other)
         {
-            //getcomponent를 많이 쓰는것에 대해....
-            CharBase target = other.GetComponent<CharBase>();
-
-
+            if (pathStrategy.ManageCollision(other, CharUtil.GetEnemyType(Caster.GetCharType())))
+                ApplyEffect(other.GetComponent<CharBase>());           
         }
 
     }

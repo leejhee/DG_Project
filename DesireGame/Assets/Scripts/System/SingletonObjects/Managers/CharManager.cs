@@ -227,16 +227,7 @@ namespace Client
             Vector3 clientPosition = ClientChar.CharTransform.position;
             var enemyDict = new Dictionary<long, CharBase>();
 
-            #region 적 설정
-            if (clientType == eCharType.ALLY)
-            {
-                enemyDict = _cache[typeof(CharMonster)];
-            }
-            else if (clientType == eCharType.ENEMY)
-            {
-                enemyDict = _cache[typeof(CharPlayer)];
-            }
-            #endregion
+            enemyDict = _cache[eCharTypeToType(CharUtil.GetEnemyType(clientType))];
 
             #region 오류 탐지
             if (enemyDict.Count == 0)

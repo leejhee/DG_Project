@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
 
 namespace Client
 {
@@ -51,6 +52,16 @@ namespace Client
                 distances.Sort((a, b) => a.dist.CompareTo(b.dist));
 
             return distances[nTH].target;
+        }
+
+        public static eCharType GetEnemyType(eCharType clientType)
+        {
+            if (clientType == eCharType.ALLY)
+                return eCharType.ENEMY;
+            else if (clientType == eCharType.ENEMY)
+                return eCharType.ALLY;
+            else
+                return eCharType.None;
         }
     }
 

@@ -275,7 +275,7 @@ namespace Client
         public enum eProjectileRangeType
         {
             SINGLE,
-            SPLASH,
+            SURROUND,
             EMax,
         }
 

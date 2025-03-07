@@ -18,23 +18,30 @@ namespace Client
 
         public void UpdatePosition(Projectile projectile)
         {
-            if (fixedTarget == false) return;
+            if (fixedTarget == false) 
+            {
+                projectile.SetDestroyFlag(true);
+                return;
+            }
 
-            Vector3 displacement = AbstractTarget - projectile.transform.position;
+            Vector3 displacement = AbstractTarget - projectile.ProjectileTransform.position;
 
             // Check Target Point
             float sqrDistance = displacement.sqrMagnitude;
             if (sqrDistance <= 0.1f)
             {
                 projectile.ApplyEffect(fixedTarget);
-                projectile.SetDestroyFlag(true);
             }
                 
             // Update Path
             Vector3 direction = displacement.normalized;
-            projectile.transform.position += InitialSpeed * Time.deltaTime * direction;
+            projectile.ProjectileTransform.position += InitialSpeed * Time.deltaTime * direction;
         }
 
-
+        // 무조건 목표 제외 무시해야 함.
+        public bool ManageCollision(Collider other, SystemEnum.eCharType enemyType)
+        {
+            return false;
+        }
     }
 }

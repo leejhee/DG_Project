@@ -1,17 +1,17 @@
-﻿ID,날아가는 방식,폭발 범위타입,관통 수,폭발범위,이펙트 경로,피격이펙트경로,functionIndex,,,,
-Index,path,rangeType,penetrationCount,splashRange,FXPath,monsterHitPath,funcIndex,,,,
-long,eProjectilePathType,eProjectileRangeType,int,int,string,string,long,,,,
-1100200,STRAIGHT,SINGLE,0,0,,,600201,,,,
-1100400,STRAIGHT,SINGLE,0,0,,,600401,,,,
-1100011,PINGPONG,SINGLE,1000,0,,,630011,,,,
-1100013,STRAIGHT,SINGLE,0,0,,,630013,,,,
-
-
-
-
-
-
-
+﻿ID,#투사체 설명,날아가는 방식,투사체 데미지 범위 타입,관통 수,폭발범위,이펙트 경로,피격이펙트경로,,,,
+Index,,path,rangeType,penetrationCount,splashRange,FXPath,monsterHitPath,,,,
+long,,eProjectilePathType,eProjectileRangeType,int,int,string,string,,,,
+1100200,K 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1100400,M 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1100210,K 스킬,PINGPONG,SINGLE,1000,0,0,0,,,,
+1100410,M 스킬,STRAIGHT,SINGLE,0,0,0,0,,,,
+1110100,전투력측정기R 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1110300,공격봇A1 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1110310,공격봇A1 스킬,STRAIGHT,SINGLE,0,0,0,0,,,,
+1110400,지원봇S1 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1100600,그레이스 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
+1100610,그레이스 스킬,STRAIGHT,SURROUND,0,1,0,0,,,,
+1100800,엠마 평타,STRAIGHT,SINGLE,0,0,0,0,,,,
 
 
 

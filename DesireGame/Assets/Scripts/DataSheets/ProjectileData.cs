@@ -17,12 +17,11 @@ public long Index; // ID
 		
 		public SystemEnum.eProjectilePathType path; // 날아가는 방식
 		
-		public SystemEnum.eProjectileRangeType rangeType; // 폭발 범위타입
+		public SystemEnum.eProjectileRangeType rangeType; // 투사체 데미지 범위 타입
 		public int penetrationCount; // 관통 수
 		public int splashRange; // 폭발범위
 		public string FXPath; // 이펙트 경로
 		public string monsterHitPath; // 피격이펙트경로
-		public long funcIndex; // functionIndex
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -53,40 +52,35 @@ public long Index; // ID
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[1] == "")
+					if(values[2] == "")
 					    data.path = default;
 					else
-					    data.path = (SystemEnum.eProjectilePathType)Enum.Parse(typeof(SystemEnum.eProjectilePathType), values[1]);
-					
-					if(values[2] == "")
-					    data.rangeType = default;
-					else
-					    data.rangeType = (SystemEnum.eProjectileRangeType)Enum.Parse(typeof(SystemEnum.eProjectileRangeType), values[2]);
+					    data.path = (SystemEnum.eProjectilePathType)Enum.Parse(typeof(SystemEnum.eProjectilePathType), values[2]);
 					
 					if(values[3] == "")
-					    data.penetrationCount = default;
+					    data.rangeType = default;
 					else
-					    data.penetrationCount = Convert.ToInt32(values[3]);
+					    data.rangeType = (SystemEnum.eProjectileRangeType)Enum.Parse(typeof(SystemEnum.eProjectileRangeType), values[3]);
 					
 					if(values[4] == "")
-					    data.splashRange = default;
+					    data.penetrationCount = default;
 					else
-					    data.splashRange = Convert.ToInt32(values[4]);
+					    data.penetrationCount = Convert.ToInt32(values[4]);
 					
 					if(values[5] == "")
-					    data.FXPath = default;
+					    data.splashRange = default;
 					else
-					    data.FXPath = Convert.ToString(values[5]);
+					    data.splashRange = Convert.ToInt32(values[5]);
 					
 					if(values[6] == "")
-					    data.monsterHitPath = default;
+					    data.FXPath = default;
 					else
-					    data.monsterHitPath = Convert.ToString(values[6]);
+					    data.FXPath = Convert.ToString(values[6]);
 					
 					if(values[7] == "")
-					    data.funcIndex = default;
+					    data.monsterHitPath = default;
 					else
-					    data.funcIndex = Convert.ToInt64(values[7]);
+					    data.monsterHitPath = Convert.ToString(values[7]);
 					
 
                     dataList[data.Index] = data;
