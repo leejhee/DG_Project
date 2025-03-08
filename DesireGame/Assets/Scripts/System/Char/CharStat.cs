@@ -99,6 +99,7 @@ namespace Client
                 case (eStats.CRIT_DAMAGE):
                 case (eStats.NCRIT_DAMAGE):
                 case (eStats.DAMAGE_INCREASE):
+                case (eStats.EFFECTIVE_HEALTH):
                     return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
                     return _charStat[(int)eStats];
@@ -169,15 +170,9 @@ namespace Client
                     (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)             //치명타 확률 및 피해 계산
                 + GetStat(eStats.BONUS_DAMAGE);                         // 추가 대미지  
 
-            // 평타면 여기서 평타 강화에 쓰일 것이고, 스킬 뎀지 강화면 여기서 별도의 추뎀이 더해질 것이다.
-            //pureDamage += TemporaryAdditionalDamage[(int)type];
-
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
-            float penetration = DamageType == eDamageType.PHYSICS ? 
-                GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
-
-            
+            float penetration = GetPenetration(damageType);
 
             OnDealDamage?.Invoke();
 
@@ -189,11 +184,19 @@ namespace Client
             };
         }
 
+        public float GetPenetration(eDamageType damageType)
+        {
+            return damageType == eDamageType.PHYSICS ?
+                GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
+        }
+
         // 내구력, 방어력 참고하여 쓸 것.
         // 실드에의 대미지는 다 다른가요??
 
         public void ReceiveDamage(DamageParameter damage)
         {
+            if (_charStat[(int)eStats.NHP] <= 0) return;
+
             // 최종대미지 계산 파트
             float finalDamage = 0;
             if(damage.damageType == eDamageType.TRUE)
@@ -207,9 +210,11 @@ namespace Client
 
                 finalDamage =
                     damage.rawDamage *
-                    100f / (100 + defender - damage.penetration);
-            }
+                    100f / (100 + defender - damage.penetration) *
+                    (1 - GetStat(eStats.EFFECTIVE_HEALTH));
 
+            }
+            
             var appliedDamage = (long)finalDamage;
 
             // 실드 계산 파트

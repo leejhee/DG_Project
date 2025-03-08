@@ -3,10 +3,9 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    /// <summary> 버프 계산자를 종료 시 삭제하기 위해 Action을 가짐 </summary>
+    /// <summary> 스탯 버프와 관련된 Function </summary>
     public class StatBuffBase : FunctionBase
     {
-        protected Action OnKillBuff;
         protected bool isTemporal;
 
         // 데이터 상으로 베이스인 스탯
@@ -34,10 +33,10 @@ namespace Client
                 {
                     ChangeStat(targetStat, -delta);                    
                 }
-                OnKillBuff?.Invoke();
             }
         }
 
+        /// <remarks> <b>계산은 GetStatRaw를 사용해서 할 것</b> </remarks>
         public virtual void ComputeDelta() { }
 
         public virtual void ChangeStat(eStats stat, float delta)

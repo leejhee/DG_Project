@@ -9,13 +9,13 @@ namespace Client
     {
         public BuffOnce(BuffParameter buffParam) : base(buffParam)
         {
-
+            isTemporal = true;
         }
 
         public override void ComputeDelta()
         {
             base.ComputeDelta();
-            delta = _TargetChar.CharStat.GetStat(targetStat)
+            delta = _TargetChar.CharStat.GetStatRaw(targetStat)
                 * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
         }
     }
@@ -29,13 +29,13 @@ namespace Client
     {
         public BuffOnceByAD(BuffParameter buffParam) : base(buffParam)
         {
-            
+            isTemporal = false;
         }
 
         public override void ComputeDelta()
         {
             base.ComputeDelta();
-            delta = _CastChar.CharStat.GetStat(SystemEnum.eStats.NAD)
+            delta = _CastChar.CharStat.GetStatRaw(SystemEnum.eStats.NAD)
                 * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
         }
 

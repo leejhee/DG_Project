@@ -168,48 +168,32 @@ namespace Client
 
         public enum eFunction
         {
-            // 공속기반 투사체 생성
-            SpawnProjectileByAS,
-            // 공격력 기반 대미지
-            DamageByCasterAD,
-            // 주문력 기반 대미지
-            DamageByCasterAP,
-            // 다음 공격에 대한 버프
-            BuffDuringAttacks,
-            // 마나쓰는 스킬 투사체 생성
-            SpawnProjectileByMana,
-            // 주문력 기반 대미지와 디버프
-            DamageByCasterAPWithCC,
-            // 공속기반 근접공격
-            MeleeADByAS,
-            // 최대체력 비례 대미지
-            DamageByTargetMaxHP,
-            // 공격력 기반 확정크리티컬 대미지
-            DamageByCasterADWithCrit,
-            // 공격력 기반 일회성버프
-            BuffOnceByCasterAD,
-            // 여러 효과 동시 발동(최대 4개)
-            MultiCasting,
-            // 일회성 버프
-            BuffOnce,
-            // CC 부여
-            ApplyCC,
+            MULTICASTING,
 
-            SynergyTrigger,
-            BuffAA,
-            CreateShield,
-            TeleportToRear,
-            ExtendRange,
-            DamageOverTimeByCasterAP,
+            DELETE_FUNCTION,
 
-            MaxCount
-        }
+            DAMAGE_BY_AD,
+            DAMAGE_BY_AP,
+            DOT_BY_AP,
+            DAMAGE_BY_TARGET_MAXHP,
 
-        // 버프 시의 스탯이 계산되는 방식.
-        public enum eOperator
-        {
-            Add,
-            Mul,
+            APPLY_CC,
+            BUFF_AA,
+            BUFF_ONCE_BY_AD,
+            BUFF_ONCE,
+
+            CREATE_SHIELD,
+            EXTEND_RANGE,
+            TELEPORT_TO_ALLY_REAR,
+            COUNT,
+            SWORD_SYNERGY_AABUFF,
+            RANGED_SYNERGY_ADBUFF,
+            SHIELD_SYNERGY_HEAL,
+            MAGIC_SYNERGY_MANABUFF,
+            DUALBLADE_SYNERGY_JUMP,
+
+            SYNERGY_TRIGGER,
+            eMax
         }
 
         public enum eDamageType
@@ -226,38 +210,38 @@ namespace Client
         {
             None,
 
-            통보,
-            가학,
-            치유력_감소,
+            LAYOFF,
+            STUN,
+            KNOCKBACK,
+            CHARM,
+            SILENCE,
+            TAUNT,
+            CRIPPLE,
+            PANIC,
+            WOUND,
 
             eMax
         }
-
-
-        public enum eDebuffType
-        {
-            None,
-
-            통보,
-            가학,
-            치유력_감소,
-
-            eMax
-        }
+        
 
         public enum eSkillTargetType
         {
             None,
 
+            SELF,
             NEAR_ENEMY,
-            CURRENT_ENEMY,
-            FARTHEST_ENEMY,
             NEAR_ENEMY_2,
             NEAR_ENEMY_3,
+            CURRENT_ENEMY,
+            CURRENT_NEAR1_ENEMY,
+            FARTHEST_ENEMY,            
             FARTHEST_ENEMY_2,
             LOW_HP_ENEMY,
-            LOW_HP_ALLY,
-            SELF,
+            LOW_HP_ALLY,           
+            NEAR_ALLY_3,
+            EVERY_ENEMY,
+            EVERY_ALLY,
+            CONTACT_ENEMY,
 
             eMax
         }
@@ -268,6 +252,7 @@ namespace Client
             TARGET_POSITION,
             PINGPONG,
             UNTIL_WALL,
+            STRAIGHT_STOP_ON_HIT,        
             WALL_BOUNCE,
             EMax,
         }
@@ -275,8 +260,9 @@ namespace Client
         public enum eProjectileRangeType
         {
             SINGLE,
+            SPLASH,
             SURROUND,
-            EMax,
+            eMax
         }
 
         public enum eLocalize

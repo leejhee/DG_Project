@@ -14,7 +14,7 @@ namespace Client
 
         public void Init()
         {
-            for (eFunction i = 0; i < eFunction.MaxCount; i++)
+            for (eFunction i = 0; i < eFunction.eMax; i++)
             {
                 _functionBaseDic[i] = new List<FunctionBase>();
             }
