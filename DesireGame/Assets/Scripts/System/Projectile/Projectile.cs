@@ -60,6 +60,8 @@ namespace Client
                     type = _projectileData.path,
                     Speed = 2f, // 이거어떻게 결정하지
                 });
+
+            _projectileLife = _projectileData.penetrationCount;
         }
 
         public void InjectProjectileFunction(List<long> indices)

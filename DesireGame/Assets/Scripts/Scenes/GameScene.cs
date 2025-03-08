@@ -38,7 +38,7 @@ namespace Client
             TestEnemy = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                 35,
-                100));
+                10000));
 
             MessageManager.SubscribeMessage<GameSceneMessageParam>(this, TestMessageSystem);
         }

@@ -34,6 +34,24 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 5250413031663389579}
+--- !u!114 &262757341300605903
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
+  m_EditorClassIdentifier: 
+  m_Time: 0.16666666666666666
+  _projectile: {fileID: 8707682887207861293, guid: 6eba046ed3c2f6045a765073c3e706f0, type: 3}
+  _offSet: {x: 0, y: 0, z: 0}
+  _statName: 3
+  percent: 120
+  indices: 
 --- !u!114 &2094542319575209362
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,4 +166,5 @@ MonoBehaviour:
   m_Children: []
   m_Clips: []
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: 262757341300605903}

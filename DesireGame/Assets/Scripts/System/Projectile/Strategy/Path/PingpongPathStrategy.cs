@@ -53,7 +53,10 @@ namespace Client
             if(other.TryGetComponent(out CharBase collidedChar))
             {
                 if (collidedChar.GetCharType() == enemyType)
+                {
+                    Debug.Log($"{collidedChar.GetID()}번 캐릭터 맞음");
                     return true;
+                }
             }
 
             return false; 

@@ -1112,7 +1112,7 @@ MonoBehaviour:
   testPlayerPoint: {x: 1, y: 1, z: -8}
   TestEnemy: {fileID: 0}
   testEnemyPoint: {x: 0, y: 1, z: 0}
-  projectileShootIndex: 500200
+  projectileShootIndex: 500210
 --- !u!1 &1597500249
 GameObject:
   m_ObjectHideFlags: 0
