@@ -51,7 +51,7 @@ MonoBehaviour:
   _offSet: {x: 0, y: 0, z: 0}
   _statName: 3
   percent: 120
-  indices: 
+  indices: 9228090000000000
 --- !u!114 &2094542319575209362
 MonoBehaviour:
   m_ObjectHideFlags: 1

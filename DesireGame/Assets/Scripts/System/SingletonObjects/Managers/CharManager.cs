@@ -224,10 +224,7 @@ namespace Client
         public CharBase GetNearestEnemy(CharBase ClientChar, int nTH = 0, bool inverse = false)
         {
             eCharType clientType = ClientChar.GetCharType();
-            Vector3 clientPosition = ClientChar.CharTransform.position;
-            var enemyDict = new Dictionary<long, CharBase>();
-
-            enemyDict = _cache[eCharTypeToType(CharUtil.GetEnemyType(clientType))];
+            var enemyDict = _cache[eCharTypeToType(CharUtil.GetEnemyType(clientType))];
 
             #region 오류 탐지
             if (enemyDict.Count == 0)
@@ -242,25 +239,13 @@ namespace Client
             }
             #endregion
 
-            var enemyDistances = new List<(CharBase Enemy, float DistSqr)>(enemyDict.Count);
-
+            var enemies = new List<CharBase>();
             foreach (var enemy in enemyDict.Values)
             {
-                float distSqr = (clientPosition - enemy.CharTransform.position).sqrMagnitude;
-                enemyDistances.Add((enemy, distSqr));
+                enemies.Add(enemy);
             }
 
-            enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
-            if (inverse)
-                enemyDistances.Sort((a, b) => b.DistSqr.CompareTo(a.DistSqr));
-            else
-                enemyDistances.Sort((a, b) => a.DistSqr.CompareTo(b.DistSqr));
-
-            if (nTH > enemyDict.Count)
-                return enemyDistances[^1].Enemy;
-
-            return enemyDistances[nTH].Enemy;
-            
+            return CharUtil.GetNearestInList(ClientChar, enemies, nTH, inverse);                      
         }
 
         /// <summary>
@@ -336,6 +321,22 @@ namespace Client
                 Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
             }
         }
+
+#if UNITY_EDITOR
+
+        public List<CharBase> GetCurrentCharacters()
+        {
+            var charlist = new List<CharBase>();
+            foreach(var dicts in _cache)
+            {
+                foreach(var character in dicts.Value)
+                {
+                    charlist.Add(character.Value);
+                }
+            }
+            return charlist;
+        }
+#endif
 
     }
 }

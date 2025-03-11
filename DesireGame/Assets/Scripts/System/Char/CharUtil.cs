@@ -36,7 +36,7 @@ namespace Client
                 return null;
             }
 
-                var distances = new List<(CharBase target, float dist)>(targetList.Count);
+            var distances = new List<(CharBase target, float dist)>(targetList.Count);
             Vector3 clientPosition = clientChar.CharTransform.position;
 
             for (int i = 0; i< targetList.Count; i++)

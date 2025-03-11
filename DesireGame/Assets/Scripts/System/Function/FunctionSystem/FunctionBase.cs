@@ -29,7 +29,6 @@ namespace Client
                 Debug.LogError($"Execution : {buffParam.FunctionIndex} 데이터 획득 실패");
             }
 
-            // 데이터가 null일 때 프로퍼티로 했다가 피보면 안되기 때문에 생성자에서 초기화.
             functionType = buffParam.eFunctionType;
 
             _LifeTime = _FunctionData.time > 0 ? 
@@ -47,9 +46,17 @@ namespace Client
         {
             if (StartFunction)
             {
+                Debug.Log($"Function 시작 : " +
+                    $"인덱스 {_FunctionData.Index} " +
+                    $"타입 {_FunctionData.function} " +
+                    $"시간 : {_FunctionData.time}");
             }
             else
             {
+                Debug.Log($"Function 종료 : " +
+                    $"인덱스 {_FunctionData.Index} " +
+                    $"타입 {_FunctionData.function} " +
+                    $"시간 : {_FunctionData.time}");
             }
         }
 

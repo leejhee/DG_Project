@@ -80,7 +80,7 @@ namespace Client
             _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // 현재 최대 마나
 
             _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
-            _charStat[(int)eStats.EFFECTIVE_HEALTH] = 0;            // 내구력 [TODO] : 정확히 알아볼 것
+            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 [TODO] : 정확히 알아볼 것
         }
 
         /// <summary> </summary>
@@ -99,7 +99,7 @@ namespace Client
                 case (eStats.CRIT_DAMAGE):
                 case (eStats.NCRIT_DAMAGE):
                 case (eStats.DAMAGE_INCREASE):
-                case (eStats.EFFECTIVE_HEALTH):
+                case (eStats.DAMAGE_REDUCTION):
                     return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
                     return _charStat[(int)eStats];
@@ -113,9 +113,11 @@ namespace Client
 
         public void ChangeStateByBuff(eStats stat, long delta)
         {
-            eStats properTargetStat = CurrentStatByBaseStat(stat);         
+            eStats properTargetStat = CurrentStatByBaseStat(stat);
+            var tempStat = GetStatRaw(properTargetStat);
             var afterStat = GetStatRaw(properTargetStat) + delta;
             _charStat[(int)properTargetStat] = afterStat;
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {tempStat} -> {afterStat}");
         }
 
         // 스탯의 초기값이 같은 곳에 있기 때문에 이렇게 한다.
@@ -130,7 +132,7 @@ namespace Client
                 case eStats.CRIT_CHANCE:    return eStats.NCRIT_CHANCE;
                 case eStats.CRIT_DAMAGE:    return eStats.NCRIT_CHANCE;
                 case eStats.ARMOR:          return eStats.NARMOR;
-                case eStats.MAGIC_RESIST:   return eStats.MAGIC_RESIST;
+                case eStats.MAGIC_RESIST:   return eStats.NMAGIC_RESIST;
                 case eStats.RANGE:          return eStats.NRANGE;
                 case eStats.MOVE_SPEED:     return eStats.NMOVE_SPEED;
                 default:
@@ -197,7 +199,7 @@ namespace Client
         {
             if (_charStat[(int)eStats.NHP] <= 0) return;
 
-            // 최종대미지 계산 파트
+            // 최종대미지 계산 파트(내구력 반영)
             float finalDamage = 0;
             if(damage.damageType == eDamageType.TRUE)
             {
@@ -211,7 +213,7 @@ namespace Client
                 finalDamage =
                     damage.rawDamage *
                     100f / (100 + defender - damage.penetration) *
-                    (1 - GetStat(eStats.EFFECTIVE_HEALTH));
+                    (1 - GetStat(eStats.DAMAGE_REDUCTION));
 
             }
             
@@ -239,7 +241,7 @@ namespace Client
             OnDamaged?.Invoke();
 
             // 사망 검사 파트
-            if (_charStat[(int)eStats.NHP] < 0)
+            if (_charStat[(int)eStats.NHP] <= 0)
             {
                 Debug.Log("으엑 죽었다");
                 OnDeath?.Invoke();

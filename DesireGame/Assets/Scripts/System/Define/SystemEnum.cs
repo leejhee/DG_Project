@@ -159,7 +159,7 @@ namespace Client
 
             MANA_RESTORE_INCREASE,
 
-            EFFECTIVE_HEALTH,
+            DAMAGE_REDUCTION,
 
             SHIELD,
 

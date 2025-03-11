@@ -123,17 +123,17 @@ namespace Client
             {
                 case eAttackMode.Auto:
                     ChangeState(PlayerState.ATTACK);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
+                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
                     break;
 
                 case eAttackMode.Skill:
                     ChangeState(PlayerState.ATTACK);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
+                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
                     break;
 
                 default:
                     ChangeState(PlayerState.IDLE);
-                    Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
+                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
                     //SetFinalTarget();
                     break;
             }

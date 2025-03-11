@@ -52,6 +52,7 @@ namespace Client
             }
 
 
+
             foreach (var posMap in charPositionMap.Values)
             {
                 CharPositionData charPosition = posMap as CharPositionData;
@@ -98,6 +99,8 @@ namespace Client
             {
                 return;
             }
+
+            _monsterSpawnStageMap.Clear();
 
             foreach (var _monsterSpawn in monsterSpawnMap.Values)
             {

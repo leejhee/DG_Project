@@ -78,7 +78,7 @@ namespace Client
 
     public class CCLayOff : CCBase
     {
-        float delta = 0;
+        private readonly float delta;
 
         public CCLayOff(CCParameter param) : base(param)
         {

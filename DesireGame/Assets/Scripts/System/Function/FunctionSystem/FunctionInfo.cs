@@ -44,7 +44,6 @@ namespace Client
                 }
             }
 
-            // 순회 후 제거 큐로 복사한 타겟 딕셔너리에서 제거 
             while (_functionKillQueue.Count != 0)
             {
                 FunctionBase target = _functionKillQueue.Dequeue();
