@@ -156,7 +156,7 @@ namespace Client
             START_MANA,
             N_MANA,
             MAX_MANA,
-
+            
             MANA_RESTORE_INCREASE,
 
             DAMAGE_REDUCTION,
@@ -179,6 +179,7 @@ namespace Client
 
             APPLY_CC,
             BUFF_AA,
+            ADDMANA_ON_AA,
             BUFF_ONCE_BY_AD,
             BUFF_ONCE,
 

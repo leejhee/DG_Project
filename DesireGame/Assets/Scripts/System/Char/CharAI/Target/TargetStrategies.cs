@@ -88,7 +88,7 @@ namespace Client
 
         public override List<CharBase> GetTargets()
         {
-            var current = Caster.CharAI.finalTarget;
+            var current = Caster.CharAI.FinalTarget;
             if (current == false)
                 current = CharManager.Instance.GetNearestEnemy(Caster);
             return new List<CharBase>()

@@ -5,6 +5,8 @@ using static Client.SystemEnum;
 using System;
 using UnityEditor.U2D.Animation;
 using Unity.VisualScripting;
+using static Client.CharAI;
+using System.Numerics;
 
 namespace Client
 {
@@ -80,7 +82,7 @@ namespace Client
             _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // 현재 최대 마나
 
             _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
-            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 [TODO] : 정확히 알아볼 것
+            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 (최종 피해량 퍼센트 경감)
         }
 
         /// <summary> </summary>
@@ -166,12 +168,12 @@ namespace Client
         public DamageParameter SendDamage(float statMultiplied, eDamageType type = eDamageType.None)
         {
             float rawDamage =
-                statMultiplied *                                        // 주스탯 * 계수
-                (1 + GetStat(eStats.DAMAGE_INCREASE)) *                 // 피해량 증가
+                (statMultiplied *                                           // 주스탯 * 계수                                  
                 (UnityEngine.Random.Range(0, 1) > GetStat(eStats.NCRIT_CHANCE) ?
-                    (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)             //치명타 확률 및 피해 계산
-                + GetStat(eStats.BONUS_DAMAGE);                         // 추가 대미지  
-
+                    (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)                 // 치명타 확률 및 피해 계산
+                + GetStat(eStats.BONUS_DAMAGE)) *                           // 추가 대미지  
+                (1 + GetStat(eStats.DAMAGE_INCREASE));                      // 피해량 증가                 
+            
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
             float penetration = GetPenetration(damageType);
@@ -192,8 +194,6 @@ namespace Client
                 GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
         }
 
-        // 내구력, 방어력 참고하여 쓸 것.
-        // 실드에의 대미지는 다 다른가요??
 
         public void ReceiveDamage(DamageParameter damage)
         {
@@ -249,12 +249,29 @@ namespace Client
         }
 
 
-        public void GainMana(int amount, bool isGain)
+        public void GainMana(eAttackMode mode)
+        {
+            if (mode == eAttackMode.Auto)
+            {
+                if (GetStat(eStats.MAX_MANA) != 0)
+                    GainMana(SystemConst.DEFAULT_MANA_RESTORE, true);
+            }
+            else if (mode == eAttackMode.Skill)
+            {
+                GainMana((int)GetStat(eStats.MAX_MANA), false);
+            }
+        }
+
+        public void GainMana(int amount, bool isGain, bool isAdditional=false)
         {
             var increaseRatio = GetStat(eStats.MANA_RESTORE_INCREASE);
-            if (isGain)
+            if (isGain && !isAdditional)
             {
                 _charStat[(int)eStats.N_MANA] += (int)((1 + increaseRatio) * amount);
+            }
+            else if(isGain && isAdditional)
+            {
+                _charStat[(int)eStats.N_MANA] += amount;
             }
             else
             {

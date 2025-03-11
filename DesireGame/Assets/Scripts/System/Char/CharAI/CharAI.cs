@@ -10,9 +10,9 @@ namespace Client
         public enum eAttackMode { None, Auto, Skill };
 
         private CharBase charAgent;
+        public CharBase FinalTarget { get; private set; }// 우선 순위 계산의 최종 결과
 
         private List<CharBase> cachedTargets;
-        public CharBase finalTarget { get; private set; }// 우선 순위 계산의 최종 결과
 
         private PlayerState currentState; // 새로운 모드 변경 여부
 
@@ -122,19 +122,12 @@ namespace Client
             switch (attackMode)
             {
                 case eAttackMode.Auto:
-                    ChangeState(PlayerState.ATTACK);
-                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Auto mode로 전환");
-                    break;
-
                 case eAttackMode.Skill:
                     ChangeState(PlayerState.ATTACK);
-                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Skill mode로 전환");
                     break;
 
                 default:
                     ChangeState(PlayerState.IDLE);
-                    //Debug.Log($"charAgent {charAgent.GetID()} 번 Idle mode로 전환");
-                    //SetFinalTarget();
                     break;
             }
         }
@@ -176,22 +169,22 @@ namespace Client
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
-            finalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
+            FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
         }
 
-        public void ExchangeMana(eAttackMode mode)
-        {
-            var stat = charAgent.CharStat;
-            if (mode == eAttackMode.Auto)
-            {
-                if (stat.GetStat(eStats.MAX_MANA) != 0)
-                    stat.GainMana(5, true);
-            }
-            else if (mode == eAttackMode.Skill)
-            {
-                stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
-            }
-        }
+        //public void ExchangeMana(eAttackMode mode)
+        //{
+        //    var stat = charAgent.CharStat;
+        //    if (mode == eAttackMode.Auto)
+        //    {
+        //        if (stat.GetStat(eStats.MAX_MANA) != 0)
+        //            stat.GainMana(5, true);
+        //    }
+        //    else if (mode == eAttackMode.Skill)
+        //    {
+        //        stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
+        //    }
+        //}
 
         public void SetAction(eAttackMode attackMode)
         {
@@ -200,7 +193,7 @@ namespace Client
 
             //데이터 기반 타겟 설정
             SetTarget(skillData.skillTarget);
-            if (finalTarget == null)
+            if (FinalTarget == null)
             {
                 Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 프레임에 타겟 할당합니다.");
                 return;
@@ -208,20 +201,21 @@ namespace Client
 
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = skillData.skillRange;
-            var distance = Vector3.Distance(charAgent.CharTransform.position, finalTarget.CharTransform.position);
+            var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
             var tolerance = 0.01f;
-            // 사거리와 비교 후 이동 결정
-            if (distance <= skillRange + tolerance || skillRange == 0)
-            {
-                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex));
-                ExchangeMana(attackMode);
 
+            // 사거리와 비교 후 이동 결정
+            bool inRange = distance <= skillRange + tolerance || skillRange == 0;
+            
+            if (inRange)
+            {
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));
                 Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {skillIndex} 사용");
             }
             else
             {
                 charAgent.Nav.stoppingDistance = skillRange;
-                charAgent.CharAction.CharMoveAction(new CharMoveParameter(finalTarget));
+                charAgent.CharAction.CharMoveAction(new CharMoveParameter(FinalTarget));
             }
         }
 

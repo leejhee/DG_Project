@@ -217,24 +217,24 @@ namespace Client
             animator.objectReferenceValue = anim;
 
             //////////FightCollider//////////////
-            Descendant = new GameObject("FightCollider");
-            Descendant.transform.SetParent(go.transform, false);
-            CapsuleCollider col = Descendant.AddComponent<CapsuleCollider>();
-            col.radius = 0.25f;
-            col.center = new Vector3(-0.5f, 0, 0);
-
-            SerializedProperty FightCollider = obj.FindProperty("_FightCollider");
-            FightCollider.objectReferenceValue = col;
+            //Descendant = new GameObject("FightCollider");
+            //Descendant.transform.SetParent(go.transform, false);
+            //CapsuleCollider col = Descendant.AddComponent<CapsuleCollider>();
+            //col.radius = 0.25f;
+            //col.center = new Vector3(-0.5f, 0, 0);
+            //
+            //SerializedProperty FightCollider = obj.FindProperty("_FightCollider");
+            //FightCollider.objectReferenceValue = col;
 
             //////////MoveCollider//////////////
-            Descendant = new GameObject("MoveCollider");
-            Descendant.transform.SetParent(go.transform, false);
-            col = Descendant.AddComponent<CapsuleCollider>();
-            col.radius = 0.25f;
-            col.center = new Vector3(-0.5f, 0, 0);
-
-            SerializedProperty MoveCollider = obj.FindProperty("_MoveCollider");
-            MoveCollider.objectReferenceValue = col;
+            //Descendant = new GameObject("MoveCollider");
+            //Descendant.transform.SetParent(go.transform, false);
+            //col = Descendant.AddComponent<CapsuleCollider>();
+            //col.radius = 0.25f;
+            //col.center = new Vector3(-0.5f, 0, 0);
+            //
+            //SerializedProperty MoveCollider = obj.FindProperty("_MoveCollider");
+            //MoveCollider.objectReferenceValue = col;
 
             //////////SkillRoot//////////////
             Descendant = new GameObject("SkillRoot");

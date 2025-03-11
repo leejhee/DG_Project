@@ -14,8 +14,10 @@ namespace Client
                 case eFunction.DAMAGE_BY_AD:            return new DamageByCasterAD(buffParam);
                 case eFunction.DAMAGE_BY_AP:            return new DamageByCasterAP(buffParam);
                 case eFunction.DAMAGE_BY_TARGET_MAXHP:  return new DamageByTargetMaxHP(buffParam);
+                case eFunction.DOT_BY_AP:               return new DamageOverTimeByAP(buffParam);
                 case eFunction.SYNERGY_TRIGGER:         return new SynergyTrigger(buffParam);
                 case eFunction.BUFF_AA:                 return new Buff_AA(buffParam);
+                case eFunction.ADDMANA_ON_AA:           return new AddMana_AA(buffParam);
                 case eFunction.BUFF_ONCE:               return new BuffOnce(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);

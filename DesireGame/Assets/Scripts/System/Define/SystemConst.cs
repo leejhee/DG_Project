@@ -15,6 +15,8 @@ namespace Client
 
         public static float TILE_UNIT_LENGTH = 1f;
 
+        public static int DEFAULT_MANA_RESTORE = 5;
+
         public static long NO_CONTENT = 0;              // 빈 인덱스용
         public static long SYNERGY_TRIGGER = 600001;    // 시너지 트리거용
 

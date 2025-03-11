@@ -1,13 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using static Client.CharAI;
+using static Client.SystemEnum;
 
 namespace Client
 {
     public class CharAction
     {
-        CharBase Actor;
+        private CharBase Actor;
 
-        NavMeshAgent Nav;
+        private NavMeshAgent Nav;
+
+        // 평타인지 스킬인지까지 따져서 발동하는 액션
+        public Action<eAttackMode> OnAttackAction;
 
         public CharAction(CharBase actor)
         {
@@ -23,7 +29,7 @@ namespace Client
             {
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);
-                Nav.speed = Actor.CharStat.GetStat(SystemEnum.eStats.NMOVE_SPEED);
+                Nav.speed = Actor.CharStat.GetStat(eStats.NMOVE_SPEED);
             }
             else
             {
@@ -39,8 +45,11 @@ namespace Client
         {
             var SkillInfo = Actor.CharSKillInfo;
             SkillInfo.PlaySkill(param.skillIndex,
-                new SkillParameter(param.targetChar, Actor));         
+                new SkillParameter(param.targetChar, Actor));
+            Actor.CharStat.GainMana(param.mode);
+            OnAttackAction?.Invoke(param.mode);
         }
+
     }
 
 }

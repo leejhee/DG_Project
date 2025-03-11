@@ -5,11 +5,10 @@ namespace Client
 {
     public class DamageOverTimeByAP : FunctionBase
     {
-        private float SecondTimer = 0;
+        private float SecondTimer = 1;
 
         public DamageOverTimeByAP(BuffParameter buffParam) : base(buffParam)
         {
-            Math.Clamp(SecondTimer, 0, 1);
         }
 
         public override void RunFunction(bool StartFunction = true)
@@ -20,7 +19,7 @@ namespace Client
         public override void Update(float delta)
         {
             base.Update(delta);
-            if(SecondTimer == 1)
+            if(SecondTimer >= 1)
             {
                 SecondTimer = 0;
                 _TargetChar.CharStat.ReceiveDamage(new DamageParameter()

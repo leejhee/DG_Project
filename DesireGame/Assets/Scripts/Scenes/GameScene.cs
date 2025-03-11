@@ -47,7 +47,7 @@ namespace Client
         private void TestProjectileShoot()
         {
             TestChar.CharAction.CharAttackAction
-                (new CharAttackParameter(TestEnemy, projectileShootIndex));
+                (new CharAttackParameter(TestEnemy, projectileShootIndex, CharAI.eAttackMode.None));
         }
         
         [ContextMenu("전투를 시작해보아요")]

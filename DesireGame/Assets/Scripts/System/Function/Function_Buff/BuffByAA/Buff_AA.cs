@@ -5,7 +5,7 @@ namespace Client
     /// <summary>
     /// BUFF_AA : 다음 {1}번의 AA가 {2}만큼 추가피해를 가합니다.
     /// </summary>
-    public class Buff_AA : StatBuffBase
+    public class Buff_AA : FunctionBase
     {
         private int _count = -1;
         private int _buffAmount = 0;
