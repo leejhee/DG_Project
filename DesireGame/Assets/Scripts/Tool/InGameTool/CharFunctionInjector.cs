@@ -23,7 +23,7 @@ namespace Client
 
         Vector2 scrollPos;
 
-        [MenuItem("Tools/Function Injector")]
+        [MenuItem("DG_InGame/캐릭터에 Function 주입")]
         public static void ShowWindow()
         {
             if (!EditorApplication.isPlaying)
@@ -134,7 +134,16 @@ namespace Client
             }
 
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("버프 적용", new GUIStyle(EditorStyles.boldLabel), GUILayout.Height(30)) && 
+
+            GUIStyle ButtonStyle = new(GUI.skin.button)
+            {
+                fontSize = 14,
+                fontStyle = FontStyle.Bold,
+                fixedHeight = 30, 
+                alignment = TextAnchor.MiddleCenter
+            };
+
+            if (GUILayout.Button("버프 적용", ButtonStyle, GUILayout.ExpandWidth(true)) && 
                 selectedFunction != null && CasterOrder > -1 && TargetOrder > -1)
             {
                 var caster = characterList[CasterOrder];

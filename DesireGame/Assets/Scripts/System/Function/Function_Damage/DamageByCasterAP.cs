@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using static Client.SystemEnum;
 
 namespace Client
 {
@@ -15,9 +16,9 @@ namespace Client
             base.RunFunction(StartFunction);
             if (StartFunction)
             {
-            }
-            else
-            {
+                var stat = _CastChar.CharStat;
+                _TargetChar.CharStat.ReceiveDamage(
+                    stat.SendDamage(stat.GetStat(eStats.NAP) * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND), eDamageType.MAGIC));
             }
         }
 
