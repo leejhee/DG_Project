@@ -11,19 +11,27 @@ namespace Client
 
         //private float currentSpeed;
 
-        private bool returning =false;
+        private bool returning = false;
 
         public PingpongPathStrategy(PathStrategyParameter param)
         {
             //해당 자리만을 목표로 하고 갑니다. 따라서 타겟의 실존 여부 확인 안함
-            AbstractTarget = param.target.CharTransform.position;
+            if(param.target == false)
+            {
+                AbstractTarget = default;
+                return;
+            }
+            else
+            {
+                AbstractTarget = param.target.CharTransform.position;
+            }
             InitialSpeed = param.Speed;
             //currentSpeed = param.Speed;
         }
 
         public void UpdatePosition(Projectile projectile)
         {
-            if (projectile.Caster == false)
+            if (projectile.Caster == false || projectile.Target == false)
             {
                 projectile.SetDestroyFlag(true);
                 return;

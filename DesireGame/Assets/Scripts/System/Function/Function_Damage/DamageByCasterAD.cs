@@ -15,9 +15,7 @@ namespace Client
             base.RunFunction(StartFunction);
             if (StartFunction)
             {
-            }
-            else
-            {
+                
             }
         }
     }

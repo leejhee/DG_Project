@@ -76,7 +76,7 @@ namespace Client
         
         private void FixedUpdate()
         {
-            if (_caster == null || destroyFlag == true)
+            if (_caster == false || _target == false || destroyFlag == true)
                 Destroy(gameObject);
             pathStrategy.UpdatePosition(this);
         }
