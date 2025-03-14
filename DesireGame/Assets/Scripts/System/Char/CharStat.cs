@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using static Client.SystemEnum;
 using System;
-using UnityEditor.U2D.Animation;
-using Unity.VisualScripting;
 using static Client.CharAI;
-using System.Numerics;
 
 namespace Client
 {
@@ -150,15 +147,7 @@ namespace Client
         public Action OnDealDamage;
         public Action OnDeath;
 
-        // 단순 '평타 강화' 등에 사용. AA 강화는 eStats로 써지지 않기 때문에.
-        //private float[] TemporaryAdditionalDamage = new float[(int)eDamageType.eMax];
-        //
-        //public void InjectAdditionalDamage(eDamageType type, float delta)
-        //{
-        //    TemporaryAdditionalDamage[(int)type] += delta;
-        //}
-
-
+        
 
         /// <summary>
         /// 공격자 기준 대미지 관여 요소들을 산출합니다.
@@ -216,23 +205,9 @@ namespace Client
                     (1 - GetStat(eStats.DAMAGE_REDUCTION));
 
             }
-            
-            var appliedDamage = (long)finalDamage;
 
             // 실드 계산 파트
-            if(_charStat[(int)eStats.SHIELD] > 0)
-            {
-                if (_charStat[(int)eStats.SHIELD] > appliedDamage)
-                {
-                    _charStat[(int)eStats.SHIELD] -= appliedDamage;
-                    Debug.Log($"보호막에 대미지 {appliedDamage}만큼 받음. 잔여 보호막 {GetStat(eStats.SHIELD)}");
-                }
-            }            
-            else
-            {                
-                appliedDamage -= _charStat[(int)eStats.SHIELD];
-                _charStat[(int)eStats.SHIELD] = 0;
-            }
+            var appliedDamage = (long)AbsorbDamage(finalDamage);
 
             // 실대미지 계산 파트
             _charStat[(int)eStats.NHP] -= appliedDamage;           
@@ -248,6 +223,31 @@ namespace Client
             }
         }
 
+        #endregion
+
+        #region Shield Managing
+        //[TODO] : 캡슐화 안해도 되려나...? 결정을 잘 해볼것.
+
+        // Function에 따른 실드를 담는다.
+        private readonly List<Shield> Shields = new();
+
+        public void AddShield(Shield shield) => Shields.Add(shield);
+        public void RemoveShield(Shield shield) => Shields.Remove(shield);
+        public float AbsorbDamage(float damage)
+        {
+            float remainingDamage = damage;
+            for (int i = Shields.Count - 1; i >= 0 && remainingDamage > 0; i--)
+            {
+                Shield shield = Shields[i];
+                remainingDamage = shield.AbsorbDamage(remainingDamage);
+            }
+
+            return remainingDamage;
+        }
+        #endregion
+
+
+        #region Mana Exchanging Function
 
         public void GainMana(eAttackMode mode)
         {
@@ -283,5 +283,7 @@ namespace Client
         #endregion
         
     }
+
+
 
 }

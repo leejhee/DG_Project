@@ -19,6 +19,8 @@ namespace Client
                 case eFunction.BUFF_AA:                 return new Buff_AA(buffParam);
                 case eFunction.ADDMANA_ON_AA:           return new AddMana_AA(buffParam);
                 case eFunction.BUFF_ONCE:               return new BuffOnce(buffParam);
+                case eFunction.CREATE_SHIELD:           return new CreateShield(buffParam);
+                case eFunction.EXTEND_RANGE:            return new ExtendRange(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);
                 default:

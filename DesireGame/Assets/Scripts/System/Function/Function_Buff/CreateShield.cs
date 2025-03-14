@@ -1,16 +1,80 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Client
 {
-    public class CraeteShield : FunctionBase
+    /// <summary>
+    /// SHIELD가 시전자의 {statsType}의 {1}%만큼 한 번 증가한다. Shield는 {time}ms 이후 사라진다.
+    /// </summary>
+    /// <remarks> 기획 의도에 따라 별도의 객체를 사용하도록 함.</remarks>
+    public class CreateShield : FunctionBase
     {
-        public CraeteShield(BuffParameter buffParam) : base(buffParam)
+        private Shield ShieldInstance = null;
+
+        public CreateShield(BuffParameter buffParam) : base(buffParam)
         {
+           
         }
 
         public override void RunFunction(bool StartFunction = true)
         {
             base.RunFunction(StartFunction);
-            
+            if(StartFunction)
+            {
+                var stat = _CastChar.CharStat;
+                if (stat == null) return;
+
+                var shieldAmount = (long)(stat.GetStat(_FunctionData.statsType) *
+                (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND));
+                ShieldInstance = new Shield(shieldAmount, this);
+
+                _TargetChar.CharStat.AddShield(ShieldInstance);
+                Debug.Log($"실드 추가: {_CastChar.GetID()}번이 {_TargetChar.GetID()}번에게 실드 부여");
+            }
+            else
+            {
+                _TargetChar.CharStat.RemoveShield(ShieldInstance);
+                Debug.Log($"실드 제거: {_CastChar.GetID()}번이 {_TargetChar.GetID()}번에게 준 실드 만료");
+            }
+        }
+
+        public void OnShieldBreak()
+        {
+            _TargetChar.FunctionInfo.KillFunction(this);
         }
 
     }
+
+    public class Shield
+    {
+        public float amount;
+        private CreateShield owner; 
+
+        public Shield(float amount, CreateShield owner)
+        {
+            this.amount = amount;
+            this.owner = owner;
+        }
+
+        /// <returns> 이 실드 인스턴스에서 흡수하고 남은 대미지를 반환한다. </returns>
+        public float AbsorbDamage(float damage)
+        {
+            if (amount >= damage)
+            {
+                amount -= damage;
+                return 0f;
+            }
+            else
+            {
+                float remainingDamage = damage - amount;
+                amount = 0f;
+                owner.OnShieldBreak();
+                Debug.Log($"실드 부서짐. 남은 대미지 : {remainingDamage}");
+                return remainingDamage;
+            }
+        }
+
+    }
+
 }

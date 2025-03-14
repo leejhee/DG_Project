@@ -16,7 +16,7 @@ namespace Client
 
         private PlayerState currentState; // 새로운 모드 변경 여부
 
-        bool resetTimer = false;
+        private bool resetTimer = false;
 
         public bool isAIRun { get; set; } = false; // 이 캐릭터는 현재 AI가 작동중입니다.
 
@@ -172,27 +172,12 @@ namespace Client
             FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
         }
 
-        //public void ExchangeMana(eAttackMode mode)
-        //{
-        //    var stat = charAgent.CharStat;
-        //    if (mode == eAttackMode.Auto)
-        //    {
-        //        if (stat.GetStat(eStats.MAX_MANA) != 0)
-        //            stat.GainMana(5, true);
-        //    }
-        //    else if (mode == eAttackMode.Skill)
-        //    {
-        //        stat.GainMana((int)stat.GetStat(eStats.MAX_MANA), false);
-        //    }
-        //}
-
         public void SetAction(eAttackMode attackMode)
         {
             var skillIndex = ReloadSkill(attackMode);
-            var skillData = DataManager.Instance.GetData<SkillData>(skillIndex);
-
+            var skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
             //데이터 기반 타겟 설정
-            SetTarget(skillData.skillTarget);
+            SetTarget(skill.TargetType);
             if (FinalTarget == null)
             {
                 Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 프레임에 타겟 할당합니다.");
@@ -200,13 +185,14 @@ namespace Client
             }
 
             //데이터 기반 사거리 설정 및 행동 결정
-            int skillRange = skillData.skillRange;
+            int skillRange = skill.NSkillRange;
             var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
             var tolerance = 0.01f;
 
             // 사거리와 비교 후 이동 결정
             bool inRange = distance <= skillRange + tolerance || skillRange == 0;
-            
+            if(charAgent.Index == 200)
+                Debug.Log(skillRange);
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));

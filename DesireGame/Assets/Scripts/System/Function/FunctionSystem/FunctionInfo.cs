@@ -31,8 +31,7 @@ namespace Client
                     target.InitFunction();
                     target.RunFunction(true);
                     _functionBaseDic[target.functionType].Add(target);
-                }
-                    
+                }                    
             }
 
             foreach (var functionBaseList in _functionBaseDic)

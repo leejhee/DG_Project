@@ -29,7 +29,7 @@ namespace Client
             }
             else
             {
-                if (isTemporal)
+                if (isTemporal && delta != 0)
                 {
                     ChangeStat(targetStat, -delta);                    
                 }

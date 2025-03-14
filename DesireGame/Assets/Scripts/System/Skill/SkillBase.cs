@@ -16,13 +16,13 @@ namespace Client
         private CharBase _caster;
 
         private SkillData _skillData;
-        private int _nSkillRange; // 현재 사거리
+
 
         public PlayableDirector PlayableDirector => _PlayableDirector;
         public CharBase CharPlayer => _caster;
         public SkillParameter InputParameter { get; private set; }
-        public int NSkillRange => _nSkillRange;
-        public SystemEnum.eSkillTargetType TargetType => _skillData.skillTarget;
+        public int NSkillRange { get; private set; }
+        public SystemEnum.eSkillTargetType TargetType {  get; private set; }
 
         public void SetCharBase(CharBase caster)
         {
@@ -33,7 +33,25 @@ namespace Client
         public void Init(SkillData data)
         {
             _skillData = data;
-            _nSkillRange = data.skillRange;
+            NSkillRange = data.skillRange;
+            TargetType = data.skillTarget;
+        }
+
+        public void ResetSkill()
+        {
+            Init(_skillData);
+        }
+        
+        // 구린데 이거말고 방법 있는지 모르겠음
+        public void SetRange(int value, bool delta=false)
+        {
+            if (NSkillRange == 0) 
+                return;
+
+            if (delta)
+                NSkillRange += value;
+            else
+                NSkillRange = value;
         }
 
         private void Awake()
