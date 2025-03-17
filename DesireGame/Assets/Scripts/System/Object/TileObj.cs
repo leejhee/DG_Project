@@ -2,15 +2,20 @@ using Client;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
 
 namespace Client
 {
     public class TileObj : MonoBehaviour
     {
         [SerializeField] private int _tileIndex;
+        [SerializeField] private eCharType _teamTile = eCharType.None;
+        
         private CharBase _charBase = null;
 
         public int TileIndex => _tileIndex;
+        public eCharType TeamTile => _teamTile;
+
         private void Start()
         {
             TileManager.Instance.SetTile(_tileIndex, this);

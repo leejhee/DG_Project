@@ -29,6 +29,7 @@ namespace Client
 
             TileMap.Add(index, tile);
         }
+
         public TileObj GetTile(int index)
         {
             if (TileMap.ContainsKey(index))
@@ -62,8 +63,14 @@ namespace Client
             {
                 Debug.LogError($"TileManager.SetChar 타일 인덱스 : {tileIndex}는 존재하지 않는 타일 인덱스입니다.");
                 return;
-            }
+            }          
+
             var tile = TileMap[tileIndex];
+            if(tile.TeamTile != setChar.GetCharType())
+            {
+                Debug.LogWarning("상대 팀으로 이동할 수 없습니다.");
+                return;
+            }
             tile.SetChar(setChar);
         }
 
@@ -73,7 +80,9 @@ namespace Client
                 return;
 
             int index = NearTileIndex(mas.moveChar.transform.position);
-            if (index == -1 || index == mas.beforeTileIndex)
+          
+            if (index == -1 || index == mas.beforeTileIndex ||
+                GetTile(index).TeamTile != mas.moveChar.GetCharType())
             {
                 SetChar(mas.beforeTileIndex, mas.moveChar);
                 return;
