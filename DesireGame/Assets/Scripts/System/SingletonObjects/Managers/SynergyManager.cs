@@ -81,8 +81,6 @@ namespace Client
 
     }
 
-    // 경량 구조. 이 단서로 무조건 CharBase를 찾을 수 있으나, CharManagere에서 CharBase 리턴하는 함수가 필요.
-    // 왜 이걸 생각했느냐? SynergyManager의 CharBase에의 의존성을 줄이려고 Trigger을 만들었는데, CharBase로 등록하면 안되지 않을까 해서.
     public struct CharLightWeightInfo
     {
         public long index;
@@ -94,10 +92,6 @@ namespace Client
         }
     }
     
-    // 캐릭터 - 트리거 - 매니저 이런식으로 연결이 느슨해졌는데
-    // 매니저에서 캐릭터 베이스 자체에 접근할 일이 잘 또는 아예 없다면
-    // 굳이 CharBase를 가지고 있어야 할까?
-    // 그냥 저 경량 정보로 가지고 있으면 어떨까? 라는 생각을 했다...
 
     public class SynergyContainer
     {

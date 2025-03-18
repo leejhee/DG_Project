@@ -129,7 +129,6 @@ namespace Client
             var synergyDict = _cache[key];
             if (synergyDict is null) return;
 
-            // 표현하는 시너지 단계별 인원수는 반드시 하나여야 함.!
             foreach(var kvp in synergyDict)
             {
                 var synergy = kvp.Value as SynergyData;

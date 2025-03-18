@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
+using static Client.SystemConst;
 
 namespace Client
 {
@@ -17,6 +19,14 @@ namespace Client
         public void SubscribePlayerMove()
         {
             MessageManager.SubscribeMessage<PlayerMove>(this, VecToTileIndex);
+        }
+
+        public void SwitchTileCombatmode(bool isCombat)
+        {
+            foreach (var tile in TileMap.Values)
+            {
+                tile.SwitchCombatBehaviour(isCombat);
+            }
         }
 
         public void SetTile(int index, TileObj tile)
@@ -117,5 +127,94 @@ namespace Client
                 return index;
             }
         }
+
+        #region Character Tile Movement Helper Method
+
+        /// <summary> 캐릭터 타입 기준 아군 및 적군 특정 열의 인덱스들을 반환 </summary>
+        public List<int> GetDemandingPositions(eCharType type, bool sameSide, int col)
+        {
+            List<int> results = new();
+            int colOffset = 0;                    
+
+            if (type == eCharType.ALLY)
+            {
+                colOffset += sameSide ? TILE_COL_COUNT - col : TILE_COL_COUNT + col - 1;
+            }
+            else if (type == eCharType.ENEMY)
+            {
+                colOffset += sameSide ? TILE_COL_COUNT + col - 1 : TILE_COL_COUNT - col;
+            }
+
+            int startIndex = colOffset * TILE_COL_OFFSET;
+            for (int idx = startIndex; idx < startIndex + TILE_SIDE_OFFSET; idx++)
+                results.Add(idx);
+
+            return results;
+        }
+
+        /// <summary> 캐릭터 타입 기준 아군, 적군 측 리스트를 반환 </summary>
+        public List<int> GetDemandingPositions(eCharType type, bool sameSide)
+        {
+            List<int> results = new();
+            int startPoint = 0;
+            if (type == eCharType.ALLY)
+            {
+                startPoint += sameSide ? 0 : TILE_SIDE_OFFSET;
+            }
+            else if (type == eCharType.ENEMY)
+            {
+                startPoint += sameSide ? TILE_SIDE_OFFSET : 0;
+            }
+
+            for(int idx = startPoint; idx < startPoint + TILE_SIDE_OFFSET; idx++)
+                results.Add(idx);
+
+            return results;
+        }
+
+        public List<int> FilterIndices(List<int> rawIndices)
+        {
+            List<int> indices = new();
+            foreach(int i in rawIndices)
+            {
+                if (GetTile(i) == false || GetTile(i).Accessable == false) continue;
+                indices.Add(i);
+            }
+           return indices;
+        }
+
+        public Vector3 GetFarthestPos(Vector3 charPos, List<int> candidates)
+        {
+            if(candidates == null || candidates.Count == 0)
+            {
+                Debug.LogError("후보군에 이상 생김. 디버깅 바랍니다.");
+                return Vector3.zero;
+            }
+
+            int result = -1;
+            float farthest = 0;
+            foreach(var idx in candidates)
+            {
+                var originDist = (GetTile(idx).transform.position - charPos).sqrMagnitude;
+                if(originDist > farthest)
+                {
+                    farthest = originDist;
+                    result = idx;
+                }
+            }
+            return GetTile(result).transform.position;
+        } 
+
+        
+        public void TeleportAllyFarthest(CharBase client)
+        {
+            var demandingPositions = GetDemandingPositions(client.GetCharType(), true);
+            var filteredPositions = FilterIndices(demandingPositions);
+            var beforePos = client.CharTransform.position;
+            client.CharTransform.position = GetFarthestPos(beforePos, filteredPositions);
+            Debug.Log($"텔레포트 완료. {client.GetID()}번 {client.name}이 {beforePos}에서 {client.CharTransform.position}으로 이동");
+        }
+
+        #endregion
     }
 }

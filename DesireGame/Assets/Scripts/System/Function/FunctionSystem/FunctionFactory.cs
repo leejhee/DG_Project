@@ -23,6 +23,8 @@ namespace Client
                 case eFunction.EXTEND_RANGE:            return new ExtendRange(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);
+                case eFunction.TELEPORT_TO_ALLY_REAR:   return new TeleportToAllyRear(buffParam);
+                case eFunction.SWORD_SYNERGY_AABUFF:    return new SWORD_AA(buffParam);
                 default:
                     break;
             }

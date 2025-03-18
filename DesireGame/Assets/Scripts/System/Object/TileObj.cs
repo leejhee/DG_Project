@@ -10,11 +10,18 @@ namespace Client
     {
         [SerializeField] private int _tileIndex;
         [SerializeField] private eCharType _teamTile = eCharType.None;
-        
+        [SerializeField] private TileCombatBehaviour _tileCombat;
+
         private CharBase _charBase = null;
 
         public int TileIndex => _tileIndex;
         public eCharType TeamTile => _teamTile;
+
+        #region 전투 컴포넌트 기능 연결
+        public void SwitchCombatBehaviour(bool iscombat) => _tileCombat.enabled = iscombat;
+        public bool Accessable => _tileCombat.IsEmpty;
+        public HashSet<CharBase> GetTotalSteppingChar(HashSet<CharBase> other) { return _tileCombat.GetTotalChar(other); }
+        #endregion
 
         private void Start()
         {

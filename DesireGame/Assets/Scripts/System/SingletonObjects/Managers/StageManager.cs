@@ -37,6 +37,15 @@ namespace Client
                 TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
             }
 
+            TileManager.Instance.SwitchTileCombatmode(false);
+
+        }
+
+        public void StartCombat()
+        {
+            SetIsFinish(false);
+            TileManager.Instance.SwitchTileCombatmode(true);
+            CharManager.Instance.WakeAllCharAI();
         }
 
         /// <summary>

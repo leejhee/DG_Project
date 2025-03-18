@@ -37,6 +37,8 @@ namespace Client
         {
             this.StatOwner = StatOwner;
 
+            #region Init Stats
+
             _charStat[(int)eStats.AD] = charStat.AD;    // 공격력
             _charStat[(int)eStats.NAD] = charStat.AD;   // 현재 공격력
 
@@ -80,6 +82,9 @@ namespace Client
 
             _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
             _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 (최종 피해량 퍼센트 경감)
+
+            #endregion
+
         }
 
         /// <summary> </summary>
@@ -115,7 +120,17 @@ namespace Client
             eStats properTargetStat = CurrentStatByBaseStat(stat);
             var tempStat = GetStatRaw(properTargetStat);
             var afterStat = GetStatRaw(properTargetStat) + delta;
-            _charStat[(int)properTargetStat] = afterStat;
+
+            switch (properTargetStat)
+            {
+                case eStats.NHP:
+                    _charStat[(int)eStats.NHP] = (long)Mathf.Clamp(_charStat[(int)eStats.NHP], 0, _charStat[(int)eStats.NMHP]);
+                    break;
+                default:
+                    _charStat[(int)properTargetStat] = afterStat;
+                    break;
+            }
+
             Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {tempStat} -> {afterStat}");
         }
 
@@ -207,11 +222,11 @@ namespace Client
             }
 
             // 실드 계산 파트
-            var appliedDamage = (long)AbsorbDamage(finalDamage);
+            var appliedDamage = AbsorbDamage((long)finalDamage);
 
             // 실대미지 계산 파트
             _charStat[(int)eStats.NHP] -= appliedDamage;           
-             Debug.Log($"대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+             Debug.Log($"{StatOwner.GetID()}번 유닛 대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
             
             OnDamaged?.Invoke();
 
@@ -231,11 +246,15 @@ namespace Client
         // Function에 따른 실드를 담는다.
         private readonly List<Shield> Shields = new();
 
-        public void AddShield(Shield shield) => Shields.Add(shield);
-        public void RemoveShield(Shield shield) => Shields.Remove(shield);
-        public float AbsorbDamage(float damage)
+        public void AddShield(Shield shield) 
         {
-            float remainingDamage = damage;
+            Shields.Add(shield);
+            _charStat[(int)eStats.SHIELD] += (long)shield.Amount;
+        } 
+        public void RemoveShield(Shield shield) => Shields.Remove(shield);
+        public long AbsorbDamage(long damage)
+        {
+            long remainingDamage = damage;
             for (int i = Shields.Count - 1; i >= 0 && remainingDamage > 0; i--)
             {
                 Shield shield = Shields[i];

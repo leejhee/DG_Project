@@ -18,7 +18,6 @@ namespace Client
             isTemporal = (_LifeTime != 0);
         }
 
-
         public override void RunFunction(bool StartFunction)
         {
             base.RunFunction(StartFunction);

@@ -33,7 +33,7 @@ namespace Client
             TestChar = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                 15,
-                200));
+                100));
             
             TestEnemy = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
@@ -53,9 +53,7 @@ namespace Client
         [ContextMenu("전투를 시작해보아요")]
         public void TestAIInitialize()
         {
-            // 임시
-            StageManager.Instance.SetIsFinish(false); 
-            CharManager.Instance.WakeAllCharAI();
+            StageManager.Instance.StartCombat();
         }
 
         [ContextMenu("시너지 조회")]

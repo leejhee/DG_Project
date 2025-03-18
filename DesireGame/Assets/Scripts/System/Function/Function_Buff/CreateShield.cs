@@ -48,27 +48,27 @@ namespace Client
 
     public class Shield
     {
-        public float amount;
-        private CreateShield owner; 
+        public long Amount { get; private set; }
+        private CreateShield owner = null; 
 
-        public Shield(float amount, CreateShield owner)
+        public Shield(long Amount, CreateShield owner)
         {
-            this.amount = amount;
+            this.Amount = Amount;
             this.owner = owner;
         }
 
         /// <returns> 이 실드 인스턴스에서 흡수하고 남은 대미지를 반환한다. </returns>
-        public float AbsorbDamage(float damage)
+        public long AbsorbDamage(long damage)
         {
-            if (amount >= damage)
+            if (Amount >= damage)
             {
-                amount -= damage;
-                return 0f;
+                Amount -= damage;
+                return 0;
             }
             else
             {
-                float remainingDamage = damage - amount;
-                amount = 0f;
+                long remainingDamage = damage - Amount;
+                Amount = 0;
                 owner.OnShieldBreak();
                 Debug.Log($"실드 부서짐. 남은 대미지 : {remainingDamage}");
                 return remainingDamage;
