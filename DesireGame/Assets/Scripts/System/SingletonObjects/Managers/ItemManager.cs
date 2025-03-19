@@ -1,0 +1,166 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using static Client.SystemEnum;
+
+namespace Client
+{
+    public class ItemManager : Singleton<ItemManager>
+    {
+        #region 생성자
+        ItemManager() { }
+        #endregion
+        // 고유 ID 생성 
+        private long _nextID = 0;
+        private List<int> cumulativeWeights = new(); // 서브스탯 - 가중치 누적 합을 저장
+        public List<int> CumulativeWeights => cumulativeWeights;
+        public override void Init()
+        {
+            base.Init();
+            AccumulateWeights();
+        }
+        public long GetNextID() => _nextID++;
+
+        #region 서브 스탯 결정 파트
+        /// <summary>
+        /// 가중치 누적 합 미리 계산 - binary search용
+        /// </summary>
+        public void AccumulateWeights()
+        {
+            cumulativeWeights.Clear(); // 기존 데이터 초기화
+            int sum = 0;
+
+            var ItemSubStatDataList = DataManager.Instance.GetDataList<ItemSubStatData>();
+            if (ItemSubStatDataList == null)
+            {
+                Debug.LogWarning("ItemSubStatDataList 를 찾지 못함");
+            }
+
+            foreach(var _itemSubStatData in ItemSubStatDataList)
+            {
+                var itemSubStatData = _itemSubStatData as ItemSubStatData;
+                int proWeight = itemSubStatData.proWeight;
+                sum += proWeight;
+                cumulativeWeights.Add(sum);
+                Debug.Log($"누적 가중치 {sum}");
+            }
+        }
+
+        /// <summary>
+        /// 스탯 증가량 정하기
+        /// </summary>
+        /// <param name="itemSubStatData"></param>
+        /// <returns></returns>
+        public int SetStatIncrease(ItemSubStatData itemSubStatData)
+        {
+            return Random.Range(itemSubStatData.min, itemSubStatData.max + 1);
+        }
+
+        /// <summary>
+        /// 서브 스탯 랜덤 가챠
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public List<(SystemEnum.eStats eStat, int increase)> GenerateSubStats(int count)
+        {
+
+            List<(SystemEnum.eStats eStat, int increase)> list = new();
+            if (count == 0) return list;
+
+            var ItemSubStatDataList = DataManager.Instance.GetDataList<ItemSubStatData>();
+            if (ItemSubStatDataList == null)
+            {
+                Debug.LogWarning("ItemSubStatDataList 를 찾지 못함");
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                float randomValue = Random.Range(0, cumulativeWeights[^1]);
+                int index = cumulativeWeights.FindIndex(x => x > randomValue);
+
+                var _itemSubStatData = ItemSubStatDataList[index];
+                var itemSubStatData = _itemSubStatData as ItemSubStatData;
+                list.Add((itemSubStatData.subStats, SetStatIncrease(itemSubStatData)));
+                Debug.Log($"서브 스탯 : {list[i].eStat}, 증가량 : {list[i].increase}");
+            }
+            return list;
+        }
+        #endregion
+
+        // 위치 옮길 수도..
+        public List<long> SetDropTableList(long enemyID)
+        {
+            // 1. 적이 가진 드랍 테이블 그룹 아이디를 가지고 테이블 정보 가져오기
+            EnemyData enemyData = DataManager.Instance.GetData<EnemyData>(enemyID);
+            DropTableGroup dropTableGroup = DataManager.Instance.GetData<DropTableGroup>(enemyData.dropTableGroupID);
+
+            // 2. 확정 드랍 테이블 아이디는 그냥 리스트에 넣기
+            List<long> dropTableIDList = new List<long>(dropTableGroup.fixDrop);
+
+            // 3-1. 랜덤 드랍 리스트에서 가중치 반영해서 몇개 뽑을지 결정
+            List<int> cumulative = new List<int>()
+            {
+                dropTableGroup.noItem,
+                dropTableGroup.noItem + dropTableGroup.oneItem,
+                dropTableGroup.noItem + dropTableGroup.oneItem + dropTableGroup.twoItem,
+                dropTableGroup.noItem + dropTableGroup.oneItem + dropTableGroup.twoItem + dropTableGroup.threeItem
+            }; // 구려
+
+            float randomValue = Random.Range(0f, cumulative[^1]);
+            int itemQuantity = cumulative.FindIndex(x => x > randomValue);
+
+            // 3-2. 랜덤 드랍 리스트의 아이디들 가지고 드랍테이블 정보 가져오기, 확률 가중치(in DropTable) 계산을 위한 누적 가중치 리스트 만들기
+            List<DropTable> _dropTableList = new();
+            List<int> cumulative2 = new();
+            int sum = 0;
+            foreach (long id in dropTableGroup.ranDrop)
+            {
+                DropTable dropTable = DataManager.Instance.GetData<DropTable>(id);
+                sum += dropTable.prob;
+                _dropTableList.Add(dropTable);
+                cumulative2.Add(sum);
+            }
+
+            // 3-3. 3-1에서 정한 아이템 개수만큼 랜덤드랍 리스트에서 드랍테이블 id 가져오기
+            for (int i = 0; i < itemQuantity; i++)
+            {
+                float rand = Random.Range(0f, cumulative2[^1]);
+                int id = cumulative2.FindIndex(x => x > rand);
+
+                long randDroptableID = dropTableGroup.ranDrop[id];
+                dropTableIDList.Add(randDroptableID);
+            }
+
+            return dropTableIDList;
+        }
+
+
+        public void DropItemBox(Vector3 position, List<int> dropList)
+        {
+            foreach (int dropIndex in dropList)
+            {
+                DropTable dropTable = DataManager.Instance.GetData<DropTable>(dropIndex);
+                if (dropTable == null)
+                {
+                    Debug.LogError($"DropTable ID {dropIndex} 정보 없음");
+                    return;
+                }
+
+                Item item = new Item(dropTable.itemID);
+                GameObject boxPrefab = GetItemBoxByTier(dropTable.beadTier);
+                    
+                if (boxPrefab != null)
+                {
+                    // 박스 프리팹을 인스턴스화하고 아이템 정보를 넣습니다.
+                    GameObject itemBox = GameObject.Instantiate(boxPrefab, position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
+                    itemBox.GetComponent<ItemBox>().WrapItem(item, dropTable.amount);
+                }
+            }
+        }
+        GameObject GetItemBoxByTier(eItemTier eItemTier)
+        {
+            return ObjectManager.Instance.Instantiate($"Item/ItemBox_{eItemTier}");
+        }
+
+    }
+}

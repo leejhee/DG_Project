@@ -11,18 +11,14 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class ItemData : SheetData
+    public partial class EnemyData : SheetData
     {
-public long Index; // itemID
-		public string nameStringCode; // 이름 스트링 코드
+public long Index; // enemyID
+		public string enemyName; // 몬스터 이름
+		public long CharID; // CharID
 		
-		public SystemEnum.eItemTier itemTier; // 아이템 티어
-		
-		public SystemEnum.eStats mainStats; // 메인스탯이름
-		public int mainStatsIncrease; // 메인 스탯증가량(만분율)
-		public int subStatsCount; // 서브스탯수
-		
-		public SystemEnum.eFunction func; // 특수효과
+		public SystemEnum.eMosterType MosterType; // MosterType
+		public long dropTableGroupID; // 드랍테이블그룹아이디
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -45,7 +41,7 @@ public long Index; // itemID
 
                     line = i;
 
-                    ItemData data = new ItemData();
+                    EnemyData data = new EnemyData();
 
                     
 					if(values[0] == "")
@@ -54,34 +50,24 @@ public long Index; // itemID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[1] == "")
-					    data.nameStringCode = default;
+					    data.enemyName = default;
 					else
-					    data.nameStringCode = Convert.ToString(values[1]);
+					    data.enemyName = Convert.ToString(values[1]);
+					
+					if(values[2] == "")
+					    data.CharID = default;
+					else
+					    data.CharID = Convert.ToInt64(values[2]);
 					
 					if(values[3] == "")
-					    data.itemTier = default;
+					    data.MosterType = default;
 					else
-					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[3]);
+					    data.MosterType = (SystemEnum.eMosterType)Enum.Parse(typeof(SystemEnum.eMosterType), values[3]);
 					
 					if(values[4] == "")
-					    data.mainStats = default;
+					    data.dropTableGroupID = default;
 					else
-					    data.mainStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[4]);
-					
-					if(values[5] == "")
-					    data.mainStatsIncrease = default;
-					else
-					    data.mainStatsIncrease = Convert.ToInt32(values[5]);
-					
-					if(values[6] == "")
-					    data.subStatsCount = default;
-					else
-					    data.subStatsCount = Convert.ToInt32(values[6]);
-					
-					if(values[7] == "")
-					    data.func = default;
-					else
-					    data.func = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[7]);
+					    data.dropTableGroupID = Convert.ToInt64(values[4]);
 					
 
                     dataList[data.Index] = data;

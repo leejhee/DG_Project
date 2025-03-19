@@ -11,18 +11,15 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class ItemData : SheetData
+    public partial class DropTable : SheetData
     {
-public long Index; // itemID
-		public string nameStringCode; // 이름 스트링 코드
+public long Index; // ID
+		public long itemID; // 아이템 ID
+		public int amount; // 수량
+		public int prob; // 확률
 		
-		public SystemEnum.eItemTier itemTier; // 아이템 티어
-		
-		public SystemEnum.eStats mainStats; // 메인스탯이름
-		public int mainStatsIncrease; // 메인 스탯증가량(만분율)
-		public int subStatsCount; // 서브스탯수
-		
-		public SystemEnum.eFunction func; // 특수효과
+		public SystemEnum.eItemTier beadTier; // 구슬 등급
+		public string beadColor; // 구슬 색상
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -45,7 +42,7 @@ public long Index; // itemID
 
                     line = i;
 
-                    ItemData data = new ItemData();
+                    DropTable data = new DropTable();
 
                     
 					if(values[0] == "")
@@ -54,34 +51,29 @@ public long Index; // itemID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[1] == "")
-					    data.nameStringCode = default;
+					    data.itemID = default;
 					else
-					    data.nameStringCode = Convert.ToString(values[1]);
-					
-					if(values[3] == "")
-					    data.itemTier = default;
-					else
-					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[3]);
+					    data.itemID = Convert.ToInt64(values[1]);
 					
 					if(values[4] == "")
-					    data.mainStats = default;
+					    data.amount = default;
 					else
-					    data.mainStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[4]);
+					    data.amount = Convert.ToInt32(values[4]);
 					
 					if(values[5] == "")
-					    data.mainStatsIncrease = default;
+					    data.prob = default;
 					else
-					    data.mainStatsIncrease = Convert.ToInt32(values[5]);
+					    data.prob = Convert.ToInt32(values[5]);
 					
 					if(values[6] == "")
-					    data.subStatsCount = default;
+					    data.beadTier = default;
 					else
-					    data.subStatsCount = Convert.ToInt32(values[6]);
+					    data.beadTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[6]);
 					
 					if(values[7] == "")
-					    data.func = default;
+					    data.beadColor = default;
 					else
-					    data.func = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[7]);
+					    data.beadColor = Convert.ToString(values[7]);
 					
 
                     dataList[data.Index] = data;

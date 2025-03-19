@@ -24,6 +24,11 @@ namespace Client
         private Dictionary<eSynergy, Dictionary<int, SynergyData>> _synergyTriggerMap = new();
         public Dictionary<eSynergy, Dictionary<int, SynergyData>> SynergyTriggerMap => _synergyTriggerMap;
 
+        // 아이템 데이터
+        private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
+        public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
+
+
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
         #endregion
@@ -37,6 +42,8 @@ namespace Client
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
             if (typeof(MonsterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
+            if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
+
 
         }
         // 플레이어 위치정보
@@ -138,6 +145,28 @@ namespace Client
                     _synergyTriggerMap[synergy.synergyType].Add(synergy.levelThresholds, synergy);
             }
         }
+
+        // 아이템 티어별 데이터
+        private void SetItemDataMap()
+        {
+            string key = typeof(ItemData).Name;
+            if (_cache.ContainsKey(key) == false)
+                return;
+
+            var itemDict = _cache[key];
+            if (itemDict is null) return;
+
+            foreach (var kvp in itemDict)
+            {
+                var itemData = kvp.Value as ItemData;
+
+                if (!_itemDataMap.ContainsKey(itemData.itemTier))
+                    _itemDataMap.Add(itemData.itemTier, new List<ItemData>());
+                if (!_itemDataMap[itemData.itemTier].Contains(itemData))
+                    _itemDataMap[itemData.itemTier].Add(itemData);
+            }
+        }
+
 
         public static string GetStringCode(string stringCode)
         {

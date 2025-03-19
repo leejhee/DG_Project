@@ -11,18 +11,15 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class ItemData : SheetData
+    public partial class DropTableGroup : SheetData
     {
-public long Index; // itemID
-		public string nameStringCode; // 이름 스트링 코드
-		
-		public SystemEnum.eItemTier itemTier; // 아이템 티어
-		
-		public SystemEnum.eStats mainStats; // 메인스탯이름
-		public int mainStatsIncrease; // 메인 스탯증가량(만분율)
-		public int subStatsCount; // 서브스탯수
-		
-		public SystemEnum.eFunction func; // 특수효과
+public long Index; // ID
+		public List<long> fixDrop; // 확정드랍
+		public List<long> ranDrop; // 변동드랍
+		public int noItem; // 아이템0개나올확률
+		public int oneItem; // 아이템1개나올확률
+		public int twoItem; // 아이템2개나올확률
+		public int threeItem; // 아이템3개나올확률
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -45,7 +42,7 @@ public long Index; // itemID
 
                     line = i;
 
-                    ItemData data = new ItemData();
+                    DropTableGroup data = new DropTableGroup();
 
                     
 					if(values[0] == "")
@@ -53,35 +50,35 @@ public long Index; // itemID
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[1] == "")
-					    data.nameStringCode = default;
-					else
-					    data.nameStringCode = Convert.ToString(values[1]);
+					ListStr = values[1].Replace('[',' ');
+					ListStr = ListStr.Replace(']', ' ');
+					var fixDropData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
+					data.fixDrop = fixDropData;
+					
+					ListStr = values[2].Replace('[',' ');
+					ListStr = ListStr.Replace(']', ' ');
+					var ranDropData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
+					data.ranDrop = ranDropData;
 					
 					if(values[3] == "")
-					    data.itemTier = default;
+					    data.noItem = default;
 					else
-					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[3]);
+					    data.noItem = Convert.ToInt32(values[3]);
 					
 					if(values[4] == "")
-					    data.mainStats = default;
+					    data.oneItem = default;
 					else
-					    data.mainStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[4]);
+					    data.oneItem = Convert.ToInt32(values[4]);
 					
 					if(values[5] == "")
-					    data.mainStatsIncrease = default;
+					    data.twoItem = default;
 					else
-					    data.mainStatsIncrease = Convert.ToInt32(values[5]);
+					    data.twoItem = Convert.ToInt32(values[5]);
 					
 					if(values[6] == "")
-					    data.subStatsCount = default;
+					    data.threeItem = default;
 					else
-					    data.subStatsCount = Convert.ToInt32(values[6]);
-					
-					if(values[7] == "")
-					    data.func = default;
-					else
-					    data.func = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[7]);
+					    data.threeItem = Convert.ToInt32(values[6]);
 					
 
                     dataList[data.Index] = data;
