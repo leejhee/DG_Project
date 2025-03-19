@@ -46,7 +46,7 @@ namespace Client
         {
             switch (param.ccType)
             {
-                case SystemEnum.eCCType.LAYOFF:     return new CCLayOff(param);
+                case SystemEnum.eCCType.SHRED:     return new CCLayOff(param);
                 case SystemEnum.eCCType.STUN:       return new CCStun(param);
                 case SystemEnum.eCCType.KNOCKBACK:  return new CCKnockBack(param);
             }

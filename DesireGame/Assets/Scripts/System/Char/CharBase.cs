@@ -161,20 +161,27 @@ namespace Client
             #endregion
 
             #region ½Ã³ÊÁö
-            //SynergyManager.Instance.RegisterCharSynergy(this);
 
             foreach(var synergy in _charSynergies)
             {
                 if (synergy == eSynergy.None) continue;
 
-                //SynergyTrigger trigger = FunctionFactory.FunctionGenerate(new BuffParameter()
-                //{
-                //    eFunctionType = eFunction.SynergyTrigger,
-                //    CastChar = this,
-                //    TargetChar = this,
-                //    FunctionIndex = SystemConst.SYNERGY_TRIGGER
-                //}) as SynergyTrigger;
-                //trigger.InitTrigger(synergy);
+                _functionInfo.AddFunction(new BuffParameter()
+                {
+                    eFunctionType = eFunction.SYNERGY_TRIGGER,
+                    CastChar = this,
+                    TargetChar = this,
+                    FunctionIndex = SystemConst.SYNERGY_TRIGGER
+                });
+
+                SynergyTrigger trigger = FunctionFactory.FunctionGenerate(new BuffParameter()
+                {
+                    eFunctionType = eFunction.SYNERGY_TRIGGER,
+                    CastChar = this,
+                    TargetChar = this,
+                    FunctionIndex = SystemConst.SYNERGY_TRIGGER
+                }) as SynergyTrigger;
+                trigger.InitTrigger(synergy);
             }
             #endregion
 

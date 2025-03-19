@@ -139,10 +139,10 @@ namespace Client
             foreach(var kvp in synergyDict)
             {
                 var synergy = kvp.Value as SynergyData;
-                if (!_synergyTriggerMap.ContainsKey(synergy.synergyType))
-                    _synergyTriggerMap.Add(synergy.synergyType, new Dictionary<int, SynergyData>());
-                if(!_synergyTriggerMap[synergy.synergyType].ContainsKey(synergy.levelThresholds))
-                    _synergyTriggerMap[synergy.synergyType].Add(synergy.levelThresholds, synergy);
+                if (!_synergyTriggerMap.ContainsKey(synergy.synergy))
+                    _synergyTriggerMap.Add(synergy.synergy, new Dictionary<int, SynergyData>());
+                if(!_synergyTriggerMap[synergy.synergy].ContainsKey(synergy.synergyCount))
+                    _synergyTriggerMap[synergy.synergy].Add(synergy.synergyCount, synergy);
             }
         }
 

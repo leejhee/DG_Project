@@ -12,7 +12,7 @@ namespace Client
         private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
 
         // 해당 구조는 그대로 유지.
-        private Action<SynergyParameter> OnSynergyChanges;
+        private Dictionary<eSynergy, Action<SynergyParameter>> _OnSynergyChanges;
 
         #region 생성자
         private SynergyManager() { }
@@ -22,11 +22,12 @@ namespace Client
         {
             base.Init();
             _synergyActivator = new();
+            _OnSynergyChanges = new();
         }
 
-        public void SubscribeToChanges(Action<SynergyParameter> trigging) => OnSynergyChanges += trigging;
+        public void SubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] += trigging;
         
-        public void UnsubscribeToChanges(Action<SynergyParameter> trigging) => OnSynergyChanges -= trigging;
+        public void UnsubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] -= trigging;
 
         public void RegisterCharSynergy(CharLightWeightInfo registrar, eSynergy synergy)
         {
@@ -44,21 +45,21 @@ namespace Client
         // 역할 따라 쪼개는거 스타일 리뷰받기.
         public void CheckSynergyChange(eSynergy targetSynergy)
         {
-            if (OnSynergyChanges == null)
+            if (_OnSynergyChanges[targetSynergy] == null)
                 return;
-            OnSynergyChanges.Invoke(new SynergyParameter()
+            _OnSynergyChanges[targetSynergy].Invoke(new SynergyParameter()
             {
                 triggingSynergy = targetSynergy,
-                functions = _synergyActivator[targetSynergy]?.GetSynergyByLevel()?.functionList
+                function = _synergyActivator[targetSynergy].GetSynergyByLevel().functionIndex
             });
         }
 
-        public void DeleteCharSynergy(CharLightWeightInfo charBase, eSynergy synergy)
+        public void DeleteCharSynergy(CharLightWeightInfo leaver, eSynergy synergy)
         {           
             if (synergy == eSynergy.None) return;
             if (_synergyActivator.ContainsKey(synergy))
             {
-                _synergyActivator[synergy].SynergyMembers.Remove(charBase);
+                _synergyActivator[synergy].SynergyMembers.Remove(leaver);
 
             }
             CheckSynergyChange(synergy);
@@ -109,14 +110,14 @@ namespace Client
 
         public eSynergy mySynergy;
 
-        public eSynergyLevel Level
-        {
-            get
-            {
-                return GetSynergyByLevel().level;
-            }
-        }
-
+        //public eSynergyLevel Level
+        //{
+        //    get
+        //    {
+        //        return GetSynergyByLevel().level;
+        //    }
+        //}
+        //
         public List<CharLightWeightInfo> SynergyMembers;
         
         public SynergyContainer(eSynergy synergy)

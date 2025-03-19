@@ -78,14 +78,14 @@ namespace Client
 
             SWORD,
             RANGED,
-            SHIELD,
-            DUAL_BALDE,
+            ARMOR,
+            DUAL_BLADE,
             MAGIC_WAND,
             LAPLACIAN,
             TIMER,
             QUANTUM_WASHER,
             TIDY,
-            TEAM6,
+            TEAM3,
 
             eMax, 
         }
@@ -192,6 +192,10 @@ namespace Client
             SHIELD_SYNERGY_HEAL,
             MAGIC_SYNERGY_MANABUFF,
             DUALBLADE_SYNERGY_JUMP,
+            CHANGE_PROJECTILE,
+
+            INCREASE_MAX_HP,
+            BUFF_TOTAL_DAMAGE,
 
             SYNERGY_TRIGGER,
             eMax
@@ -211,14 +215,14 @@ namespace Client
         {
             None,
 
-            LAYOFF,
+            SHRED,
             STUN,
             KNOCKBACK,
             CHARM,
             SILENCE,
             TAUNT,
             CRIPPLE,
-            PANIC,
+            SUNDER,
             WOUND,
 
             eMax

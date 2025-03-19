@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
+using UnityEngine;
 
 namespace Client
 {
@@ -37,11 +37,11 @@ namespace Client
             base.RunFunction(StartExecution);
             if (StartExecution)
             {
-                SynergyManager.Instance.SubscribeToChanges(SubscribeDistribution);
+                SynergyManager.Instance.SubscribeToChanges(mySynergy, SubscribeDistribution);
             }
             else
             {
-                SynergyManager.Instance.UnsubscribeToChanges(SubscribeDistribution);
+                SynergyManager.Instance.UnsubscribeToChanges(mySynergy, SubscribeDistribution);
             }
         }
 
@@ -55,22 +55,24 @@ namespace Client
                     continue;
                 RunFunction(false);
             }
-            
-            foreach(var funcIndex in param.functions)
-            {
-                FunctionData synergyBuffData = DataManager.Instance.GetData<FunctionData>(funcIndex);
-                if (synergyBuffData is null) continue;
-                FunctionBase synergyBuff = FunctionFactory.FunctionGenerate(new BuffParameter()
-                {
-                    eFunctionType = synergyBuffData.function,
-                    CastChar = _CastChar,
-                    TargetChar = _TargetChar, // 타겟 
-                    FunctionIndex = funcIndex
-                });
 
-                _distributedCache.Add(synergyBuff);
-                synergyBuff.RunFunction(true);
+            FunctionData synergyBuffData = DataManager.Instance.GetData<FunctionData>(param.function);
+            if (synergyBuffData is null)
+            {
+                Debug.Log("시너지 데이터가 null이래요. 데이터 검토합시다.");
+                return;
             }
+
+            FunctionBase synergyBuff = FunctionFactory.FunctionGenerate(new BuffParameter()
+            {
+                eFunctionType = synergyBuffData.function,
+                CastChar = _CastChar,
+                TargetChar = _TargetChar, // 타겟 
+                FunctionIndex = param.function
+            });
+
+            _distributedCache.Add(synergyBuff);
+            synergyBuff.RunFunction(true);
 
         }
 
@@ -82,6 +84,6 @@ namespace Client
     public class SynergyParameter
     {
         public SystemEnum.eSynergy triggingSynergy = SystemEnum.eSynergy.None;
-        public List<long> functions = new();
+        public long function;
     }
 }

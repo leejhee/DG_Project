@@ -14,13 +14,12 @@ namespace Client
     public partial class SynergyData : SheetData
     {
 public long Index; // synergyID
-		public List<long> functionList; // 기능
+		public long functionIndex; // 기능
 		
-		public SystemEnum.eSynergy synergyType; // 시너지 종류
-		public int levelThresholds; // 해당 버프를 위한 문턱인원수
+		public SystemEnum.eSkillTargetType skillTarget; // 스킬 대상
 		
-		public SystemEnum.eSynergyLevel level; // 무슨레벨인지
-		public string levelIcon; // 아이콘
+		public SystemEnum.eSynergy synergy; // 시너지
+		public int synergyCount; // 인원 수
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -51,30 +50,25 @@ public long Index; // synergyID
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					ListStr = values[1].Replace('[',' ');
-					ListStr = ListStr.Replace(']', ' ');
-					var functionListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
-					data.functionList = functionListData;
+					if(values[1] == "")
+					    data.functionIndex = default;
+					else
+					    data.functionIndex = Convert.ToInt64(values[1]);
 					
 					if(values[2] == "")
-					    data.synergyType = default;
+					    data.skillTarget = default;
 					else
-					    data.synergyType = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[2]);
+					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[2]);
 					
 					if(values[3] == "")
-					    data.levelThresholds = default;
+					    data.synergy = default;
 					else
-					    data.levelThresholds = Convert.ToInt32(values[3]);
+					    data.synergy = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[3]);
 					
 					if(values[4] == "")
-					    data.level = default;
+					    data.synergyCount = default;
 					else
-					    data.level = (SystemEnum.eSynergyLevel)Enum.Parse(typeof(SystemEnum.eSynergyLevel), values[4]);
-					
-					if(values[5] == "")
-					    data.levelIcon = default;
-					else
-					    data.levelIcon = Convert.ToString(values[5]);
+					    data.synergyCount = Convert.ToInt32(values[4]);
 					
 
                     dataList[data.Index] = data;
