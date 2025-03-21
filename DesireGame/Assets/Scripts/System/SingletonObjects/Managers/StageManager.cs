@@ -55,6 +55,7 @@ namespace Client
         {
             if(TryGetNextStage(Stage))
             {
+                ItemManager.Instance.CleanupItems();
                 CharManager.Instance.ReturnToOriginPos();
                 StartStage(++Stage);
             }

@@ -52,14 +52,8 @@ namespace Client
             }
             Debug.Log($"{Index}가 드랍할 건 {dropList.Count}개, {sb.ToString()}");
             #endregion
-
+            ItemManager.Instance.DropItemBeads(this.CharTransform.position, dropList);
         }
 
-        void DropItemBeads()
-        {
-            // 최종 결정된 아이템 박스 프리팹 떨구기
-
-
-        }
     }
 }

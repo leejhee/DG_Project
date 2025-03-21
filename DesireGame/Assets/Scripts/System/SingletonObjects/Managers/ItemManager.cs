@@ -12,6 +12,7 @@ namespace Client
         #endregion
         // 고유 ID 생성 
         private long _nextID = 0;
+        private List<GameObject> itemBeads = new List<GameObject>();
         private List<int> cumulativeWeights = new(); // 서브스탯 - 가중치 누적 합을 저장
         public List<int> CumulativeWeights => cumulativeWeights;
         public override void Init()
@@ -21,6 +22,39 @@ namespace Client
         }
         public long GetNextID() => _nextID++;
 
+        public void RegisterItem(GameObject item)
+        {
+            if (!itemBeads.Contains(item))
+            {
+                itemBeads.Add(item);
+            }
+        }
+
+        public void DeactivateItem(GameObject item)
+        {
+            item.SetActive(false);
+        }
+
+        public bool AreAllItemsCollected()
+        {
+            foreach (GameObject item in itemBeads)
+            {
+                if (item.activeSelf) return false;
+            }
+            return true;
+        }
+
+        public void CleanupItems()
+        {
+            foreach (GameObject item in itemBeads)
+            {
+                if (!item.activeSelf)
+                {
+                    GameObject.Destroy(item);
+                }
+            }
+            itemBeads.Clear();
+        }
         #region 서브 스탯 결정 파트
         /// <summary>
         /// 가중치 누적 합 미리 계산 - binary search용
@@ -42,7 +76,6 @@ namespace Client
                 int proWeight = itemSubStatData.proWeight;
                 sum += proWeight;
                 cumulativeWeights.Add(sum);
-                Debug.Log($"누적 가중치 {sum}");
             }
         }
 
@@ -73,6 +106,8 @@ namespace Client
                 Debug.LogWarning("ItemSubStatDataList 를 찾지 못함");
             }
 
+            if (cumulativeWeights.Count == 0) AccumulateWeights();
+
             for (int i = 0; i < count; i++)
             {
                 float randomValue = Random.Range(0, cumulativeWeights[^1]);
@@ -81,7 +116,7 @@ namespace Client
                 var _itemSubStatData = ItemSubStatDataList[index];
                 var itemSubStatData = _itemSubStatData as ItemSubStatData;
                 list.Add((itemSubStatData.subStats, SetStatIncrease(itemSubStatData)));
-                Debug.Log($"서브 스탯 : {list[i].eStat}, 증가량 : {list[i].increase}");
+                Debug.Log($"{i} 서브 스탯 : {list[i].eStat}, 증가량 : {list[i].increase}");
             }
             return list;
         }
@@ -135,7 +170,7 @@ namespace Client
         }
 
 
-        public void DropItemBox(Vector3 position, List<int> dropList)
+        public void DropItemBeads(Vector3 position, List<long> dropList)
         {
             foreach (int dropIndex in dropList)
             {
@@ -147,19 +182,23 @@ namespace Client
                 }
 
                 Item item = new Item(dropTable.itemID);
-                GameObject boxPrefab = GetItemBoxByTier(dropTable.beadTier);
-                    
-                if (boxPrefab != null)
+                GameObject beadPrefab = ObjectManager.Instance.Instantiate($"Item/ItemBead");
+
+                if (beadPrefab != null)
                 {
-                    // 박스 프리팹을 인스턴스화하고 아이템 정보를 넣습니다.
-                    GameObject itemBox = GameObject.Instantiate(boxPrefab, position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
-                    itemBox.GetComponent<ItemBox>().WrapItem(item, dropTable.amount);
+                    // 박스 프리팹을 인스턴스화하고 아이템 정보 넣기
+                    Vector3 randPos = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
+                    GameObject itemBead = GetItemBeadwithColor(beadPrefab, dropTable.beadColor);
+                    itemBead.transform.position = position + randPos;
+                    itemBead.GetComponent<ItemBead>().WrapItem(item, dropTable.amount);
+
                 }
             }
         }
-        GameObject GetItemBoxByTier(eItemTier eItemTier)
+        GameObject GetItemBeadwithColor(GameObject bead, string hexCode)
         {
-            return ObjectManager.Instance.Instantiate($"Item/ItemBox_{eItemTier}");
+            bead.GetComponent<Renderer>().material.color = Util.GetHexColor(hexCode);
+            return bead;
         }
 
     }
