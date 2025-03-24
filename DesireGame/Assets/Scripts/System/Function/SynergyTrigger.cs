@@ -6,30 +6,21 @@ namespace Client
 {
 
     /// <summary>
-    /// 시너지 매니저와 CharBase와의 강한 결합을 풀기 위한 클래스
+    /// 시너지 트리거 function. 이펙트 연출 책임도 담당
     /// </summary>
     public class SynergyTrigger : FunctionBase
     {
-        private SystemEnum.eSynergy mySynergy; // 무슨 시너지에 대한 트리거?
-        private List<FunctionBase> _distributedCache;
-        
+        private SystemEnum.eSynergy mySynergy; // 무슨 시너지에 대한 트리거?       
+        private CharLightWeightInfo myCharLightWeightInfo;
 
         public SynergyTrigger(BuffParameter buffParam) : base(buffParam)
         {
-
-        }
-
-        // 일단은 그냥 이렇게 함. 상수로 trigger 만들도록 할게요
-        public void InitTrigger(SystemEnum.eSynergy synergy)
-        {
-            mySynergy = synergy;
-            // 이거 Index로 해서 distinct 할 수 있으면 하자. 굳이 charbase 넣을지 말지는 질문할 것.
-            SynergyManager.Instance.RegisterCharSynergy(new CharLightWeightInfo()
+            mySynergy = (SystemEnum.eSynergy)_FunctionData.input1;
+            myCharLightWeightInfo = new CharLightWeightInfo()
             {
                 index = _CastChar.Index,
                 uid = _CastChar.GetID()
-            }, mySynergy);
-            RunFunction(true);
+            };
         }
 
         public override void RunFunction(bool StartExecution)
@@ -37,48 +28,14 @@ namespace Client
             base.RunFunction(StartExecution);
             if (StartExecution)
             {
-                SynergyManager.Instance.SubscribeToChanges(mySynergy, SubscribeDistribution);
+                SynergyManager.Instance.RegisterSynergy(myCharLightWeightInfo, mySynergy);
+                _CastChar.Dead += () =>
+                {
+                    SynergyManager.Instance.DeleteSynergy(myCharLightWeightInfo, mySynergy);
+                };
             }
-            else
-            {
-                SynergyManager.Instance.UnsubscribeToChanges(mySynergy, SubscribeDistribution);
-            }
+            
         }
-
-        public void SubscribeDistribution(SynergyParameter param)
-        {
-            if (mySynergy != param.triggingSynergy) return;
-            if (_distributedCache == null) return;
-            foreach (var cached in _distributedCache)
-            {
-                if (cached == null)
-                    continue;
-                RunFunction(false);
-            }
-
-            FunctionData synergyBuffData = DataManager.Instance.GetData<FunctionData>(param.function);
-            if (synergyBuffData is null)
-            {
-                Debug.Log("시너지 데이터가 null이래요. 데이터 검토합시다.");
-                return;
-            }
-
-            FunctionBase synergyBuff = FunctionFactory.FunctionGenerate(new BuffParameter()
-            {
-                eFunctionType = synergyBuffData.function,
-                CastChar = _CastChar,
-                TargetChar = _TargetChar, // 타겟 
-                FunctionIndex = param.function
-            });
-
-            _distributedCache.Add(synergyBuff);
-            synergyBuff.RunFunction(true);
-
-        }
-
-        // 팔 때 버프가 해제가 되어야 하는데
-        // 버프에서도 안테나를 박아서
-        // 매니저에서 죽어라 버프. 하면 자기자신 killqueue로 보내면 
     }
 
     public class SynergyParameter

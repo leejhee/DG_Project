@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using static Client.SystemEnum;
+using System;
 
 namespace Client
 {
@@ -10,14 +11,16 @@ namespace Client
         public enum eAttackMode { None, Auto, Skill };
 
         private CharBase charAgent;
-        public CharBase FinalTarget { get; private set; }// 우선 순위 계산의 최종 결과
 
         private List<CharBase> cachedTargets;
 
         private PlayerState currentState; // 새로운 모드 변경 여부
 
         private bool resetTimer = false;
-
+        
+        public Action<CharBase> OnTargetSet;    
+        
+        public CharBase FinalTarget { get; private set; }// 우선 순위 계산의 최종 결과
         public bool isAIRun { get; set; } = false; // 이 캐릭터는 현재 AI가 작동중입니다.
 
         public CharAI(CharBase charAgent)
@@ -170,6 +173,7 @@ namespace Client
             });
             cachedTargets = targettingGuide.GetTargets();
             FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
+            OnTargetSet?.Invoke(FinalTarget);
         }
 
         public void SetAction(eAttackMode attackMode)
@@ -196,7 +200,7 @@ namespace Client
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));
-                //Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {skillIndex} 사용");
+                Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {skillIndex} 사용");
             }
             else
             {

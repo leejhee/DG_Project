@@ -88,6 +88,12 @@ namespace Client
 
         public override List<CharBase> GetTargets()
         {
+            if (!Caster.CharAI.isAIRun)
+            {
+                Debug.LogWarning("현재는 AI가 작동하지 않으므로 타겟을 반환하지 않습니다.");
+                return new List<CharBase>();
+            }
+
             var current = Caster.CharAI.FinalTarget;
             if (current == false)
                 current = CharManager.Instance.GetNearestEnemy(Caster);
@@ -97,6 +103,31 @@ namespace Client
             };
         }
     }
+
+    public class EveryAllyTargetStrategy : TargettingStrategyBase
+    {
+        public EveryAllyTargetStrategy(TargettingStrategyParameter param) : base(param)
+        {
+        }
+
+        public override List<CharBase> GetTargets()
+        {
+            return CharManager.Instance.GetOneSide(SystemEnum.eCharType.ALLY);
+        }
+    }
+
+    public class EveryEnemyTargetStrategy : TargettingStrategyBase
+    {
+        public EveryEnemyTargetStrategy(TargettingStrategyParameter param) : base(param)
+        {
+        }
+
+        public override List<CharBase> GetTargets()
+        {
+            return CharManager.Instance.GetOneSide(SystemEnum.eCharType.ENEMY);
+        }
+    }
+
 
 }
 

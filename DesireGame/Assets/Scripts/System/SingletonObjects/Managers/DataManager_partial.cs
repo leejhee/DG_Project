@@ -21,9 +21,13 @@ namespace Client
         public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
 
         // 시너지 관련 function Data
-        private Dictionary<eSynergy, Dictionary<int, SynergyData>> _synergyTriggerMap = new();
-        public Dictionary<eSynergy, Dictionary<int, SynergyData>> SynergyTriggerMap => _synergyTriggerMap;
+        private Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> _synergyDataMap = new();
+        public Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> SynergyDataMap => _synergyDataMap;
 
+        // 시너지 트리거 딕셔너리
+        private Dictionary<eSynergy, FunctionData> _synergyTriggerMap = new();
+        public Dictionary<eSynergy, FunctionData> SynergyTriggerMap => _synergyTriggerMap;
+        
         // 아이템 데이터
         private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
         public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
@@ -42,8 +46,8 @@ namespace Client
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
             if (typeof(MonsterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
+            if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
             if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
-
 
         }
         // 플레이어 위치정보
@@ -139,12 +143,40 @@ namespace Client
             foreach(var kvp in synergyDict)
             {
                 var synergy = kvp.Value as SynergyData;
-                if (!_synergyTriggerMap.ContainsKey(synergy.synergy))
-                    _synergyTriggerMap.Add(synergy.synergy, new Dictionary<int, SynergyData>());
-                if(!_synergyTriggerMap[synergy.synergy].ContainsKey(synergy.synergyCount))
-                    _synergyTriggerMap[synergy.synergy].Add(synergy.synergyCount, synergy);
+                if (!_synergyDataMap.ContainsKey(synergy.synergy))
+                    _synergyDataMap.Add(synergy.synergy, new Dictionary<int, List<SynergyData>>());
+                if(!_synergyDataMap[synergy.synergy].ContainsKey(synergy.synergyCount))
+                    _synergyDataMap[synergy.synergy].Add(synergy.synergyCount, new List<SynergyData>());
+                if (!_synergyDataMap[synergy.synergy][synergy.synergyCount].Contains(synergy))
+                    _synergyDataMap[synergy.synergy][synergy.synergyCount].Add(synergy);
             }
         }
+
+        // 시너지별 트리거 분류
+        private void SetSynergyTriggerMap()
+        {
+            string key = typeof(FunctionData).Name;
+            if (!_cache.ContainsKey(key))
+                return;
+            
+            var triggerDict = _cache[key];
+            if(triggerDict is null) return;
+
+            foreach(var kvp in triggerDict)
+            {
+                var trigger = kvp.Value as FunctionData;
+                if(trigger.function == eFunction.SYNERGY_TRIGGER)
+                {
+                    if (trigger.input1 >= (long)eSynergy.eMax) continue;
+                        var synergyType = (eSynergy)trigger.input1;
+                    if(!_synergyTriggerMap.ContainsKey(synergyType))
+                        _synergyTriggerMap.Add(synergyType, trigger);
+                }
+            }
+
+
+        }
+
 
         // 아이템 티어별 데이터
         private void SetItemDataMap()

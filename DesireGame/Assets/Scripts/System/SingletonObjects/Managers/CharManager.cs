@@ -248,6 +248,12 @@ namespace Client
             return CharUtil.GetNearestInList(ClientChar, enemies, nTH, inverse);                      
         }
 
+        public List<CharBase> GetOneSide(eCharType charType)
+        {
+            return _cache[eCharTypeToType(charType)].Values.ToList();
+        }        
+
+
         /// <summary>
         /// _cache 안에 있는 캐릭터 AI 켜기
         /// </summary>

@@ -251,6 +251,24 @@ namespace Client
             eMax
         }
 
+        public enum eSynergyRange
+        {
+            None,
+            SELF,
+            GLOBAL_ALLY,
+            GLOBAL_ENEMY,
+            eMax
+        }
+
+        public enum eBuffTriggerTime
+        {
+            None,
+            COMBAT,
+            BORN,
+
+            eMax
+        }
+
         public enum eProjectilePathType
         {
             STRAIGHT,

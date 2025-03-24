@@ -15,6 +15,8 @@ namespace Client
         public bool CanStartStage { get; private set; } = true;
         public bool IsStageFinished { get; private set; } = false;
 
+        public Action OnStartStage;
+
         public override void Init()
         {
             base.Init();
@@ -46,6 +48,7 @@ namespace Client
             SetIsFinish(false);
             TileManager.Instance.SwitchTileCombatmode(true);
             CharManager.Instance.WakeAllCharAI();
+            OnStartStage?.Invoke();
         }
 
         /// <summary>
@@ -94,6 +97,7 @@ namespace Client
         /// </summary>
         public bool TryGetNextStage(int _stage)
         {
+            SynergyManager.Instance.Reset();
             CharManager.Instance.ClearAllChar();
 
             int nextStage = _stage + 1;

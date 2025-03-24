@@ -9,5 +9,6 @@ namespace Client
         public CharBase Caster { get; protected set; }
         public TargettingStrategyBase(TargettingStrategyParameter param) => Caster = param.Caster;
         public abstract List<CharBase> GetTargets();
+
     }
 }

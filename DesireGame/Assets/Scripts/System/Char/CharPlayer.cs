@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
 
 namespace Client
 {
@@ -10,6 +11,8 @@ namespace Client
 
         private Vector3 offset;
         private Camera mainCamera;
+
+        private List<eSynergy> _charSynergies = null;
 
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
         
@@ -23,6 +26,28 @@ namespace Client
         {
             base.CharInit();
             CharManager.Instance.SetChar<CharPlayer>(this);
+
+            #region ½Ã³ÊÁö
+            _charSynergies = new List<eSynergy>()
+            {
+                _charData.synergy1,
+                _charData.synergy2,
+                _charData.synergy3
+            };
+
+            foreach (var synergy in _charSynergies)
+            {
+                if (synergy == eSynergy.None) continue;
+                var synergyTrigger = DataManager.Instance.SynergyTriggerMap[synergy];
+                _functionInfo.AddFunction(new BuffParameter()
+                {
+                    eFunctionType = eFunction.SYNERGY_TRIGGER,
+                    CastChar = this,
+                    TargetChar = this,
+                    FunctionIndex = synergyTrigger.Index
+                });
+            }
+            #endregion
         }
 
         void OnMouseDown()

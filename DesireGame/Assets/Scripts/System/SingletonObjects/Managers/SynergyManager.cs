@@ -12,7 +12,7 @@ namespace Client
         private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
 
         // 해당 구조는 그대로 유지.
-        private Dictionary<eSynergy, Action<SynergyParameter>> _OnSynergyChanges;
+        //private Dictionary<eSynergy, Action<SynergyParameter>> _OnSynergyChanges;
 
         #region 생성자
         private SynergyManager() { }
@@ -22,14 +22,41 @@ namespace Client
         {
             base.Init();
             _synergyActivator = new();
-            _OnSynergyChanges = new();
+            //_OnSynergyChanges = new();
         }
 
-        public void SubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] += trigging;
-        
-        public void UnsubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] -= trigging;
+        public void Reset() => _synergyActivator.Clear();
 
-        public void RegisterCharSynergy(CharLightWeightInfo registrar, eSynergy synergy)
+        //public void SubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] += trigging;
+        
+        //public void UnsubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] -= trigging;
+
+        /// <summary> 캐릭터 단위 시너지 등록 </summary>
+        /// <param name="registrar"> 가입자 정보 </param>
+        public void RegisterCharSynergy(CharLightWeightInfo registrar)
+        {
+            var mySynergies = registrar.synergyList;
+            var otherSynergies = _synergyActivator.Keys.Except(mySynergies).ToList();
+
+            foreach (var synergy in registrar.synergyList)
+            {
+                RegisterSynergy(registrar, synergy);
+            }
+
+            foreach(var other in otherSynergies)
+            {
+                foreach(var data in _synergyActivator[other].GetSynergyByLevel())
+                {
+
+                }
+            }
+
+        }
+
+        /// <summary> 시너지 등록 단위 </summary>
+        /// <param name="registrar"> 가입자 정보 </param>
+        /// <param name="synergy"> 가입할 시너지 </param>
+        public void RegisterSynergy(CharLightWeightInfo registrar, eSynergy synergy)
         {
             if (synergy == eSynergy.None) return;
 
@@ -37,32 +64,22 @@ namespace Client
             {
                 _synergyActivator.Add(synergy, new SynergyContainer(synergy));
             }
-            _synergyActivator[synergy].SynergyMembers.Add(registrar);
-
-            CheckSynergyChange(synergy);
+            _synergyActivator[synergy].Register(registrar);
         }
 
-        // 역할 따라 쪼개는거 스타일 리뷰받기.
-        public void CheckSynergyChange(eSynergy targetSynergy)
-        {
-            if (_OnSynergyChanges[targetSynergy] == null)
-                return;
-            _OnSynergyChanges[targetSynergy].Invoke(new SynergyParameter()
-            {
-                triggingSynergy = targetSynergy,
-                function = _synergyActivator[targetSynergy].GetSynergyByLevel().functionIndex
-            });
-        }
-
-        public void DeleteCharSynergy(CharLightWeightInfo leaver, eSynergy synergy)
+        public void DeleteSynergy(CharLightWeightInfo leaver, eSynergy synergy)
         {           
             if (synergy == eSynergy.None) return;
+
             if (_synergyActivator.ContainsKey(synergy))
             {
-                _synergyActivator[synergy].SynergyMembers.Remove(leaver);
-
+                _synergyActivator[synergy].Delete(leaver);
             }
-            CheckSynergyChange(synergy);
+            
+            if (_synergyActivator[synergy].MemberCount == 0)
+            {
+                _synergyActivator.Remove(synergy);
+            }
         }
 
         #region Test_Method
@@ -70,11 +87,9 @@ namespace Client
         public void ShowCurrentSynergies()
         {
             StringBuilder view = new("현재 시너지\n");
-            foreach(var kvp in _synergyActivator)
+            foreach(var value in _synergyActivator.Values)
             {
-                view.AppendLine($"eSynergy : {kvp.Key}, " +
-                                $"distinctmembers : {kvp.Value.DistinctMembers}, " +
-                                $"members : {kvp.Value.SynergyMembers.Count}");
+                view.AppendLine(value.ToString());
             }
             Debug.Log(view.ToString());
         }
@@ -82,70 +97,4 @@ namespace Client
 
     }
 
-    public struct CharLightWeightInfo
-    {
-        public long index;
-        public long uid;
-
-        public readonly CharBase SpecifyCharBase()
-        {
-            return CharManager.Instance.GetFieldChar(uid);
-        }
-    }
-    
-
-    public class SynergyContainer
-    {
-        public int DistinctMembers
-        {
-            get
-            {
-                var distinctList = SynergyMembers
-                    .GroupBy(member => member.index)
-                    .Select(g => g.First())
-                    .ToList();
-                return distinctList.Count;
-            }
-        }
-
-        public eSynergy mySynergy;
-
-        //public eSynergyLevel Level
-        //{
-        //    get
-        //    {
-        //        return GetSynergyByLevel().level;
-        //    }
-        //}
-        //
-        public List<CharLightWeightInfo> SynergyMembers;
-        
-        public SynergyContainer(eSynergy synergy)
-        {
-            SynergyMembers = new List<CharLightWeightInfo>();
-            mySynergy = synergy;
-        }
-
-        public SynergyData GetSynergyByLevel()
-        {
-            var synergyInfo = DataManager.Instance.SynergyTriggerMap[mySynergy];
-            var sortedKeys = new List<int>(synergyInfo.Keys);
-            sortedKeys.Sort();
-
-            int nowDistinct = DistinctMembers;
-
-            // 문턱이 1인 시너지는 시너지 종류별로 반드시 존재해야 함.
-            int levelThreshold = 1;
-            foreach (var threshold in sortedKeys)
-            {               
-                if(nowDistinct < threshold)
-                {
-                    return synergyInfo[levelThreshold];
-                }
-                levelThreshold = threshold;
-            }
-            return synergyInfo[levelThreshold];
-        }
-
-    }
 }

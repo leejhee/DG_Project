@@ -21,20 +21,19 @@ namespace Client
         [SerializeField] protected GameObject _CharCamaraPos; // 캐릭터 애니메이션 리스트
         [SerializeField] protected Animator _Animator;       // 애니메이터\
 
-        private FunctionInfo _functionInfo = null; // 기능 정보
+        protected FunctionInfo _functionInfo = null; // 기능 정보
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
-        private   CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
-        private   CharStat     _charStat = null;      // Stat 정보
-        private   CharData     _charData = null;      // 캐릭터 데이터
-        private   CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
-        private   CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
+        private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
+        private CharStat     _charStat = null;      // Stat 정보
+        private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
+        private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
+        protected CharData _charData = null;      // 캐릭터 데이터
         protected CharAI      _charAI = null;
 
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
 
-        private List<eSynergy> _charSynergies = null;
 
         private PlayerState _currentState; // 현재 상태
         private bool _isAction = false;    // 행동중인가? 판별
@@ -70,7 +69,6 @@ namespace Client
         public CharAI CharAI => _charAI;
         public CharData CharData => _charData;
         public PlayerState PlayerState => _currentState;
-        public List<eSynergy> CharSynergies => _charSynergies;
 
         public int TileIndex { get; set; } = default;
 
@@ -101,12 +99,7 @@ namespace Client
             {
                 Debug.LogError($"캐릭터 ID : {_index} Data 데이터 Get 실패");
             }
-            _charSynergies = new List<eSynergy>() 
-            { 
-                _charData.synergy1, 
-                _charData.synergy2, 
-                _charData.synergy3 
-            };
+            
         }
 
         protected virtual void Start()
@@ -159,46 +152,26 @@ namespace Client
                     });
             }
             #endregion
-
-            #region 시너지
-
-            foreach(var synergy in _charSynergies)
-            {
-                if (synergy == eSynergy.None) continue;
-
-                _functionInfo.AddFunction(new BuffParameter()
-                {
-                    eFunctionType = eFunction.SYNERGY_TRIGGER,
-                    CastChar = this,
-                    TargetChar = this,
-                    FunctionIndex = SystemConst.SYNERGY_TRIGGER
-                });
-
-                SynergyTrigger trigger = FunctionFactory.FunctionGenerate(new BuffParameter()
-                {
-                    eFunctionType = eFunction.SYNERGY_TRIGGER,
-                    CastChar = this,
-                    TargetChar = this,
-                    FunctionIndex = SystemConst.SYNERGY_TRIGGER
-                }) as SynergyTrigger;
-                trigger.InitTrigger(synergy);
-            }
-            #endregion
-
+         
             _charStat.OnDeath += () =>
             {
                 Debug.Log($"캐릭터 사망 : uid {_uid}, 이름 {_charData.charName}");
-                CharDistroy();
+                CharDead();
             };
 
+            Dead += () =>
+            {
+                CharDead();
+                Destroy(gameObject);
+            };
         }
 
-        public virtual void CharDistroy()
+        public virtual void CharDead()
         {
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         public long GetID() => _uid;
@@ -301,16 +274,18 @@ namespace Client
             _charAnim.PlayAnimation(state);
         }
 
-        public void Dead()
-        {
-            CharDistroy();
+        public Action Dead;
 
-        }
+        //public void Dead()
+        //{
+        //    CharDead();
+        //    Destroy(gameObject);
+        //}
 
         // 플레이어 유닛 팔면 영영 사라져서 시너지 없애야한다... 판매 있더라고요
         public void Sell()
         {
-            CharDistroy();
+            CharDead();
             //돈 나오게 하는 것도 만들어놔라
         }
 

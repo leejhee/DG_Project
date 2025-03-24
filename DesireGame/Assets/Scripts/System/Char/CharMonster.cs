@@ -19,9 +19,9 @@ namespace Client
             //Patrol
         }
 
-        public override void CharDistroy()
+        public override void CharDead()
         {
-            base.CharDistroy();
+            base.CharDead();
             DrawItems();
         }
 

@@ -16,6 +16,10 @@ namespace Client
 public long Index; // synergyID
 		public long functionIndex; // 기능
 		
+		public SystemEnum.eBuffTriggerTime buffTriggerTime; // 시너지효과적용시작시간
+		
+		public SystemEnum.eSynergyRange casterType; // 시너지효과적용대상
+		
 		public SystemEnum.eSkillTargetType skillTarget; // 스킬 대상
 		
 		public SystemEnum.eSynergy synergy; // 시너지
@@ -56,19 +60,29 @@ public long Index; // synergyID
 					    data.functionIndex = Convert.ToInt64(values[1]);
 					
 					if(values[2] == "")
-					    data.skillTarget = default;
+					    data.buffTriggerTime = default;
 					else
-					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[2]);
+					    data.buffTriggerTime = (SystemEnum.eBuffTriggerTime)Enum.Parse(typeof(SystemEnum.eBuffTriggerTime), values[2]);
 					
 					if(values[3] == "")
-					    data.synergy = default;
+					    data.casterType = default;
 					else
-					    data.synergy = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[3]);
+					    data.casterType = (SystemEnum.eSynergyRange)Enum.Parse(typeof(SystemEnum.eSynergyRange), values[3]);
 					
 					if(values[4] == "")
+					    data.skillTarget = default;
+					else
+					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[4]);
+					
+					if(values[5] == "")
+					    data.synergy = default;
+					else
+					    data.synergy = (SystemEnum.eSynergy)Enum.Parse(typeof(SystemEnum.eSynergy), values[5]);
+					
+					if(values[6] == "")
 					    data.synergyCount = default;
 					else
-					    data.synergyCount = Convert.ToInt32(values[4]);
+					    data.synergyCount = Convert.ToInt32(values[6]);
 					
 
                     dataList[data.Index] = data;

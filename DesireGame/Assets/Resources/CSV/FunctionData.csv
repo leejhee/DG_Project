@@ -80,17 +80,17 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 691440,,DUAL_BLADE(4) Synergy MultiCasting:,MULTICASTING,,,,,691441,691442,,,,,
 691441,,1) 전투 시작시. 적 진영의 후방으로 도약,DUALBLADE_SYNERGY_JUMP,,,,,,,,,,,
 691442,,2) CRIT_CHANCE 75% 증가,BUFF_ONCE,CRIT_CHANCE,,,-1,7500,,,,,,
-600001,,st,SYNERGY_TRIGGER,,,,-1,,,,,,,
 698765,,성택컨디션체크테스트,,,,,,,,,,790000,[600711.600712],
-
-
-
-
-
-
-
-
-
+600001,,st,SYNERGY_TRIGGER,,,,-1,1,,,,,,
+600002,,st,SYNERGY_TRIGGER,,,,-1,2,,,,,,
+600003,,st,SYNERGY_TRIGGER,,,,-1,3,,,,,,
+600004,,st,SYNERGY_TRIGGER,,,,-1,4,,,,,,
+600005,,st,SYNERGY_TRIGGER,,,,-1,5,,,,,,
+600006,,st,SYNERGY_TRIGGER,,,,-1,6,,,,,,
+600007,,st,SYNERGY_TRIGGER,,,,-1,7,,,,,,
+600008,,st,SYNERGY_TRIGGER,,,,-1,8,,,,,,
+600009,,st,SYNERGY_TRIGGER,,,,-1,9,,,,,,
+600010,,st,SYNERGY_TRIGGER,,,,-1,10,,,,,,
 
 
 

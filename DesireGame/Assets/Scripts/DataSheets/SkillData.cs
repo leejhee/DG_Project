@@ -52,40 +52,40 @@ public long Index; // ID
 					else
 					    data.Index = Convert.ToInt64(values[0]);
 					
-					if(values[1] == "")
+					if(values[2] == "")
 					    data.nameStringCode = default;
 					else
-					    data.nameStringCode = Convert.ToString(values[1]);
+					    data.nameStringCode = Convert.ToString(values[2]);
 					
-					if(values[2] == "")
+					if(values[3] == "")
 					    data.desStringCode = default;
 					else
-					    data.desStringCode = Convert.ToString(values[2]);
-					
-					if(values[4] == "")
-					    data.skillRange = default;
-					else
-					    data.skillRange = Convert.ToInt32(values[4]);
+					    data.desStringCode = Convert.ToString(values[3]);
 					
 					if(values[5] == "")
-					    data.skillTarget = default;
+					    data.skillRange = default;
 					else
-					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[5]);
+					    data.skillRange = Convert.ToInt32(values[5]);
 					
 					if(values[6] == "")
-					    data.animPath = default;
+					    data.skillTarget = default;
 					else
-					    data.animPath = Convert.ToString(values[6]);
+					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[6]);
 					
 					if(values[7] == "")
-					    data.fxPath = default;
+					    data.animPath = default;
 					else
-					    data.fxPath = Convert.ToString(values[7]);
+					    data.animPath = Convert.ToString(values[7]);
 					
 					if(values[8] == "")
+					    data.fxPath = default;
+					else
+					    data.fxPath = Convert.ToString(values[8]);
+					
+					if(values[9] == "")
 					    data.sfxPath = default;
 					else
-					    data.sfxPath = Convert.ToString(values[8]);
+					    data.sfxPath = Convert.ToString(values[9]);
 					
 
                     dataList[data.Index] = data;

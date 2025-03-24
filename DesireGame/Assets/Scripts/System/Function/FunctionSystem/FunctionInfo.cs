@@ -1,6 +1,7 @@
 using static Client.SystemEnum;
 using System.Collections.Generic;
 using UnityEngine;
+using OpenCover.Framework.Model;
 
 namespace Client
 {
@@ -58,6 +59,13 @@ namespace Client
             EnqueueFunction(func);
         }
         
+        // 시너지 전용 enqueue. 제네릭으로 다른 건 안되게 막음. 어쩔수 없다...
+        public void AddFunction<T>(T synergyFunction) where T : SynergyFunction
+        {
+            EnqueueFunction(synergyFunction);
+        }
+
+
         public void KillFunction(FunctionBase target)
         {
             EnqueueKill(target);

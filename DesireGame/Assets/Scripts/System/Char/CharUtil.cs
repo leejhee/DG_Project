@@ -22,7 +22,6 @@ namespace Client
 
     public class CharUtil
     {
-        // 최선일까? GetNearest와 통합할 생각도 하면 좋을거같다. 일단 이렇게 쓰지만 매개변수도 좀 많다...
         public static CharBase GetNearestInList(CharBase clientChar, List<CharBase> targetList, int nTH = 0, bool inverse = false)
         {
             if(clientChar == false)
