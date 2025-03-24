@@ -35,18 +35,18 @@ namespace Client
                 _charData.synergy3
             };
 
-            foreach (var synergy in _charSynergies)
-            {
-                if (synergy == eSynergy.None) continue;
-                var synergyTrigger = DataManager.Instance.SynergyTriggerMap[synergy];
-                _functionInfo.AddFunction(new BuffParameter()
-                {
-                    eFunctionType = eFunction.SYNERGY_TRIGGER,
-                    CastChar = this,
-                    TargetChar = this,
-                    FunctionIndex = synergyTrigger.Index
-                });
-            }
+            //foreach (var synergy in _charSynergies)
+            //{
+            //    if (synergy == eSynergy.None) continue;
+            //    var synergyTrigger = DataManager.Instance.SynergyTriggerMap[synergy];
+            //    _functionInfo.AddFunction(new BuffParameter()
+            //    {
+            //        eFunctionType = eFunction.SYNERGY_TRIGGER,
+            //        CastChar = this,
+            //        TargetChar = this,
+            //        FunctionIndex = synergyTrigger.Index
+            //    });
+            //}
             #endregion
         }
 
