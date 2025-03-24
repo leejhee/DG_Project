@@ -17,7 +17,7 @@ public long Index; // enemyID
 		public string enemyName; // 몬스터 이름
 		public long CharID; // CharID
 		
-		public SystemEnum.eMosterType MosterType; // MosterType
+		public SystemEnum.eMonsterType MonsterType; // MonsterType
 		public long dropTableGroupID; // 드랍테이블그룹아이디
 		
 
@@ -60,9 +60,9 @@ public long Index; // enemyID
 					    data.CharID = Convert.ToInt64(values[2]);
 					
 					if(values[3] == "")
-					    data.MosterType = default;
+					    data.MonsterType = default;
 					else
-					    data.MosterType = (SystemEnum.eMosterType)Enum.Parse(typeof(SystemEnum.eMosterType), values[3]);
+					    data.MonsterType = (SystemEnum.eMonsterType)Enum.Parse(typeof(SystemEnum.eMonsterType), values[3]);
 					
 					if(values[4] == "")
 					    data.dropTableGroupID = default;

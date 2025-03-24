@@ -7,8 +7,6 @@ namespace Client
 {
     public class TestManager : Singleton<TestManager>
     {
-        public GlobalSave LobbySave;
-        public GameSave currentSave;
 
         TestManager() { }
 
@@ -19,9 +17,6 @@ namespace Client
 
         public void TestSave()
         {
-            LobbySave = new GlobalSave();
-            currentSave = new GameSave();
-            LobbySave.IngameSaves.Add(currentSave);
         }
 
     }

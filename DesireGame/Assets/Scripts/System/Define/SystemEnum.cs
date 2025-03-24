@@ -302,9 +302,19 @@ namespace Client
 
         }
 
-        public enum eMosterType
+        public enum eMonsterType
         {
+            NORMAL,
+            EPIC,
+            BOSS,
+            eMax
+        }
 
+        public enum eItemType
+        {
+            CURRENCY,
+            ITEM,
+            eMax
         }
         #region 교체될 수 있는 enum들이므로 용도가 겹칠 경우 삭제해줄 것
 
@@ -386,16 +396,6 @@ namespace Client
             MaxCount
         }
 
-        public enum eItemType
-        {
-            None,
-
-            Equipment,
-            Consumable,
-            ETC,
-
-            MaxCount
-        }
         
         public enum PlayerAnim
         {

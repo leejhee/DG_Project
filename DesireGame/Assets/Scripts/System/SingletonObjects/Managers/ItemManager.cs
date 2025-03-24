@@ -12,8 +12,8 @@ namespace Client
         #endregion
         // 고유 ID 생성 
         private long _nextID = 0;
-        private List<GameObject> itemBeads = new List<GameObject>();
-        private List<int> cumulativeWeights = new(); // 서브스탯 - 가중치 누적 합을 저장
+        private List<GameObject> itemBeads         = new(); // 필드에 있는 아이템 구슬
+        private List<int>        cumulativeWeights = new(); // 서브스탯 - 가중치 누적 합을 저장
         public List<int> CumulativeWeights => cumulativeWeights;
         public override void Init()
         {

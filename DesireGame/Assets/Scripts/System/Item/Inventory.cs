@@ -1,0 +1,66 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Client
+{
+    public class Inventory : Singleton<Inventory>
+    {
+        // 싱글턴 너무 남발하나?
+        // 근데 싱글턴을 하지 않고서는 뾰족한 수가 없다 ㅠ.ㅠ
+
+        private readonly int maxCount = 20;
+        private List<Item> itemList = new();
+        public override void Init()
+        {
+            base.Init();
+            InitInventory();
+        }
+
+        // TODO : 저장 구조 확립 후 Load & Save 기능 구현하기
+        private void InitInventory()
+        {
+            // TODO : 보유 아이템 불러오기
+        }
+        
+        private void SaveInventory()
+        {
+            // TODO : 보유 아이템 목록 저장
+        }
+
+        public bool IsInventoryFull()
+        {
+            if (itemList.Count >= maxCount)
+            {
+                Debug.LogError($"인벤토리가 가득 차 아이템을 추가할 수 없습니다.");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void AddItem(Item item)
+        {
+            if (IsInventoryFull()) return;
+
+            itemList.Add(item);
+            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  획득");
+        }
+
+        public void DeleteItem(Item item)
+        {
+            if (!itemList.Contains(item))
+            {
+                Debug.LogError("해당 아이템은 인벤토리에 존재하지 않습니다.");
+                return;
+            }
+
+            itemList.Remove(item);
+            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  제거");
+        }
+
+        // TODO : 아이템 리스트 변경시 UI 업데이트
+    }
+}

@@ -12,6 +12,7 @@ namespace Client
         private Collider _itemBoxCollider;
         private Transform _itemBoxTransform;
 
+        public Item Item => _item;
         private void Awake()
         {
             _itemBoxTransform = transform;
@@ -35,8 +36,9 @@ namespace Client
                 {
                     if (hit.collider.CompareTag("Item"))
                     {
-                        Debug.Log($"æ∆¿Ã≈€ {hit.collider.gameObject.GetComponent<ItemBead>()._item.GetID()} »πµÊ!");
-                        // TODO : »πµÊ«— æ∆¿Ã≈€ ¡§∫∏∏¶ ¿Œ∫•≈‰∏Æø° ≥÷æÓ¡‡.
+                        if (Inventory.Instance.IsInventoryFull()) return;
+
+                        Inventory.Instance.AddItem(hit.collider.gameObject.GetComponent<ItemBead>().Item);
                         ItemManager.Instance.DeactivateItem(hit.collider.gameObject);
                     }
                 }
