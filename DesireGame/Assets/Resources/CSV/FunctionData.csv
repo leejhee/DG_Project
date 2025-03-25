@@ -37,6 +37,8 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 690042,,1) AD 20% 증가,BUFF_ONCE,AD,,,-1,2000,,,,,,
 690043,,2) AP 20% 증가,BUFF_ONCE,AP,,,-1,2000,,,,,,
 690044,,LAPLACIAN(M) Synergy Trigger 제거,DELETE_FUNCTION,,,,1,690040,,,,,,
+690002,,"LAPLACIAN(2) NO BUFF, ONLY ICON",,,,,,,,,,,,
+690003,,"LAPLACIAN(3) NO BUFF, ONLY ICON",,,,,,,,,,,,
 690050,,4 LAPLACIAN Synergy Condition: 모든 라플라시안 기물이 존재하는가?,,,,,,,,,,,,
 690051,,4 LAPLACIAN Synergy(0): 라플라시안 Synergy Multicasting,MULTICASTING,,,,,690052,690053,,,790004,0690051.0690054.0690055.0690056.0690057,
 690052,,1) LAPLACIAN 기물 최대 체력 500 증가,INCREASE_MAX_HP,,,,,500,,,,,,
@@ -91,9 +93,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 600008,,st,SYNERGY_TRIGGER,,,,-1,8,,,,,,
 600009,,st,SYNERGY_TRIGGER,,,,-1,9,,,,,,
 600010,,st,SYNERGY_TRIGGER,,,,-1,10,,,,,,
-
-
-
+0,,아무것도없는거,,,,,,,,,,,,
 
 
 

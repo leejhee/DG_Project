@@ -29,10 +29,16 @@ namespace Client
             if (StartExecution)
             {
                 SynergyManager.Instance.RegisterSynergy(myCharLightWeightInfo, mySynergy);
+                
+                //[TODO] : 팔 때만 시너지 지워지도록 만들기
                 _CastChar.Dead += () =>
                 {
-                    SynergyManager.Instance.DeleteSynergy(myCharLightWeightInfo, mySynergy);
+                    _CastChar.FunctionInfo.KillFunction(this);
                 };
+            }
+            else
+            {
+                SynergyManager.Instance.DeleteSynergy(myCharLightWeightInfo, mySynergy);
             }
             
         }

@@ -35,6 +35,14 @@ namespace Client
                 _charData.synergy3
             };
 
+            SynergyManager.Instance.RegisterCharSynergy(new CharLightWeightInfo()
+            {
+                index = Index,
+                uid = _uid,
+                synergyList = _charSynergies
+            });
+
+            /*
             //foreach (var synergy in _charSynergies)
             //{
             //    if (synergy == eSynergy.None) continue;
@@ -46,7 +54,7 @@ namespace Client
             //        TargetChar = this,
             //        FunctionIndex = synergyTrigger.Index
             //    });
-            //}
+            //}*/
             #endregion
         }
 

@@ -4,7 +4,7 @@ long,,string,string,,int,eSkillTargetType,string,string,string,#long,,
 500100,,L_AA,,,1,NEAR_ENEMY,L_AA,,,,T,500101
 500110,,L_SKILL,,다음 두 번의 기본 공격이 60의 추가 피해를 입힙니다.,1,CURRENT_ENEMY,L_SKILL,,,,,
 500200,,K_AA,,,4,NEAR_ENEMY,K_AA,,,1100200,,
-500210,,K_SKILL_1,,가장 멀리 있는 적에게 날아갔다가 돌아오는 나비를 던집니다.,0,FARTHEST_ENEMY,K_SKILL_1,,,1100210,,
+500210,,K_SKILL,,가장 멀리 있는 적에게 날아갔다가 돌아오는 나비를 던집니다.,0,FARTHEST_ENEMY,K_SKILL,,,1100210,,
 500211,,K_SKILL_2,,나비에 닿은 적은 6초간 '통보'를 얻습니다. '통보'를 가진 적은 마법 방어력이 50% 감소합니다.,0,CURRENT_ENEMY,K_SKILL_2,,,1100210,,
 500212,,K_SKILL_3,,나비에 닿은 적에게 주문력의 120%에 해당하는 피해를 입힙니다.,0,CURRENT_ENEMY,K_SKILL_3,,,1100210,,
 500300,,J_AA,,,1,NEAR_ENEMY,J_AA,,,1100400,,

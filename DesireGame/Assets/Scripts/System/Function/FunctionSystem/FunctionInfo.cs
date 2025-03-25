@@ -13,13 +13,26 @@ namespace Client
 
         private Queue<FunctionBase> _functionKillQueue = new();
 
+        private Queue<FunctionBase> _functionOnBattleStartQueue = new();
+
         public void Init()
         {
             for (eFunction i = 0; i < eFunction.eMax; i++)
             {
                 _functionBaseDic[i] = new List<FunctionBase>();
             }
+
+            StageManager.Instance.OnStartStage += AddBattleStartQueueFunction;
         }
+
+        private void AddBattleStartQueueFunction()
+        {
+            while(_functionOnBattleStartQueue.Count > 0)
+            {
+                _functionReadyQueue.Enqueue(_functionOnBattleStartQueue.Dequeue());
+            }
+        }
+
 
         public void UpdateFunctionDic()
         {          
@@ -27,7 +40,7 @@ namespace Client
             while(_functionReadyQueue.Count != 0)
             {
                 FunctionBase target = _functionReadyQueue.Dequeue();
-                if (!_functionBaseDic[target.functionType].Contains(target)) //버프 중첩 불가 
+                if (!_functionBaseDic[target.functionType].Contains(target)) //버프 중첩 불가? (Equals override 안해서 영향 없이 중첩되는 상황)
                 {
                     target.InitFunction();
                     target.RunFunction(true);
@@ -56,13 +69,40 @@ namespace Client
         public void AddFunction(BuffParameter target)
         {
             FunctionBase func = FunctionFactory.FunctionGenerate(target);
-            EnqueueFunction(func);
+            EnqueueImmediateFunction(func);
         }
-        
+               
+        public void AddFunction(BuffParameter target, eBuffTriggerTime triggerTime)
+        {
+            FunctionBase func = FunctionFactory.FunctionGenerate(target);
+            if(triggerTime == eBuffTriggerTime.BORN)
+            {
+                EnqueueImmediateFunction(func);
+            }
+            else if(triggerTime == eBuffTriggerTime.COMBAT)
+            {
+                EnqueueInitialFunction(func);
+            }
+        }
+
+        public void AddFunction(FunctionBase target, eBuffTriggerTime triggerTime)
+        {
+            if (target == null) return;
+            if (triggerTime == eBuffTriggerTime.BORN)
+            {
+                EnqueueImmediateFunction(target);
+            }
+            else if (triggerTime == eBuffTriggerTime.COMBAT)
+            {
+                EnqueueInitialFunction(target);
+            }
+        }
+
+
         // 시너지 전용 enqueue. 제네릭으로 다른 건 안되게 막음. 어쩔수 없다...
         public void AddFunction<T>(T synergyFunction) where T : SynergyFunction
         {
-            EnqueueFunction(synergyFunction);
+            EnqueueImmediateFunction(synergyFunction);
         }
 
 
@@ -72,7 +112,7 @@ namespace Client
         }
 
         // Function Dictionary로의 접근 통제.
-        private void EnqueueFunction(FunctionBase target)
+        private void EnqueueImmediateFunction(FunctionBase target)
         {
             _functionReadyQueue.Enqueue(target);
         }
@@ -82,6 +122,10 @@ namespace Client
             _functionKillQueue.Enqueue(target);
         }
 
+        private void EnqueueInitialFunction(FunctionBase target)
+        {
+            _functionOnBattleStartQueue.Enqueue(target);
+        }
 
     }
 }

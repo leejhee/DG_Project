@@ -12,13 +12,10 @@ namespace Client
 
         private List<CharLightWeightInfo> _synergyMembers;
 
-        private List<CharLightWeightInfo> _buffReceiverSignature;
-
         #region 생성자
         public SynergyContainer(eSynergy synergy)
         {
             _synergyMembers = new();
-            _buffReceiverSignature = new();
             mySynergy = synergy;
         }
 
@@ -42,7 +39,7 @@ namespace Client
             if (CheckSynergyChange())
                 SetCurrentSynergy();
             else
-                GetCurrentSynergyBuff();
+                GetCurrentSynergyBuff(registrar);
         }
 
         // 해당 시너지에 포함되는 멤버가 탈퇴할 때 호출된다.
@@ -99,8 +96,7 @@ namespace Client
 
         #region Synergy Buff Managing
 
-
-        public Action OnSynergyChanges = null;
+        public Queue<SynergyBuffRecord> synergyBuffRecords = new();
         
         // 시너지가 갱신되어야 하는지에 대한 체크 함수
         public bool CheckSynergyChange()
@@ -115,87 +111,130 @@ namespace Client
             }
         }
 
-        // 시너지 버프 얻는 함수
-        public void GetCurrentSynergyBuff()
+        // 현재 적용되는 글로벌 시너지 버프를 얻는 함수
+        public void GetCurrentSynergyBuff(CharLightWeightInfo receiver)
         {
+            var caster = receiver.SpecifyCharBase();
+            if (caster == null) return;
 
+            foreach(var synergyData in _currentSynergyBuff)
+            {
+                if(synergyData.casterType == eSynergyRange.GLOBAL_ALLY)
+                {
+                    GetBuff(caster, synergyData);
+                }
+            }
+
+        }
+
+        // 시너지 버프 얻는 함수
+        public void GetBuff(CharBase caster, SynergyData data)
+        {
+            #region GETTING PARAMETERS
+            var funcData = DataManager.Instance.GetData<FunctionData>(data.functionIndex);
+            if (funcData == null)
+            {
+                Debug.LogError("잘못 됐다잖냐 이녀석아 데이터 확인 다시해봐라.");
+                return;
+            }
+            
+            var IntendedTargets = TargetStrategyFactory.CreateTargetStrategy
+                (new TargettingStrategyParameter() { Caster = caster, type = data.skillTarget }).GetTargets();
+
+            CharBase target = null;
+            if (IntendedTargets.Count == 0)
+                Debug.Log($"현재 타겟이 타게팅 타입 {data.skillTarget}에 따라 정해지지 않습니다.");
+            else
+                target = IntendedTargets[0];
+            #endregion
+
+            #region ADD BUFF AND RECORD
+            //////////Add Buff///////////
+            var synergyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
+            {
+                CastChar = caster,
+                TargetChar = target,
+                eFunctionType = funcData.function,
+                FunctionIndex = funcData.Index
+            });
+            caster.FunctionInfo.AddFunction(synergyFunction, data.buffTriggerTime);
+            Debug.Log($"{caster.GetID()}번 캐릭터 {caster.name}에 synergy Function {funcData.Index}번 function 주입. " +
+                                    $"기능 : {funcData.function}");
+            //////////Add Record/////////
+            synergyBuffRecords.Enqueue(new SynergyBuffRecord(caster, synergyFunction));
+            #endregion
         }
 
         // 시너지 갱신 함수
         public void SetCurrentSynergy()
         {
-            var newSynergyData = GetSynergyByLevel();
-            if(newSynergyData != null)
-            {                
-                OnSynergyChanges?.Invoke();
-                OnSynergyChanges = null;
-                _currentSynergyBuff = newSynergyData;
-
-                List<CharBase> casters = new();
-                
-                foreach(var synergyData in _currentSynergyBuff)
-                {
-                    // eSynergyRange에 따라서, Caster로 지정할 아군의 범위를 지정한다.
-                    if (synergyData.casterType == eSynergyRange.SELF)
-                    {
-                        foreach (var info in _synergyMembers)
-                            casters.Add(info.SpecifyCharBase());                       
-                    }
-                    else if (synergyData.casterType == eSynergyRange.GLOBAL_ALLY)
-                    {
-                        casters = CharManager.Instance.GetOneSide(eCharType.ALLY);
-                    }
-                    else if(synergyData.casterType == eSynergyRange.GLOBAL_ENEMY)
-                    {
-                        casters = CharManager.Instance.GetOneSide(eCharType.ENEMY);
-                    }
-
-                    Debug.Log($"시너지 변경이 감지되었습니다. " +
-                    $"Synergy {mySynergy}에서 {DistinctMembers}명 달성하여 {synergyData.Index}번 버프 " +
-                    $"casters {casters.Count}에게 들어감");
-
-                    foreach(var caster in casters)
-                    {
-                        Debug.Log(caster.name);
-                    }
-
-                    // 캐스터 순회하여 각각 caster로 설정한 function을 만들어 add한다.
-                    foreach (var caster in casters)
-                    {
-                        var funcData = DataManager.Instance.GetData<FunctionData>(synergyData.functionIndex);
-                        if (funcData == null)
-                        {
-                            Debug.LogError("잘못 됐다잖냐 이녀석아 데이터 확인 다시해봐라.");
-                            continue;
-                        }
-
-                        if (FunctionFactory.FunctionGenerate(new BuffParameter()
-                        {
-                            CastChar = caster,
-                            TargetChar = null,
-                            FunctionIndex = funcData.Index,
-                            eFunctionType = funcData.function
-                        }) is not SynergyFunction synergyFunc)
-                        {
-                            Debug.LogError("너 시너지 말고 다른 펑션 가져오려 했지 딱걸렸어!");
-                            continue;
-                        }
-
-                        // eSkillTargetType에 따라서, Target으로 지정할 유닛의 범위를 지정한다.
-                        // 시너지 변경 경우 새로 할당된 function에 대체되기 위한 구독도 한다.
-                        synergyFunc.DelayedInit(synergyData.skillTarget, OnSynergyChanges);
-                        caster.FunctionInfo.AddFunction(synergyFunc);
-                        Debug.Log($"{caster.GetID()}번 캐릭터 {caster.name}에 synergy Function {funcData.Index}번 function 주입. " +
-                                    $"기능 : {funcData.function}");
-                    }
-                    
-
-
-                }
+            // Reset Record
+            while(synergyBuffRecords.Count > 0)
+            {
+                var record = synergyBuffRecords.Dequeue();
+                if (record.Caster) // 만약 팔아서 나가고 Destroy되면 null일 거라서
+                    record.KillSynergyBuff();
             }
+
+            List<CharBase> casters = new();            
+            foreach(var synergyData in _currentSynergyBuff)
+            {
+                // eSynergyRange에 따라서, Caster로 지정할 아군의 범위를 지정한다.
+                switch (synergyData.casterType)
+                {
+                    case eSynergyRange.ONCE:                        
+                        break;
+                    case eSynergyRange.SELF:
+                        foreach (var info in _synergyMembers)
+                            casters.Add(info.SpecifyCharBase());
+                        break;
+                    case eSynergyRange.GLOBAL_ALLY:
+                        casters = CharManager.Instance.GetOneSide(eCharType.ALLY);
+                        break;
+                    case eSynergyRange.GLOBAL_ENEMY:
+                        casters = CharManager.Instance.GetOneSide(eCharType.ENEMY);
+                        break;
+                    default: break;
+                }
+
+                Debug.Log($"시너지 변경이 감지되었습니다. " +
+                            $"Synergy {mySynergy}에서 {DistinctMembers}명 달성하여 {synergyData.Index}번 버프 " +
+                            $"casters {casters.Count}에게 들어감");
+
+                foreach(var caster in casters)
+                {
+                    Debug.Log(caster.name);
+                }
+
+                // 캐스터 순회하여 각각 caster로 설정한 function을 만들어 add한다.
+                foreach (var caster in casters)
+                {
+                    GetBuff(caster, synergyData);                       
+                }
+            }            
         }
 
         #endregion
 
     }
+
+    public class SynergyBuffRecord
+    {
+        public CharBase Caster { get; private set; }
+        public FunctionBase BuffFunction { get; private set; }
+
+        public SynergyBuffRecord(CharBase caster, FunctionBase buffFunction)
+        {
+            Caster = caster;
+            BuffFunction = buffFunction;
+        }
+
+        public void KillSynergyBuff()
+        {
+            Caster.FunctionInfo.KillFunction(BuffFunction);
+        }
+
+    }
+
+
 }

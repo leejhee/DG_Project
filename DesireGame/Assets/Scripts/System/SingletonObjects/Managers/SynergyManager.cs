@@ -45,10 +45,7 @@ namespace Client
 
             foreach(var other in otherSynergies)
             {
-                foreach(var data in _synergyActivator[other].GetSynergyByLevel())
-                {
-
-                }
+                _synergyActivator[other].GetCurrentSynergyBuff(registrar);
             }
 
         }

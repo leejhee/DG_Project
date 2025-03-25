@@ -4,7 +4,7 @@ namespace Client
 {
     public class CharSynergyHandler
     {
-        public CharSynergyHandler(List<eSynergy> synergies)
+        public CharSynergyHandler(CharLightWeightInfo registrar)
         {
 
         }

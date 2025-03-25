@@ -11,6 +11,7 @@ namespace Client
         {
             switch (buffParam.eFunctionType)
             {
+                case eFunction.None:                    return new NO_CONTENT(buffParam); 
                 case eFunction.DAMAGE_BY_AD:            return new DamageByCasterAD(buffParam);
                 case eFunction.DAMAGE_BY_AP:            return new DamageByCasterAP(buffParam);
                 case eFunction.DAMAGE_BY_TARGET_MAXHP:  return new DamageByTargetMaxHP(buffParam);

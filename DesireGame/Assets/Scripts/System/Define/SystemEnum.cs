@@ -168,6 +168,8 @@ namespace Client
 
         public enum eFunction
         {
+            None,
+
             MULTICASTING,
 
             DELETE_FUNCTION,
@@ -254,6 +256,7 @@ namespace Client
         public enum eSynergyRange
         {
             None,
+            ONCE,
             SELF,
             GLOBAL_ALLY,
             GLOBAL_ENEMY,
