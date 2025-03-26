@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -10,10 +11,13 @@ namespace Client
     public class SynergyManager : Singleton<SynergyManager>
     {
         private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
-
-        // 해당 구조는 그대로 유지.
-        //private Dictionary<eSynergy, Action<SynergyParameter>> _OnSynergyChanges;
-
+        public ReadOnlyCollection<CharLightWeightInfo> GetInfo(eSynergy synergy)
+        {
+            if(_synergyActivator.ContainsKey(synergy))
+                return _synergyActivator[synergy].SynergyMembers;
+            return null;
+        }
+        
         #region 생성자
         private SynergyManager() { }
         #endregion

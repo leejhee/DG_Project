@@ -77,5 +77,29 @@ namespace Client
 
         }
 
+        public void CheckFollowingCondition()
+        {
+            if (_FunctionData.ConditionCheck != default)
+            {
+                var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
+                if (data == null) return;
+                var condition = ConditionFactory.CreateCondition(data);
+                if (condition.CheckCondition())
+                {
+                    foreach(var followingfunction in _FunctionData.ConditionFuncList)
+                    {
+                        var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
+                        _TargetChar.FunctionInfo.AddFunction(new BuffParameter()
+                        {
+                            CastChar = _CastChar,
+                            TargetChar = _TargetChar,
+                            eFunctionType = func.function,
+                            FunctionIndex = followingfunction
+                        });
+                    }
+                }
+            }
+        }
+
     }
 }

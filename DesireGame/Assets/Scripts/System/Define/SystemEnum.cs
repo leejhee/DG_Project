@@ -199,7 +199,21 @@ namespace Client
             INCREASE_MAX_HP,
             BUFF_TOTAL_DAMAGE,
 
+            CHECK_CONDITION,
+
             SYNERGY_TRIGGER,
+            eMax
+        }
+
+        public enum eCondition
+        {
+            None,
+
+            LAPLACIAN_ONLY,
+            LAPLACIAN_ALL,
+            HP_UNDER_N,
+            TRUE,
+
             eMax
         }
 

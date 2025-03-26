@@ -20,6 +20,10 @@ namespace Client
         private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
         public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
 
+        // 시너지 별 캐릭터 분류
+        private Dictionary<eSynergy, List<CharData>> _synergyCharacterMap = new();
+        public Dictionary<eSynergy, List<CharData>> SynergyCharacterMap => _synergyCharacterMap;
+
         // 시너지 관련 function Data
         private Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> _synergyDataMap = new();
         public Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> SynergyDataMap => _synergyDataMap;
@@ -45,6 +49,7 @@ namespace Client
             if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
             if (typeof(MonsterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
+            if (typeof(CharData).ToString().Contains(data)) { SetSynergyCharMap(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
             if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
             if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
@@ -129,6 +134,34 @@ namespace Client
                 _monsterSpawnStageMap[monsterSpawn.StageNum].Add(monsterSpawnInfo);
             }
         }
+
+        private void SetSynergyCharMap()
+        {
+            string key = typeof(CharData).Name;
+            if (!_cache.ContainsKey(key))
+                return;
+
+            var charDict = _cache[key];
+            if (charDict is null) return;
+
+            foreach(var kvp in charDict)
+            {
+                var _char = kvp.Value as CharData;
+                var synergies = new List<eSynergy>() 
+                { _char.synergy1, _char.synergy2, _char.synergy3 };
+
+                foreach(var synergy in synergies)
+                {
+                    if (!SynergyCharacterMap.ContainsKey(synergy))
+                        SynergyCharacterMap.Add(synergy, new List<CharData>());
+                    if (!SynergyCharacterMap[synergy].Contains(_char))
+                        SynergyCharacterMap[synergy].Add(_char);
+                }
+            }
+
+        }
+
+
 
         // 시너지 종류별 데이터 뭉텅이.
         private void SetSynergyMappingData()

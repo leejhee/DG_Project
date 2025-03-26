@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using System.Collections.ObjectModel;
 
 namespace Client
 {
     public class SynergyContainer
     {
-        private eSynergy mySynergy;
+        private readonly eSynergy mySynergy;
 
         private List<CharLightWeightInfo> _synergyMembers;
+        public ReadOnlyCollection<CharLightWeightInfo> SynergyMembers => _synergyMembers.AsReadOnly();
 
         #region 생성자
         public SynergyContainer(eSynergy synergy)
@@ -96,7 +98,7 @@ namespace Client
 
         #region Synergy Buff Managing
 
-        public Queue<SynergyBuffRecord> synergyBuffRecords = new();
+        private Queue<SynergyBuffRecord> synergyBuffRecords = new();
         
         // 시너지가 갱신되어야 하는지에 대한 체크 함수
         public bool CheckSynergyChange()
@@ -157,6 +159,9 @@ namespace Client
                 eFunctionType = funcData.function,
                 FunctionIndex = funcData.Index
             });
+
+            //TODO : FunctionInfo에 '전투 시작'에 대한 지시 철회할 것. 시너지컨테이너에서 책임 진다.
+            //TODO : SynergyContainer에서 Distributer로 객체 분리할지 생각해볼 것
             caster.FunctionInfo.AddFunction(synergyFunction, data.buffTriggerTime);
             Debug.Log($"{caster.GetID()}번 캐릭터 {caster.name}에 synergy Function {funcData.Index}번 function 주입. " +
                                     $"기능 : {funcData.function}");
@@ -232,6 +237,7 @@ namespace Client
         public void KillSynergyBuff()
         {
             Caster.FunctionInfo.KillFunction(BuffFunction);
+            Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
         }
 
     }

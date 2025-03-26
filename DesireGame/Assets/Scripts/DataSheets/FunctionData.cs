@@ -27,6 +27,7 @@ public long Index; // ID
 		public long input2; // input2
 		public long input3; // input3
 		public long input4; // input4
+		public long input5; // input5
 		public long ConditionCheck; // 조건
 		public List<long> ConditionFuncList; // 조건부Func
 		
@@ -105,11 +106,16 @@ public long Index; // ID
 					    data.input4 = Convert.ToInt64(values[11]);
 					
 					if(values[12] == "")
+					    data.input5 = default;
+					else
+					    data.input5 = Convert.ToInt64(values[12]);
+					
+					if(values[13] == "")
 					    data.ConditionCheck = default;
 					else
-					    data.ConditionCheck = Convert.ToInt64(values[12]);
+					    data.ConditionCheck = Convert.ToInt64(values[13]);
 					
-					ListStr = values[13].Replace('[',' ');
+					ListStr = values[14].Replace('[',' ');
 					ListStr = ListStr.Replace(']', ' ');
 					var ConditionFuncListData = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
 					data.ConditionFuncList = ConditionFuncListData;
