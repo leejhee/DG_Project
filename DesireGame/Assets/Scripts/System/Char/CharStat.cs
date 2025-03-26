@@ -301,6 +301,14 @@ namespace Client
 
         #endregion
         
+        public void ResetAfterBattle()
+        {
+            // 전투 이후 체력과 마나 초기화
+            // 이게 적절한가?
+            _charStat[(int)eStats.NHP] = (long)GetStat(eStats.NMHP);
+            _charStat[(int)eStats.N_MANA] = (long)GetStat(eStats.MAX_MANA);
+            Debug.Log($"리셋 : 체력 {GetStat(eStats.NHP)}/{GetStat(eStats.NMHP)} 마나 {GetStat(eStats.N_MANA)}/{GetStat(eStats.MAX_MANA)}");
+        }
     }
 
 
