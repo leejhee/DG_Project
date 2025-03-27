@@ -14,7 +14,7 @@ namespace Client
         private List<(SystemEnum.eStats eStat, int increase)> _subStatList;
 
         public ItemData ItemData => _itemData;
-
+        public List<(SystemEnum.eStats eStat, int increase)> SubStatList => _subStatList;
         public Item(long itemID)
         {
             _itemIndex = itemID;

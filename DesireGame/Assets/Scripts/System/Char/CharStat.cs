@@ -309,8 +309,6 @@ namespace Client
             _charStat[(int)eStats.N_MANA] = (long)GetStat(eStats.START_MANA);
             Debug.Log($"리셋 : 체력 {GetStat(eStats.NHP)}/{GetStat(eStats.NMHP)} 마나 {GetStat(eStats.N_MANA)}/{GetStat(eStats.START_MANA)}");
         }
+
     }
-
-
-
 }
