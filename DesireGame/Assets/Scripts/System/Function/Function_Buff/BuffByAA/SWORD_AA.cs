@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Client
 {
-    public class SWORD_AA : SynergyFunction
+    public class SWORD_AA : FunctionBase
     {
         private int _count = -1;
         private int _amount = 0;

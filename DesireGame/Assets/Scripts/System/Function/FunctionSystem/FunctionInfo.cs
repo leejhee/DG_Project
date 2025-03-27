@@ -1,8 +1,6 @@
 using static Client.SystemEnum;
 using System.Collections.Generic;
 using UnityEngine;
-using OpenCover.Framework.Model;
-using System;
 
 namespace Client
 {
@@ -41,6 +39,11 @@ namespace Client
             while(_functionReadyQueue.Count != 0)
             {
                 FunctionBase target = _functionReadyQueue.Dequeue();
+                if (target == null) continue;
+
+                if(!_functionBaseDic.ContainsKey(target.functionType))
+                    _functionBaseDic.Add(target.functionType, new List<FunctionBase>());
+
                 if (!_functionBaseDic[target.functionType].Contains(target)) //버프 중첩 불가? (Equals override 안해서 영향 없이 중첩되는 상황)
                 {
                     target.InitFunction();
