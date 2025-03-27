@@ -40,7 +40,7 @@ namespace Client
         }
         public void ApplyItemEffect(Item item)
         {
-            charOwner.CharStat.ApplyItemEffect(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
+            charOwner.CharStat.ChangeStateByBuff(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
             foreach(var substat in item.SubStatList)
             {
                 charOwner.CharStat.ChangeStateByBuff(substat.eStat, substat.increase);
@@ -49,7 +49,7 @@ namespace Client
         }
         public void DisapplyItemEffect(Item item)
         {
-            charOwner.CharStat.DisapplyItemEffect(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
+            charOwner.CharStat.ChangeStateByBuff(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
             foreach (var substat in item.SubStatList)
             {
                 charOwner.CharStat.ChangeStateByBuff(substat.eStat, -substat.increase);
