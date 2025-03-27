@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Client
 {
@@ -16,6 +19,13 @@ namespace Client
         protected float _LifeTime = -1; // 라이프타임 -1 은 무한 지속
 
         public SystemEnum.eFunction functionType;
+
+        #region Debug Property
+        public string _TargetName => _TargetChar.name;
+        public string _CasterName => _CastChar.name;
+        public long DebugIndex => _FunctionData.Index;
+        #endregion
+
 
         // 버프 생성자
         public FunctionBase(BuffParameter buffParam)
@@ -57,6 +67,11 @@ namespace Client
                     $"인덱스 {_FunctionData.Index} " +
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
+                
+                foreach(var child in _children)
+                {
+                    _TargetChar.FunctionInfo.KillFunction(child);
+                }
             }
         }
 
@@ -89,17 +104,36 @@ namespace Client
                     foreach(var followingfunction in _FunctionData.ConditionFuncList)
                     {
                         var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
-                        _TargetChar.FunctionInfo.AddFunction(new BuffParameter()
-                        {
-                            CastChar = _CastChar,
-                            TargetChar = _TargetChar,
-                            eFunctionType = func.function,
-                            FunctionIndex = followingfunction
-                        });
+                        AddChildFunctionToTarget(func);
                     }
+                }
+                else
+                {
+                    Debug.Log("컨디션 만족하지 못하여 발동 안함");
                 }
             }
         }
 
+        private List<FunctionBase> _children = new();
+        public void AddChildFunctionToTarget(FunctionData childData)
+        {
+            if (childData == null || childData.function == default)
+                return;
+            else
+            {
+                var child = FunctionFactory.FunctionGenerate(new BuffParameter()
+                {
+                    CastChar = _CastChar,
+                    TargetChar = _TargetChar,
+                    eFunctionType = childData.function,
+                    FunctionIndex = childData.Index
+                });
+                _children.Add(child);
+                _TargetChar.FunctionInfo.AddFunction(child);
+
+                Debug.Log($"{_CasterName}에서 {_TargetName}으로의, {_FunctionData.Index}의 " +
+                            $"child function {childData.Index}번 추가");
+            }               
+        }
     }
 }

@@ -2,6 +2,7 @@ using static Client.SystemEnum;
 using System.Collections.Generic;
 using UnityEngine;
 using OpenCover.Framework.Model;
+using System;
 
 namespace Client
 {
@@ -85,7 +86,7 @@ namespace Client
             }
         }
 
-        public void AddFunction(FunctionBase target, eBuffTriggerTime triggerTime)
+        public void AddFunction(FunctionBase target, eBuffTriggerTime triggerTime=eBuffTriggerTime.BORN)
         {
             if (target == null) return;
             if (triggerTime == eBuffTriggerTime.BORN)
@@ -98,7 +99,7 @@ namespace Client
             }
         }
 
-
+        // 이거 써야 할지 다시 한번 생각해보자.
         // 시너지 전용 enqueue. 제네릭으로 다른 건 안되게 막음. 어쩔수 없다...
         public void AddFunction<T>(T synergyFunction) where T : SynergyFunction
         {
