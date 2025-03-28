@@ -1,11 +1,8 @@
 #if UNITY_EDITOR
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using System.Linq;
-using System;
-using UnityEditor.PackageManager.UI;
 
 namespace Client
 {
@@ -13,7 +10,6 @@ namespace Client
     {
         private List<CharBase> characterList = new();
         private List<FunctionData> functionDatas = new();
-        private string[] functionOptions = null;
         private string searchFunctionTerm = "";
         private int CasterOrder = -1;
         private int TargetOrder = -1;
@@ -41,17 +37,28 @@ namespace Client
             {
                 characterList = CharManager.Instance.GetCurrentCharacters();
                 var functionlist = DataManager.Instance.GetDataList<FunctionData>();
-                functionOptions = new string[functionlist.Count];
                 for (int i = 0; i < functionlist.Count; i++)
                 {
                     var target = functionlist[i] as FunctionData;
                     functionDatas.Add(target);
-                    functionOptions[i] =
-                        $"Index : {target.Index}, " +
-                        $"Function Type : {target.function}, " +
-                        $"Duration : {(target.time <= 1 ? target.time : target.time / SystemConst.PER_THOUSAND)}";
                 }              
             }            
+        }
+
+        private string TimeGuide(long duration)
+        {
+            if(duration == default)
+            {
+                return "INSTANT";
+            }
+            else if (duration == -1)
+            {
+                return "PERMANENT";
+            }
+            else
+            {
+                return ((float)(duration / SystemConst.PER_THOUSAND)).ToString();
+            }
         }
 
         private void OnGUI()
@@ -83,7 +90,7 @@ namespace Client
             .Where(f => string.IsNullOrEmpty(searchFunctionTerm) ||
                         f.function.ToString().Contains(searchFunctionTerm) ||
                         f.Index.ToString().Contains(searchFunctionTerm) ||
-                        f.time.ToString().Contains(searchFunctionTerm))
+                        TimeGuide(f.time).Contains(searchFunctionTerm))
             .ToList();
 
 
@@ -116,7 +123,7 @@ namespace Client
 
                     EditorGUILayout.LabelField(function.Index.ToString(), rowStyle, GUILayout.Width(80));
                     EditorGUILayout.LabelField(function.function.ToString(), rowStyle, GUILayout.Width(200));
-                    EditorGUILayout.LabelField(function.time.ToString(), rowStyle, GUILayout.Width(80));
+                    EditorGUILayout.LabelField(TimeGuide(function.time), rowStyle, GUILayout.Width(80));
 
                     if (GUILayout.Button("선택", GUILayout.Width(80)))
                     {
@@ -135,6 +142,8 @@ namespace Client
 
             GUILayout.FlexibleSpace();
 
+            string result = selectedFunction == null ? "버프를 선택해주세요" : selectedFunction.Index.ToString() + "번 버프 적용";
+
             GUIStyle ButtonStyle = new(GUI.skin.button)
             {
                 fontSize = 14,
@@ -143,7 +152,7 @@ namespace Client
                 alignment = TextAnchor.MiddleCenter
             };
 
-            if (GUILayout.Button("버프 적용", ButtonStyle, GUILayout.ExpandWidth(true)) && 
+            if (GUILayout.Button(result, ButtonStyle, GUILayout.ExpandWidth(true)) && 
                 selectedFunction != null && CasterOrder > -1 && TargetOrder > -1)
             {
                 var caster = characterList[CasterOrder];

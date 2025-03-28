@@ -285,7 +285,7 @@ namespace Client
         // 플레이어 유닛 팔면 영영 사라져서 시너지 없애야한다... 판매 있더라고요
         public void Sell()
         {
-            CharDead();
+            Dead.Invoke();
             //돈 나오게 하는 것도 만들어놔라
         }
 

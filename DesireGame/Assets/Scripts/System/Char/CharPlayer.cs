@@ -35,26 +35,20 @@ namespace Client
                 _charData.synergy3
             };
 
-            SynergyManager.Instance.RegisterCharSynergy(new CharLightWeightInfo()
+            var charInfo = new CharLightWeightInfo()
             {
                 index = Index,
                 uid = _uid,
                 synergyList = _charSynergies
-            });
+            };
 
-            /*
-            //foreach (var synergy in _charSynergies)
-            //{
-            //    if (synergy == eSynergy.None) continue;
-            //    var synergyTrigger = DataManager.Instance.SynergyTriggerMap[synergy];
-            //    _functionInfo.AddFunction(new BuffParameter()
-            //    {
-            //        eFunctionType = eFunction.SYNERGY_TRIGGER,
-            //        CastChar = this,
-            //        TargetChar = this,
-            //        FunctionIndex = synergyTrigger.Index
-            //    });
-            //}*/
+            SynergyManager.Instance.RegisterCharSynergy(charInfo);
+
+            Dead += () =>
+            {
+                SynergyManager.Instance.DeleteCharSynergy(charInfo);
+                // [TODO] 이선재 : 장착되어있던 아이템 해제하는 것 필요
+            };
             #endregion
         }
 

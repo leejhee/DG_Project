@@ -54,6 +54,24 @@ namespace Client
 
         }
 
+        public void DeleteCharSynergy(CharLightWeightInfo leaver)
+        {
+            var mySynergies = leaver.synergyList;
+            var otherSynergies = _synergyActivator.Keys.Except(mySynergies).ToList();
+
+            foreach (var synergy in leaver.synergyList)
+            {
+                DeleteSynergy(leaver, synergy);
+            }
+
+            foreach (var other in otherSynergies)
+            {
+                _synergyActivator[other].KillLeaverBuff(leaver);
+            }
+
+        }
+
+
         /// <summary> 시너지 등록 단위 </summary>
         /// <param name="registrar"> 가입자 정보 </param>
         /// <param name="synergy"> 가입할 시너지 </param>

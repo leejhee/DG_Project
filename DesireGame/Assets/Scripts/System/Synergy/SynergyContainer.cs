@@ -50,6 +50,8 @@ namespace Client
             if (_synergyMembers.Contains(leaver))
                 _synergyMembers.Remove(leaver);
 
+            KillLeaverBuff(leaver);
+
             if (CheckSynergyChange())
                 SetCurrentSynergy();
         }
@@ -79,7 +81,6 @@ namespace Client
             int nowDistinct = DistinctMembers;
 
             // 문턱이 1인 시너지는 시너지 종류별로 반드시 존재해야 함.
-            // 하지만 지금은 1짜리는 안만들어놨다. 그니까 활성화만 생각하자.
             int levelThreshold = 1;
             foreach (var threshold in sortedKeys)
             {
@@ -129,6 +130,23 @@ namespace Client
 
         }
 
+        public void KillLeaverBuff(CharLightWeightInfo releaser)
+        {
+            var caster = releaser.SpecifyCharBase();
+            if (caster == null) return;
+
+            // 안전하게 하자.
+            int count = synergyBuffRecords.Count;
+            while (count-- > 0)
+            {
+                var record = synergyBuffRecords.Dequeue();
+                if (record.Caster == caster)
+                    continue;
+                else
+                    synergyBuffRecords.Enqueue(record);               
+            }
+        }
+
         // 시너지 버프 얻는 함수
         public void GetBuff(CharBase caster, SynergyData data)
         {
@@ -172,8 +190,7 @@ namespace Client
 
         // 시너지 갱신 함수
         public void SetCurrentSynergy()
-        {
-            // Reset Record
+        {            
             while(synergyBuffRecords.Count > 0)
             {
                 var record = synergyBuffRecords.Dequeue();
