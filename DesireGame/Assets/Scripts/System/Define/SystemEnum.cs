@@ -202,6 +202,8 @@ namespace Client
             CHECK_CONDITION,
 
             SYNERGY_TRIGGER,
+            LAPLACIAN_ENTRYPOINT,
+
             eMax
         }
 

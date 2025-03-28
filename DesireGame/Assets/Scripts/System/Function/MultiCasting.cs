@@ -20,7 +20,8 @@ namespace Client
                     _FunctionData.input1,
                     _FunctionData.input2,
                     _FunctionData.input3,
-                    _FunctionData.input4
+                    _FunctionData.input4,
+                    _FunctionData.input5
                 };
                 foreach (var index in indices)
                 {
@@ -32,14 +33,16 @@ namespace Client
                             Debug.LogWarning($"{index} 데이터가 없으니 확인해보세요. 다음 인덱스로 넘어감");
                             continue;
                         }
-                            
-                        _TargetChar.FunctionInfo.AddFunction(new BuffParameter()
-                        {
-                            CastChar = _CastChar,
-                            TargetChar = _TargetChar,
-                            eFunctionType = data.function,
-                            FunctionIndex = index
-                        });
+                        
+                        AddChildFunctionToTarget(data);
+
+                        //_TargetChar.FunctionInfo.AddFunction(new BuffParameter()
+                        //{
+                        //    CastChar = _CastChar,
+                        //    TargetChar = _TargetChar,
+                        //    eFunctionType = data.function,
+                        //    FunctionIndex = index
+                        //});
                         Debug.Log($"성공적으로 주입 완료 _CastChar {_CastChar.GetID()} _TargetChar {_TargetChar.GetID()} index {index}");
                     }
                 }

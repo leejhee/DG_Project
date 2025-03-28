@@ -253,7 +253,8 @@ namespace Client
 
         public void KillSynergyBuff()
         {
-            Caster.FunctionInfo.KillFunction(BuffFunction);
+            BuffFunction.KillSelfFunction(true, true);
+            //Caster.FunctionInfo.KillFunction(BuffFunction);
             Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
         }
 

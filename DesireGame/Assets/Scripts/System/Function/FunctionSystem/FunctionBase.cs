@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -68,10 +69,7 @@ namespace Client
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
                 
-                foreach(var child in _children)
-                {
-                    _TargetChar.FunctionInfo.KillFunction(child);
-                }
+                
             }
         }
 
@@ -114,7 +112,7 @@ namespace Client
             }
         }
 
-        private List<FunctionBase> _children = new();
+        protected List<FunctionBase> _children = new();
         public void AddChildFunctionToTarget(FunctionData childData)
         {
             if (childData == null || childData.function == default)
@@ -134,6 +132,26 @@ namespace Client
                 Debug.Log($"{_CasterName}에서 {_TargetName}으로의, {_FunctionData.Index}의 " +
                             $"child function {childData.Index}번 추가");
             }               
+        }
+
+        public void KillChildFunctionToTarget(bool isFromSynergy=false)
+        {
+            foreach(var child in _children)
+            {
+                if(child == null) continue;
+                child.KillSelfFunction(isFromSynergy);
+            }                              
+        }
+
+        public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
+        {
+            if(inCaster)            
+                _CastChar.FunctionInfo.KillFunction(this);             
+            else           
+                _TargetChar.FunctionInfo.KillFunction(this);
+           
+            if (killChildren)
+                KillChildFunctionToTarget(killChildren);
         }
     }
 }

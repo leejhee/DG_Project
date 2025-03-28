@@ -31,7 +31,7 @@ namespace Client
                 SynergyManager.Instance.RegisterSynergy(myCharLightWeightInfo, mySynergy);
                 
                 //[TODO] : 팔 때만 시너지 지워지도록 만들기
-                _CastChar.Dead += () =>
+                _CastChar.OnRealDead += () =>
                 {
                     _CastChar.FunctionInfo.KillFunction(this);
                 };

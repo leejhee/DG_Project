@@ -159,11 +159,6 @@ namespace Client
                 CharDead();
             };
 
-            Dead += () =>
-            {
-                CharDead();
-                Destroy(gameObject);
-            };
         }
 
         public virtual void CharDead()
@@ -274,18 +269,18 @@ namespace Client
             _charAnim.PlayAnimation(state);
         }
 
-        public Action Dead;
-
-        //public void Dead()
-        //{
-        //    CharDead();
-        //    Destroy(gameObject);
-        //}
+        public Action OnRealDead;
+        public virtual void Dead()
+        {
+            CharDead();
+            OnRealDead?.Invoke();
+            Destroy(gameObject);
+        }
 
         // 플레이어 유닛 팔면 영영 사라져서 시너지 없애야한다... 판매 있더라고요
         public void Sell()
         {
-            Dead.Invoke();
+            Dead();
             //돈 나오게 하는 것도 만들어놔라
         }
 

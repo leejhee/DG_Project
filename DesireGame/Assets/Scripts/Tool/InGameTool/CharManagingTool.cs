@@ -70,7 +70,7 @@ namespace Client
             if (GUILayout.Button(guide, ButtonStyle, GUILayout.ExpandWidth(true)) &&
                 (victim == true)&& VictimOrder > -1)
             {
-                victim.Dead.Invoke();
+                victim.Dead();
                 UpdateCharacterList();
             }
 

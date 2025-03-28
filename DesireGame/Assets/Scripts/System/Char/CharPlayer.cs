@@ -12,6 +12,7 @@ namespace Client
         private Vector3 offset;
         private Camera mainCamera;
 
+        private CharLightWeightInfo lightWeightInfo;
         private List<eSynergy> _charSynergies = null;
 
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
@@ -35,21 +36,23 @@ namespace Client
                 _charData.synergy3
             };
 
-            var charInfo = new CharLightWeightInfo()
+            lightWeightInfo = new CharLightWeightInfo()
             {
                 index = Index,
                 uid = _uid,
                 synergyList = _charSynergies
             };
 
-            SynergyManager.Instance.RegisterCharSynergy(charInfo);
+            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
 
-            Dead += () =>
-            {
-                SynergyManager.Instance.DeleteCharSynergy(charInfo);
-                // [TODO] 이선재 : 장착되어있던 아이템 해제하는 것 필요
-            };
             #endregion
+        }
+
+        public override void Dead()
+        {
+            SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
+            // [TODO] 이선재 : 장착되어있던 아이템 해제하는 것 필요
+            base.Dead();
         }
 
         void OnMouseDown()

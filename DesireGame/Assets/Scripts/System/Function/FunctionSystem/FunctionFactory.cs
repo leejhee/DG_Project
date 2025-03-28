@@ -26,6 +26,7 @@ namespace Client
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);
                 case eFunction.TELEPORT_TO_ALLY_REAR:   return new TeleportToAllyRear(buffParam);
                 case eFunction.SWORD_SYNERGY_AABUFF:    return new SWORD_AA(buffParam);
+                case eFunction.LAPLACIAN_ENTRYPOINT:    return new LAPLACIAN_ENTRYPOINT(buffParam);
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 default:
                     break;
