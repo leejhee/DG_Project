@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace Client
 {
@@ -11,6 +12,9 @@ namespace Client
 
         private readonly int maxCount = 20;
         private List<Item> itemList = new();
+
+        public Action<ItemUIParameter> OnItemChange; // 인벤토리에 변화 생길 시 UI에 변경사항 전달
+
         public override void Init()
         {
             base.Init();
@@ -47,6 +51,8 @@ namespace Client
 
             itemList.Add(item);
             Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  획득");
+
+            OnItemChange?.Invoke(new ItemUIParameter(item));
         }
 
         public void DeleteItem(Item item)

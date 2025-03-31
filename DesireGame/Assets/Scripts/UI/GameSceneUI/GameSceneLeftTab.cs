@@ -11,6 +11,8 @@ namespace Client
         [SerializeField] Button ChangeTabBtn;
         int CurrnetActive = 0;
 
+
+
         private void Awake()
         {
             UIManager.Instance.SetCanvas(gameObject, false);

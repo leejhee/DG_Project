@@ -10,4 +10,19 @@ namespace Client
         
     }
 
+    public class SynergyUIParameter : UIParameter
+    {
+        public Sprite SynergySprite;
+    }
+
+    public class ItemUIParameter : UIParameter
+    {
+        public Item Item;
+
+        public ItemUIParameter(Item item)
+        {
+            this.Item = item;
+        }
+    }
+
 }
