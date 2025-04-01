@@ -41,4 +41,19 @@ namespace Client
 
     }
 
+    public class BuffOnceByAP : StatBuffBase
+    {
+        public BuffOnceByAP(BuffParameter buffParam) : base(buffParam)
+        {
+            isTemporal = false;
+        }
+
+        public override void ComputeDelta()
+        {
+            base.ComputeDelta();
+            delta = _CastChar.CharStat.GetStatRaw(SystemEnum.eStats.NAP)
+                * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
+        }
+    }
+
 }

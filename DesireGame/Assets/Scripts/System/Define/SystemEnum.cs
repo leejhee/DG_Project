@@ -183,6 +183,7 @@ namespace Client
             BUFF_AA,
             ADDMANA_ON_AA,
             BUFF_ONCE_BY_AD,
+            BUFF_ONCE_BY_AP,
             BUFF_ONCE,
 
             CREATE_SHIELD,
@@ -203,6 +204,7 @@ namespace Client
 
             SYNERGY_TRIGGER,
             LAPLACIAN_ENTRYPOINT,
+            GET_FUNCTION_AFTER_WAIT,
 
             eMax
         }

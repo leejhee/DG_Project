@@ -9,9 +9,10 @@ namespace Client
 {
     public struct DamageParameter
     {
-        public float rawDamage;        // 공격자 측에서 계산된 대미지
-        public eDamageType damageType; // 공격자 측의 대미지 타입
-        public float penetration;      // 대미지 타입에 따른 관통
+        public CharBase Attacker;       // 공격자 신상
+        public float rawDamage;         // 공격자 측에서 계산된 대미지
+        public eDamageType damageType;  // 공격자 측의 대미지 타입
+        public float penetration;       // 대미지 타입에 따른 관통
     }
 
     /// <summary>
@@ -31,7 +32,8 @@ namespace Client
                     return eDamageType.MAGIC;
                 else
                     return eDamageType.None;
-            } }
+            } 
+        }
 
         public CharStat(StatsData charStat, CharBase StatOwner)
         {
@@ -162,7 +164,7 @@ namespace Client
         public Action OnDealDamage;
         public Action OnDeath;
 
-        
+        public Action<CharBase> 신상공개;
 
         /// <summary>
         /// 공격자 기준 대미지 관여 요소들을 산출합니다.
@@ -186,6 +188,7 @@ namespace Client
 
             return new DamageParameter()
             {
+                Attacker = StatOwner,
                 rawDamage = rawDamage,
                 damageType = damageType,
                 penetration = penetration
@@ -234,6 +237,7 @@ namespace Client
             if (_charStat[(int)eStats.NHP] <= 0)
             {
                 Debug.Log("으엑 죽었다");
+                신상공개?.Invoke(damage.Attacker);
                 OnDeath?.Invoke();
             }
         }

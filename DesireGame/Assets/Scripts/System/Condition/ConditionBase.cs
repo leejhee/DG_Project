@@ -5,6 +5,18 @@ using System.Linq;
 
 namespace Client
 {
+    // 원형
+    public abstract class ConditionCheckParameter
+    {
+
+    }
+
+    public class StatConditionParameter : ConditionCheckParameter
+    {
+        
+    }
+
+    // 파생 클래스에서는 각 생성자 부분에 구독하는 부분을 추가할 것
     public abstract class ConditionBase
     {
         protected ConditionData _conditionData;
@@ -14,9 +26,28 @@ namespace Client
             _conditionData = data;
         }
 
-        public abstract bool CheckCondition();
+        public abstract bool CheckCondition(ConditionCheckParameter param);
+    }
+
+    public abstract class StatCondition : ConditionBase
+    {
+        protected StatCondition(ConditionData data) : base(data)
+        {
+
+        }
+
+        public override abstract bool CheckCondition(ConditionCheckParameter param);
+
 
     }
+
+    public abstract class CharPosCondition : ConditionBase
+    {
+        protected CharPosCondition(ConditionData data) : base(data)
+        {
+        }
+    }
+
 
     public class LaplacianUnitOnly : ConditionBase
     {
@@ -27,7 +58,7 @@ namespace Client
             checkTargetIndex = _conditionData.value1;
         }
 
-        public override bool CheckCondition()
+        public override bool CheckCondition(ConditionCheckParameter param)
         {
             var members = SynergyManager.Instance.GetInfo(SystemEnum.eSynergy.LAPLACIAN);
             if (members == null || members.Count == 0)
@@ -46,7 +77,7 @@ namespace Client
         {
         }
 
-        public override bool CheckCondition()
+        public override bool CheckCondition(ConditionCheckParameter param)
         {
             return true;
         }

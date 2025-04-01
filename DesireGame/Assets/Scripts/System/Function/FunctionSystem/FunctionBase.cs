@@ -90,6 +90,8 @@ namespace Client
 
         }
 
+
+
         public void CheckFollowingCondition()
         {
             if (_FunctionData.ConditionCheck != default)
@@ -97,17 +99,21 @@ namespace Client
                 var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
                 if (data == null) return;
                 var condition = ConditionFactory.CreateCondition(data);
-                if (condition.CheckCondition())
+
+
                 {
-                    foreach(var followingfunction in _FunctionData.ConditionFuncList)
-                    {
-                        var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
-                        AddChildFunctionToTarget(func);
-                    }
-                }
-                else
-                {
-                    Debug.Log("컨디션 만족하지 못하여 발동 안함");
+                //if (condition.CheckCondition())
+                //{
+                //    foreach(var followingfunction in _FunctionData.ConditionFuncList)
+                //    {
+                //        var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
+                //        AddChildFunctionToTarget(func);
+                //    }
+                //}
+                //else
+                //{
+                //    Debug.Log("컨디션 만족하지 못하여 발동 안함");
+                //}
                 }
             }
         }
@@ -134,15 +140,17 @@ namespace Client
             }               
         }
 
-        public void KillChildFunctionToTarget(bool isFromSynergy=false)
+        public void KillChildFunctionToTarget(bool killAfterChildren=false)
         {
             foreach(var child in _children)
             {
                 if(child == null) continue;
-                child.KillSelfFunction(isFromSynergy);
+                child.KillSelfFunction(killAfterChildren, inCaster: false);
             }                              
         }
 
+        /// <summary> Function 본인 킬 스위치 </summary>
+        /// <remarks> Caster 및 Target에 주의할 것. </remarks>
         public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
         {
             if(inCaster)            

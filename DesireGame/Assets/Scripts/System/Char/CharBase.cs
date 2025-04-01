@@ -166,7 +166,6 @@ namespace Client
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
             gameObject.SetActive(false);
-            //Destroy(gameObject);
         }
 
         public long GetID() => _uid;
@@ -243,8 +242,7 @@ namespace Client
             // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
             CharAI.isAIRun = turnOn;
             if (turnOn)
-            {
-                
+            {                
                 _coroutine = StartCoroutine(CharAI.UpdateAI(_currentState));
             }
             else

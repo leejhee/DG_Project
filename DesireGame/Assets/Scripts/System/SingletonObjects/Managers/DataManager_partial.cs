@@ -36,7 +36,6 @@ namespace Client
         private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
         public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
 
-
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
         #endregion

@@ -28,7 +28,6 @@ namespace Client
             }
         }
 
-        // 하 진짜 개 구리다
         private void SetFunctionTarget(CharBase charBase) => _TargetChar = charBase;
 
         public void OnAA()

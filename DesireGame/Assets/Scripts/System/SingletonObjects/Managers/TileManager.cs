@@ -82,6 +82,11 @@ namespace Client
                 return;
             }
             tile.SetChar(setChar);
+
+            // ¹º°¡ Ã¼Å©.
+            {
+
+            }
         }
 
         public void VecToTileIndex(PlayerMove mas)

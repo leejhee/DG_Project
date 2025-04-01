@@ -1,5 +1,6 @@
 namespace Client
 {
+    // [TODO] : 이거 지우고 연결 수정할 것
     public class SynergyFunction : FunctionBase
     {
 
