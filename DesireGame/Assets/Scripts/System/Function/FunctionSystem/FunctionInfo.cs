@@ -131,5 +131,31 @@ namespace Client
             _functionOnBattleStartQueue.Enqueue(target);
         }
 
+        #region CONDITION PART
+        private List<ConditionBase> _conditions = new();
+
+        public void AddCondition(ConditionParameter param)
+        {
+            var condition = ConditionFactory.CreateCondition(param);
+            if(condition != null)
+                _conditions.Add(condition);
+        }
+
+        public void AddCondition(ConditionBase condition)
+        {
+            _conditions.Add(condition);
+        }
+
+        public void KillCondition(ConditionBase condition)
+        {
+            _conditions.Remove(condition);
+        }
+
+        public void EvaluateCondition(ConditionCheckParameter param)
+        {
+            foreach(var condition in _conditions)
+                condition.CheckInput(param);
+        }
+        #endregion
     }
 }

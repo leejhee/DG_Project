@@ -68,8 +68,9 @@ namespace Client
                     $"인덱스 {_FunctionData.Index} " +
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
-                
-                
+
+                if (_condition != null)
+                    _TargetChar.FunctionInfo.KillCondition(_condition);
             }
         }
 
@@ -90,7 +91,7 @@ namespace Client
 
         }
 
-
+        private ConditionBase _condition = null;
 
         public void CheckFollowingCondition()
         {
@@ -98,9 +99,12 @@ namespace Client
             {
                 var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
                 if (data == null) return;
-                var condition = ConditionFactory.CreateCondition(data);
-
-
+                _condition = ConditionFactory.CreateCondition(new ConditionParameter()
+                {
+                    conditionData = data,
+                    conditionCallback = ConditionCheckCallback
+                });
+                _TargetChar.FunctionInfo.AddCondition(_condition);
                 {
                 //if (condition.CheckCondition())
                 //{
@@ -117,6 +121,23 @@ namespace Client
                 }
             }
         }
+
+        private void ConditionCheckCallback(bool result)
+        {
+            if(result)
+            {
+                foreach (var followingfunction in _FunctionData.ConditionFuncList)
+                {
+                    var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
+                    AddChildFunctionToTarget(func);
+                }
+            }
+            else
+            {
+                Debug.Log("컨디션 만족하지 못하여 발동 안함");
+            }
+        }
+
 
         protected List<FunctionBase> _children = new();
         public void AddChildFunctionToTarget(FunctionData childData)
