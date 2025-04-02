@@ -35,9 +35,9 @@ namespace Client
             } 
         }
 
-        public CharStat(StatsData charStat, CharBase StatOwner)
+        public CharStat(StatsData charStat, CharBase statOwner)
         {
-            this.StatOwner = StatOwner;
+            this.StatOwner = statOwner;
 
             #region Init Stats
 
@@ -88,9 +88,7 @@ namespace Client
             #endregion
 
         }
-
-        /// <summary> </summary>
-        /// [TODO] : N자 들어가는거에 버프치 계산하는 구조 넣어서 할 것.
+        
         public float GetStat(eStats eStats)
         {
             switch (eStats)
@@ -134,10 +132,31 @@ namespace Client
             }
 
             Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {tempStat} -> {afterStat}");
+            
+            #region 스탯에 따른 조건 Trigging
+            {
+                Queue<ConditionCheckParameter> triggers = new();
+
+                if (delta < 0)
+                {
+                    triggers.Enqueue(new StatConditionParameter()
+                    {
+                        changedStat = properTargetStat,
+                        conditionType = eCondition.HP_UNDER_N, // HP 깎일 때
+                        input = (long)(GetStat(eStats.NHP) / GetStat(eStats.NMHP))
+                    });
+                }
+                
+                while (triggers.Count > 0)
+                {
+                    StatOwner.FunctionInfo.EvaluateCondition(triggers.Dequeue());
+                }
+            }
+            #endregion
         }
 
         // 스탯의 초기값이 같은 곳에 있기 때문에 이렇게 한다.
-        public eStats CurrentStatByBaseStat(eStats baseStat)
+        private static eStats CurrentStatByBaseStat(eStats baseStat)
         {
             switch (baseStat)
             {
@@ -164,7 +183,7 @@ namespace Client
         public Action OnDealDamage;
         public Action OnDeath;
 
-        public Action<CharBase> 신상공개;
+        //public Action<CharBase> 신상공개;
 
         /// <summary>
         /// 공격자 기준 대미지 관여 요소들을 산출합니다.
@@ -201,7 +220,7 @@ namespace Client
                 GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
         }
 
-
+        
         public void ReceiveDamage(DamageParameter damage)
         {
             if (_charStat[(int)eStats.NHP] <= 0) return;
@@ -228,16 +247,16 @@ namespace Client
             var appliedDamage = AbsorbDamage((long)finalDamage);
 
             // 실대미지 계산 파트
-            _charStat[(int)eStats.NHP] -= appliedDamage;           
-             Debug.Log($"{StatOwner.GetID()}번 유닛 대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
+            ChangeStateByBuff(eStats.NHP, -appliedDamage);
+            Debug.Log($"{StatOwner.GetID()}번 유닛 대미지 {appliedDamage}만큼 받음. 잔여 HP {GetStat(eStats.NHP)}");
             
             OnDamaged?.Invoke();
-
+            
             // 사망 검사 파트
             if (_charStat[(int)eStats.NHP] <= 0)
             {
                 Debug.Log("으엑 죽었다");
-                신상공개?.Invoke(damage.Attacker);
+                //신상공개?.Invoke(damage.Attacker);
                 OnDeath?.Invoke();
             }
         }
@@ -253,7 +272,7 @@ namespace Client
         public void AddShield(Shield shield) 
         {
             Shields.Add(shield);
-            _charStat[(int)eStats.SHIELD] += (long)shield.Amount;
+            _charStat[(int)eStats.SHIELD] += shield.Amount;
         } 
         public void RemoveShield(Shield shield) => Shields.Remove(shield);
         public long AbsorbDamage(long damage)
@@ -268,8 +287,7 @@ namespace Client
             return remainingDamage;
         }
         #endregion
-
-
+        
         #region Mana Exchanging Function
 
         public void GainMana(eAttackMode mode)
@@ -292,7 +310,7 @@ namespace Client
             {
                 _charStat[(int)eStats.N_MANA] += (int)((1 + increaseRatio) * amount);
             }
-            else if(isGain && isAdditional)
+            else if(isGain)
             {
                 _charStat[(int)eStats.N_MANA] += amount;
             }

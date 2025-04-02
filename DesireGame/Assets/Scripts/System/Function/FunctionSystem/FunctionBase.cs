@@ -95,7 +95,7 @@ namespace Client
 
         public void CheckFollowingCondition()
         {
-            if (_FunctionData.ConditionCheck != default)
+            if (_FunctionData.ConditionCheck != 0)
             {
                 var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
                 if (data == null) return;
@@ -180,7 +180,7 @@ namespace Client
                 _TargetChar.FunctionInfo.KillFunction(this);
            
             if (killChildren)
-                KillChildFunctionToTarget(killChildren);
+                KillChildFunctionToTarget(true);
         }
     }
 }

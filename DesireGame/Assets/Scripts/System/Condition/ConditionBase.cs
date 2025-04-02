@@ -27,26 +27,24 @@ namespace Client
 
         public long input;
     }
-
+    
     public class SynergyConditionParameter : ConditionCheckParameter
     {
         public eSynergy changedSynergy;
     }
-
-    /// <summary>
+    
     /// /////////////////////////////////////////////////////////////////////
-    /// </summary>
-
+    
     // 파생 클래스에서는 각 생성자 부분에 구독하는 부분을 추가할 것
     public abstract class ConditionBase
     {
         protected ConditionData _conditionData;
-        protected Action<bool> _conditionCallback;      
-        
-        public ConditionBase(ConditionParameter param)
+        protected Action<bool> _conditionCallback;
+
+        protected ConditionBase(ConditionParameter param)
         {
             _conditionData = param.conditionData;
-            _conditionCallback += param.conditionCallback;
+            _conditionCallback = param.conditionCallback;
         }
 
         //public abstract bool CheckCondition(ConditionCheckParameter param);
@@ -63,7 +61,8 @@ namespace Client
         public override void CheckInput(ConditionCheckParameter param)
         {
             base.CheckInput(param);
-            if (param is not StatConditionParameter) return;            
+            if (param is not StatConditionParameter) 
+                return;            
         }
 
     }
@@ -98,8 +97,13 @@ namespace Client
         public override void CheckInput(ConditionCheckParameter param)
         {
             base.CheckInput(param);
-            var StatCondition = param as StatConditionParameter; // 타입 검사는 부모에서 수행
-            _conditionCallback.Invoke(StatCondition.input < _conditionData.value1);
+            if (param is not StatConditionParameter statCondition)
+            {
+                Debug.LogError($"형변환 실패로 조건 체크 종료. {typeof(StatConditionParameter)}");
+                return;
+            }
+            
+            _conditionCallback.Invoke(statCondition.input < _conditionData.value1);
         }
     }
 
@@ -113,18 +117,6 @@ namespace Client
 
         }
 
-        //public override bool CheckCondition(ConditionCheckParameter param)
-        //{
-        //    var members = SynergyManager.Instance.GetInfo(SystemEnum.eSynergy.LAPLACIAN);
-        //    if (members == null || members.Count == 0)
-        //    {
-        //        return false;  
-        //    }
-        //
-        //    var answerIndices = members.Select(member => member.index).Distinct().ToList();                      
-        //    return (answerIndices.Count == 1) && (answerIndices[0] == checkTargetIndex);
-        //}
-
         public override void CheckInput(ConditionCheckParameter param)
         {
             base.CheckInput(param);
@@ -135,7 +127,7 @@ namespace Client
             }
 
             var answerIndices = members.Select(member => member.index).Distinct().ToList();
-            _conditionCallback.Invoke((answerIndices.Count == 1) && (answerIndices[0] == checkTargetIndex));
+            _conditionCallback.Invoke(answerIndices.Count == 1 && answerIndices[0] == checkTargetIndex);
         }
 
     }
