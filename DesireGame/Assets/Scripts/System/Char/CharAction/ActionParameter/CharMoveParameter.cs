@@ -15,7 +15,7 @@ namespace Client
         {
             if(target == null)
             {
-                Debug.LogError("¾ø´Âµ¥´Ù°¡ ¿òÁ÷ÀÌ¶ó°í ÇÏ¸é °ï¶õÇÔ.");
+                Debug.LogError("ì—†ëŠ”ë°ë‹¤ê°€ ì›€ì§ì´ë¼ê³  í•˜ë©´ ê³¤ë€í•¨.");
             }
             Destination = target.transform.position;
         }
@@ -23,7 +23,7 @@ namespace Client
         public CharMoveParameter(long targetCharUID)
         {
             CharBase target = CharManager.Instance.GetFieldChar(targetCharUID);
-            if(target == null) Debug.LogError("¾ø´Âµ¥´Ù°¡ ¿òÁ÷ÀÌ¶ó°í ÇÏ¸é °ï¶õÇÔ.");
+            if(target == null) Debug.LogError("ì—†ëŠ”ë°ë‹¤ê°€ ì›€ì§ì´ë¼ê³  í•˜ë©´ ê³¤ë€í•¨.");
             Destination = target.transform.position;
         }
     }

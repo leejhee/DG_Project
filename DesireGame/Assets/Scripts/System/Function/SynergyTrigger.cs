@@ -6,11 +6,11 @@ namespace Client
 {
 
     /// <summary>
-    /// ½Ã³ÊÁö Æ®¸®°Å function. ÀÌÆåÆ® ¿¬Ãâ Ã¥ÀÓµµ ´ã´ç
+    /// ì‹œë„ˆì§€ íŠ¸ë¦¬ê±° function. ì´í™íŠ¸ ì—°ì¶œ ì±…ì„ë„ ë‹´ë‹¹
     /// </summary>
     public class SynergyTrigger : FunctionBase
     {
-        private SystemEnum.eSynergy mySynergy; // ¹«½¼ ½Ã³ÊÁö¿¡ ´ëÇÑ Æ®¸®°Å?       
+        private SystemEnum.eSynergy mySynergy; // ë¬´ìŠ¨ ì‹œë„ˆì§€ì— ëŒ€í•œ íŠ¸ë¦¬ê±°?       
         private CharLightWeightInfo myCharLightWeightInfo;
 
         public SynergyTrigger(BuffParameter buffParam) : base(buffParam)
@@ -30,7 +30,7 @@ namespace Client
             {
                 SynergyManager.Instance.RegisterSynergy(myCharLightWeightInfo, mySynergy);
                 
-                //[TODO] : ÆÈ ¶§¸¸ ½Ã³ÊÁö Áö¿öÁöµµ·Ï ¸¸µé±â
+                //[TODO] : íŒ” ë•Œë§Œ ì‹œë„ˆì§€ ì§€ì›Œì§€ë„ë¡ ë§Œë“¤ê¸°
                 _CastChar.OnRealDead += () =>
                 {
                     _CastChar.FunctionInfo.KillFunction(this);

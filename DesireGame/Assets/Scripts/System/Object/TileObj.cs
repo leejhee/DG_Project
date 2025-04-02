@@ -17,7 +17,7 @@ namespace Client
         public int TileIndex => _tileIndex;
         public eCharType TeamTile => _teamTile;
 
-        #region ÀüÅõ ÄÄÆ÷³ÍÆ® ±â´É ¿¬°á
+        #region ì „íˆ¬ ì»´í¬ë„ŒíŠ¸ ê¸°ëŠ¥ ì—°ê²°
         public void SwitchCombatBehaviour(bool iscombat) => _tileCombat.enabled = iscombat;
         public bool Accessable => _tileCombat.IsEmpty;
         public HashSet<CharBase> GetTotalSteppingChar(HashSet<CharBase> other) { return _tileCombat.GetTotalChar(other); }
@@ -28,7 +28,7 @@ namespace Client
             TileManager.Instance.SetTile(_tileIndex, this);
         }
 
-        // Ä³¸¯ÅÍ ¼¼ÆÃ
+        // ìºë¦­í„° ì„¸íŒ…
         public CharBase SetChar(CharBase charBase)
         {
             if (charBase == false)

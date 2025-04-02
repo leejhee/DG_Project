@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 namespace Client
 {
-    /// <summary> ÀüÅõ ½Ã Å¸ÀÏÀÇ Ã¥ÀÓ¿¡ ´ëÇÑ Å¬·¡½º </summary>
+    /// <summary> ì „íˆ¬ ì‹œ íƒ€ì¼ì˜ ì±…ì„ì— ëŒ€í•œ í´ë˜ìŠ¤ </summary>
     public class TileCombatBehaviour : MonoBehaviour
     {
         private HashSet<CharBase> steppingOnChar = new();
         public bool IsEmpty => steppingOnChar.Count == 0;
 
-        /// <summary> Å¸ÀÏ °£ ÇØ½Ã¼ÂÀÇ ÇÕÁıÇÕÀ» ±¸ÇÔ. Å¸ÀÏ ±â¹İ ¹üÀ§±â Ã³¸® </summary>
-        /// <param name="charList"> unionÇÒ ÇØ½Ã¼Â </param>
-        /// <returns> ÇöÀç Å¸ÀÏ°ú unionµÈ Ä³¸¯ÅÍ ÇØ½Ã¼Â </returns>
+        /// <summary> íƒ€ì¼ ê°„ í•´ì‹œì…‹ì˜ í•©ì§‘í•©ì„ êµ¬í•¨. íƒ€ì¼ ê¸°ë°˜ ë²”ìœ„ê¸° ì²˜ë¦¬ </summary>
+        /// <param name="charList"> unioní•  í•´ì‹œì…‹ </param>
+        /// <returns> í˜„ì¬ íƒ€ì¼ê³¼ unionëœ ìºë¦­í„° í•´ì‹œì…‹ </returns>
         public HashSet<CharBase> GetTotalChar(HashSet<CharBase> charList)
         {
-            // º¹»çº»À¸·Î ¿øº» ¿À¿° ¹æÁö
+            // ë³µì‚¬ë³¸ìœ¼ë¡œ ì›ë³¸ ì˜¤ì—¼ ë°©ì§€
             HashSet<CharBase> result = new(steppingOnChar);
             result.UnionWith(charList);
             return result;

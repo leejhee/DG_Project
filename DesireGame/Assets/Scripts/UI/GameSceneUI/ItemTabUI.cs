@@ -5,16 +5,16 @@ namespace Client
 {
     public class ItemTabUI : MonoBehaviour
     {
-        [SerializeField] Transform ItemGridPanel; // ³×¸ğ³­~ ¾ÆÀÌÅÛ ½½·ÔµéÀÌ ÀÚ¸®ÀâÀ» Vertical Layout PanelÀÇ Transform(¿©±â´Ù°¡ InstantiateÇÏ°ÚÁö?)
+        [SerializeField] Transform ItemGridPanel; // ë„¤ëª¨ë‚œ~ ì•„ì´í…œ ìŠ¬ë¡¯ë“¤ì´ ìë¦¬ì¡ì„ Vertical Layout Panelì˜ Transform(ì—¬ê¸°ë‹¤ê°€ Instantiateí•˜ê² ì§€?)
 
         private void Start()
         {
-            Inventory.Instance.OnItemChange += ¾ÆÀÌÅÛ¶ç¿ì±â;
+            Inventory.Instance.OnItemChange += ì•„ì´í…œë„ìš°ê¸°;
         }
 
-        private void ¾ÆÀÌÅÛ¶ç¿ì±â(ItemUIParameter itemParameter)
+        private void ì•„ì´í…œë„ìš°ê¸°(ItemUIParameter itemParameter)
         {
-            //´ëÃæ »õ·Î¿î ¾ÆÀÌÅÛ ÇÏ³ª¸¦ ¶ç¿öÁÖ´Â ³»¿ë
+            //ëŒ€ì¶© ìƒˆë¡œìš´ ì•„ì´í…œ í•˜ë‚˜ë¥¼ ë„ì›Œì£¼ëŠ” ë‚´ìš©
         }
     }
 }

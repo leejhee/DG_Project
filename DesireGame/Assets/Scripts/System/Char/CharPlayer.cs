@@ -28,7 +28,7 @@ namespace Client
             base.CharInit();
             CharManager.Instance.SetChar<CharPlayer>(this);
 
-            #region ½Ã³ÊÁö
+            #region ì‹œë„ˆì§€
             _charSynergies = new List<eSynergy>()
             {
                 _charData.synergy1,
@@ -51,29 +51,29 @@ namespace Client
         public override void Dead()
         {
             SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
-            // [TODO] ÀÌ¼±Àç : ÀåÂøµÇ¾îÀÖ´ø ¾ÆÀÌÅÛ ÇØÁ¦ÇÏ´Â °Í ÇÊ¿ä
+            // [TODO] ì´ì„ ì¬ : ì¥ì°©ë˜ì–´ìˆë˜ ì•„ì´í…œ í•´ì œí•˜ëŠ” ê²ƒ í•„ìš”
             base.Dead();
         }
 
         void OnMouseDown()
         {
-            // Ä³¸¯ÅÍ AI ÇÃ·¡ÀÌ Áß Á¶ÀÛ ±İÁö
+            // ìºë¦­í„° AI í”Œë˜ì´ ì¤‘ ì¡°ì‘ ê¸ˆì§€
             if (_charAI?.isAIRun ?? true)
                 return;
             
             if (mainCamera == null) return;
             SetNavMeshAgent(false);
-            //// ¸¶¿ì½º Å¬¸¯ À§Ä¡¿Í Ä³¸¯ÅÍ À§Ä¡ÀÇ Â÷ÀÌ °è»ê
+            //// ë§ˆìš°ìŠ¤ í´ë¦­ ìœ„ì¹˜ì™€ ìºë¦­í„° ìœ„ì¹˜ì˜ ì°¨ì´ ê³„ì‚°
             //offset = transform.position - GetMouseWorldPosition();
         }
         private void OnMouseDrag()
         {
-            // Ä³¸¯ÅÍ AI ÇÃ·¡ÀÌ Áß Á¶ÀÛ ±İÁö
+            // ìºë¦­í„° AI í”Œë˜ì´ ì¤‘ ì¡°ì‘ ê¸ˆì§€
             if (_charAI?.isAIRun ?? true)
                 return;
             if (mainCamera == null) return;
 
-            // ¸¶¿ì½º À§Ä¡¿¡ ¿ÀÇÁ¼ÂÀ» ´õÇØ¼­ Ä³¸¯ÅÍ ÀÌµ¿
+            // ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ì˜¤í”„ì…‹ì„ ë”í•´ì„œ ìºë¦­í„° ì´ë™
             transform.position = GetMouseWorldPosition(); //+ offset;
 
         }
@@ -89,7 +89,7 @@ namespace Client
         private Vector3 GetMouseWorldPosition()
         {
             Vector3 mouseScreenPos = Input.mousePosition;
-            mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z; // ÇöÀç Z °ª À¯Áö
+            mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z; // í˜„ì¬ Z ê°’ ìœ ì§€
             return mainCamera.ScreenToWorldPoint(mouseScreenPos);
         }
         

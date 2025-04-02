@@ -1,6 +1,6 @@
 namespace Client
 {
-    // [TODO] : ÀÌ°Å Áö¿ì°í ¿¬°á ¼öÁ¤ÇÒ °Í
+    // [TODO] : ì´ê±° ì§€ìš°ê³  ì—°ê²° ìˆ˜ì •í•  ê²ƒ
     public class SynergyFunction : FunctionBase
     {
 

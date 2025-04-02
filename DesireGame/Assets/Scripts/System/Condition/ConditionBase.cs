@@ -5,7 +5,7 @@ using System.Linq;
 using static Client.SystemEnum;
 using System;
 
-// TODO : ÀÚÀßÇÑ Condition °è»êÀ» À§ÇÑ ±âÁØÀ» ºÎ¿©ÇÒ Static helper ¸¸µé °Í.
+// TODO : ìì˜í•œ Condition ê³„ì‚°ì„ ìœ„í•œ ê¸°ì¤€ì„ ë¶€ì—¬í•  Static helper ë§Œë“¤ ê²ƒ.
 namespace Client
 {
     public struct ConditionParameter
@@ -14,7 +14,7 @@ namespace Client
         public ConditionData conditionData;
     }
 
-    // ¿øÇü
+    // ì›í˜•
     public class ConditionCheckParameter
     {
         public eCondition conditionType;
@@ -37,7 +37,7 @@ namespace Client
     /// /////////////////////////////////////////////////////////////////////
     /// </summary>
 
-    // ÆÄ»ı Å¬·¡½º¿¡¼­´Â °¢ »ı¼ºÀÚ ºÎºĞ¿¡ ±¸µ¶ÇÏ´Â ºÎºĞÀ» Ãß°¡ÇÒ °Í
+    // íŒŒìƒ í´ë˜ìŠ¤ì—ì„œëŠ” ê° ìƒì„±ì ë¶€ë¶„ì— êµ¬ë…í•˜ëŠ” ë¶€ë¶„ì„ ì¶”ê°€í•  ê²ƒ
     public abstract class ConditionBase
     {
         protected ConditionData _conditionData;
@@ -98,7 +98,7 @@ namespace Client
         public override void CheckInput(ConditionCheckParameter param)
         {
             base.CheckInput(param);
-            var StatCondition = param as StatConditionParameter; // Å¸ÀÔ °Ë»ç´Â ºÎ¸ğ¿¡¼­ ¼öÇà
+            var StatCondition = param as StatConditionParameter; // íƒ€ì… ê²€ì‚¬ëŠ” ë¶€ëª¨ì—ì„œ ìˆ˜í–‰
             _conditionCallback.Invoke(StatCondition.input < _conditionData.value1);
         }
     }

@@ -7,7 +7,7 @@ namespace Client
 {
     public class ProjectileGeneratorPlayableAsset : SkillTimeLinePlayableAsset
     {
-        // [TODO] : ¸¶Ä¿·Î ¿Å°Ü¼­ ¹ß»ç¸¸ ÇÏ°í ³¡³ª´Â °Å·Î ÇÕ½Ã´Ù. ProjectileÀÌ Áö¼ÓµÉ ÇÊ¿ä ¾øÀ½
+        // [TODO] : ë§ˆì»¤ë¡œ ì˜®ê²¨ì„œ ë°œì‚¬ë§Œ í•˜ê³  ëë‚˜ëŠ” ê±°ë¡œ í•©ì‹œë‹¤. Projectileì´ ì§€ì†ë  í•„ìš” ì—†ìŒ
         [SerializeField] GameObject ProjectilePrefab;
         [SerializeField] float Range;
         [SerializeField] float Speed;

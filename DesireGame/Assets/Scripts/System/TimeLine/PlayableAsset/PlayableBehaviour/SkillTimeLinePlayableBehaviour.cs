@@ -6,15 +6,15 @@ using UnityEngine.Playables;
 namespace Client
 {
     /// <summary>
-    /// ½ºÅ³¿ë ÇÃ·¹ÀÌ¾îºí Çàµ¿
+    /// ìŠ¤í‚¬ìš© í”Œë ˆì´ì–´ë¸” í–‰ë™
     /// </summary>
     public abstract class SkillTimeLinePlayableBehaviour : PlayableBehaviour
     {
         public CharBase charBase;
         public SkillBase skillBase;
 
-        // »ı¼ºÀÚ¸¦ ¾µ¼ö´Â ¾ø°í ÃÊ±âÈ­´Â ÇÏ´Â°Ô ÁÁ°Ú°í...½Í¾î¼­ ÃÊ±âÈ­¸¦ ÀÏ´Ü virtual·Î ¸¸µé¾îµÒ...
-        // ¶ÇÇÑ µğ¹ö±ë ½Ã µÎ ¿ä¼Ò¸¦ ¾Æ´Â °ÍÀº Å« ÀÌµæµµ µÈ´Ù.
+        // ìƒì„±ìë¥¼ ì“¸ìˆ˜ëŠ” ì—†ê³  ì´ˆê¸°í™”ëŠ” í•˜ëŠ”ê²Œ ì¢‹ê² ê³ ...ì‹¶ì–´ì„œ ì´ˆê¸°í™”ë¥¼ ì¼ë‹¨ virtualë¡œ ë§Œë“¤ì–´ë‘ ...
+        // ë˜í•œ ë””ë²„ê¹… ì‹œ ë‘ ìš”ì†Œë¥¼ ì•„ëŠ” ê²ƒì€ í° ì´ë“ë„ ëœë‹¤.
         public virtual void InitBehaviour(CharBase charBase, SkillBase skillBase)
         {
             this.charBase = charBase;

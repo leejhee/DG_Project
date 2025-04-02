@@ -5,20 +5,20 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// Ä³¸¯ÅÍ ¸ŞÀÎ ¾Ö´Ï¸ŞÀÌ¼Ç
+    /// ìºë¦­í„° ë©”ì¸ ì• ë‹ˆë©”ì´ì…˜
     /// </summary>
     public class CharAnimInfo
     {
-        private CharBase _charBase; // ¾Ö´Ï¸ŞÀÌ¼Ç ÇÃ·¹ÀÌ Ä³¸¯ÅÍ
+        private CharBase _charBase; // ì• ë‹ˆë©”ì´ì…˜ í”Œë ˆì´ ìºë¦­í„°
 
-        public Animator Animator { get; set; } = null; // ¾Ö´Ï¸ŞÀÌ¼Ç 
+        public Animator Animator { get; set; } = null; // ì• ë‹ˆë©”ì´ì…˜ 
         
         public CharAnimInfo(Animator animator)
         {
             Animator = animator;
             if (Animator == null)
             {
-                Debug.LogError("CharAnimInfo ¾Ö´Ï¸ŞÀÌ¼Ç Ã£±â ½ÇÆĞ");
+                Debug.LogError("CharAnimInfo ì• ë‹ˆë©”ì´ì…˜ ì°¾ê¸° ì‹¤íŒ¨");
             }
         }
 
@@ -26,7 +26,7 @@ namespace Client
         {
             if (Animator == null)
             {
-                Debug.LogError("CharAnimInfo ¾Ö´Ï¸ŞÀÌ¼Ç Ã£±â ½ÇÆĞ");
+                Debug.LogError("CharAnimInfo ì• ë‹ˆë©”ì´ì…˜ ì°¾ê¸° ì‹¤íŒ¨");
                 return;
             }
 

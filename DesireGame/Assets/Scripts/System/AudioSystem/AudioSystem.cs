@@ -6,25 +6,25 @@ using static Client.SystemEnum;
 namespace Client
 {
     /// <summary>
-    /// AudioPlayer °ü¸® AudioSystem 
+    /// AudioPlayer ê´€ë¦¬ AudioSystem 
     /// </summary>
     public class AudioSystem 
     {
-        private static AudioSystem _instance    = null; // AudioSystem °´Ã¼
+        private static AudioSystem _instance    = null; // AudioSystem ê°ì²´
         private AudioPlayer[]      _audioPlayer = null; // AudioPlayer Systems
         private GameObject         _audioRoot   = null; // AudioRoot
 
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         AudioSystem() { }
-        #endregion »ı¼ºÀÚ
+        #endregion ìƒì„±ì
 
         /// <summary>
-        /// AudioSystem °´Ã¼
+        /// AudioSystem ê°ì²´
         /// </summary>
         public static AudioSystem Instance { get { Init(); return _instance; } }
 
         /// <summary>
-        /// ÃÊ±âÈ­
+        /// ì´ˆê¸°í™”
         /// </summary>
         private static void Init()
         {
@@ -51,7 +51,7 @@ namespace Client
         }
 
         /// <summary>
-        /// ¿Àµğ¿À ÇÃ·¹ÀÌ¾î 
+        /// ì˜¤ë””ì˜¤ í”Œë ˆì´ì–´ 
         /// </summary>
         /// <param name="audioType"></param>
         /// <returns></returns>

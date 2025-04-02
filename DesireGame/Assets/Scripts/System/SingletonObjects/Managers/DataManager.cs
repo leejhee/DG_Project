@@ -9,11 +9,11 @@ using UnityEngine;
 namespace Client
 {
     /// <summary> 
-    /// µ¥ÀÌÅÍ ¸Å´ÏÀú (Sheet µ¥ÀÌÅÍ °ü¸®)
+    /// ë°ì´í„° ë§¤ë‹ˆì € (Sheet ë°ì´í„° ê´€ë¦¬)
     /// </summary>
     public partial class DataManager : Singleton<DataManager>
     {
-        /// ·ÎµåÇÑ Àû ÀÖ´Â DataTable (Table ¸íÀ»  Key1 µ¥ÀÌÅÍ ID¸¦ Key2·Î »ç¿ë)
+        /// ë¡œë“œí•œ ì  ìˆëŠ” DataTable (Table ëª…ì„  Key1 ë°ì´í„° IDë¥¼ Key2ë¡œ ì‚¬ìš©)
         private Dictionary<string, Dictionary<long, SheetData>> _cache = new Dictionary<string, Dictionary<long, SheetData>>();
 
         #region Singleton
@@ -22,9 +22,9 @@ namespace Client
         #endregion
         
 
-        // µ¥ÀÌÅÍ ·Îµù Áß Çàµ¿ ¿¹¾à
+        // ë°ì´í„° ë¡œë”© ì¤‘ í–‰ë™ ì˜ˆì•½
         public Action DoAfterLoadActon;
-        // ·Îµå°¡ ³¡³µ´ÂÁö È®ÀÎ
+        // ë¡œë“œê°€ ëë‚¬ëŠ”ì§€ í™•ì¸
         public bool EndLoad { get; private set; } = false;
 
         public override void Init()
@@ -35,7 +35,7 @@ namespace Client
         }
         public void DataLoad()
         {
-            // ÇöÀç ¾î¼Àºí¸® ³»¿¡¼­ SheetData¸¦ »ó¼Ó¹Ş´Â ¸ğµç Å¸ÀÔÀ» Ã£À½
+            // í˜„ì¬ ì–´ì…ˆë¸”ë¦¬ ë‚´ì—ì„œ SheetDataë¥¼ ìƒì†ë°›ëŠ” ëª¨ë“  íƒ€ì…ì„ ì°¾ìŒ
             var sheetDataTypes = Assembly.GetExecutingAssembly().GetTypes()
                                          .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(SheetData)));
 
@@ -44,7 +44,7 @@ namespace Client
             foreach (var type in sheetDataTypes)
             {
 
-                // °¢ Å¸ÀÔ¿¡ ´ëÇØ ÀÎ½ºÅÏ½º »ı¼º
+                // ê° íƒ€ì…ì— ëŒ€í•´ ì¸ìŠ¤í„´ìŠ¤ ìƒì„±
                 SheetData instance = (SheetData)Activator.CreateInstance(type);
                 if (instance == null)
                 {
@@ -75,18 +75,18 @@ namespace Client
             key = key.Replace("Client.", "");
             if (!_cache.ContainsKey(key))
             {
-                Debug.LogError($"{key} µ¥ÀÌÅÍ Å×ÀÌºíÀº Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError($"{key} ë°ì´í„° í…Œì´ë¸”ì€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return null;
             }
             if (!_cache[key].ContainsKey(Index))
             {
-                Debug.LogError($"{key} µ¥ÀÌÅÍ¿¡ ID {Index}´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError($"{key} ë°ì´í„°ì— ID {Index}ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return null;
             }
             T returnData = _cache[key][Index] as T;
             if (returnData == null)
             {
-                Debug.LogError($"{key} µ¥ÀÌÅÍ¿¡ ID {Index}´Â Á¸ÀçÇÏÁö¸¸ {key}Å¸ÀÔÀ¸·Î º¯È¯ ½ÇÆĞÇß½À´Ï´Ù.");
+                Debug.LogError($"{key} ë°ì´í„°ì— ID {Index}ëŠ” ì¡´ì¬í•˜ì§€ë§Œ {key}íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
                 return null;
 
             }
@@ -101,7 +101,7 @@ namespace Client
 
             if (_cache.ContainsKey(key))
             {
-                Debug.LogWarning($"{key} µ¥ÀÌÅÍ Å×ÀÌºíÀº ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+                Debug.LogWarning($"{key} ë°ì´í„° í…Œì´ë¸”ì€ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤.");
             }
             else
             {
@@ -110,7 +110,7 @@ namespace Client
 
             if (_cache[key].ContainsKey(id))
             {
-                Debug.LogWarning($"{key} Å¸ÀÔ ID: {id} Ä®·³Àº ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù. !(ÁÖÀÇ) °ÔÀÓ Áß µ¥ÀÌÅÍ Ä®·³À» º¯°æÇÒ ¼ö ¾ø½À´Ï´Ù!");
+                Debug.LogWarning($"{key} íƒ€ì… ID: {id} ì¹¼ëŸ¼ì€ ì´ë¯¸ ì¡´ì¬í•©ë‹ˆë‹¤. !(ì£¼ì˜) ê²Œì„ ì¤‘ ë°ì´í„° ì¹¼ëŸ¼ì„ ë³€ê²½í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
             }
             else 
             {
@@ -122,25 +122,25 @@ namespace Client
             string typeName = typeof(T).Name;
             if (_cache.ContainsKey(typeName) == false)
             {
-                Debug.LogWarning($"DataManager : {typeName} Å¸ÀÔ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogWarning($"DataManager : {typeName} íƒ€ì… ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 
                 return null;
             }
-            // ±×³É _cache[typeName] ¸¦ ³»º¸³»Áö ¾Ê°í Linq¸¦ ÀÌ¿ëÇÏ¸é ´Ù¸¥ List¸¦ »ı¼ºÇÏ¹Ç·Î
-            // List¿¡¼­ °´Ã¼ »èÁ¦, Sort µî¿¡¼­ ¿øº» µ¥ÀÌÅÍ ¿À¿°À» ¸·À» ¼ö ÀÖ´Ù.
-            // ´Ù¸¸ °´Ã¼ ³»ºÎ ´ëÀÌÅÍ¸¦ ¹Ù²Ù´Â°Ç ¹®Á¦°¡ ÀÖÀ» ¼ö ÀÖ´Âµ¥
-            // ¿ì¸® µ¥ÀÌÅÍ´Â readonly ´Ï±î ÀÌ ¹®Á¦µµ ¾øÀ½ - ÀÌ ¾Æ´Ï³×!?!?!?!?!? ³Ê¹«³ª À§ÇèÇÑµ¥¿ä!?!?!?
-            // ´ë½Å Linq°¡ °¡ºñÁö¸¦ »ó´çÈ÷ »ı¼ºÇÏ¹Ç·Î Update¿¡¼­ Linq »ç¿ëÀº Áö¾ç
+            // ê·¸ëƒ¥ _cache[typeName] ë¥¼ ë‚´ë³´ë‚´ì§€ ì•Šê³  Linqë¥¼ ì´ìš©í•˜ë©´ ë‹¤ë¥¸ Listë¥¼ ìƒì„±í•˜ë¯€ë¡œ
+            // Listì—ì„œ ê°ì²´ ì‚­ì œ, Sort ë“±ì—ì„œ ì›ë³¸ ë°ì´í„° ì˜¤ì—¼ì„ ë§‰ì„ ìˆ˜ ìˆë‹¤.
+            // ë‹¤ë§Œ ê°ì²´ ë‚´ë¶€ ëŒ€ì´í„°ë¥¼ ë°”ê¾¸ëŠ”ê±´ ë¬¸ì œê°€ ìˆì„ ìˆ˜ ìˆëŠ”ë°
+            // ìš°ë¦¬ ë°ì´í„°ëŠ” readonly ë‹ˆê¹Œ ì´ ë¬¸ì œë„ ì—†ìŒ - ì´ ì•„ë‹ˆë„¤!?!?!?!?!? ë„ˆë¬´ë‚˜ ìœ„í—˜í•œë°ìš”!?!?!?
+            // ëŒ€ì‹  Linqê°€ ê°€ë¹„ì§€ë¥¼ ìƒë‹¹íˆ ìƒì„±í•˜ë¯€ë¡œ Updateì—ì„œ Linq ì‚¬ìš©ì€ ì§€ì–‘
             return _cache[typeName].Values.ToList();
         }
 
 #if UNITY_EDITOR
-        // µ¥ÀÌÅÍ °ËÁõ¿ë(¿¡µğÅÍ¿¡¼­¸¸ »ç¿ë)
+        // ë°ì´í„° ê²€ì¦ìš©(ì—ë””í„°ì—ì„œë§Œ ì‚¬ìš©)
         public Dictionary<long, SheetData> GetDictionary(string typeName)
         {
             if (_cache.ContainsKey(typeName) == false)
             {
-                Debug.LogWarning($"DataManager : {typeName} Å¸ÀÔ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogWarning($"DataManager : {typeName} íƒ€ì… ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return null;
             }
             return _cache[typeName];

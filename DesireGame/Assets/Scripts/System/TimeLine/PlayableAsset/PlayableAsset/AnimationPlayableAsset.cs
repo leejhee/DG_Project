@@ -29,10 +29,10 @@ namespace Client
             playableBehaviour.animationClip = animationClip;
             var scriptPlayable = ScriptPlayable<AnimationPlayableBehaviour>.Create(graph, playableBehaviour);
 
-            // AnimationClipPlayable »ı¼º
+            // AnimationClipPlayable ìƒì„±
             var animationPlayable = AnimationClipPlayable.Create(graph, animationClip);
 
-            // ÇÃ·¹ÀÌºíÀ» ¿¬°á
+            // í”Œë ˆì´ë¸”ì„ ì—°ê²°
             scriptPlayable.AddInput(animationPlayable, 0, 1);
 
             return scriptPlayable;

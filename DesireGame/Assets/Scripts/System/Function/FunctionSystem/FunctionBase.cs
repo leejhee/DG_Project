@@ -7,17 +7,17 @@ using static UnityEngine.GraphicsBuffer;
 namespace Client
 {
     /// <summary>
-    /// Execution º£ÀÌ½º ½Ã½ºÅÛ
+    /// Execution ë² ì´ìŠ¤ ì‹œìŠ¤í…œ
     /// </summary>
     public abstract class FunctionBase
     {
-        protected CharBase _TargetChar = null; // ±â´É Å¸°Ù
-        protected CharBase _CastChar = null; // ±â´É Ä³½ºÆÃ Ä³¸¯ÅÍ
-        protected FunctionData _FunctionData = null; // ±â´É µ¥ÀÌÅÍ
+        protected CharBase _TargetChar = null; // ê¸°ëŠ¥ íƒ€ê²Ÿ
+        protected CharBase _CastChar = null; // ê¸°ëŠ¥ ìºìŠ¤íŒ… ìºë¦­í„°
+        protected FunctionData _FunctionData = null; // ê¸°ëŠ¥ ë°ì´í„°
 
-        protected float _StartTime = 0; // ½ÃÀÛ ½Ã°£
-        protected float _RunTime = 0; // ÇöÀç ½Ã°£
-        protected float _LifeTime = -1; // ¶óÀÌÇÁÅ¸ÀÓ -1 Àº ¹«ÇÑ Áö¼Ó
+        protected float _StartTime = 0; // ì‹œì‘ ì‹œê°„
+        protected float _RunTime = 0; // í˜„ì¬ ì‹œê°„
+        protected float _LifeTime = -1; // ë¼ì´í”„íƒ€ì„ -1 ì€ ë¬´í•œ ì§€ì†
 
         public SystemEnum.eFunction functionType;
 
@@ -28,7 +28,7 @@ namespace Client
         #endregion
 
 
-        // ¹öÇÁ »ı¼ºÀÚ
+        // ë²„í”„ ìƒì„±ì
         public FunctionBase(BuffParameter buffParam)
         {
             _TargetChar = buffParam.TargetChar;
@@ -37,7 +37,7 @@ namespace Client
 
             if (_FunctionData == null)
             {
-                Debug.LogError($"Execution : {buffParam.FunctionIndex} µ¥ÀÌÅÍ È¹µæ ½ÇÆĞ");
+                Debug.LogError($"Execution : {buffParam.FunctionIndex} ë°ì´í„° íšë“ ì‹¤íŒ¨");
             }
 
             functionType = buffParam.eFunctionType;
@@ -50,24 +50,24 @@ namespace Client
 
 
         /// <summary>
-        /// ¹öÇÁ ½ÃÀÛ°ú Á¾·á
+        /// ë²„í”„ ì‹œì‘ê³¼ ì¢…ë£Œ
         /// </summary>
-        /// <param name="StartFunction"> true: Çàµ¿ ½ÃÀÛ false Çàµ¿ Á¾·á </param>
+        /// <param name="StartFunction"> true: í–‰ë™ ì‹œì‘ false í–‰ë™ ì¢…ë£Œ </param>
         public virtual void RunFunction(bool StartFunction = true)
         {
             if (StartFunction)
             {
-                Debug.Log($"Function ½ÃÀÛ : " +
-                    $"ÀÎµ¦½º {_FunctionData.Index} " +
-                    $"Å¸ÀÔ {_FunctionData.function} " +
-                    $"½Ã°£ : {_FunctionData.time}");
+                Debug.Log($"Function ì‹œì‘ : " +
+                    $"ì¸ë±ìŠ¤ {_FunctionData.Index} " +
+                    $"íƒ€ì… {_FunctionData.function} " +
+                    $"ì‹œê°„ : {_FunctionData.time}");
             }
             else
             {
-                Debug.Log($"Function Á¾·á : " +
-                    $"ÀÎµ¦½º {_FunctionData.Index} " +
-                    $"Å¸ÀÔ {_FunctionData.function} " +
-                    $"½Ã°£ : {_FunctionData.time}");
+                Debug.Log($"Function ì¢…ë£Œ : " +
+                    $"ì¸ë±ìŠ¤ {_FunctionData.Index} " +
+                    $"íƒ€ì… {_FunctionData.function} " +
+                    $"ì‹œê°„ : {_FunctionData.time}");
 
                 if (_condition != null)
                     _TargetChar.FunctionInfo.KillCondition(_condition);
@@ -77,7 +77,7 @@ namespace Client
         public virtual void Update(float delta) { }
 
         /// <summary>
-        /// ±â´É ½Ã°£ ¿Ï·á Ã¼Å©
+        /// ê¸°ëŠ¥ ì‹œê°„ ì™„ë£Œ ì²´í¬
         /// </summary>
         public void CheckTimeOver()
         {
@@ -116,7 +116,7 @@ namespace Client
                 //}
                 //else
                 //{
-                //    Debug.Log("ÄÁµğ¼Ç ¸¸Á·ÇÏÁö ¸øÇÏ¿© ¹ßµ¿ ¾ÈÇÔ");
+                //    Debug.Log("ì»¨ë””ì…˜ ë§Œì¡±í•˜ì§€ ëª»í•˜ì—¬ ë°œë™ ì•ˆí•¨");
                 //}
                 }
             }
@@ -134,7 +134,7 @@ namespace Client
             }
             else
             {
-                Debug.Log("ÄÁµğ¼Ç ¸¸Á·ÇÏÁö ¸øÇÏ¿© ¹ßµ¿ ¾ÈÇÔ");
+                Debug.Log("ì»¨ë””ì…˜ ë§Œì¡±í•˜ì§€ ëª»í•˜ì—¬ ë°œë™ ì•ˆí•¨");
             }
         }
 
@@ -156,8 +156,8 @@ namespace Client
                 _children.Add(child);
                 _TargetChar.FunctionInfo.AddFunction(child);
 
-                Debug.Log($"{_CasterName}¿¡¼­ {_TargetName}À¸·ÎÀÇ, {_FunctionData.Index}ÀÇ " +
-                            $"child function {childData.Index}¹ø Ãß°¡");
+                Debug.Log($"{_CasterName}ì—ì„œ {_TargetName}ìœ¼ë¡œì˜, {_FunctionData.Index}ì˜ " +
+                            $"child function {childData.Index}ë²ˆ ì¶”ê°€");
             }               
         }
 
@@ -170,8 +170,8 @@ namespace Client
             }                              
         }
 
-        /// <summary> Function º»ÀÎ Å³ ½ºÀ§Ä¡ </summary>
-        /// <remarks> Caster ¹× Target¿¡ ÁÖÀÇÇÒ °Í. </remarks>
+        /// <summary> Function ë³¸ì¸ í‚¬ ìŠ¤ìœ„ì¹˜ </summary>
+        /// <remarks> Caster ë° Targetì— ì£¼ì˜í•  ê²ƒ. </remarks>
         public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
         {
             if(inCaster)            

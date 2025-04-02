@@ -13,14 +13,14 @@ namespace Client
         {
             if(functionIndex == default)
             {
-                Debug.LogError("ÁÖÀÔÇÒ functionIndex¸¦ ´Ù½Ã ÇÑ¹ø È®ÀÎÇÏ¼¼¿ä.");
+                Debug.LogError("ì£¼ì…í•  functionIndexë¥¼ ë‹¤ì‹œ í•œë²ˆ í™•ì¸í•˜ì„¸ìš”.");
                 return;
             }
 
             FunctionData data = DataManager.Instance.GetData<FunctionData>(functionIndex);
             if(data == null)
             {
-                Debug.LogError("Data°¡ nullÀÌ´Ù. Index¿Í µ¥ÀÌÅÍ¸¦ ´Ù½Ã ÇÑ¹ø È®ÀÎÇÏ¼¼¿ä.");
+                Debug.LogError("Dataê°€ nullì´ë‹¤. Indexì™€ ë°ì´í„°ë¥¼ ë‹¤ì‹œ í•œë²ˆ í™•ì¸í•˜ì„¸ìš”.");
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace Client
                     eFunctionType = data.function,
                     FunctionIndex = functionIndex
                 });
-                Debug.Log($"{skillParam.skillCaster.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ {targets[i].GetID()}¹ø Ä³¸¯ÅÍ·Î {functionIndex}¹ø function ÁÖÀÔ ¿Ï·á");
+                Debug.Log($"{skillParam.skillCaster.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ {targets[i].GetID()}ë²ˆ ìºë¦­í„°ë¡œ {functionIndex}ë²ˆ function ì£¼ì… ì™„ë£Œ");
             }
 
         }

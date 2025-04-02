@@ -7,12 +7,12 @@ namespace Client
 {
     public class SkillMarkerShotProjectal : SkillTimeLineMarker
     {
-        [Header("¹ß»çÇÒ Åõ»çÃ¼")]
+        [Header("ë°œì‚¬í•  íˆ¬ì‚¬ì²´")]
         [SerializeField] protected Projectile _projectile;
         [SerializeField] protected Vector3 _offSet;
         
-        //¸¸¾à ÀÌ°É ¾´´Ù¸é ÀÌ µ¥ÀÌÅÍµéÀ» Àü¼ÛÇØÁÙ °Ô µû·Î ÇÊ¿äÇÏ´Ù.
-        [Header("Åõ»çÃ¼¿¡ ¹İ¿µÇÒ ½ÃÀüÀÚÀÇ ½ºÅÈ°ú ºñÀ²")]
+        //ë§Œì•½ ì´ê±¸ ì“´ë‹¤ë©´ ì´ ë°ì´í„°ë“¤ì„ ì „ì†¡í•´ì¤„ ê²Œ ë”°ë¡œ í•„ìš”í•˜ë‹¤.
+        [Header("íˆ¬ì‚¬ì²´ì— ë°˜ì˜í•  ì‹œì „ìì˜ ìŠ¤íƒ¯ê³¼ ë¹„ìœ¨")]
         [SerializeField] protected SystemEnum.eStats _statName;
         [SerializeField] protected float percent;
 
@@ -20,7 +20,7 @@ namespace Client
         
         public override void MarkerAction()
         {                      
-            // ÇöÀç´Â ±×³É ÇÑ¹ø¿¡ »§ ½î´Â°Å ÇÑ´Ù.
+            // í˜„ì¬ëŠ” ê·¸ëƒ¥ í•œë²ˆì— ë¹µ ì˜ëŠ”ê±° í•œë‹¤.
             for(int idx = 0; idx < skillParam.skillTargets.Count; idx++)
             {
                 Projectile projectile = GameObject.Instantiate(_projectile, skillParam.skillCaster.transform.position, Quaternion.identity);
@@ -29,7 +29,7 @@ namespace Client
             }
         }
 
-        // ÀÌ°Ç ¿¡µğÅÍ »ó¿¡¼­ È£ÃâµÇ´Â ÇÔ¼ö. ·±Å¸ÀÓ ÀÛ¾÷ ¾Æ´Ï¸é °ÇµéÁö ¸¿½Ã´Ù.
+        // ì´ê±´ ì—ë””í„° ìƒì—ì„œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜. ëŸ°íƒ€ì„ ì‘ì—… ì•„ë‹ˆë©´ ê±´ë“¤ì§€ ë§™ì‹œë‹¤.
         public override void SkillInitialize()
         {
 

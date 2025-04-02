@@ -6,13 +6,13 @@ using static Client.SystemEnum;
 namespace Client
 {
     /// <summary>
-    /// Scene ÃÊ±âÈ­ class
+    /// Scene ì´ˆê¸°í™” class
     /// </summary>
     public class GameScene : MonoBehaviour
     {
         [SerializeField] GameObject GameSceneUIPrefab;
 
-        [Header("Test(shootindexÀÇ °æ¿ì ÆíÇÏ°Ô ÇÏ·Á°í ÀÓÀÇ·Î ÀÌ·¸°Ô ÇÔ)")]
+        [Header("Test(shootindexì˜ ê²½ìš° í¸í•˜ê²Œ í•˜ë ¤ê³  ì„ì˜ë¡œ ì´ë ‡ê²Œ í•¨)")]
         [SerializeField] private CharBase TestChar;
         [SerializeField] private Vector3 testPlayerPoint;
         [SerializeField] private CharBase TestEnemy;
@@ -29,7 +29,7 @@ namespace Client
         {
 
 
-            // Å¸ÀÏ ½Ã½ºÅÛ °áÇÕ
+            // íƒ€ì¼ ì‹œìŠ¤í…œ ê²°í•©
             TestChar = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                 15,
@@ -43,20 +43,20 @@ namespace Client
             MessageManager.SubscribeMessage<GameSceneMessageParam>(this, TestMessageSystem);
         }
 
-        [ContextMenu("Åõ»çÃ¼¸¦ ³¯·Áº¸¾Æ¿ä")]
+        [ContextMenu("íˆ¬ì‚¬ì²´ë¥¼ ë‚ ë ¤ë³´ì•„ìš”")]
         private void TestProjectileShoot()
         {
             TestChar.CharAction.CharAttackAction
                 (new CharAttackParameter(TestEnemy, projectileShootIndex, CharAI.eAttackMode.None));
         }
         
-        [ContextMenu("ÀüÅõ¸¦ ½ÃÀÛÇØº¸¾Æ¿ä")]
+        [ContextMenu("ì „íˆ¬ë¥¼ ì‹œì‘í•´ë³´ì•„ìš”")]
         public void TestAIInitialize()
         {
             StageManager.Instance.StartCombat();
         }
 
-        [ContextMenu("½Ã³ÊÁö Á¶È¸")]
+        [ContextMenu("ì‹œë„ˆì§€ ì¡°íšŒ")]
         public void TestShowSynergy()
         {
             SynergyManager.Instance.ShowCurrentSynergies();
@@ -65,7 +65,7 @@ namespace Client
 
         public void TestMessageSystem(GameSceneMessageParam param)
         {
-            Debug.Log($"GameScene ¿¡¼­ ¼ö½Å ¿Ï·á ¸Ş½ÃÁö ³»¿ëÀº - {param.message} - ");
+            Debug.Log($"GameScene ì—ì„œ ìˆ˜ì‹  ì™„ë£Œ ë©”ì‹œì§€ ë‚´ìš©ì€ - {param.message} - ");
         }
     }
 }

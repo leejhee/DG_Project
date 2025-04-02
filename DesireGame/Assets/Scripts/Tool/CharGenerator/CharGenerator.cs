@@ -48,21 +48,21 @@ namespace Client
 
         void OnGUI()
         {
-            GUILayout.Label("Ä³¸¯ÅÍ »ı¼º Åø", EditorStyles.boldLabel);
+            GUILayout.Label("ìºë¦­í„° ìƒì„± íˆ´", EditorStyles.boldLabel);
 
             #region Put SPUM Object
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("SPUM ¿øÇü Ä³¸¯ÅÍ¸¦ ³Ö¾îÁÖ¼¼¿ä.");
+            EditorGUILayout.LabelField("SPUM ì›í˜• ìºë¦­í„°ë¥¼ ë„£ì–´ì£¼ì„¸ìš”.");
             GUILayout.FlexibleSpace();
             SPUM_Object = EditorGUILayout.ObjectField(SPUM_Object, typeof(GameObject), false, GUILayout.MaxWidth(300));
             EditorGUILayout.EndHorizontal();
             #endregion
 
-            EditorGUILayout.HelpBox("SPUM ¿øÇü Ä³¸¯ÅÍ¿¡ Ä³¸¯ÅÍ ÇÊ¼ö ±â´ÉÀ» Á¦ÀÛÇÏ¿© ³Ö½À´Ï´Ù.", MessageType.Info);
+            EditorGUILayout.HelpBox("SPUM ì›í˜• ìºë¦­í„°ì— ìºë¦­í„° í•„ìˆ˜ ê¸°ëŠ¥ì„ ì œì‘í•˜ì—¬ ë„£ìŠµë‹ˆë‹¤.", MessageType.Info);
 
             #region Select Data for New Prefab
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("¾î¶² Ä³¸¯ÅÍÀÇ ÇÁ¸®ÆÕÀÎ°¡¿ä?");
+            EditorGUILayout.LabelField("ì–´ë–¤ ìºë¦­í„°ì˜ í”„ë¦¬íŒ¹ì¸ê°€ìš”?");
             GUILayout.FlexibleSpace();
             selectedOptionIndex = EditorGUILayout.Popup(selectedOptionIndex, Options, GUILayout.MaxWidth(300));
             EditorGUILayout.EndHorizontal();
@@ -70,7 +70,7 @@ namespace Client
 
             #region Select Path
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("ÇÁ¸®ÆÕ ÀÌ¸§À» Á¦¿ÜÇÏ°í ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+            EditorGUILayout.LabelField("í”„ë¦¬íŒ¹ ì´ë¦„ì„ ì œì™¸í•˜ê³  ì…ë ¥í•´ì£¼ì„¸ìš”.");
             GUILayout.FlexibleSpace();
             EditorGUILayout.TextField(targetPath, GUILayout.MaxWidth(500));
             EditorGUILayout.EndHorizontal();
@@ -81,7 +81,7 @@ namespace Client
             {
                 if (SPUMEditor == null || SPUMEditor.target != SPUM_Object)
                 {
-                    DestroyImmediate(SPUMEditor); // ÁÖ¼® Ã³¸®µÈ ºÎºĞ ±×´ë·Î À¯Áö
+                    DestroyImmediate(SPUMEditor); // ì£¼ì„ ì²˜ë¦¬ëœ ë¶€ë¶„ ê·¸ëŒ€ë¡œ ìœ ì§€
                     SPUMEditor = Editor.CreateEditor(SPUM_Object);
                 }
                 SPUMEditor.OnInteractivePreviewGUI(GUILayoutUtility.GetRect(100, 100), GUIStyle.none);
@@ -90,14 +90,14 @@ namespace Client
 
 
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Ä³¸¯ÅÍ »ı¼º ¶Ç´Â ±â´É Ãß°¡", GUILayout.Width(300)))
+            if (GUILayout.Button("ìºë¦­í„° ìƒì„± ë˜ëŠ” ê¸°ëŠ¥ ì¶”ê°€", GUILayout.Width(300)))
             {
                 GeneratorChar();
             }   
         }
 
         /// <summary>
-        /// ÀÌÈÄ ±â´É Ãß°¡°¡ ÇÊ¿äÇÒ ¼ö ÀÖÀ½ ¹İµå½Ã ÀÌ¸¦ »ı°¢ÇÏ°í ÀÛ¾÷ÇÒ °Í
+        /// ì´í›„ ê¸°ëŠ¥ ì¶”ê°€ê°€ í•„ìš”í•  ìˆ˜ ìˆìŒ ë°˜ë“œì‹œ ì´ë¥¼ ìƒê°í•˜ê³  ì‘ì—…í•  ê²ƒ
         /// </summary>
         private void GeneratorChar()
         {
@@ -106,7 +106,7 @@ namespace Client
 
             if (SPUM_Object is null)
             {
-                Debug.LogError("¸ÕÀú ¼±ÅÃÇÏ°í ´©¸£¼Ì³ª¿ä?");
+                Debug.LogError("ë¨¼ì € ì„ íƒí•˜ê³  ëˆ„ë¥´ì…¨ë‚˜ìš”?");
                 return;
             }
 
@@ -115,12 +115,12 @@ namespace Client
             string savePath = targetPath + targetData.charPrefab + ".prefab";
             if (string.IsNullOrEmpty(assetPath))
             {
-                Debug.LogError("¿¡¼ÂÀÌ ¾Æ´Ï·¡¿ä!");               
+                Debug.LogError("ì—ì…‹ì´ ì•„ë‹ˆë˜ìš”!");               
                 return;
             }
             else if (File.Exists(savePath))
             {
-                Debug.LogError($"Áßº¹µÇ´Â ÀÌ¸§ÀÇ ÆÄÀÏÀÌ ÇÁ¸®ÆÕ Æú´õ¿¡ Á¸ÀçÇÕ´Ï´Ù. {targetPath}¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+                Debug.LogError($"ì¤‘ë³µë˜ëŠ” ì´ë¦„ì˜ íŒŒì¼ì´ í”„ë¦¬íŒ¹ í´ë”ì— ì¡´ì¬í•©ë‹ˆë‹¤. {targetPath}ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
                 return;
             }
             #endregion
@@ -134,7 +134,7 @@ namespace Client
             GameObject SPUMPrefab = PrefabUtility.InstantiatePrefab(SPUM_Object) as GameObject;
             if (!SPUMPrefab)
             {
-                Debug.LogError("º¹»çÇÏ°í ·ÎµåÇß´Âµ¥ null? ¹º°¡ Àß¸øµÊ. ¿©±â¿¡ °É¸®¸é ¾ÈµÊ.");
+                Debug.LogError("ë³µì‚¬í•˜ê³  ë¡œë“œí–ˆëŠ”ë° null? ë­”ê°€ ì˜ëª»ë¨. ì—¬ê¸°ì— ê±¸ë¦¬ë©´ ì•ˆë¨.");
                 return;
             }
             PrefabUtility.UnpackPrefabInstance(SPUMPrefab, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
@@ -165,7 +165,7 @@ namespace Client
 
             PrefabUtility.SaveAsPrefabAsset(CharPrefab, savePath);
             #endregion
-            Debug.Log($"¼º°øÀûÀ¸·Î {CharPrefab.name} ÀúÀåÇß½À´Ï´Ù");
+            Debug.Log($"ì„±ê³µì ìœ¼ë¡œ {CharPrefab.name} ì €ì¥í–ˆìŠµë‹ˆë‹¤");
             DestroyImmediate(CharPrefab);            
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -174,7 +174,7 @@ namespace Client
 
     }
 
-    /// <summary> ¿¡µğÅÍ¿¡¼­ CharBase »ó¼ÓÇÏ´Â Ä³¸¯ÅÍ »Ì´Â ¿ë </summary>
+    /// <summary> ì—ë””í„°ì—ì„œ CharBase ìƒì†í•˜ëŠ” ìºë¦­í„° ë½‘ëŠ” ìš© </summary>
     public static class CharFactory
     {
         public static CharBase SetBaseObject(CharData data, GameObject go)

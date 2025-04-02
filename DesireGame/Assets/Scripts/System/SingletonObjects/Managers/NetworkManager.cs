@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 namespace Client
 {
     /// <summary>
-    /// (·¹°Å½Ã)Google Sheet¸¦ ÀĞ¾î¿À±â À§ÇÑ Manager
+    /// (ë ˆê±°ì‹œ)Google Sheetë¥¼ ì½ì–´ì˜¤ê¸° ìœ„í•œ Manager
     /// </summary>
     public class NetworkManager
     {
@@ -25,13 +25,13 @@ namespace Client
         }
 
         /// <summary>
-        /// ±¸±Û ½ºÇÁ·¹µå ½ÃÆ® ¸¦ ¹Ş¾Æ¿Í °¡°øÇÏ´Â ÇÔ¼ö
+        /// êµ¬ê¸€ ìŠ¤í”„ë ˆë“œ ì‹œíŠ¸ ë¥¼ ë°›ì•„ì™€ ê°€ê³µí•˜ëŠ” í•¨ìˆ˜
         /// </summary>
-        /// <param name="GoogleSheetsID"> ±¸±Û ½ºÇÁ·¹µå ½ÃÆ®ÀÇ ID </param>
-        /// <param name="ManufactureData"> ½ºÇÁ·¹µå ½ÃÆ® °¡°ø ÇÔ¼ö inputÀº ÇÑ ÁÙ À» ¹Ş¾Æ¾ßÇÔ, CellÀº ÅÇ('\t')À¸·Î ±¸ºĞ</param>
-        /// <param name="WorkSheetsID"> ½ÃÆ®ÀÇ WorkSheet ±¸ºĞ default ´Â 0 Ã¹ Àå</param>
-        /// <param name="startCell"> ½ÃÀÛ ¼¿ default A1</param>
-        /// <param name="endCell"> ³¡ ¼¿ default E </param>
+        /// <param name="GoogleSheetsID"> êµ¬ê¸€ ìŠ¤í”„ë ˆë“œ ì‹œíŠ¸ì˜ ID </param>
+        /// <param name="ManufactureData"> ìŠ¤í”„ë ˆë“œ ì‹œíŠ¸ ê°€ê³µ í•¨ìˆ˜ inputì€ í•œ ì¤„ ì„ ë°›ì•„ì•¼í•¨, Cellì€ íƒ­('\t')ìœ¼ë¡œ êµ¬ë¶„</param>
+        /// <param name="WorkSheetsID"> ì‹œíŠ¸ì˜ WorkSheet êµ¬ë¶„ default ëŠ” 0 ì²« ì¥</param>
+        /// <param name="startCell"> ì‹œì‘ ì…€ default A1</param>
+        /// <param name="endCell"> ë ì…€ default E </param>
         /// <returns></returns>
         public IEnumerator GoogleSheetsDataParsing(string GoogleSheetsID, Action<string> ManufactureData, string WorkSheetsID = "0", string endCell = "Z", string startCell = "A2")
         {
@@ -53,7 +53,7 @@ namespace Client
 
                 if (webData.isNetworkError || webData.isHttpError)
                 {
-                    Debug.Log("³×Æ®¿öÅ© ¹®Á¦ ¹ß°ß ÀÎÅÍ³İÈ¯°æ ¶Ç´Â URL È®ÀÎ ¹Ù¶÷");
+                    Debug.Log("ë„¤íŠ¸ì›Œí¬ ë¬¸ì œ ë°œê²¬ ì¸í„°ë„·í™˜ê²½ ë˜ëŠ” URL í™•ì¸ ë°”ëŒ");
                 }
                 else
                 {

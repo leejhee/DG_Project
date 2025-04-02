@@ -7,12 +7,12 @@ using UnityEngine.Playables;
 namespace Client
 {
     /// <summary>
-    /// ½ºÅ³ Å¸ÀÓ¶óÀÎ¿ë ¸¶Ä¿
+    /// ìŠ¤í‚¬ íƒ€ì„ë¼ì¸ìš© ë§ˆì»¤
     /// </summary>
     public class SkillMarkerPinpointDamage : SkillTimeLineMarker
     {
 
-        [Header("Åõ»çÃ¼¿¡ ¹İ¿µÇÒ ½ÃÀüÀÚÀÇ ½ºÅÈ°ú ºñÀ²")]
+        [Header("íˆ¬ì‚¬ì²´ì— ë°˜ì˜í•  ì‹œì „ìì˜ ìŠ¤íƒ¯ê³¼ ë¹„ìœ¨")]
         [SerializeField] protected SystemEnum.eStats _statName;
         [SerializeField] protected float percent;
 
@@ -20,11 +20,11 @@ namespace Client
         {
             if(_statName == default || percent == default)
             {
-                Debug.Log("½ºÅÈÀ» ¼³Á¤ÇÏÁö ¾Ê¾Ò³ª¿ä? È®ÀÎÇØ ÁÖ¼¼¿ä.");
+                Debug.Log("ìŠ¤íƒ¯ì„ ì„¤ì •í•˜ì§€ ì•Šì•˜ë‚˜ìš”? í™•ì¸í•´ ì£¼ì„¸ìš”.");
                 return;
             }
 
-            // ½ºÅÈÆĞÅ°Áö ³»ºÎ¿¡¼­ °è»êÇÏµµ·Ï ÇÒ±î...?
+            // ìŠ¤íƒ¯íŒ¨í‚¤ì§€ ë‚´ë¶€ì—ì„œ ê³„ì‚°í•˜ë„ë¡ í• ê¹Œ...?
             for (int idx = 0; idx < skillParam.skillTargets.Count; idx++)
             {
                 var casterStat = skillParam.skillCaster.CharStat;
@@ -38,7 +38,7 @@ namespace Client
             }
         }
 
-        // ÀÌ°Ç ¿¡µğÅÍ »ó¿¡¼­ È£ÃâµÇ´Â ÇÔ¼ö. ·±Å¸ÀÓ ÀÛ¾÷ ¾Æ´Ï¸é °ÇµéÁö ¸¿½Ã´Ù.
+        // ì´ê±´ ì—ë””í„° ìƒì—ì„œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜. ëŸ°íƒ€ì„ ì‘ì—… ì•„ë‹ˆë©´ ê±´ë“¤ì§€ ë§™ì‹œë‹¤.
         public override void SkillInitialize()
         {
 

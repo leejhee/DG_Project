@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 namespace Client
 {
     /// <summary>
-    /// ½ºÅ³ °´Ã¼
+    /// ìŠ¤í‚¬ ê°ì²´
     /// </summary>
     [RequireComponent(typeof(SkillMarkerReceiver))]
     public class SkillBase : MonoBehaviour, IContextProvider
@@ -29,7 +29,7 @@ namespace Client
             _caster = caster;
         }
 
-        // ÃßÈÄ µ¥ÀÌÅÍ Æ÷ÇÔÇÒ ¹æ¹ıÀÌ ÀÖ´Ù¸é ¹İµå½Ã ÀÌ ÄÚµå ±³Ã¼ÇÒ °Í
+        // ì¶”í›„ ë°ì´í„° í¬í•¨í•  ë°©ë²•ì´ ìˆë‹¤ë©´ ë°˜ë“œì‹œ ì´ ì½”ë“œ êµì²´í•  ê²ƒ
         public void Init(SkillData data)
         {
             _skillData = data;
@@ -42,7 +42,7 @@ namespace Client
             Init(_skillData);
         }
         
-        // ±¸¸°µ¥ ÀÌ°Å¸»°í ¹æ¹ı ÀÖ´ÂÁö ¸ğ¸£°ÚÀ½
+        // êµ¬ë¦°ë° ì´ê±°ë§ê³  ë°©ë²• ìˆëŠ”ì§€ ëª¨ë¥´ê² ìŒ
         public void SetRange(int value, bool delta=false)
         {
             if (NSkillRange == 0) 

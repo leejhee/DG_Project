@@ -5,7 +5,7 @@ using System.IO;
 #if UNITY_EDITOR
 public class CustomScriptCreator
 {
-    // Project View¿¡¼­ ¿ìÅ¬¸¯ ¸Ş´º Ãß°¡
+    // Project Viewì—ì„œ ìš°í´ë¦­ ë©”ë‰´ ì¶”ê°€
     [MenuItem("Assets/Create/Custom C# Script with Namespace", false, 80)]
     public static void CreateCustomCSharpScript()
     {
@@ -13,7 +13,7 @@ public class CustomScriptCreator
         string scriptName = "NewCustomScript.cs";
         string fullPath = Path.Combine(path, scriptName);
 
-        // ½ºÅ©¸³Æ® ³»¿ë »ı¼º
+        // ìŠ¤í¬ë¦½íŠ¸ ë‚´ìš© ìƒì„±
         string scriptContent =
 @"using UnityEngine;
 using System.Collections;
@@ -27,16 +27,16 @@ namespace Client
     }
 }";
 
-        // ÆÄÀÏ »ı¼º
+        // íŒŒì¼ ìƒì„±
         File.WriteAllText(fullPath, scriptContent);
         AssetDatabase.Refresh();
 
-        // »õ·Î ¸¸µç ½ºÅ©¸³Æ® ¼±ÅÃ
+        // ìƒˆë¡œ ë§Œë“  ìŠ¤í¬ë¦½íŠ¸ ì„ íƒ
         Object obj = AssetDatabase.LoadAssetAtPath<Object>(fullPath);
         Selection.activeObject = obj;
     }
 
-    // ¼±ÅÃµÈ Æú´õÀÇ °æ·Î¸¦ °¡Á®¿À°Å³ª, ¼±ÅÃµÇÁö ¾Ê¾Ò´Ù¸é ±âº» °æ·Î¸¦ ¹İÈ¯
+    // ì„ íƒëœ í´ë”ì˜ ê²½ë¡œë¥¼ ê°€ì ¸ì˜¤ê±°ë‚˜, ì„ íƒë˜ì§€ ì•Šì•˜ë‹¤ë©´ ê¸°ë³¸ ê²½ë¡œë¥¼ ë°˜í™˜
     private static string GetSelectedPathOrFallback()
     {
         string path = "Assets";

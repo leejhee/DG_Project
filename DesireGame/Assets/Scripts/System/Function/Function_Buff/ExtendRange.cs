@@ -18,7 +18,7 @@ namespace Client
                 {
                     kvp.Value.SetRange((int)_FunctionData.input1, true);
                 }
-                Debug.Log($"{_TargetChar.GetID()}¹ø ½ºÅ³ÀÇ »ç°Å¸®°¡ {_FunctionData.input1}¸¸Å­ ¿À¸§");
+                Debug.Log($"{_TargetChar.GetID()}ë²ˆ ìŠ¤í‚¬ì˜ ì‚¬ê±°ë¦¬ê°€ {_FunctionData.input1}ë§Œí¼ ì˜¤ë¦„");
             }
             else
             {
@@ -27,7 +27,7 @@ namespace Client
                 {
                     kvp.Value.SetRange(-(int)_FunctionData.input1, true);
                 }
-                Debug.Log($"{_TargetChar.GetID()}¹ø ½ºÅ³ÀÇ »ç°Å¸®°¡ {_FunctionData.input1}¸¸Å­ ³»·Á ¿ø·¡´ë·Î µ¹¾Æ°¨");
+                Debug.Log($"{_TargetChar.GetID()}ë²ˆ ìŠ¤í‚¬ì˜ ì‚¬ê±°ë¦¬ê°€ {_FunctionData.input1}ë§Œí¼ ë‚´ë ¤ ì›ë˜ëŒ€ë¡œ ëŒì•„ê°");
 
             }
         }

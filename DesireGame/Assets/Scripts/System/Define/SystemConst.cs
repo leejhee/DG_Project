@@ -15,16 +15,16 @@ namespace Client
 
         public static float TILE_UNIT_LENGTH = 1f;
 
-        // ¸Ê Å¸ÀÏ ±¸Á¶°¡ ºÒº¯ÀÌ¶ó´Â ÀüÁ¦
-        public static int TILE_COL_OFFSET = 5;  // ÇÑ column¿¡ ¸î°³? (´Ù column ´ÜÀ§·Î ±âÈ¹µÇ¾î ÀÖ¾î¼­ ÀÌ·¸°Ô ÇÔ)
-        public static int TILE_COL_COUNT = 4;   // columnÀÌ ¸î°³?
+        // ë§µ íƒ€ì¼ êµ¬ì¡°ê°€ ë¶ˆë³€ì´ë¼ëŠ” ì „ì œ
+        public static int TILE_COL_OFFSET = 5;  // í•œ columnì— ëª‡ê°œ? (ë‹¤ column ë‹¨ìœ„ë¡œ ê¸°íšë˜ì–´ ìˆì–´ì„œ ì´ë ‡ê²Œ í•¨)
+        public static int TILE_COL_COUNT = 4;   // columnì´ ëª‡ê°œ?
         public static int TILE_SIDE_OFFSET = TILE_COL_OFFSET * TILE_COL_COUNT;
-        public static int TILE_MAX = TILE_SIDE_OFFSET * 2; // ÀüÃ¼ Å¸ÀÏ ¼ö
+        public static int TILE_MAX = TILE_SIDE_OFFSET * 2; // ì „ì²´ íƒ€ì¼ ìˆ˜
 
         public static int DEFAULT_MANA_RESTORE = 5;
 
-        public static long NO_CONTENT = 0;              // ºó ÀÎµ¦½º¿ë
-        public static long SYNERGY_TRIGGER = 600001;    // ½Ã³ÊÁö Æ®¸®°Å¿ë
+        public static long NO_CONTENT = 0;              // ë¹ˆ ì¸ë±ìŠ¤ìš©
+        public static long SYNERGY_TRIGGER = 600001;    // ì‹œë„ˆì§€ íŠ¸ë¦¬ê±°ìš©
 
         public static float PER_TEN_THOUSAND = 10000.0f;
         public static float PER_THOUSAND = 1000.0f;

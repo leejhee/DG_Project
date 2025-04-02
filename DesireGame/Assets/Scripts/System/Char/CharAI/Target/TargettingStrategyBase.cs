@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Client
 {
-    /// <summary> eSkillTargetType¿¡ ´ëÇÑ ±¸Çö¿ë Ãß»óÅ¬·¡½º </summary>
+    /// <summary> eSkillTargetTypeì— ëŒ€í•œ êµ¬í˜„ìš© ì¶”ìƒí´ë˜ìŠ¤ </summary>
     public abstract class TargettingStrategyBase 
     {
         public CharBase Caster { get; protected set; }

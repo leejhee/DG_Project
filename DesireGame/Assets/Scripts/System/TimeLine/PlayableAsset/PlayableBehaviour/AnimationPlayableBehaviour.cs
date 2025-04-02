@@ -17,30 +17,30 @@ namespace Client
             base.InitBehaviour(charBase, skillBase);
         }
 
-        // Å¬¸³ÀÌ ½ÃÀÛµÉ ¶§ È£Ãâ
+        // í´ë¦½ì´ ì‹œì‘ë  ë•Œ í˜¸ì¶œ
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {
-            // PlayableGraph »ı¼º
+            // PlayableGraph ìƒì„±
             playableGraph = PlayableGraph.Create("AnimationPlayable");
 
-            // AnimationClipPlayable »ı¼º
+            // AnimationClipPlayable ìƒì„±
             AnimationClipPlayable clipPlayable = AnimationClipPlayable.Create(playableGraph, animationClip);
 
-            // Ãâ·Â »ı¼º ¹× ¿¬°á
+            // ì¶œë ¥ ìƒì„± ë° ì—°ê²°
             var output = AnimationPlayableOutput.Create(playableGraph, "Animation", animator);
             output.SetSourcePlayable(clipPlayable);
 
-            // Playable Àç»ı
+            // Playable ì¬ìƒ
             playableGraph.Play();
         }
 
-        // Å¬¸³ÀÌ ¸ØÃâ ¶§ È£Ãâ
+        // í´ë¦½ì´ ë©ˆì¶œ ë•Œ í˜¸ì¶œ
         public override void OnBehaviourPause(Playable playable, FrameData info)
         {
             if (playableGraph.IsValid())
             {
-                playableGraph.Stop(); // ±×·¡ÇÁ Á¤Áö
-                playableGraph.Destroy(); // ±×·¡ÇÁ ¸®¼Ò½º ÇØÁ¦
+                playableGraph.Stop(); // ê·¸ë˜í”„ ì •ì§€
+                playableGraph.Destroy(); // ê·¸ë˜í”„ ë¦¬ì†ŒìŠ¤ í•´ì œ
             }
             //animator.Play("IDLE",0,0);
         }

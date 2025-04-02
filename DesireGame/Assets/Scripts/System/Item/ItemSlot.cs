@@ -8,17 +8,17 @@ namespace Client
     public class ItemSlot
     {
         private CharPlayer charOwner;
-        private List<Item> items = new(); // ÀåÂøÇÑ ¾ÆÀÌÅÛ ¸®½ºÆ®
+        private List<Item> items = new(); // ì¥ì°©í•œ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸
 
 
         private readonly int maxCount = 3;
 
         public void EquipItem(Item item)
         {
-            // ¾ÆÀÌÅÛ ÀåÂø
+            // ì•„ì´í…œ ì¥ì°©
             if (items.Count >= maxCount)
             {
-                Debug.Log("Ä­ ´Ù Ã¡´Âµ¥¿ë");
+                Debug.Log("ì¹¸ ë‹¤ ì°¼ëŠ”ë°ìš©");
                 return;
             }
 
@@ -28,10 +28,10 @@ namespace Client
 
         public void UnequipItem(Item item)
         {
-            // ¾ÆÀÌÅÛ ÇØÁ¦
+            // ì•„ì´í…œ í•´ì œ
             if (items.Count >= maxCount)
             {
-                Debug.Log("»¬ °Ô ¾ø´Âµ¥¿ë");
+                Debug.Log("ëº„ ê²Œ ì—†ëŠ”ë°ìš©");
                 return;
             }
 

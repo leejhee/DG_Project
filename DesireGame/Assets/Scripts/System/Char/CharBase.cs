@@ -8,61 +8,61 @@ using UnityEngine.AI;
 namespace Client
 {
     /// <summary>
-    /// Ä³¸¯ÅÍ º£ÀÌ½º class
+    /// ìºë¦­í„° ë² ì´ìŠ¤ class
     /// </summary>
     public abstract class CharBase : MonoBehaviour
     {
         // SerializeField 
-        [SerializeField] private   long         _index;         // CharData Å×ÀÌºíÀÇ ÀÎµ¦½º 
-        [SerializeField] private   Collider     _FightCollider; // ÀüÅõ Äİ¶óÀÌ´õ
-        [SerializeField] private   Collider     _MoveCollider;  // ÀÌµ¿ Äİ¶óÀÌ´õ
-        [SerializeField] private   GameObject   _SkillRoot;     // ½ºÅ³ ·çÆ®
-        [SerializeField] protected NavMeshAgent _NavMeshAgent;  // ³×ºñ ¸Ş½¬ ¿¡ÀÌÀüÆ®
-        [SerializeField] protected GameObject _CharCamaraPos; // Ä³¸¯ÅÍ ¾Ö´Ï¸ŞÀÌ¼Ç ¸®½ºÆ®
-        [SerializeField] protected Animator _Animator;       // ¾Ö´Ï¸ŞÀÌÅÍ\
+        [SerializeField] private   long         _index;         // CharData í…Œì´ë¸”ì˜ ì¸ë±ìŠ¤ 
+        [SerializeField] private   Collider     _FightCollider; // ì „íˆ¬ ì½œë¼ì´ë”
+        [SerializeField] private   Collider     _MoveCollider;  // ì´ë™ ì½œë¼ì´ë”
+        [SerializeField] private   GameObject   _SkillRoot;     // ìŠ¤í‚¬ ë£¨íŠ¸
+        [SerializeField] protected NavMeshAgent _NavMeshAgent;  // ë„¤ë¹„ ë©”ì‰¬ ì—ì´ì „íŠ¸
+        [SerializeField] protected GameObject _CharCamaraPos; // ìºë¦­í„° ì• ë‹ˆë©”ì´ì…˜ ë¦¬ìŠ¤íŠ¸
+        [SerializeField] protected Animator _Animator;       // ì• ë‹ˆë©”ì´í„°\
 
-        protected FunctionInfo _functionInfo = null; // ±â´É Á¤º¸
-        //private CharItemInfo  _charItemInfo;         // Ä³¸¯ÅÍ º¸À¯/Àåºñ ¾ÆÀÌÅÛ
+        protected FunctionInfo _functionInfo = null; // ê¸°ëŠ¥ ì •ë³´
+        //private CharItemInfo  _charItemInfo;         // ìºë¦­í„° ë³´ìœ /ì¥ë¹„ ì•„ì´í…œ
 
-        private CharSKillInfo _charSKillInfo;       // Ä³¸¯ÅÍ ½ºÅ³
-        private CharStat     _charStat = null;      // Stat Á¤º¸
-        private CharAnim     _charAnim = null;      // Ä³¸¯ÅÍ ¾Ö´Ï¸ŞÀÌ¼Ç ¸®½ºÆ®
-        private CharAction  _charAction = null;     // Ä³¸¯ÅÍ µ¿ÀÛ ¸í·É Å¬·¡½º
-        protected CharData _charData = null;      // Ä³¸¯ÅÍ µ¥ÀÌÅÍ
+        private CharSKillInfo _charSKillInfo;       // ìºë¦­í„° ìŠ¤í‚¬
+        private CharStat     _charStat = null;      // Stat ì •ë³´
+        private CharAnim     _charAnim = null;      // ìºë¦­í„° ì• ë‹ˆë©”ì´ì…˜ ë¦¬ìŠ¤íŠ¸
+        private CharAction  _charAction = null;     // ìºë¦­í„° ë™ì‘ ëª…ë ¹ í´ë˜ìŠ¤
+        protected CharData _charData = null;      // ìºë¦­í„° ë°ì´í„°
         protected CharAI      _charAI = null;
 
-        private Transform  _CharTransform = null; // Ä³¸¯ÅÍ Æ®·»½ºÆû
-        private Transform  _CharUnitRoot = null;  // Ä³¸¯ÅÍ À¯´Ö ·çÆ® Æ®·»½ºÆû
+        private Transform  _CharTransform = null; // ìºë¦­í„° íŠ¸ë ŒìŠ¤í¼
+        private Transform  _CharUnitRoot = null;  // ìºë¦­í„° ìœ ë‹› ë£¨íŠ¸ íŠ¸ë ŒìŠ¤í¼
 
 
-        private PlayerState _currentState; // ÇöÀç »óÅÂ
-        private bool _isAction = false;    // Çàµ¿ÁßÀÎ°¡? ÆÇº°
+        private PlayerState _currentState; // í˜„ì¬ ìƒíƒœ
+        private bool _isAction = false;    // í–‰ë™ì¤‘ì¸ê°€? íŒë³„
         private Dictionary<PlayerState, int> _indexPair = new(); // 
         
-        protected long _uid;  // Ä³¸¯ÅÍ °íÀ¯ ID
+        protected long _uid;  // ìºë¦­í„° ê³ ìœ  ID
 
-        private Vector3 _rightRotation = new Vector3(0, 180,0); // ¿À¸¥ÂÊ ·ÎÅ×ÀÌ¼Ç
-        private Vector2 _lefRotationtion = Vector3.zero;        // ¿ŞÂÊ ·ÎÅ×ÀÌ¼Ç
+        private Vector3 _rightRotation = new Vector3(0, 180,0); // ì˜¤ë¥¸ìª½ ë¡œí…Œì´ì…˜
+        private Vector2 _lefRotationtion = Vector3.zero;        // ì™¼ìª½ ë¡œí…Œì´ì…˜
 
-        private Vector3 _rightPos = new Vector3(1, 0, 0); // ¿À¸¥ÂÊ ¹æÇâ
-        private Vector2 _leftPos = new Vector3(-1, 0, 0); // ¿ŞÂÊ ¹æÇâ
+        private Vector3 _rightPos = new Vector3(1, 0, 0); // ì˜¤ë¥¸ìª½ ë°©í–¥
+        private Vector2 _leftPos = new Vector3(-1, 0, 0); // ì™¼ìª½ ë°©í–¥
 
-        private Coroutine _coroutine; // UpdateAI¿ë,,
-        public Vector3 LookAtPos { get; private set; } = Vector3.right; // ÇöÀç ¹æÇâ¼º
+        private Coroutine _coroutine; // UpdateAIìš©,,
+        public Vector3 LookAtPos { get; private set; } = Vector3.right; // í˜„ì¬ ë°©í–¥ì„±
 
 
-        protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // Ä³¸¯ÅÍ Å¸ÀÔ
+        protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // ìºë¦­í„° íƒ€ì…
 
         public long Index => _index;
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
-        public FunctionInfo FunctionInfo => _functionInfo;  // ±â´É Á¤º¸
-        public CharSKillInfo CharSKillInfo => _charSKillInfo; // Ä³¸¯ÅÍ ½ºÅ³
+        public FunctionInfo FunctionInfo => _functionInfo;  // ê¸°ëŠ¥ ì •ë³´
+        public CharSKillInfo CharSKillInfo => _charSKillInfo; // ìºë¦­í„° ìŠ¤í‚¬
         public Transform CharTransform => _CharTransform;
-        private Transform CharUnitRoot => _CharUnitRoot; // Ä³¸¯ÅÍ À¯´Ö ·çÆ® Æ®·»½ºÆû
+        private Transform CharUnitRoot => _CharUnitRoot; // ìºë¦­í„° ìœ ë‹› ë£¨íŠ¸ íŠ¸ë ŒìŠ¤í¼
         //public CharItemInfo CharItemInfo => _charItemInfo;
-        public GameObject CharCamaraPos => _CharCamaraPos; // Ä«¸Ş¶ó À§Ä¡
-        public CharAnim CharAnim => _charAnim; // Ä«¸Ş¶ó À§Ä¡
+        public GameObject CharCamaraPos => _CharCamaraPos; // ì¹´ë©”ë¼ ìœ„ì¹˜
+        public CharAnim CharAnim => _charAnim; // ì¹´ë©”ë¼ ìœ„ì¹˜
         public NavMeshAgent Nav => _NavMeshAgent;
         public CharStat CharStat => _charStat;
         public CharAction CharAction => _charAction;
@@ -91,13 +91,13 @@ namespace Client
                 StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
                 if (charStat == null)
                 {
-                    Debug.LogError($"Ä³¸¯ÅÍ ID : {_index} µ¥ÀÌÅÍ Get ¼º°ø charStat {_charData.statsIndex} µ¥ÀÌÅÍ Get ½ÇÆĞ");
+                    Debug.LogError($"ìºë¦­í„° ID : {_index} ë°ì´í„° Get ì„±ê³µ charStat {_charData.statsIndex} ë°ì´í„° Get ì‹¤íŒ¨");
                 }
                 _charStat = new CharStat(charStat, this);
             }
             else
             {
-                Debug.LogError($"Ä³¸¯ÅÍ ID : {_index} Data µ¥ÀÌÅÍ Get ½ÇÆĞ");
+                Debug.LogError($"ìºë¦­í„° ID : {_index} Data ë°ì´í„° Get ì‹¤íŒ¨");
             }
             
         }
@@ -114,11 +114,11 @@ namespace Client
                 _indexPair[state] = 0;
             }
             CharInit();
-            // TODO : on off ±â´É
-            // turnonandoff ÀÌ·±½ÄÀ¸·Î ÇØ¼­ ²°´Ù Ä×´Ù¸¦ ÇÒ ¼ö ÀÖ°Ô ÇØ¾ßÇÏ±â ¶§¹®¿¡
-            // µû·Î ¹º°¡¸¦ ÇØ¾ß ÇÑ´Ù°í ÇÑ´Ù
-            // CharBase¿¡ ÇÔ¼ö¸¦ ¼±¾ğÇÏ¿© CharManager¿¡¼­ _cache ³» ¸ğµç CharBase¸¦ ´ë»óÀ¸·Î 
-            // ÇØ´ç ÇÔ¼ö¸¦ È£ÃâÇÏ°Ô ÇÏ¸é AI¸¦ Å°°í ²ø ¼ö ÀÖ´Ù.
+            // TODO : on off ê¸°ëŠ¥
+            // turnonandoff ì´ëŸ°ì‹ìœ¼ë¡œ í•´ì„œ ê»ë‹¤ ì¼°ë‹¤ë¥¼ í•  ìˆ˜ ìˆê²Œ í•´ì•¼í•˜ê¸° ë•Œë¬¸ì—
+            // ë”°ë¡œ ë­”ê°€ë¥¼ í•´ì•¼ í•œë‹¤ê³  í•œë‹¤
+            // CharBaseì— í•¨ìˆ˜ë¥¼ ì„ ì–¸í•˜ì—¬ CharManagerì—ì„œ _cache ë‚´ ëª¨ë“  CharBaseë¥¼ ëŒ€ìƒìœ¼ë¡œ 
+            // í•´ë‹¹ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê²Œ í•˜ë©´ AIë¥¼ í‚¤ê³  ëŒ ìˆ˜ ìˆë‹¤.
         }
 
         void Update()
@@ -126,10 +126,10 @@ namespace Client
             FunctionInfo?.UpdateFunctionDic();            
         }
 
-        // CharÀÇ Start½ÃÁ¡¿¡ ºÒ¸²
+        // Charì˜ Startì‹œì ì— ë¶ˆë¦¼
         protected virtual void CharInit()
         {
-            #region ½ºÅ³
+            #region ìŠ¤í‚¬
             _charSKillInfo = new CharSKillInfo(this);
             if (_charSKillInfo != null)
             {               
@@ -138,7 +138,7 @@ namespace Client
             }
             #endregion
 
-            #region ÃÊ±â ÆĞ½Ãºê
+            #region ì´ˆê¸° íŒ¨ì‹œë¸Œ
             foreach (long functionIndex in _charData.func)
             {
                 var functiondata = DataManager.Instance.GetData<FunctionData>(functionIndex);
@@ -155,7 +155,7 @@ namespace Client
          
             _charStat.OnDeath += () =>
             {
-                Debug.Log($"Ä³¸¯ÅÍ »ç¸Á : uid {_uid}, ÀÌ¸§ {_charData.charName}");
+                Debug.Log($"ìºë¦­í„° ì‚¬ë§ : uid {_uid}, ì´ë¦„ {_charData.charName}");
                 CharDead();
             };
 
@@ -181,12 +181,12 @@ namespace Client
         //        return;
         //    if (_charStat == null)
         //    {
-        //        Debug.LogWarning($"{transform.name} ÀÇ Stat°¡ ¾øÀ½");
+        //        Debug.LogWarning($"{transform.name} ì˜ Statê°€ ì—†ìŒ");
         //        return;
         //    }
         //    float angle = Mathf.Atan2(vector.x, vector.y) * Mathf.Rad2Deg;
             
-        //    // YÃàÀ» ±âÁØÀ¸·Î È¸Àü (2D Æò¸é¿¡¼­ ¹Ù¶óº¸´Â ¹æÇâ)
+        //    // Yì¶•ì„ ê¸°ì¤€ìœ¼ë¡œ íšŒì „ (2D í‰ë©´ì—ì„œ ë°”ë¼ë³´ëŠ” ë°©í–¥)
         //    Vector3 deltaRotation = new Vector3(0, angle, 0);
         //    transform.eulerAngles += deltaRotation * Time.deltaTime;
             
@@ -197,7 +197,7 @@ namespace Client
         //}
 
         ///// <summary>
-        ///// È£Ãâ ½ÃÁ¡ ÇØ´ç À§Ä¡·Î ÀÌµ¿
+        ///// í˜¸ì¶œ ì‹œì  í•´ë‹¹ ìœ„ì¹˜ë¡œ ì´ë™
         ///// </summary>
         ///// <param name="vector"></param>
         //public void CharMoveTo(Vector2 vector)
@@ -209,7 +209,7 @@ namespace Client
         //}
 
         ///// <summary>
-        ///// È£Ãâ ½ÃÁ¡ Ä³¸¯ÅÍÀÇ À§Ä¡·Î ÀÌµ¿
+        ///// í˜¸ì¶œ ì‹œì  ìºë¦­í„°ì˜ ìœ„ì¹˜ë¡œ ì´ë™
         ///// </summary>
         ///// <param name="targetChar"></param>
         //public void CharMoveTo(CharBase targetChar)
@@ -221,7 +221,7 @@ namespace Client
         //}
 
         ///// <summary>
-        ///// È£Ãâ ½ÃÁ¡ Ä³¸¯ÅÍÀÇ À§Ä¡·Î ÀÌµ¿
+        ///// í˜¸ì¶œ ì‹œì  ìºë¦­í„°ì˜ ìœ„ì¹˜ë¡œ ì´ë™
         ///// </summary>
         ///// <param name="targetChar"></param>
         //public void CharMoveTo(long targetCharUID)
@@ -233,13 +233,13 @@ namespace Client
         //}
 
         /// <summary>
-        /// Ä³¸¯ÅÍ AI on & off ±â´É
+        /// ìºë¦­í„° AI on & off ê¸°ëŠ¥
         /// </summary>
         public void AISwitch(bool turnOn = true)
         {
             if (CharAI == null) return;
-            // CharBase¿¡ ÇÔ¼ö¸¦ ¼±¾ğÇÏ¿© CharManager¿¡¼­(È£ÃâÇÏ´Â³ğ) _cache ³» ¸ğµç CharBase¸¦ ´ë»óÀ¸·Î 
-            // ÇØ´ç ÇÔ¼ö¸¦ È£ÃâÇÏ°Ô ÇÏ¸é AI¸¦ Å°°í ²ø ¼ö ÀÖ´Ù.
+            // CharBaseì— í•¨ìˆ˜ë¥¼ ì„ ì–¸í•˜ì—¬ CharManagerì—ì„œ(í˜¸ì¶œí•˜ëŠ”ë†ˆ) _cache ë‚´ ëª¨ë“  CharBaseë¥¼ ëŒ€ìƒìœ¼ë¡œ 
+            // í•´ë‹¹ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ê²Œ í•˜ë©´ AIë¥¼ í‚¤ê³  ëŒ ìˆ˜ ìˆë‹¤.
             CharAI.isAIRun = turnOn;
             if (turnOn)
             {                
@@ -275,11 +275,11 @@ namespace Client
             Destroy(gameObject);
         }
 
-        // ÇÃ·¹ÀÌ¾î À¯´Ö ÆÈ¸é ¿µ¿µ »ç¶óÁ®¼­ ½Ã³ÊÁö ¾ø¾Ö¾ßÇÑ´Ù... ÆÇ¸Å ÀÖ´õ¶ó°í¿ä
+        // í”Œë ˆì´ì–´ ìœ ë‹› íŒ”ë©´ ì˜ì˜ ì‚¬ë¼ì ¸ì„œ ì‹œë„ˆì§€ ì—†ì• ì•¼í•œë‹¤... íŒë§¤ ìˆë”ë¼ê³ ìš”
         public void Sell()
         {
             Dead();
-            //µ· ³ª¿À°Ô ÇÏ´Â °Íµµ ¸¸µé¾î³ö¶ó
+            //ëˆ ë‚˜ì˜¤ê²Œ í•˜ëŠ” ê²ƒë„ ë§Œë“¤ì–´ë†”ë¼
         }
 
     }

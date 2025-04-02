@@ -6,19 +6,19 @@ using static Client.SystemEnum;
 namespace Client
 {
     /// <summary>
-    /// ½ÇÁ¦ ¿Àµğ¿À ÇÃ·¹ÀÌ¾î
+    /// ì‹¤ì œ ì˜¤ë””ì˜¤ í”Œë ˆì´ì–´
     /// </summary>
     public class AudioPlayer : MonoBehaviour
     {
         [SerializeField] 
-        private AudioSource _audioSource = new AudioSource(); // ¿Àµğ¿À ¼Ò½º
+        private AudioSource _audioSource = new AudioSource(); // ì˜¤ë””ì˜¤ ì†ŒìŠ¤
         [SerializeField] 
-        private AudioClip   _audioClip   = null;              // ¿Àµğ¿À Å¬¸³
+        private AudioClip   _audioClip   = null;              // ì˜¤ë””ì˜¤ í´ë¦½
         [SerializeField]
-        private eSounds      _soundType   = eSounds.MaxCount;   // ¿Àµğ¿À Å¸ÀÔ
+        private eSounds      _soundType   = eSounds.MaxCount;   // ì˜¤ë””ì˜¤ íƒ€ì…
 
-        public AudioSource audioSource { get { return GetAudioSource(); } }                // ¿Àµğ¿À ¼Ò½º
-        public eSounds soundType { get { return _soundType; } set { _soundType = value; } } // ¿Àµğ¿À Å¸ÀÔ
+        public AudioSource audioSource { get { return GetAudioSource(); } }                // ì˜¤ë””ì˜¤ ì†ŒìŠ¤
+        public eSounds soundType { get { return _soundType; } set { _soundType = value; } } // ì˜¤ë””ì˜¤ íƒ€ì…
 
         /// <summary>
         /// Get AudioSource 
@@ -34,7 +34,7 @@ namespace Client
         }
 
         /// <summary>
-        /// ÇöÀç ÇÃ·¹ÀÌ ÄÁÆ®·Ñ ÁßÀÎ AudioClip
+        /// í˜„ì¬ í”Œë ˆì´ ì»¨íŠ¸ë¡¤ ì¤‘ì¸ AudioClip
         /// </summary>
         /// <returns></returns>
         public AudioClip GetAudioClip()
@@ -43,7 +43,7 @@ namespace Client
         }
 
         /// <summary>
-        /// PlayOneShot (AudioClip °ü¸® X)
+        /// PlayOneShot (AudioClip ê´€ë¦¬ X)
         /// </summary>
         /// <param name="audioClip"></param>
         public void PlayAudioOneShot(AudioClip audioClip)
@@ -52,7 +52,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Play (AudioClip °ü¸® O)
+        /// Play (AudioClip ê´€ë¦¬ O)
         /// </summary>
         /// <param name="audioClip"></param>
         public void PlayAudio(AudioClip audioClip)

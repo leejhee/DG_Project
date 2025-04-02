@@ -4,8 +4,8 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    // SynergyManager¿¡¼­ Ä³¸¯ÅÍÀÇ Áßº¹ ¿©ºÎ¸¦ È®ÀÎÇÏ±â À§ÇØ ÀÛ¼º.
-    // SynergyManagerÀÇ ³»Àå Å¬·¡½º·Î ÀÛ¼ºÇÒ±î...?
+    // SynergyManagerì—ì„œ ìºë¦­í„°ì˜ ì¤‘ë³µ ì—¬ë¶€ë¥¼ í™•ì¸í•˜ê¸° ìœ„í•´ ì‘ì„±.
+    // SynergyManagerì˜ ë‚´ì¥ í´ë˜ìŠ¤ë¡œ ì‘ì„±í• ê¹Œ...?
     public class CharComparer : IEqualityComparer<CharBase>
     {
         public bool Equals(CharBase x, CharBase y)

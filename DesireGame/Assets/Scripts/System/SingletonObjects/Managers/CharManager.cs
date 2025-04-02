@@ -8,19 +8,19 @@ using static Client.SystemEnum;
 namespace Client
 {
     /// <summary>
-    /// Char ÄÁÆ®·Ñ¿ë ¸Å´ÏÀú
-    /// Char °ÔÀÓ ³» ÄÁÆ®·Ñ °¡´É °´Ã¼ÀÇ ÃÖ¼Ò´ÜÀ§
+    /// Char ì»¨íŠ¸ë¡¤ìš© ë§¤ë‹ˆì €
+    /// Char ê²Œì„ ë‚´ ì»¨íŠ¸ë¡¤ ê°€ëŠ¥ ê°ì²´ì˜ ìµœì†Œë‹¨ìœ„
     /// </summary>
     public class CharManager : Singleton<CharManager>
     {
-        // Á¸ÀçÇÏ´Â Char (Char TypeÀ» Key1 Char ID¸¦ Key2·Î »ç¿ë)
+        // ì¡´ì¬í•˜ëŠ” Char (Char Typeì„ Key1 Char IDë¥¼ Key2ë¡œ ì‚¬ìš©)
         private Dictionary<Type, Dictionary<long, CharBase>> _cache = new Dictionary<Type, Dictionary<long, CharBase>>();
-        // ÇÃ·¹ÀÌ¾î º¹»çº»ÀÌ µé¾î°¥ Ä³½Ã, ´ÙÀ½ ½ºÅ×ÀÌÁö·Î ³Ñ¾î°¥ ¶§ ¼¼ÆÃ¿ë
+        // í”Œë ˆì´ì–´ ë³µì‚¬ë³¸ì´ ë“¤ì–´ê°ˆ ìºì‹œ, ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ë„˜ì–´ê°ˆ ë•Œ ì„¸íŒ…ìš©
         private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
 
-        // °íÀ¯ ID »ı¼º 
+        // ê³ ìœ  ID ìƒì„± 
         private long _nextID = 0;
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         CharManager() { }
         #endregion
         private Transform _charRoot = null;
@@ -38,10 +38,10 @@ namespace Client
         }
         
         public long SelectedCharIndex { get; private set; } = 1;
-        // °íÀ¯ ID »ı¼º
+        // ê³ ìœ  ID ìƒì„±
         public long GetNextID() => _nextID++;
 
-        // Æ¯Á¤ Å¸ÀÔÀÇ Ä³¸¯ÅÍ ¼ö°¡ 0ÀÌ µÇ¾úÀ» ¶§ ¹ß»ıÇÏ´Â ÀÌº¥Æ®
+        // íŠ¹ì • íƒ€ì…ì˜ ìºë¦­í„° ìˆ˜ê°€ 0ì´ ë˜ì—ˆì„ ë•Œ ë°œìƒí•˜ëŠ” ì´ë²¤íŠ¸
         public event Action<Type> OnCharTypeEmpty;
 
        public T GetChar<T>(long ID) where T : CharBase
@@ -50,18 +50,18 @@ namespace Client
 
             if (!_cache.ContainsKey(key))
             {
-                Debug.LogWarning($"{typeof(T).ToString()} Å¸ÀÔÀ» Ã£À» ¼ö ¾øÀ½");
+                Debug.LogWarning($"{typeof(T).ToString()} íƒ€ì…ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ");
                 return null;
             }
             if (_cache[key].ContainsKey(ID))
             {
-                Debug.LogWarning($"{key} Å¸ÀÔÀÇ ID: {ID}À» Ã£À» ¼ö ¾øÀ½");
+                Debug.LogWarning($"{key} íƒ€ì…ì˜ ID: {ID}ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ");
                 return null;
             }
             T findChar = _cache[key][ID] as T;
             if (findChar == null)
             {
-                Debug.LogWarning($"{key} Å¸ÀÔÀÇ ID: {ID}À» {key} Å¸ÀÔÀ¸·Î º¯È¯ ºÒ°¡");
+                Debug.LogWarning($"{key} íƒ€ì…ì˜ ID: {ID}ì„ {key} íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ë¶ˆê°€");
                 return null;
             }
             return findChar;
@@ -76,7 +76,7 @@ namespace Client
             }
             if (_cache[key].ContainsKey(data.GetID()))
             {
-                Debug.LogWarning($"{key} Å¸ÀÔÀÇ ID: {data.GetID()}°¡ ÀÌ¹Ì Á¸ÀçÇÔ");
+                Debug.LogWarning($"{key} íƒ€ì…ì˜ ID: {data.GetID()}ê°€ ì´ë¯¸ ì¡´ì¬í•¨");
                 return false;
             }
             _cache[key].Add(data.GetID(),data);
@@ -87,18 +87,18 @@ namespace Client
         {
             if (!_cache.ContainsKey(myType))
             {
-                Debug.LogWarning($"{myType.ToString()} Å¸ÀÔÀ» Ã£À» ¼ö ¾øÀ½ »èÁ¦ ½ÇÆĞ");
+                Debug.LogWarning($"{myType.ToString()} íƒ€ì…ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ ì‚­ì œ ì‹¤íŒ¨");
                 return false;
             }
             if (!_cache[myType].ContainsKey(id))
             {
-                Debug.LogWarning($"{myType.ToString()} Å¸ÀÔÀÇ ID: {id}À» Ã£À» ¼ö ¾øÀ½ »èÁ¦ ½ÇÆĞ");
+                Debug.LogWarning($"{myType.ToString()} íƒ€ì…ì˜ ID: {id}ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ ì‚­ì œ ì‹¤íŒ¨");
                 return false;
             }
             var findChar = _cache[myType][id];
             if (findChar == null)
             {
-                Debug.LogWarning($"{myType} Å¸ÀÔÀÇ id: {id}À» {myType} Å¸ÀÔÀ¸·Î º¯È¯ ºÒ°¡ »èÁ¦ ½ÇÆĞ");
+                Debug.LogWarning($"{myType} íƒ€ì…ì˜ id: {id}ì„ {myType} íƒ€ì…ìœ¼ë¡œ ë³€í™˜ ë¶ˆê°€ ì‚­ì œ ì‹¤íŒ¨");
                 return false;
             }
             _cache[myType].Remove(id);
@@ -160,7 +160,7 @@ namespace Client
             return charBase;
         }
 
-        // Å¸ÀÏ ½Ã½ºÅÛ
+        // íƒ€ì¼ ì‹œìŠ¤í…œ
         public CharBase CharGenerate(CharTileParameter charParam)
         {
             CharBase charBase = Instance.CharGenerate(charParam.CharIndex);
@@ -173,13 +173,13 @@ namespace Client
             CharData charData = DataManager.Instance.GetData<CharData>(charIndex);
             if (charData == null)
             {
-                Debug.LogWarning($"CharFactory : {charIndex} ÀÇ CharIndex¸¦ Ã£À» ¼ö ¾øÀ½");
+                Debug.LogWarning($"CharFactory : {charIndex} ì˜ CharIndexë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŒ");
                 return null;
             }
             GameObject gameObject = ObjectManager.Instance.Instantiate($"Char/{charData.charPrefab}", CharRoot);
             if (gameObject == null)
             {
-                Debug.LogWarning($"CharFactory : {charData.charPrefab} ÀÇ charPrefabÀ» Ã£À» ¼ö ¾øÀ½");
+                Debug.LogWarning($"CharFactory : {charData.charPrefab} ì˜ charPrefabì„ ì°¾ì„ ìˆ˜ ì—†ìŒ");
                 return null;
             }
 
@@ -226,15 +226,15 @@ namespace Client
             eCharType clientType = ClientChar.GetCharType();
             var enemyDict = _cache[eCharTypeToType(CharUtil.GetEnemyType(clientType))];
 
-            #region ¿À·ù Å½Áö
+            #region ì˜¤ë¥˜ íƒì§€
             if (enemyDict.Count == 0)
             {
-                Debug.Log($"{clientType}ÀÇ ÀûÀÌ ¼¶¸êµÇ¾î Àû Ã£±â¸¦ Áß´ÜÇÕ´Ï´Ù. ÃâÃ³ {ClientChar.GetID()}");
+                Debug.Log($"{clientType}ì˜ ì ì´ ì„¬ë©¸ë˜ì–´ ì  ì°¾ê¸°ë¥¼ ì¤‘ë‹¨í•©ë‹ˆë‹¤. ì¶œì²˜ {ClientChar.GetID()}");
                 return null;
             }
             else if (nTH < 0)
             {
-                Debug.Log("0º¸´Ù ÀÛÀº nTH´Â ¾ÈµÅ¿ä!");
+                Debug.Log("0ë³´ë‹¤ ì‘ì€ nTHëŠ” ì•ˆë¼ìš”!");
                 return null;
             }
             #endregion
@@ -255,7 +255,7 @@ namespace Client
 
 
         /// <summary>
-        /// _cache ¾È¿¡ ÀÖ´Â Ä³¸¯ÅÍ AI ÄÑ±â
+        /// _cache ì•ˆì— ìˆëŠ” ìºë¦­í„° AI ì¼œê¸°
         /// </summary>
         public void WakeAllCharAI()
         {
@@ -263,7 +263,7 @@ namespace Client
             {
                 foreach(var unit in kvp.Value)
                 {
-                    Debug.Log($"AI - uid: {unit.Value.GetID()} Ä³¸¯ÅÍ ÀÌ¸§: {unit.Value.CharData.charName}");
+                    Debug.Log($"AI - uid: {unit.Value.GetID()} ìºë¦­í„° ì´ë¦„: {unit.Value.CharData.charName}");
                     unit.Value.AISwitch(true);
                 }
             }
@@ -295,13 +295,13 @@ namespace Client
         {
             if (_cache.ContainsKey(type) && _cache[type].Count == 0)
             {
-                Debug.Log($"{type} Å¸ÀÔÀÇ Ä³¸¯ÅÍ°¡ 0¸íÀÌ µÊ.");
+                Debug.Log($"{type} íƒ€ì…ì˜ ìºë¦­í„°ê°€ 0ëª…ì´ ë¨.");
                 OnCharTypeEmpty?.Invoke(type);
             }
         }
 
         /// <summary>
-        /// ½ºÅ×ÀÌÁö Á¾·á ÈÄ ÇÊµå¿¡ ³²¾ÆÀÖ´Â ÇÃ·¹ÀÌ¾îÀÇ ID¸¦ º¹»ç
+        /// ìŠ¤í…Œì´ì§€ ì¢…ë£Œ í›„ í•„ë“œì— ë‚¨ì•„ìˆëŠ” í”Œë ˆì´ì–´ì˜ IDë¥¼ ë³µì‚¬
         /// </summary>
         public void CopyFieldPlayerID()
         {
@@ -310,12 +310,12 @@ namespace Client
             foreach (var kvp in _cache[typeof(CharPlayer)])
             {
                 _playerCache.Add(kvp.Key, kvp.Value);
-                Debug.Log($"ÇÊµå¿¡ ÀÖ´Â {kvp.Value.CharData.charName} ( Å° : {kvp.Key} ) º¹Á¦");
+                Debug.Log($"í•„ë“œì— ìˆëŠ” {kvp.Value.CharData.charName} ( í‚¤ : {kvp.Key} ) ë³µì œ");
             }
         }
 
         /// <summary>
-        /// ½ºÅ×ÀÌÁö ½ÃÀÛ¸¶´Ù ¼³Á¤Çß´ø Å¸ÀÏ·Î ÇÃ·¹ÀÌ¾î Àç¹èÄ¡
+        /// ìŠ¤í…Œì´ì§€ ì‹œì‘ë§ˆë‹¤ ì„¤ì •í–ˆë˜ íƒ€ì¼ë¡œ í”Œë ˆì´ì–´ ì¬ë°°ì¹˜
         /// </summary>
         public void ReturnToOriginPos()
         {
@@ -325,7 +325,7 @@ namespace Client
                 charBase.CharStat.ResetAfterBattle();
                 TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
 
-                Debug.Log($"º¹»çµÈ {kvp.Value.CharData.charName} {kvp.Value.GetID()} ±âÁ¸ À§Ä¡·Î");
+                Debug.Log($"ë³µì‚¬ëœ {kvp.Value.CharData.charName} {kvp.Value.GetID()} ê¸°ì¡´ ìœ„ì¹˜ë¡œ");
             }
         }
 

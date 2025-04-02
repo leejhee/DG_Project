@@ -5,7 +5,7 @@ using Client;
 
 #if UNITY_EDITOR
 using UnityEditor;
-// ев╫╨ф╝ дз╣Е ╦саЖ гоаЖ╦╩╟М ╥ндц ев╫╨ф╝©К
+// М┘▄Л┼╓М┼╦ Л╫■К⌠° К╗╦Л╖─ М∙≤Л╖─К╖░ЙЁ═ К║°Л╩╛ М┘▄Л┼╓М┼╦Л ╘
  public class TestTool : Editor
 {
     [MenuItem("TestTool/Test1")]

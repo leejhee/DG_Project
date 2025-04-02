@@ -13,7 +13,7 @@ public class Test : Editor
     public static void Test1()
     {
         GameSceneMessageParam tmp = new();
-        tmp.message = "public class Test:Editor ¿¡¼­ ºê·ÎµåÄ³½ºÆÃÇÑ ¸Ş½ÃÁöÀÔ´Ï´Ù.";
+        tmp.message = "public class Test:Editor ì—ì„œ ë¸Œë¡œë“œìºìŠ¤íŒ…í•œ ë©”ì‹œì§€ì…ë‹ˆë‹¤.";
         MessageManager.SendMessage<GameSceneMessageParam>(tmp);
     }
 

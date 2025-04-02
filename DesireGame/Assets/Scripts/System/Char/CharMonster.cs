@@ -26,7 +26,7 @@ namespace Client
         }
 
         /// <summary>
-        /// CharID¸¦ EnemyID·Î º¯°æ
+        /// CharIDë¥¼ EnemyIDë¡œ ë³€ê²½
         /// </summary>
         /// <param name="charID"></param>
         /// <returns></returns>
@@ -44,13 +44,13 @@ namespace Client
         void DrawItems()
         {
             List<long> dropList = ItemManager.Instance.SetDropTableList(GetEnemyID(Index));
-            #region Å×½ºÆ®¿ë µğ¹ö±×
+            #region í…ŒìŠ¤íŠ¸ìš© ë””ë²„ê·¸
             StringBuilder sb = new();
             foreach (long id in dropList)
             {
                 sb.Append($"{id} ");
             }
-            Debug.Log($"{Index}°¡ µå¶øÇÒ °Ç {dropList.Count}°³, {sb.ToString()}");
+            Debug.Log($"{Index}ê°€ ë“œëí•  ê±´ {dropList.Count}ê°œ, {sb.ToString()}");
             #endregion
             ItemManager.Instance.DropItemBeads(this.CharTransform.position, dropList);
         }

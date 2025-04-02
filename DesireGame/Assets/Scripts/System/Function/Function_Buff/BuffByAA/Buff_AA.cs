@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// BUFF_AA : ´ÙÀ½ {1}¹øÀÇ AA°¡ {2}¸¸Å­ Ãß°¡ÇÇÇØ¸¦ °¡ÇÕ´Ï´Ù.
+    /// BUFF_AA : ë‹¤ìŒ {1}ë²ˆì˜ AAê°€ {2}ë§Œí¼ ì¶”ê°€í”¼í•´ë¥¼ ê°€í•©ë‹ˆë‹¤.
     /// </summary>
     public class Buff_AA : FunctionBase
     {
@@ -33,7 +33,7 @@ namespace Client
         {
             if(_count > 0)
             {
-                Debug.Log(@$"{_CastChar.GetID()}ÀÇ ½ºÅ³ ¹ßµ¿À¸·Î ÆòÅ¸µ© {_buffAmount}¸¸Å­ Áõ°¡.
+                Debug.Log(@$"{_CastChar.GetID()}ì˜ ìŠ¤í‚¬ ë°œë™ìœ¼ë¡œ í‰íƒ€ë€ {_buffAmount}ë§Œí¼ ì¦ê°€.
 count : {_count}");
                 _count--;
                 

@@ -12,7 +12,7 @@ namespace Client
 
         private NavMeshAgent Nav;
 
-        // ÆòÅ¸ÀÎÁö ½ºÅ³ÀÎÁö±îÁö µûÁ®¼­ ¹ßµ¿ÇÏ´Â ¾×¼Ç
+        // í‰íƒ€ì¸ì§€ ìŠ¤í‚¬ì¸ì§€ê¹Œì§€ ë”°ì ¸ì„œ ë°œë™í•˜ëŠ” ì•¡ì…˜
         public Action<eAttackMode> OnAttackAction;
 
         public CharAction(CharBase actor)

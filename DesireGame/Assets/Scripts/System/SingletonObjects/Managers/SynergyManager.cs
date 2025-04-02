@@ -18,7 +18,7 @@ namespace Client
             return null;
         }
         
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         private SynergyManager() { }
         #endregion
 
@@ -35,8 +35,8 @@ namespace Client
         
         //public void UnsubscribeToChanges(eSynergy synergy, Action<SynergyParameter> trigging) => _OnSynergyChanges[synergy] -= trigging;
 
-        /// <summary> Ä³¸¯ÅÍ ´ÜÀ§ ½Ã³ÊÁö µî·Ï </summary>
-        /// <param name="registrar"> °¡ÀÔÀÚ Á¤º¸ </param>
+        /// <summary> ìºë¦­í„° ë‹¨ìœ„ ì‹œë„ˆì§€ ë“±ë¡ </summary>
+        /// <param name="registrar"> ê°€ì…ì ì •ë³´ </param>
         public void RegisterCharSynergy(CharLightWeightInfo registrar)
         {
             var mySynergies = registrar.synergyList;
@@ -72,9 +72,9 @@ namespace Client
         }
 
 
-        /// <summary> ½Ã³ÊÁö µî·Ï ´ÜÀ§ </summary>
-        /// <param name="registrar"> °¡ÀÔÀÚ Á¤º¸ </param>
-        /// <param name="synergy"> °¡ÀÔÇÒ ½Ã³ÊÁö </param>
+        /// <summary> ì‹œë„ˆì§€ ë“±ë¡ ë‹¨ìœ„ </summary>
+        /// <param name="registrar"> ê°€ì…ì ì •ë³´ </param>
+        /// <param name="synergy"> ê°€ì…í•  ì‹œë„ˆì§€ </param>
         public void RegisterSynergy(CharLightWeightInfo registrar, eSynergy synergy)
         {
             if (synergy == eSynergy.None) return;
@@ -102,10 +102,10 @@ namespace Client
         }
 
         #region Test_Method
-        // ¾À»ó Å×½ºÆ®¸¸ ÇÏ´Â ¿ëµµ
+        // ì”¬ìƒ í…ŒìŠ¤íŠ¸ë§Œ í•˜ëŠ” ìš©ë„
         public void ShowCurrentSynergies()
         {
-            StringBuilder view = new("ÇöÀç ½Ã³ÊÁö\n");
+            StringBuilder view = new("í˜„ì¬ ì‹œë„ˆì§€\n");
             foreach(var value in _synergyActivator.Values)
             {
                 view.AppendLine(value.ToString());

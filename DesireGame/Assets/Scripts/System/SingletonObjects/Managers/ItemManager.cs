@@ -7,13 +7,13 @@ namespace Client
 {
     public class ItemManager : Singleton<ItemManager>
     {
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         ItemManager() { }
         #endregion
-        // °íÀ¯ ID »ı¼º 
+        // ê³ ìœ  ID ìƒì„± 
         private long _nextID = 0;
-        private List<GameObject> itemBeads         = new(); // ÇÊµå¿¡ ÀÖ´Â ¾ÆÀÌÅÛ ±¸½½
-        private List<int>        cumulativeWeights = new(); // ¼­ºê½ºÅÈ - °¡ÁßÄ¡ ´©Àû ÇÕÀ» ÀúÀå
+        private List<GameObject> itemBeads         = new(); // í•„ë“œì— ìˆëŠ” ì•„ì´í…œ êµ¬ìŠ¬
+        private List<int>        cumulativeWeights = new(); // ì„œë¸ŒìŠ¤íƒ¯ - ê°€ì¤‘ì¹˜ ëˆ„ì  í•©ì„ ì €ì¥
         public List<int> CumulativeWeights => cumulativeWeights;
         public override void Init()
         {
@@ -55,19 +55,19 @@ namespace Client
             }
             itemBeads.Clear();
         }
-        #region ¼­ºê ½ºÅÈ °áÁ¤ ÆÄÆ®
+        #region ì„œë¸Œ ìŠ¤íƒ¯ ê²°ì • íŒŒíŠ¸
         /// <summary>
-        /// °¡ÁßÄ¡ ´©Àû ÇÕ ¹Ì¸® °è»ê - binary search¿ë
+        /// ê°€ì¤‘ì¹˜ ëˆ„ì  í•© ë¯¸ë¦¬ ê³„ì‚° - binary searchìš©
         /// </summary>
         public void AccumulateWeights()
         {
-            cumulativeWeights.Clear(); // ±âÁ¸ µ¥ÀÌÅÍ ÃÊ±âÈ­
+            cumulativeWeights.Clear(); // ê¸°ì¡´ ë°ì´í„° ì´ˆê¸°í™”
             int sum = 0;
 
             var ItemSubStatDataList = DataManager.Instance.GetDataList<ItemSubStatData>();
             if (ItemSubStatDataList == null)
             {
-                Debug.LogWarning("ItemSubStatDataList ¸¦ Ã£Áö ¸øÇÔ");
+                Debug.LogWarning("ItemSubStatDataList ë¥¼ ì°¾ì§€ ëª»í•¨");
             }
 
             foreach(var _itemSubStatData in ItemSubStatDataList)
@@ -80,7 +80,7 @@ namespace Client
         }
 
         /// <summary>
-        /// ½ºÅÈ Áõ°¡·® Á¤ÇÏ±â
+        /// ìŠ¤íƒ¯ ì¦ê°€ëŸ‰ ì •í•˜ê¸°
         /// </summary>
         /// <param name="itemSubStatData"></param>
         /// <returns></returns>
@@ -90,7 +90,7 @@ namespace Client
         }
 
         /// <summary>
-        /// ¼­ºê ½ºÅÈ ·£´ı °¡Ã­
+        /// ì„œë¸Œ ìŠ¤íƒ¯ ëœë¤ ê°€ì± 
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
@@ -103,7 +103,7 @@ namespace Client
             var ItemSubStatDataList = DataManager.Instance.GetDataList<ItemSubStatData>();
             if (ItemSubStatDataList == null)
             {
-                Debug.LogWarning("ItemSubStatDataList ¸¦ Ã£Áö ¸øÇÔ");
+                Debug.LogWarning("ItemSubStatDataList ë¥¼ ì°¾ì§€ ëª»í•¨");
             }
 
             if (cumulativeWeights.Count == 0) AccumulateWeights();
@@ -116,35 +116,35 @@ namespace Client
                 var _itemSubStatData = ItemSubStatDataList[index];
                 var itemSubStatData = _itemSubStatData as ItemSubStatData;
                 list.Add((itemSubStatData.subStats, SetStatIncrease(itemSubStatData)));
-                Debug.Log($"{i} ¼­ºê ½ºÅÈ : {list[i].eStat}, Áõ°¡·® : {list[i].increase}");
+                Debug.Log($"{i} ì„œë¸Œ ìŠ¤íƒ¯ : {list[i].eStat}, ì¦ê°€ëŸ‰ : {list[i].increase}");
             }
             return list;
         }
         #endregion
 
-        // À§Ä¡ ¿Å±æ ¼öµµ..
+        // ìœ„ì¹˜ ì˜®ê¸¸ ìˆ˜ë„..
         public List<long> SetDropTableList(long enemyID)
         {
-            // 1. ÀûÀÌ °¡Áø µå¶ø Å×ÀÌºí ±×·ì ¾ÆÀÌµğ¸¦ °¡Áö°í Å×ÀÌºí Á¤º¸ °¡Á®¿À±â
+            // 1. ì ì´ ê°€ì§„ ë“œë í…Œì´ë¸” ê·¸ë£¹ ì•„ì´ë””ë¥¼ ê°€ì§€ê³  í…Œì´ë¸” ì •ë³´ ê°€ì ¸ì˜¤ê¸°
             EnemyData enemyData = DataManager.Instance.GetData<EnemyData>(enemyID);
             DropTableGroup dropTableGroup = DataManager.Instance.GetData<DropTableGroup>(enemyData.dropTableGroupID);
 
-            // 2. È®Á¤ µå¶ø Å×ÀÌºí ¾ÆÀÌµğ´Â ±×³É ¸®½ºÆ®¿¡ ³Ö±â
+            // 2. í™•ì • ë“œë í…Œì´ë¸” ì•„ì´ë””ëŠ” ê·¸ëƒ¥ ë¦¬ìŠ¤íŠ¸ì— ë„£ê¸°
             List<long> dropTableIDList = new List<long>(dropTableGroup.fixDrop);
 
-            // 3-1. ·£´ı µå¶ø ¸®½ºÆ®¿¡¼­ °¡ÁßÄ¡ ¹İ¿µÇØ¼­ ¸î°³ »ÌÀ»Áö °áÁ¤
+            // 3-1. ëœë¤ ë“œë ë¦¬ìŠ¤íŠ¸ì—ì„œ ê°€ì¤‘ì¹˜ ë°˜ì˜í•´ì„œ ëª‡ê°œ ë½‘ì„ì§€ ê²°ì •
             List<int> cumulative = new List<int>()
             {
                 dropTableGroup.noItem,
                 dropTableGroup.noItem + dropTableGroup.oneItem,
                 dropTableGroup.noItem + dropTableGroup.oneItem + dropTableGroup.twoItem,
                 dropTableGroup.noItem + dropTableGroup.oneItem + dropTableGroup.twoItem + dropTableGroup.threeItem
-            }; // ±¸·Á
+            }; // êµ¬ë ¤
 
             float randomValue = Random.Range(0f, cumulative[^1]);
             int itemQuantity = cumulative.FindIndex(x => x > randomValue);
 
-            // 3-2. ·£´ı µå¶ø ¸®½ºÆ®ÀÇ ¾ÆÀÌµğµé °¡Áö°í µå¶øÅ×ÀÌºí Á¤º¸ °¡Á®¿À±â, È®·ü °¡ÁßÄ¡(in DropTable) °è»êÀ» À§ÇÑ ´©Àû °¡ÁßÄ¡ ¸®½ºÆ® ¸¸µé±â
+            // 3-2. ëœë¤ ë“œë ë¦¬ìŠ¤íŠ¸ì˜ ì•„ì´ë””ë“¤ ê°€ì§€ê³  ë“œëí…Œì´ë¸” ì •ë³´ ê°€ì ¸ì˜¤ê¸°, í™•ë¥  ê°€ì¤‘ì¹˜(in DropTable) ê³„ì‚°ì„ ìœ„í•œ ëˆ„ì  ê°€ì¤‘ì¹˜ ë¦¬ìŠ¤íŠ¸ ë§Œë“¤ê¸°
             List<DropTable> _dropTableList = new();
             List<int> cumulative2 = new();
             int sum = 0;
@@ -156,7 +156,7 @@ namespace Client
                 cumulative2.Add(sum);
             }
 
-            // 3-3. 3-1¿¡¼­ Á¤ÇÑ ¾ÆÀÌÅÛ °³¼ö¸¸Å­ ·£´ıµå¶ø ¸®½ºÆ®¿¡¼­ µå¶øÅ×ÀÌºí id °¡Á®¿À±â
+            // 3-3. 3-1ì—ì„œ ì •í•œ ì•„ì´í…œ ê°œìˆ˜ë§Œí¼ ëœë¤ë“œë ë¦¬ìŠ¤íŠ¸ì—ì„œ ë“œëí…Œì´ë¸” id ê°€ì ¸ì˜¤ê¸°
             for (int i = 0; i < itemQuantity; i++)
             {
                 float rand = Random.Range(0f, cumulative2[^1]);
@@ -177,7 +177,7 @@ namespace Client
                 DropTable dropTable = DataManager.Instance.GetData<DropTable>(dropIndex);
                 if (dropTable == null)
                 {
-                    Debug.LogError($"DropTable ID {dropIndex} Á¤º¸ ¾øÀ½");
+                    Debug.LogError($"DropTable ID {dropIndex} ì •ë³´ ì—†ìŒ");
                     return;
                 }
 
@@ -186,7 +186,7 @@ namespace Client
 
                 if (beadPrefab != null)
                 {
-                    // ¹Ú½º ÇÁ¸®ÆÕÀ» ÀÎ½ºÅÏ½ºÈ­ÇÏ°í ¾ÆÀÌÅÛ Á¤º¸ ³Ö±â
+                    // ë°•ìŠ¤ í”„ë¦¬íŒ¹ì„ ì¸ìŠ¤í„´ìŠ¤í™”í•˜ê³  ì•„ì´í…œ ì •ë³´ ë„£ê¸°
                     Vector3 randPos = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-0.5f, 0.5f));
                     GameObject itemBead = GetItemBeadwithColor(beadPrefab, dropTable.beadColor);
                     itemBead.transform.position = position + randPos;

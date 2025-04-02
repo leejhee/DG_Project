@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Client
 {
-    // ·ÑÃ¼ ·¹ÆÛ»ó ¸¶³ª ¾ò´Â Å¸ÀÌ¹ÖÀÌ µû·Î ÀÖ¾î¼­ ¸¶Ä¿·Î Ã³¸®ÇÔ
+    // ë¡¤ì²´ ë ˆí¼ìƒ ë§ˆë‚˜ ì–»ëŠ” íƒ€ì´ë°ì´ ë”°ë¡œ ìˆì–´ì„œ ë§ˆì»¤ë¡œ ì²˜ë¦¬í•¨
     public class SkillMarkerManaExchanger : SkillTimeLineMarker
     {
         private enum choice { Earn, Pay }
@@ -10,7 +10,7 @@ namespace Client
         [SerializeField] 
         choice Choice;
 
-        [SerializeField, Header("PayÀÏ °æ¿ì, ±×³É µÎ¼Åµµ µË´Ï´Ù. ¾Ë¾Æ¼­ °è»êµÊ")] 
+        [SerializeField, Header("Payì¼ ê²½ìš°, ê·¸ëƒ¥ ë‘ì…”ë„ ë©ë‹ˆë‹¤. ì•Œì•„ì„œ ê³„ì‚°ë¨")] 
         int amount = 5;
 
         public override void MarkerAction()
@@ -21,15 +21,15 @@ namespace Client
             if (Choice == choice.Earn)
             {
                 stat.GainMana(amount, true);
-                Debug.Log(@$"{skillParam.skillCaster.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ ÆòÅ¸·Î {amount}¸¶³ª È¹µæ
-ÇöÀç ¸¶³ª {stat.GetStat(SystemEnum.eStats.N_MANA)}");
+                Debug.Log(@$"{skillParam.skillCaster.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ í‰íƒ€ë¡œ {amount}ë§ˆë‚˜ íšë“
+í˜„ì¬ ë§ˆë‚˜ {stat.GetStat(SystemEnum.eStats.N_MANA)}");
             }
             else if(Choice == choice.Pay)
             {
                 amount = (int)stat.GetStat(SystemEnum.eStats.MAX_MANA);
                 stat.GainMana(amount, false);
-                Debug.Log(@$"{skillParam.skillCaster.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ ½ºÅ³·Î {amount}¸¶³ª ¼Òºñ
-ÇöÀç ¸¶³ª {stat.GetStat(SystemEnum.eStats.N_MANA)}");
+                Debug.Log(@$"{skillParam.skillCaster.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ ìŠ¤í‚¬ë¡œ {amount}ë§ˆë‚˜ ì†Œë¹„
+í˜„ì¬ ë§ˆë‚˜ {stat.GetStat(SystemEnum.eStats.N_MANA)}");
             }
 
         }

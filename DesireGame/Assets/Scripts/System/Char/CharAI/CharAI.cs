@@ -14,14 +14,14 @@ namespace Client
 
         private List<CharBase> cachedTargets;
 
-        private PlayerState currentState; // »õ·Î¿î ¸ğµå º¯°æ ¿©ºÎ
+        private PlayerState currentState; // ìƒˆë¡œìš´ ëª¨ë“œ ë³€ê²½ ì—¬ë¶€
 
         private bool resetTimer = false;
         
         public Action<CharBase> OnTargetSet;    
         
-        public CharBase FinalTarget { get; private set; }// ¿ì¼± ¼øÀ§ °è»êÀÇ ÃÖÁ¾ °á°ú
-        public bool isAIRun { get; set; } = false; // ÀÌ Ä³¸¯ÅÍ´Â ÇöÀç AI°¡ ÀÛµ¿ÁßÀÔ´Ï´Ù.
+        public CharBase FinalTarget { get; private set; }// ìš°ì„  ìˆœìœ„ ê³„ì‚°ì˜ ìµœì¢… ê²°ê³¼
+        public bool isAIRun { get; set; } = false; // ì´ ìºë¦­í„°ëŠ” í˜„ì¬ AIê°€ ì‘ë™ì¤‘ì…ë‹ˆë‹¤.
 
         public CharAI(CharBase charAgent)
         {
@@ -29,14 +29,14 @@ namespace Client
         }
 
         /// <summary>
-        /// Ä³¸¯ÅÍ AI Çàµ¿ °áÁ¤ Å¸ÀÌ¸Ó
+        /// ìºë¦­í„° AI í–‰ë™ ê²°ì • íƒ€ì´ë¨¸
         /// </summary>
         /// <param name="newState"></param>
         public IEnumerator UpdateAI(PlayerState initialState)
         {
-            // ½ºÅ³ »ç¿ëÇÏ´Â µ¿¾È¿¡´Â Å¸ÀÌ¸Ó ÀÛµ¿ Áß´Ü
-            // ÇöÀç »óÅÂ°¡ °ø°İorÀÌµ¿¿¡ µû¶ó SetState() È£Ãâ ÁÖ±â ¹Ù²ãÁà¾ß ÇÔ
-            // »óÅÂ º¯°æ ½Ã ±âÁ¸ Å¸ÀÌ¸Ó Áß´Ü
+            // ìŠ¤í‚¬ ì‚¬ìš©í•˜ëŠ” ë™ì•ˆì—ëŠ” íƒ€ì´ë¨¸ ì‘ë™ ì¤‘ë‹¨
+            // í˜„ì¬ ìƒíƒœê°€ ê³µê²©orì´ë™ì— ë”°ë¼ SetState() í˜¸ì¶œ ì£¼ê¸° ë°”ê¿”ì¤˜ì•¼ í•¨
+            // ìƒíƒœ ë³€ê²½ ì‹œ ê¸°ì¡´ íƒ€ì´ë¨¸ ì¤‘ë‹¨
 
             currentState = initialState;
             float actionInterval = GetActionInterval(currentState);
@@ -44,7 +44,7 @@ namespace Client
 
             while (true)
             {
-                // »óÅÂ°¡ º¯°æµÇ¾úÀ» °æ¿ì Å¸ÀÌ¸Ó¸¦ ¸®¼Â
+                // ìƒíƒœê°€ ë³€ê²½ë˜ì—ˆì„ ê²½ìš° íƒ€ì´ë¨¸ë¥¼ ë¦¬ì…‹
                 if (resetTimer)
                 {
                     resetTimer = false;
@@ -63,7 +63,7 @@ namespace Client
         
 
         /// <summary>
-        /// ÇöÀç »óÅÂ¿¡ µû¸¥ È£Ãâ °£°İ ¸®ÅÏ
+        /// í˜„ì¬ ìƒíƒœì— ë”°ë¥¸ í˜¸ì¶œ ê°„ê²© ë¦¬í„´
         /// </summary>
         /// <param name="newState"></param>
         /// <returns></returns>
@@ -78,7 +78,7 @@ namespace Client
                     break;
 
                 case PlayerState.MOVE:
-                    interval = 1 / charAgent.CharStat.GetStat(eStats.NMOVE_SPEED); // TODO : ÀÌµ¿ °Å¸® ´ÜÀ§ ±âÈ¹¿¡ ¹°¾îº¸±â
+                    interval = 1 / charAgent.CharStat.GetStat(eStats.NMOVE_SPEED); // TODO : ì´ë™ ê±°ë¦¬ ë‹¨ìœ„ ê¸°íšì— ë¬¼ì–´ë³´ê¸°
                     break;
 
                 default:
@@ -90,14 +90,14 @@ namespace Client
         }
 
         /// <summary>
-        /// ¸¶³ª ¾ç¿¡ µû¶ó °ø°İ ¸ğµå ÆÇ´Ü
+        /// ë§ˆë‚˜ ì–‘ì— ë”°ë¼ ê³µê²© ëª¨ë“œ íŒë‹¨
         /// </summary>
         /// <returns></returns>
         public eAttackMode SetAttackMode()
         {
-            // ½ºÅ³ »ç¿ë Á¶°Ç
-            // 1: ÃÖ´ë ¸¶³ª°¡ 0º¸´Ù Å©´Ù
-            // 2: ÇöÀç ¸¶³ª >= ÃÖ´ë ¸¶³ª
+            // ìŠ¤í‚¬ ì‚¬ìš© ì¡°ê±´
+            // 1: ìµœëŒ€ ë§ˆë‚˜ê°€ 0ë³´ë‹¤ í¬ë‹¤
+            // 2: í˜„ì¬ ë§ˆë‚˜ >= ìµœëŒ€ ë§ˆë‚˜
             bool condition1 = charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
             bool condition2 = charAgent.CharStat.GetStat(eStats.N_MANA) >= charAgent.CharStat.GetStat(eStats.MAX_MANA);
 
@@ -108,17 +108,17 @@ namespace Client
         }
 
         ///// <summary>
-        ///// ÃÖÁ¾ Å¸°Ù Á¤ÇÏ±â
+        ///// ìµœì¢… íƒ€ê²Ÿ ì •í•˜ê¸°
         ///// </summary>
         //public void SetFinalTarget(eAttackMode mode = eAttackMode.None)
         //{
         //    finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
         //    if (finalTarget != null)
-        //        Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}ÀÇ final target : {finalTarget.CharData.charName}");
+        //        Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}ì˜ final target : {finalTarget.CharData.charName}");
         //}
 
         /// <summary>
-        /// »óÅÂ °è»ê ¹× Çàµ¿ ¼³Á¤
+        /// ìƒíƒœ ê³„ì‚° ë° í–‰ë™ ì„¤ì •
         /// </summary>
         public void SetStateByAttackMode(eAttackMode attackMode)
         {
@@ -137,16 +137,16 @@ namespace Client
 
         public void ChangeState(PlayerState newState)
         {
-            // »óÅÂ º¯°æ °¨Áö ½Ã 
+            // ìƒíƒœ ë³€ê²½ ê°ì§€ ì‹œ 
             if (currentState != newState)
             {
-                Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()} : {currentState}¿¡¼­ {newState}À¸·Î »óÅÂ º¯°æ");
+                Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()} : {currentState}ì—ì„œ {newState}ìœ¼ë¡œ ìƒíƒœ ë³€ê²½");
                 currentState = newState;
-                resetTimer = true; // Å¸ÀÌ¸Ó ¸®¼Â ÇÃ·¡±× ¼³Á¤
+                resetTimer = true; // íƒ€ì´ë¨¸ ë¦¬ì…‹ í”Œë˜ê·¸ ì„¤ì •
             }
         }
 
-        // ¾îÅÃ¸ğµå¿¡ µû¸¥ ½ºÅ³ ÀÎµ¦½º ÇÒ´ç
+        // ì–´íƒëª¨ë“œì— ë”°ë¥¸ ìŠ¤í‚¬ ì¸ë±ìŠ¤ í• ë‹¹
         public long ReloadSkill(eAttackMode mode)
         {
             if (mode == eAttackMode.Auto)
@@ -159,7 +159,7 @@ namespace Client
             }
             else
             {
-                Debug.Log("¾îÅÃ¸ğµå ÇÒ´ç ¾ÈµÇ¾î ½ºÅ³ ¹Ì»ç¿ë");
+                Debug.Log("ì–´íƒëª¨ë“œ í• ë‹¹ ì•ˆë˜ì–´ ìŠ¤í‚¬ ë¯¸ì‚¬ìš©");
                 return SystemConst.NO_CONTENT;
             }
         }
@@ -172,7 +172,7 @@ namespace Client
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
-            FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // ¹«Á¶°Ç cached Áß ÃÖ±ÙÁ¢ ´ë»ó
+            FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // ë¬´ì¡°ê±´ cached ì¤‘ ìµœê·¼ì ‘ ëŒ€ìƒ
             OnTargetSet?.Invoke(FinalTarget);
         }
 
@@ -180,27 +180,27 @@ namespace Client
         {
             var skillIndex = ReloadSkill(attackMode);
             var skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
-            //µ¥ÀÌÅÍ ±â¹İ Å¸°Ù ¼³Á¤
+            //ë°ì´í„° ê¸°ë°˜ íƒ€ê²Ÿ ì„¤ì •
             SetTarget(skill.TargetType);
             if (FinalTarget == null)
             {
-                Debug.LogWarning("Å¸°Ù µµÁß ¼¶¸ê. ¹«È¿È­µÇ¾î ´ÙÀ½ ÇÁ·¹ÀÓ¿¡ Å¸°Ù ÇÒ´çÇÕ´Ï´Ù.");
+                Debug.LogWarning("íƒ€ê²Ÿ ë„ì¤‘ ì„¬ë©¸. ë¬´íš¨í™”ë˜ì–´ ë‹¤ìŒ í”„ë ˆì„ì— íƒ€ê²Ÿ í• ë‹¹í•©ë‹ˆë‹¤.");
                 return;
             }
 
-            //µ¥ÀÌÅÍ ±â¹İ »ç°Å¸® ¼³Á¤ ¹× Çàµ¿ °áÁ¤
+            //ë°ì´í„° ê¸°ë°˜ ì‚¬ê±°ë¦¬ ì„¤ì • ë° í–‰ë™ ê²°ì •
             int skillRange = skill.NSkillRange;
             var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
             var tolerance = 0.01f;
 
-            // »ç°Å¸®¿Í ºñ±³ ÈÄ ÀÌµ¿ °áÁ¤
+            // ì‚¬ê±°ë¦¬ì™€ ë¹„êµ í›„ ì´ë™ ê²°ì •
             bool inRange = distance <= skillRange + tolerance || skillRange == 0;
             if(charAgent.Index == 200)
                 Debug.Log(skillRange);
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));
-                Debug.Log($"Ä³¸¯ÅÍ {charAgent.CharData.charName} {charAgent.GetID()}ÀÇ ½ºÅ³ {skillIndex} »ç¿ë");
+                Debug.Log($"ìºë¦­í„° {charAgent.CharData.charName} {charAgent.GetID()}ì˜ ìŠ¤í‚¬ {skillIndex} ì‚¬ìš©");
             }
             else
             {

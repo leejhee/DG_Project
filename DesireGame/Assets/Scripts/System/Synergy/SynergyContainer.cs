@@ -14,7 +14,7 @@ namespace Client
         private List<CharLightWeightInfo> _synergyMembers;
         public ReadOnlyCollection<CharLightWeightInfo> SynergyMembers => _synergyMembers.AsReadOnly();
 
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         public SynergyContainer(eSynergy synergy)
         {
             _synergyMembers = new();
@@ -23,7 +23,7 @@ namespace Client
 
         public override string ToString()
         {
-            return $"{mySynergy} ½Ã³ÊÁö, Members : {_synergyMembers.Count}, DistinctMembers : {DistinctMembers}";
+            return $"{mySynergy} ì‹œë„ˆì§€, Members : {_synergyMembers.Count}, DistinctMembers : {DistinctMembers}";
         }
 
         #endregion
@@ -32,7 +32,7 @@ namespace Client
 
         public int MemberCount => _synergyMembers.Count;
 
-        // ÇØ´ç ½Ã³ÊÁö¿¡ Æ÷ÇÔµÇ´Â ¸â¹ö°¡ µî·ÏµÉ ¶§ È£ÃâµÈ´Ù.
+        // í•´ë‹¹ ì‹œë„ˆì§€ì— í¬í•¨ë˜ëŠ” ë©¤ë²„ê°€ ë“±ë¡ë  ë•Œ í˜¸ì¶œëœë‹¤.
         public void Register(CharLightWeightInfo registrar)
         {
             if(!_synergyMembers.Contains(registrar))
@@ -44,7 +44,7 @@ namespace Client
                 GetCurrentSynergyBuff(registrar);
         }
 
-        // ÇØ´ç ½Ã³ÊÁö¿¡ Æ÷ÇÔµÇ´Â ¸â¹ö°¡ Å»ÅğÇÒ ¶§ È£ÃâµÈ´Ù.
+        // í•´ë‹¹ ì‹œë„ˆì§€ì— í¬í•¨ë˜ëŠ” ë©¤ë²„ê°€ íƒˆí‡´í•  ë•Œ í˜¸ì¶œëœë‹¤.
         public void Delete(CharLightWeightInfo leaver)
         {
             if (_synergyMembers.Contains(leaver))
@@ -80,7 +80,7 @@ namespace Client
 
             int nowDistinct = DistinctMembers;
 
-            // ¹®ÅÎÀÌ 1ÀÎ ½Ã³ÊÁö´Â ½Ã³ÊÁö Á¾·ùº°·Î ¹İµå½Ã Á¸ÀçÇØ¾ß ÇÔ.
+            // ë¬¸í„±ì´ 1ì¸ ì‹œë„ˆì§€ëŠ” ì‹œë„ˆì§€ ì¢…ë¥˜ë³„ë¡œ ë°˜ë“œì‹œ ì¡´ì¬í•´ì•¼ í•¨.
             int levelThreshold = 1;
             foreach (var threshold in sortedKeys)
             {
@@ -101,7 +101,7 @@ namespace Client
 
         private Queue<SynergyBuffRecord> synergyBuffRecords = new();
         
-        // ½Ã³ÊÁö°¡ °»½ÅµÇ¾î¾ß ÇÏ´ÂÁö¿¡ ´ëÇÑ Ã¼Å© ÇÔ¼ö
+        // ì‹œë„ˆì§€ê°€ ê°±ì‹ ë˜ì–´ì•¼ í•˜ëŠ”ì§€ì— ëŒ€í•œ ì²´í¬ í•¨ìˆ˜
         public bool CheckSynergyChange()
         {
             var newSynergy = GetSynergyByLevel();
@@ -114,7 +114,7 @@ namespace Client
             }
         }
 
-        // ÇöÀç Àû¿ëµÇ´Â ±Û·Î¹ú ½Ã³ÊÁö ¹öÇÁ¸¦ ¾ò´Â ÇÔ¼ö
+        // í˜„ì¬ ì ìš©ë˜ëŠ” ê¸€ë¡œë²Œ ì‹œë„ˆì§€ ë²„í”„ë¥¼ ì–»ëŠ” í•¨ìˆ˜
         public void GetCurrentSynergyBuff(CharLightWeightInfo receiver)
         {
             var caster = receiver.SpecifyCharBase();
@@ -135,7 +135,7 @@ namespace Client
             var caster = releaser.SpecifyCharBase();
             if (caster == null) return;
 
-            // ¾ÈÀüÇÏ°Ô ÇÏÀÚ.
+            // ì•ˆì „í•˜ê²Œ í•˜ì.
             int count = synergyBuffRecords.Count;
             while (count-- > 0)
             {
@@ -147,14 +147,14 @@ namespace Client
             }
         }
 
-        // ½Ã³ÊÁö ¹öÇÁ ¾ò´Â ÇÔ¼ö
+        // ì‹œë„ˆì§€ ë²„í”„ ì–»ëŠ” í•¨ìˆ˜
         public void GetBuff(CharBase caster, SynergyData data)
         {
             #region GETTING PARAMETERS
             var funcData = DataManager.Instance.GetData<FunctionData>(data.functionIndex);
             if (funcData == null)
             {
-                Debug.LogError("Àß¸ø µÆ´ÙÀİ³Ä ÀÌ³à¼®¾Æ µ¥ÀÌÅÍ È®ÀÎ ´Ù½ÃÇØºÁ¶ó.");
+                Debug.LogError("ì˜ëª» ëë‹¤ì–ëƒ ì´ë…€ì„ì•„ ë°ì´í„° í™•ì¸ ë‹¤ì‹œí•´ë´ë¼.");
                 return;
             }
             
@@ -163,7 +163,7 @@ namespace Client
 
             CharBase target = null;
             if (IntendedTargets.Count == 0)
-                Debug.Log($"ÇöÀç Å¸°ÙÀÌ Å¸°ÔÆÃ Å¸ÀÔ {data.skillTarget}¿¡ µû¶ó Á¤ÇØÁöÁö ¾Ê½À´Ï´Ù.");
+                Debug.Log($"í˜„ì¬ íƒ€ê²Ÿì´ íƒ€ê²ŒíŒ… íƒ€ì… {data.skillTarget}ì— ë”°ë¼ ì •í•´ì§€ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             else
                 target = IntendedTargets[0];
             #endregion
@@ -178,30 +178,30 @@ namespace Client
                 FunctionIndex = funcData.Index
             });
 
-            //TODO : FunctionInfo¿¡ 'ÀüÅõ ½ÃÀÛ'¿¡ ´ëÇÑ Áö½Ã Ã¶È¸ÇÒ °Í. ½Ã³ÊÁöÄÁÅ×ÀÌ³Ê¿¡¼­ Ã¥ÀÓ Áø´Ù.
-            //TODO : SynergyContainer¿¡¼­ Distributer·Î °´Ã¼ ºĞ¸®ÇÒÁö »ı°¢ÇØº¼ °Í
+            //TODO : FunctionInfoì— 'ì „íˆ¬ ì‹œì‘'ì— ëŒ€í•œ ì§€ì‹œ ì² íšŒí•  ê²ƒ. ì‹œë„ˆì§€ì»¨í…Œì´ë„ˆì—ì„œ ì±…ì„ ì§„ë‹¤.
+            //TODO : SynergyContainerì—ì„œ Distributerë¡œ ê°ì²´ ë¶„ë¦¬í• ì§€ ìƒê°í•´ë³¼ ê²ƒ
             caster.FunctionInfo.AddFunction(synergyFunction, data.buffTriggerTime);
-            Debug.Log($"{caster.GetID()}¹ø Ä³¸¯ÅÍ {caster.name}¿¡ synergy Function {funcData.Index}¹ø function ÁÖÀÔ. " +
-                                    $"±â´É : {funcData.function}");
+            Debug.Log($"{caster.GetID()}ë²ˆ ìºë¦­í„° {caster.name}ì— synergy Function {funcData.Index}ë²ˆ function ì£¼ì…. " +
+                                    $"ê¸°ëŠ¥ : {funcData.function}");
             //////////Add Record/////////
             synergyBuffRecords.Enqueue(new SynergyBuffRecord(caster, synergyFunction));
             #endregion
         }
 
-        // ½Ã³ÊÁö °»½Å ÇÔ¼ö
+        // ì‹œë„ˆì§€ ê°±ì‹  í•¨ìˆ˜
         public void SetCurrentSynergy()
         {            
             while(synergyBuffRecords.Count > 0)
             {
                 var record = synergyBuffRecords.Dequeue();
-                if (record.Caster) // ¸¸¾à ÆÈ¾Æ¼­ ³ª°¡°í DestroyµÇ¸é nullÀÏ °Å¶ó¼­
+                if (record.Caster) // ë§Œì•½ íŒ”ì•„ì„œ ë‚˜ê°€ê³  Destroyë˜ë©´ nullì¼ ê±°ë¼ì„œ
                     record.KillSynergyBuff();
             }
 
             List<CharBase> casters = new();            
             foreach(var synergyData in _currentSynergyBuff)
             {
-                // eSynergyRange¿¡ µû¶ó¼­, Caster·Î ÁöÁ¤ÇÒ ¾Æ±ºÀÇ ¹üÀ§¸¦ ÁöÁ¤ÇÑ´Ù.
+                // eSynergyRangeì— ë”°ë¼ì„œ, Casterë¡œ ì§€ì •í•  ì•„êµ°ì˜ ë²”ìœ„ë¥¼ ì§€ì •í•œë‹¤.
                 switch (synergyData.casterType)
                 {
                     case eSynergyRange.ONCE:                        
@@ -219,16 +219,16 @@ namespace Client
                     default: break;
                 }
 
-                Debug.Log($"½Ã³ÊÁö º¯°æÀÌ °¨ÁöµÇ¾ú½À´Ï´Ù. " +
-                            $"Synergy {mySynergy}¿¡¼­ {DistinctMembers}¸í ´Ş¼ºÇÏ¿© {synergyData.Index}¹ø ¹öÇÁ " +
-                            $"casters {casters.Count}¿¡°Ô µé¾î°¨");
+                Debug.Log($"ì‹œë„ˆì§€ ë³€ê²½ì´ ê°ì§€ë˜ì—ˆìŠµë‹ˆë‹¤. " +
+                            $"Synergy {mySynergy}ì—ì„œ {DistinctMembers}ëª… ë‹¬ì„±í•˜ì—¬ {synergyData.Index}ë²ˆ ë²„í”„ " +
+                            $"casters {casters.Count}ì—ê²Œ ë“¤ì–´ê°");
 
                 foreach(var caster in casters)
                 {
                     Debug.Log(caster.name);
                 }
 
-                // Ä³½ºÅÍ ¼øÈ¸ÇÏ¿© °¢°¢ caster·Î ¼³Á¤ÇÑ functionÀ» ¸¸µé¾î addÇÑ´Ù.
+                // ìºìŠ¤í„° ìˆœíšŒí•˜ì—¬ ê°ê° casterë¡œ ì„¤ì •í•œ functionì„ ë§Œë“¤ì–´ addí•œë‹¤.
                 foreach (var caster in casters)
                 {
                     GetBuff(caster, synergyData);                       
@@ -255,7 +255,7 @@ namespace Client
         {
             BuffFunction.KillSelfFunction(true, true);
             //Caster.FunctionInfo.KillFunction(BuffFunction);
-            Debug.Log($"{Caster.name}ÀÇ ¹öÇÁ »èÁ¦ : {BuffFunction.functionType}");
+            Debug.Log($"{Caster.name}ì˜ ë²„í”„ ì‚­ì œ : {BuffFunction.functionType}");
         }
 
     }

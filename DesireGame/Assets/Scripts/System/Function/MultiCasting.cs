@@ -30,7 +30,7 @@ namespace Client
                         var data = DataManager.Instance.GetData<FunctionData>(index);
                         if (data == null)
                         {
-                            Debug.LogWarning($"{index} µ¥ÀÌÅÍ°¡ ¾øÀ¸´Ï È®ÀÎÇØº¸¼¼¿ä. ´ÙÀ½ ÀÎµ¦½º·Î ³Ñ¾î°¨");
+                            Debug.LogWarning($"{index} ë°ì´í„°ê°€ ì—†ìœ¼ë‹ˆ í™•ì¸í•´ë³´ì„¸ìš”. ë‹¤ìŒ ì¸ë±ìŠ¤ë¡œ ë„˜ì–´ê°");
                             continue;
                         }
                         
@@ -43,7 +43,7 @@ namespace Client
                         //    eFunctionType = data.function,
                         //    FunctionIndex = index
                         //});
-                        Debug.Log($"¼º°øÀûÀ¸·Î ÁÖÀÔ ¿Ï·á _CastChar {_CastChar.GetID()} _TargetChar {_TargetChar.GetID()} index {index}");
+                        Debug.Log($"ì„±ê³µì ìœ¼ë¡œ ì£¼ì… ì™„ë£Œ _CastChar {_CastChar.GetID()} _TargetChar {_TargetChar.GetID()} index {index}");
                     }
                 }
             }

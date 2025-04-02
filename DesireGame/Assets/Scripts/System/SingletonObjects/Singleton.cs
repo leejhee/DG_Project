@@ -10,13 +10,13 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// Singleton °´Ã¼¸¦ À§ÇÑ º£ÀÌ½º Å¬·¡½º 
+    /// Singleton ê°ì²´ë¥¼ ìœ„í•œ ë² ì´ìŠ¤ í´ë˜ìŠ¤ 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class Singleton<T> where T : class
     {
         /// <summary>
-        /// Singleton °´Ã¼ È£Ãâ
+        /// Singleton ê°ì²´ í˜¸ì¶œ
         /// </summary>
         public static T Instance
         {
@@ -26,25 +26,25 @@ namespace Client
             }
         }
 
-        // ÀÌ°É ºÎ¸£´Â°É º¸ÀåÇØÁÙ ÇÊ¿ä°¡ ÀÖ¾îº¸ÀÓ
+        // ì´ê±¸ ë¶€ë¥´ëŠ”ê±¸ ë³´ì¥í•´ì¤„ í•„ìš”ê°€ ìˆì–´ë³´ì„
         public virtual void Init() { }
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         /// <summary>
-        /// Singleton »ı¼ºÀÚ
+        /// Singleton ìƒì„±ì
         /// </summary>
         protected Singleton() { }
-        #endregion »ı¼ºÀÚ
+        #endregion ìƒì„±ì
 
-        #region Singleton¿ë Á¢±ÙÁ¦ÇÑ Å¬·¡½º
+        #region Singletonìš© ì ‘ê·¼ì œí•œ í´ë˜ìŠ¤
         /// <summary>
-        /// Singleton¿ë Á¢±ÙÁ¦ÇÑ Å¬·¡½º
+        /// Singletonìš© ì ‘ê·¼ì œí•œ í´ë˜ìŠ¤
         /// </summary>
         internal static class SingletonAllocator
         {
-            internal static T _Instance = null; // Singleton °´Ã¼
+            internal static T _Instance = null; // Singleton ê°ì²´
 
             /// <summary>
-            /// SingletonAllocator »ı¼ºÀÚ 
+            /// SingletonAllocator ìƒì„±ì 
             /// </summary>
             static SingletonAllocator()
             {
@@ -53,9 +53,9 @@ namespace Client
             }
 
             /// <summary>
-            /// _Instance »ı¼º 
+            /// _Instance ìƒì„± 
             /// </summary>
-            /// <param name="type"> »ı¼º Å¸ÀÔ </param>
+            /// <param name="type"> ìƒì„± íƒ€ì… </param>
             static void CreateInstance(Type type)
             {
                 ConstructorInfo constructorNonPublic = type.GetConstructor(
@@ -66,29 +66,29 @@ namespace Client
 
                 if (constructorPublic != null && constructorPublic.Length > 0)
                 {
-                    Debug.LogError($"{type.FullName}ÀÇ »ı¼ºÀÚ¸¦ È®ÀÎÇØÁÖ¼¼¿ä. Singleton Àº Public »ı¼ºÀÚ¸¦ Çã¿ëÇÏÁö ¾Ê½À´Ï´Ù. ");
+                    Debug.LogError($"{type.FullName}ì˜ ìƒì„±ìë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”. Singleton ì€ Public ìƒì„±ìë¥¼ í—ˆìš©í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ");
                     return;
                 }
 
-                // »ı¼ºÀÚ¿¡¼­ ÀÎ½ºÅÏ½º¸¦ »ı¼ºÇÕ´Ï´Ù.
+                // ìƒì„±ìì—ì„œ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
                 if (constructorNonPublic != null)
                 {
                     _Instance = (T)constructorNonPublic.Invoke(null);
                 }
                 else
                 {
-                    Debug.LogError("Singleton °´Ã¼¸¦ »ı¼ºÇÒ ¼ö ¾ø½À´Ï´Ù. ºñ°ø°³ »ı¼ºÀÚ°¡ ÇÊ¿äÇÕ´Ï´Ù.");
+                    Debug.LogError("Singleton ê°ì²´ë¥¼ ìƒì„±í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë¹„ê³µê°œ ìƒì„±ìê°€ í•„ìš”í•©ë‹ˆë‹¤.");
                 }
             }
 
-            // Singleton ¿ÀºêÁ§Æ® °øÅë ·ÎÁ÷
+            // Singleton ì˜¤ë¸Œì íŠ¸ ê³µí†µ ë¡œì§
             static void Initialize(Type type)
             {
 
             }
 
         }
-        #endregion Singleton¿ë Á¢±ÙÁ¦ÇÑ Å¬·¡½º
+        #endregion Singletonìš© ì ‘ê·¼ì œí•œ í´ë˜ìŠ¤
 
     }
 }

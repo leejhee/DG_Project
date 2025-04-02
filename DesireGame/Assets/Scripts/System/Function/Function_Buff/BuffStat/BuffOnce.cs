@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// BUFF_ONCE : {statsType}°¡ {1}%¸¸Å­ ÇÑ ¹ø Áõ°¡ÇÑ´Ù. {time}ms ÀÌÈÄ »ç¶óÁø´Ù.
+    /// BUFF_ONCE : {statsType}ê°€ {1}%ë§Œí¼ í•œ ë²ˆ ì¦ê°€í•œë‹¤. {time}ms ì´í›„ ì‚¬ë¼ì§„ë‹¤.
     /// </summary>
     public class BuffOnce : StatBuffBase
     {
@@ -20,10 +20,10 @@ namespace Client
         }
     }
 
-    // µÑÀÌ ¿¬°üÀ» Áş´Â°Ô ¸ÂÀ»±î...?
+    // ë‘˜ì´ ì—°ê´€ì„ ì§“ëŠ”ê²Œ ë§ì„ê¹Œ...?
 
     /// <summary>
-    /// BUFF_ONCE_BY_AD : ½ÃÀüÀÚÀÇ ÇöÀç °ø°İ·ÂÀÇ {1}%¸¸Å­ {statsType}°¡ ÇÑ ¹ø º¯È­
+    /// BUFF_ONCE_BY_AD : ì‹œì „ìì˜ í˜„ì¬ ê³µê²©ë ¥ì˜ {1}%ë§Œí¼ {statsType}ê°€ í•œ ë²ˆ ë³€í™”
     /// </summary>
     public class BuffOnceByAD : StatBuffBase
     {

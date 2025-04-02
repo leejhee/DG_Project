@@ -15,7 +15,7 @@ namespace Client
             {
                 if(_FunctionData.ConditionCheck == default)
                 {
-                    Debug.LogError("Condition CheckÀÎµ¥ Á¦´ë·Î ÃÊ±âÈ­ ¾ÈµÇ¾îÀÖÀ½. µ¥ÀÌÅÍ Ã¼Å©¿ä¸Á");
+                    Debug.LogError("Condition Checkì¸ë° ì œëŒ€ë¡œ ì´ˆê¸°í™” ì•ˆë˜ì–´ìˆìŒ. ë°ì´í„° ì²´í¬ìš”ë§");
                     return;
                 }
                 CheckFollowingCondition();

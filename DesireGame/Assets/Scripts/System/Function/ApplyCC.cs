@@ -54,7 +54,7 @@ namespace Client
         }
     }
 
-    // [TODO] : CCº°·Î ÀúÀåÇØ¾ß ÇÒ ÀÌÆåÆ® Á¾·ùµµ Æ÷ÇÔÇÏ´Â °Ô ÁÁÀ»µí. ¾î¶»°Ô ´ãÀ»Áö °í¹ÎÇØ¾ßÇÑ´Ù.
+    // [TODO] : CCë³„ë¡œ ì €ì¥í•´ì•¼ í•  ì´í™íŠ¸ ì¢…ë¥˜ë„ í¬í•¨í•˜ëŠ” ê²Œ ì¢‹ì„ë“¯. ì–´ë–»ê²Œ ë‹´ì„ì§€ ê³ ë¯¼í•´ì•¼í•œë‹¤.
     public abstract class CCBase
     {
         protected CharBase _Caster;
@@ -67,12 +67,12 @@ namespace Client
 
         public virtual void RunCC()
         {
-            Debug.Log($"{_Target.GetID()}¹ø Ä³¸¯ÅÍ¿¡ {GetType()} Å¸ÀÔÀÇ CC ¹ßµ¿");
+            Debug.Log($"{_Target.GetID()}ë²ˆ ìºë¦­í„°ì— {GetType()} íƒ€ì…ì˜ CC ë°œë™");
         }
 
         public virtual void EndCC()
         {
-            Debug.Log($"{_Target.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ {GetType()} Å¸ÀÔÀÇ CC ¼Ò¸ê");
+            Debug.Log($"{_Target.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ {GetType()} íƒ€ì…ì˜ CC ì†Œë©¸");
         }
     }
 

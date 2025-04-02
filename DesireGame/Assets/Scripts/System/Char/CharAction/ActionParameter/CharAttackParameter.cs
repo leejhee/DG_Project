@@ -21,7 +21,7 @@ namespace Client
             this.mode = mode;
         }
 
-        // ÇÏ³ª¸¸ ÇÒ ¼öµµ ÀÖÀ¸´Ï±î. È¤½Ã ¸ô¶ó¼­...
+        // í•˜ë‚˜ë§Œ í•  ìˆ˜ë„ ìˆìœ¼ë‹ˆê¹Œ. í˜¹ì‹œ ëª°ë¼ì„œ...
         public CharAttackParameter
             (
                 CharBase targetChar,

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// ENUM ±¸Çö : SELF
+    /// ENUM êµ¬í˜„ : SELF
     /// </summary>
     public class SelfTargetStrategy : TargettingStrategyBase
     {
@@ -90,7 +90,7 @@ namespace Client
         {
             if (!Caster.CharAI.isAIRun)
             {
-                Debug.LogWarning("ÇöÀç´Â AI°¡ ÀÛµ¿ÇÏÁö ¾ÊÀ¸¹Ç·Î Å¸°ÙÀ» ¹İÈ¯ÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogWarning("í˜„ì¬ëŠ” AIê°€ ì‘ë™í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ íƒ€ê²Ÿì„ ë°˜í™˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return new List<CharBase>();
             }
 

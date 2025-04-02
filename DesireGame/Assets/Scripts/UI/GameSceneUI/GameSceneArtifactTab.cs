@@ -21,8 +21,8 @@ namespace Client
 
         void SetArtifact()
         {
-            // ¾ÆÆ¼ÆÑÆ® ¸®½ºÆ®¿¡ º¯È­ »ý±æ ½Ã È£Ãâ,
-            // UI ¿ä¼Ò ¾÷µ¥ÀÌÆ®.
+            // ì•„í‹°íŒ©íŠ¸ ë¦¬ìŠ¤íŠ¸ì— ë³€í™” ìƒê¸¸ ì‹œ í˜¸ì¶œ,
+            // UI ìš”ì†Œ ì—…ë°ì´íŠ¸.
         }
     }
 }

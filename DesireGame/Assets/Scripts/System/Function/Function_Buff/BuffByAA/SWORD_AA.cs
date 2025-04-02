@@ -42,7 +42,7 @@ namespace Client
                     damageType = _FunctionData.damageType,
                     penetration = _TargetChar.CharStat.GetPenetration(_FunctionData.damageType)
                 });
-                Debug.Log($"{_CastChar.name}ÀÌ {_TargetChar.GetID()}¹ø À¯´Ö¿¡°Ô ½Ã³ÊÁö È¿°ú·Î ´ë¹ÌÁö Ãß°¡½ÃÅ´");
+                Debug.Log($"{_CastChar.name}ì´ {_TargetChar.GetID()}ë²ˆ ìœ ë‹›ì—ê²Œ ì‹œë„ˆì§€ íš¨ê³¼ë¡œ ëŒ€ë¯¸ì§€ ì¶”ê°€ì‹œí‚´");
                 _count = (int)_FunctionData.input1;
             }
             else 

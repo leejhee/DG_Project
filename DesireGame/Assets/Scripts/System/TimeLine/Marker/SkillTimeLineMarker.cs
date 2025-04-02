@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 namespace Client
 {
     /// <summary>
-    /// ½ºÅ³ Å¸ÀÓ¶óÀÎ¿ë ¸¶Ä¿
+    /// ìŠ¤í‚¬ íƒ€ì„ë¼ì¸ìš© ë§ˆì»¤
     /// </summary>
     public class SkillTimeLineMarker : Marker, INotification
     {

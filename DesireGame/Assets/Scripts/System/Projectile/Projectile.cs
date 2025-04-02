@@ -17,14 +17,14 @@ namespace Client
         protected ProjectileData _projectileData;
         protected float _projectileDamageInput;
         protected List<FunctionData> _functionDataList;
-        protected int _projectileLife; // Åõ»çÃ¼ÀÇ °üÅë Çã¿ë ¼öÄ¡
+        protected int _projectileLife; // íˆ¬ì‚¬ì²´ì˜ ê´€í†µ í—ˆìš© ìˆ˜ì¹˜
         
-        // ¹º°¡¹º°¡´Ù.
+        // ë­”ê°€ë­”ê°€ë‹¤.
         private bool destroyFlag = false;
         public void SetDestroyFlag(bool flag) => destroyFlag = flag;
 
-        private IPathStrategy       pathStrategy;       // °æ·Î ÀÌµ¿ ¹æ½Ä
-        private IRangeStrategy      rangeStrategy;      // À§Ä¡ µµ´Ş ÈÄ ¹üÀ§ Ã³¸®
+        private IPathStrategy       pathStrategy;       // ê²½ë¡œ ì´ë™ ë°©ì‹
+        private IRangeStrategy      rangeStrategy;      // ìœ„ì¹˜ ë„ë‹¬ í›„ ë²”ìœ„ ì²˜ë¦¬
 
         public Collider Collider => _projectileCollider;
         public Transform ProjectileTransform => _projectileTransform;
@@ -47,7 +47,7 @@ namespace Client
             _target = param.skillTargets[param.TargetIndex];
             if(_projectileData == null)
             {
-                Debug.LogError("ÀÌ µ¥ÀÌÅÍ ¾ø´Â°Å¶ó´Âµ¥¿ä? ÀÎµ¦½º Á¦´ë·Î È®ÀÎ¹Ù¶÷");
+                Debug.LogError("ì´ ë°ì´í„° ì—†ëŠ”ê±°ë¼ëŠ”ë°ìš”? ì¸ë±ìŠ¤ ì œëŒ€ë¡œ í™•ì¸ë°”ëŒ");
                 return;
             }
             _projectileDamageInput =
@@ -58,7 +58,7 @@ namespace Client
                 {
                     target = _target,
                     type = _projectileData.path,
-                    Speed = 2f, // ÀÌ°Å¾î¶»°Ô °áÁ¤ÇÏÁö
+                    Speed = 2f, // ì´ê±°ì–´ë–»ê²Œ ê²°ì •í•˜ì§€
                 });
 
             _projectileLife = _projectileData.penetrationCount;
@@ -82,14 +82,14 @@ namespace Client
         }
 
 
-        // È¿°ú Àû¿ë ÆÇÁ¤ÀÌ µÈ ´ë»ó¿¡°Ô ´ë¹ÌÁö ¹× functionÀ» ÁÖÀÔ
+        // íš¨ê³¼ ì ìš© íŒì •ì´ ëœ ëŒ€ìƒì—ê²Œ ëŒ€ë¯¸ì§€ ë° functionì„ ì£¼ì…
         public void ApplyEffect(CharBase target)
         {           
-            // ´ë¹ÌÁö ÆÄÆ®
+            // ëŒ€ë¯¸ì§€ íŒŒíŠ¸
             target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
             Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
             
-            // È¿°ú ÆÄÆ®
+            // íš¨ê³¼ íŒŒíŠ¸
             foreach(var data in _functionDataList)
             {
                 target.FunctionInfo.AddFunction(new BuffParameter()
@@ -101,14 +101,14 @@ namespace Client
                 });
             }
 
-            // °æ¿ì¿¡ µû¶ó ¼öÄ¡ ¹Ù²ğ¼öµµ...? 2ÀúÁö 3ÀúÁö ±×·±°Å ÀÖÀ»¼öµµ ÀÖ°í
+            // ê²½ìš°ì— ë”°ë¼ ìˆ˜ì¹˜ ë°”ë€”ìˆ˜ë„...? 2ì €ì§€ 3ì €ì§€ ê·¸ëŸ°ê±° ìˆì„ìˆ˜ë„ ìˆê³ 
             if(--_projectileLife < 0)
             {
                 SetDestroyFlag(true);
             }
         }
 
-        // path typeÀÇ Á¾·ù·Î ÀÎÇØ ¼±ÅÃÇÔ
+        // path typeì˜ ì¢…ë¥˜ë¡œ ì¸í•´ ì„ íƒí•¨
         private void OnTriggerEnter(Collider other)
         {
             if (pathStrategy.ManageCollision(other, CharUtil.GetEnemyType(Caster.GetCharType())))

@@ -6,7 +6,7 @@ namespace Client
 {
     public class FunctionInfo
     {
-        private Dictionary<eFunction, List<FunctionBase>> _functionBaseDic = new(); // ±â´É 
+        private Dictionary<eFunction, List<FunctionBase>> _functionBaseDic = new(); // ê¸°ëŠ¥ 
 
         private Queue<FunctionBase> _functionReadyQueue = new();
 
@@ -35,7 +35,7 @@ namespace Client
 
         public void UpdateFunctionDic()
         {          
-            // ÁØºñ Å¥¿¡¼­ µñ¼Å³Ê¸®·Î Ãß°¡
+            // ì¤€ë¹„ íì—ì„œ ë”•ì…”ë„ˆë¦¬ë¡œ ì¶”ê°€
             while(_functionReadyQueue.Count != 0)
             {
                 FunctionBase target = _functionReadyQueue.Dequeue();
@@ -44,7 +44,7 @@ namespace Client
                 if(!_functionBaseDic.ContainsKey(target.functionType))
                     _functionBaseDic.Add(target.functionType, new List<FunctionBase>());
 
-                if (!_functionBaseDic[target.functionType].Contains(target)) //¹öÇÁ ÁßÃ¸ ºÒ°¡? (Equals override ¾ÈÇØ¼­ ¿µÇâ ¾øÀÌ ÁßÃ¸µÇ´Â »óÈ²)
+                if (!_functionBaseDic[target.functionType].Contains(target)) //ë²„í”„ ì¤‘ì²© ë¶ˆê°€? (Equals override ì•ˆí•´ì„œ ì˜í–¥ ì—†ì´ ì¤‘ì²©ë˜ëŠ” ìƒí™©)
                 {
                     target.InitFunction();
                     target.RunFunction(true);
@@ -102,8 +102,8 @@ namespace Client
             }
         }
 
-        // ÀÌ°Å ½á¾ß ÇÒÁö ´Ù½Ã ÇÑ¹ø »ı°¢ÇØº¸ÀÚ.
-        // ½Ã³ÊÁö Àü¿ë enqueue. Á¦³×¸¯À¸·Î ´Ù¸¥ °Ç ¾ÈµÇ°Ô ¸·À½. ¾îÂ¿¼ö ¾ø´Ù...
+        // ì´ê±° ì¨ì•¼ í• ì§€ ë‹¤ì‹œ í•œë²ˆ ìƒê°í•´ë³´ì.
+        // ì‹œë„ˆì§€ ì „ìš© enqueue. ì œë„¤ë¦­ìœ¼ë¡œ ë‹¤ë¥¸ ê±´ ì•ˆë˜ê²Œ ë§‰ìŒ. ì–´ì©”ìˆ˜ ì—†ë‹¤...
         public void AddFunction<T>(T synergyFunction) where T : SynergyFunction
         {
             EnqueueImmediateFunction(synergyFunction);
@@ -115,7 +115,7 @@ namespace Client
             EnqueueKill(target);
         }
 
-        // Function Dictionary·ÎÀÇ Á¢±Ù ÅëÁ¦.
+        // Function Dictionaryë¡œì˜ ì ‘ê·¼ í†µì œ.
         private void EnqueueImmediateFunction(FunctionBase target)
         {
             _functionReadyQueue.Enqueue(target);

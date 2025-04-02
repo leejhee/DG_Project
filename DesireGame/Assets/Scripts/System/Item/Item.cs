@@ -5,7 +5,7 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    // µå¶øµÇ´Â ¾ÆÀÌÅÛ ±¸½½, UI µî¿¡ µé¾î°¥ ¾ÆÀÌÅÛ Á¤º¸
+    // ë“œëë˜ëŠ” ì•„ì´í…œ êµ¬ìŠ¬, UI ë“±ì— ë“¤ì–´ê°ˆ ì•„ì´í…œ ì •ë³´
     public class Item
     {
         private long _uid;
@@ -28,7 +28,7 @@ namespace Client
 
             if (_itemData == null)
             {
-                Debug.LogError("¾ÆÀÌÅÛ µ¥ÀÌÅÍ ¾øÀ½, ÀÎµ¦½º È®ÀÎ");
+                Debug.LogError("ì•„ì´í…œ ë°ì´í„° ì—†ìŒ, ì¸ë±ìŠ¤ í™•ì¸");
                 return;
             }
             _subStatList = ItemManager.Instance.GenerateSubStats(_itemData.subStatsCount);

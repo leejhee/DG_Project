@@ -38,7 +38,7 @@ namespace Client
             projectile.ProjectileTransform.position += InitialSpeed * Time.deltaTime * direction;
         }
 
-        // ¹«Á¶°Ç ¸ñÇ¥ Á¦¿Ü ¹«½ÃÇØ¾ß ÇÔ.
+        // ë¬´ì¡°ê±´ ëª©í‘œ ì œì™¸ ë¬´ì‹œí•´ì•¼ í•¨.
         public bool ManageCollision(Collider other, SystemEnum.eCharType enemyType)
         {
             return false;

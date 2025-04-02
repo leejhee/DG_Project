@@ -10,19 +10,19 @@ namespace Client
     public class StageTool : EditorWindow
     {
         private int StageNum = 1;
-        [MenuItem("DG_InGame/½ºÅ×ÀÌÁö ¸ó½ºÅÍ ¹èÄ¡")]
+        [MenuItem("DG_InGame/ìŠ¤í…Œì´ì§€ ëª¬ìŠ¤í„° ë°°ì¹˜")]
         public static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(StageTool), false, "½ºÅ×ÀÌÁö ¸ó½ºÅÍ ¹èÄ¡");
+            EditorWindow.GetWindow(typeof(StageTool), false, "ìŠ¤í…Œì´ì§€ ëª¬ìŠ¤í„° ë°°ì¹˜");
         }
 
         void OnGUI()
         {
-            GUILayout.Label("½ºÅ×ÀÌÁö Num", EditorStyles.boldLabel);
+            GUILayout.Label("ìŠ¤í…Œì´ì§€ Num", EditorStyles.boldLabel);
 
-            #region ½ºÅ×ÀÌÁö Á¤º¸ ÀÔ·Â
+            #region ìŠ¤í…Œì´ì§€ ì •ë³´ ì…ë ¥
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("½ºÅ×ÀÌÁö Num: ");
+            EditorGUILayout.LabelField("ìŠ¤í…Œì´ì§€ Num: ");
             GUILayout.FlexibleSpace();
             StageNum = EditorGUILayout.IntField(StageNum);
             EditorGUILayout.EndHorizontal();
@@ -30,43 +30,43 @@ namespace Client
 
             if (EditorApplication.isPlaying == false)
             {
-                EditorGUILayout.HelpBox($"UnityÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.", MessageType.Info);
+                EditorGUILayout.HelpBox($"Unityí”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.", MessageType.Info);
                 return;
             }
 
-            #region ½ºÅ×ÀÌÁö Á¤º¸ µµ¿ò¸»
+            #region ìŠ¤í…Œì´ì§€ ì •ë³´ ë„ì›€ë§
             StringBuilder stringBuilder = new();
             List<StageData> stageDatas = new();
             List<int> stageList = new();
             var stageDataKeyList = DataManager.Instance.MonsterSpawnStageMap?.Keys;
             if (stageDataKeyList == null)
             {
-                Debug.LogWarning("StageTool : StageDataList ¸¦ Ã£Áö ¸øÇÔ");
+                Debug.LogWarning("StageTool : StageDataList ë¥¼ ì°¾ì§€ ëª»í•¨");
                 return;
             }
             foreach (var stageKey in stageDataKeyList)
             {
                 stageList.Add(stageKey);
             }
-            stringBuilder.Append($"»ç¿ë °¡´É ½ºÅ×ÀÌÁö´Â \n");
+            stringBuilder.Append($"ì‚¬ìš© ê°€ëŠ¥ ìŠ¤í…Œì´ì§€ëŠ” \n");
             foreach (var _stage in stageList)
             {
                 stringBuilder.Append($"num : {_stage} \n");
             }
-            stringBuilder.Append($"ÀÔ´Ï´Ù. \n");
+            stringBuilder.Append($"ì…ë‹ˆë‹¤. \n");
 
-            EditorGUILayout.HelpBox($"»ç¿ë °¡´É Ä³¸¯ÅÍ ¸í´Ü \n {stringBuilder.ToString()}", MessageType.Info);
+            EditorGUILayout.HelpBox($"ì‚¬ìš© ê°€ëŠ¥ ìºë¦­í„° ëª…ë‹¨ \n {stringBuilder.ToString()}", MessageType.Info);
             if (stageList.Contains(StageNum) == false)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.HelpBox($"{StageNum}´Â »ç¿ë ºÒ°¡´ÉÇÑ ½ºÅ×ÀÌÁöÀÔ´Ï´Ù.", MessageType.Error);
+                EditorGUILayout.HelpBox($"{StageNum}ëŠ” ì‚¬ìš© ë¶ˆê°€ëŠ¥í•œ ìŠ¤í…Œì´ì§€ì…ë‹ˆë‹¤.", MessageType.Error);
                 EditorGUILayout.EndHorizontal();
                 return;
             }
             #endregion
 
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("½ºÅ×ÀÌÁö ±¸Çö", GUILayout.Width(300)))
+            if (GUILayout.Button("ìŠ¤í…Œì´ì§€ êµ¬í˜„", GUILayout.Width(300)))
             {
                 SetStage();
             }

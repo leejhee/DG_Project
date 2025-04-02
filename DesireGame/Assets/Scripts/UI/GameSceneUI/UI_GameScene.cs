@@ -6,12 +6,12 @@ using TMPro;
 
 namespace Client
 {
-    // GameScene ¾È¿¡ µé¾î°¥ UI ÃÑÃ¼.
-    // [TODO] : UI ¹­¾îÁÙ °³Ã¼¿¡ ´ëÇÑ Å¸ÀÔ Á¤ÀÇ »ı°¢ÇÒ °Í.(Äµ¹ö½º °øÅëÀ¸·Î °¡Áü. setcanvas ½áµµ µÈ´Ù.)
-    // [TODO] : ÇØ´ç Å¸ÀÔ¿¡ ´ëÇØ ÇØ»óµµ ´ëÀÀ »ı°¢ÇÒ °Í.
+    // GameScene ì•ˆì— ë“¤ì–´ê°ˆ UI ì´ì²´.
+    // [TODO] : UI ë¬¶ì–´ì¤„ ê°œì²´ì— ëŒ€í•œ íƒ€ì… ì •ì˜ ìƒê°í•  ê²ƒ.(ìº”ë²„ìŠ¤ ê³µí†µìœ¼ë¡œ ê°€ì§. setcanvas ì¨ë„ ëœë‹¤.)
+    // [TODO] : í•´ë‹¹ íƒ€ì…ì— ëŒ€í•´ í•´ìƒë„ ëŒ€ì‘ ìƒê°í•  ê²ƒ.
     public class UI_GameScene : MonoBehaviour
     {
-        // GameScene ¾È¿¡ µé¾î°¡´Â UI ÇÁ¸®ÆÕ ÀüºÎ ³Ö¾îÁÙ°Í.
+        // GameScene ì•ˆì— ë“¤ì–´ê°€ëŠ” UI í”„ë¦¬íŒ¹ ì „ë¶€ ë„£ì–´ì¤„ê²ƒ.
         [SerializeField] List<GameObject> Prefabs = new List<GameObject>();
 
         private void Awake()

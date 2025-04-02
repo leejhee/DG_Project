@@ -25,7 +25,7 @@ namespace Client
         public override void Update(float delta)
         {
             base.Update(delta);
-            Debug.Log("½Ã°£¸¸Å­ ¶°¾ßÇÔ. Áï lifetime == 0ÀÌ¸é 1¹ø ¶°¾ßÇÔ");
+            Debug.Log("ì‹œê°„ë§Œí¼ ë– ì•¼í•¨. ì¦‰ lifetime == 0ì´ë©´ 1ë²ˆ ë– ì•¼í•¨");
         }
 
     }

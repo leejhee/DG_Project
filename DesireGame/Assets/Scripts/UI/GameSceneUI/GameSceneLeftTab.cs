@@ -22,11 +22,11 @@ namespace Client
                 BindBtnEvent();
             }
 
-            //[TODO] : ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ±¸Á¶ ÀÛ¼º ½Ã ¼ÒÀ¯ ¾ÆÀÌÅÛ, ½Ã³ÊÁö Á¤º¸ ¿¬°áÇÏ¿© ¶ç¿ì±â.
+            //[TODO] : í”Œë ˆì´ì–´ ë°ì´í„° êµ¬ì¡° ì‘ì„± ì‹œ ì†Œìœ  ì•„ì´í…œ, ì‹œë„ˆì§€ ì •ë³´ ì—°ê²°í•˜ì—¬ ë„ìš°ê¸°.
 
         }
 
-        // [TODO] : ÀÔ·ÂÀ» InputManager¿¡ ³Ö¾î¼­ »ç¿ëÇÒ °Í.
+        // [TODO] : ì…ë ¥ì„ InputManagerì— ë„£ì–´ì„œ ì‚¬ìš©í•  ê²ƒ.
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.Tab))

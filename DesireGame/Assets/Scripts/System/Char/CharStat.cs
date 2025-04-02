@@ -9,14 +9,14 @@ namespace Client
 {
     public struct DamageParameter
     {
-        public CharBase Attacker;       // °ø°İÀÚ ½Å»ó
-        public float rawDamage;         // °ø°İÀÚ Ãø¿¡¼­ °è»êµÈ ´ë¹ÌÁö
-        public eDamageType damageType;  // °ø°İÀÚ ÃøÀÇ ´ë¹ÌÁö Å¸ÀÔ
-        public float penetration;       // ´ë¹ÌÁö Å¸ÀÔ¿¡ µû¸¥ °üÅë
+        public CharBase Attacker;       // ê³µê²©ì ì‹ ìƒ
+        public float rawDamage;         // ê³µê²©ì ì¸¡ì—ì„œ ê³„ì‚°ëœ ëŒ€ë¯¸ì§€
+        public eDamageType damageType;  // ê³µê²©ì ì¸¡ì˜ ëŒ€ë¯¸ì§€ íƒ€ì…
+        public float penetration;       // ëŒ€ë¯¸ì§€ íƒ€ì…ì— ë”°ë¥¸ ê´€í†µ
     }
 
     /// <summary>
-    /// char ½ºÅ×ÀÌÆ®
+    /// char ìŠ¤í…Œì´íŠ¸
     /// </summary>
     public class CharStat
     {
@@ -41,56 +41,56 @@ namespace Client
 
             #region Init Stats
 
-            _charStat[(int)eStats.AD] = charStat.AD;    // °ø°İ·Â
-            _charStat[(int)eStats.NAD] = charStat.AD;   // ÇöÀç °ø°İ·Â
+            _charStat[(int)eStats.AD] = charStat.AD;    // ê³µê²©ë ¥
+            _charStat[(int)eStats.NAD] = charStat.AD;   // í˜„ì¬ ê³µê²©ë ¥
 
-            _charStat[(int)eStats.AP] = charStat.AP;    // ÁÖ¹®·Â
-            _charStat[(int)eStats.NAP] = charStat.AP;   // ÇöÀç ÁÖ¹®·Â
+            _charStat[(int)eStats.AP] = charStat.AP;    // ì£¼ë¬¸ë ¥
+            _charStat[(int)eStats.NAP] = charStat.AP;   // í˜„ì¬ ì£¼ë¬¸ë ¥
 
-            _charStat[(int)eStats.HP] = charStat.HP;    // Ã¼·Â
-            _charStat[(int)eStats.NHP] = charStat.HP;   // ÇöÀç Ã¼·Â
-            _charStat[(int)eStats.NMHP] = charStat.HP;  // ÇöÀç ÃÖ´ë Ã¼·Â
+            _charStat[(int)eStats.HP] = charStat.HP;    // ì²´ë ¥
+            _charStat[(int)eStats.NHP] = charStat.HP;   // í˜„ì¬ ì²´ë ¥
+            _charStat[(int)eStats.NMHP] = charStat.HP;  // í˜„ì¬ ìµœëŒ€ ì²´ë ¥
 
-            _charStat[(int)eStats.AS] = charStat.attackSpeed;   // °ø°İ ¼Óµµ(ÃµºĞÀ²)
-            _charStat[(int)eStats.NAS] = charStat.attackSpeed;  // ÇöÀç °ø°İ ¼Óµµ(ÃµºĞÀ²)
+            _charStat[(int)eStats.AS] = charStat.attackSpeed;   // ê³µê²© ì†ë„(ì²œë¶„ìœ¨)
+            _charStat[(int)eStats.NAS] = charStat.attackSpeed;  // í˜„ì¬ ê³µê²© ì†ë„(ì²œë¶„ìœ¨)
 
-            _charStat[(int)eStats.CRIT_CHANCE] = charStat.critChance;       // Ä¡¸íÅ¸ È®·ü(¸¸ºĞÀ²)
-            _charStat[(int)eStats.NCRIT_CHANCE] = charStat.critChance;      // ÇöÀç Ä¡¸íÅ¸ È®·ü(¸¸ºĞÀ²)
+            _charStat[(int)eStats.CRIT_CHANCE] = charStat.critChance;       // ì¹˜ëª…íƒ€ í™•ë¥ (ë§Œë¶„ìœ¨)
+            _charStat[(int)eStats.NCRIT_CHANCE] = charStat.critChance;      // í˜„ì¬ ì¹˜ëª…íƒ€ í™•ë¥ (ë§Œë¶„ìœ¨)
 
-            _charStat[(int)eStats.CRIT_DAMAGE] = charStat.cirtDamage;       // Ä¡¸íÅ¸ ´ë¹ÌÁö(¸¸ºĞÀ²)
-            _charStat[(int)eStats.NCRIT_DAMAGE] = charStat.cirtDamage;      // ÇöÀç Ä¡¸íÅ¸ ´ë¹ÌÁö(¸¸ºĞÀ²)
+            _charStat[(int)eStats.CRIT_DAMAGE] = charStat.cirtDamage;       // ì¹˜ëª…íƒ€ ëŒ€ë¯¸ì§€(ë§Œë¶„ìœ¨)
+            _charStat[(int)eStats.NCRIT_DAMAGE] = charStat.cirtDamage;      // í˜„ì¬ ì¹˜ëª…íƒ€ ëŒ€ë¯¸ì§€(ë§Œë¶„ìœ¨)
 
-            _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease;   // ÇÇÇØ·® Áõ°¡(¸¸ºĞÀ²)
-            _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage;         // Ãß°¡ ÇÇÇØ
+            _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease;   // í”¼í•´ëŸ‰ ì¦ê°€(ë§Œë¶„ìœ¨)
+            _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage;         // ì¶”ê°€ í”¼í•´
 
-            _charStat[(int)eStats.ARMOR] = charStat.defense;    // ¹æ¾î·Â
-            _charStat[(int)eStats.NARMOR] = charStat.defense;   // ÇöÀç ¹æ¾î·Â
+            _charStat[(int)eStats.ARMOR] = charStat.defense;    // ë°©ì–´ë ¥
+            _charStat[(int)eStats.NARMOR] = charStat.defense;   // í˜„ì¬ ë°©ì–´ë ¥
 
-            _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist;     // ¸¶¹ı ¹æ¾î·Â
-            _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist;    // ÇöÀç ¸¶¹ı ¹æ¾î·Â
+            _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist;     // ë§ˆë²• ë°©ì–´ë ¥
+            _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist;    // í˜„ì¬ ë§ˆë²• ë°©ì–´ë ¥
 
-            _charStat[(int)eStats.ARMOR_PENETRATION] = 0;   // ¹°¸® ¹æ¾î·Â °üÅë
-            _charStat[(int)eStats.MAGIC_PENETRATION] = 0;   // ¸¶¹ı ¹æ¾î·Â °üÅë
+            _charStat[(int)eStats.ARMOR_PENETRATION] = 0;   // ë¬¼ë¦¬ ë°©ì–´ë ¥ ê´€í†µ
+            _charStat[(int)eStats.MAGIC_PENETRATION] = 0;   // ë§ˆë²• ë°©ì–´ë ¥ ê´€í†µ
 
-            _charStat[(int)eStats.RANGE] = charStat.Range;  // °ø°İ »ç°Å¸®
-            _charStat[(int)eStats.NRANGE] = charStat.Range; // ÇöÀç °ø°İ »ç°Å¸®
+            _charStat[(int)eStats.RANGE] = charStat.Range;  // ê³µê²© ì‚¬ê±°ë¦¬
+            _charStat[(int)eStats.NRANGE] = charStat.Range; // í˜„ì¬ ê³µê²© ì‚¬ê±°ë¦¬
 
-            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // ÀÌµ¿ ¼Óµµ(ÃµºĞÀ² Ã³¸®ÇÔ)
-            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // ÇöÀç ÀÌµ¿ ¼Óµµ(ÃµºĞÀ² Ã³¸®ÇÔ)
+            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // ì´ë™ ì†ë„(ì²œë¶„ìœ¨ ì²˜ë¦¬í•¨)
+            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // í˜„ì¬ ì´ë™ ì†ë„(ì²œë¶„ìœ¨ ì²˜ë¦¬í•¨)
 
-            _charStat[(int)eStats.START_MANA] = charStat.startMana; // ¸¶³ª
-            _charStat[(int)eStats.N_MANA] = charStat.startMana;     // ÇöÀç ¸¶³ª
-            _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // ÇöÀç ÃÖ´ë ¸¶³ª
+            _charStat[(int)eStats.START_MANA] = charStat.startMana; // ë§ˆë‚˜
+            _charStat[(int)eStats.N_MANA] = charStat.startMana;     // í˜„ì¬ ë§ˆë‚˜
+            _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // í˜„ì¬ ìµœëŒ€ ë§ˆë‚˜
 
-            _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // ¸¶³ª È¸º¹·® Ãß°¡ ÆÛ¼¾Æ®(¸¸ºĞÀ²)
-            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // ³»±¸·Â (ÃÖÁ¾ ÇÇÇØ·® ÆÛ¼¾Æ® °æ°¨)
+            _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // ë§ˆë‚˜ íšŒë³µëŸ‰ ì¶”ê°€ í¼ì„¼íŠ¸(ë§Œë¶„ìœ¨)
+            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // ë‚´êµ¬ë ¥ (ìµœì¢… í”¼í•´ëŸ‰ í¼ì„¼íŠ¸ ê²½ê°)
 
             #endregion
 
         }
 
         /// <summary> </summary>
-        /// [TODO] : NÀÚ µé¾î°¡´Â°Å¿¡ ¹öÇÁÄ¡ °è»êÇÏ´Â ±¸Á¶ ³Ö¾î¼­ ÇÒ °Í.
+        /// [TODO] : Nì ë“¤ì–´ê°€ëŠ”ê±°ì— ë²„í”„ì¹˜ ê³„ì‚°í•˜ëŠ” êµ¬ì¡° ë„£ì–´ì„œ í•  ê²ƒ.
         public float GetStat(eStats eStats)
         {
             switch (eStats)
@@ -133,10 +133,10 @@ namespace Client
                     break;
             }
 
-            Debug.Log($"{StatOwner.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ {properTargetStat} ½ºÅÈ {tempStat} -> {afterStat}");
+            Debug.Log($"{StatOwner.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ {properTargetStat} ìŠ¤íƒ¯ {tempStat} -> {afterStat}");
         }
 
-        // ½ºÅÈÀÇ ÃÊ±â°ªÀÌ °°Àº °÷¿¡ ÀÖ±â ¶§¹®¿¡ ÀÌ·¸°Ô ÇÑ´Ù.
+        // ìŠ¤íƒ¯ì˜ ì´ˆê¸°ê°’ì´ ê°™ì€ ê³³ì— ìˆê¸° ë•Œë¬¸ì— ì´ë ‡ê²Œ í•œë‹¤.
         public eStats CurrentStatByBaseStat(eStats baseStat)
         {
             switch (baseStat)
@@ -159,26 +159,26 @@ namespace Client
 
         #region Damage Method
 
-        // UI¿¡ »ç¿ëÇÏ¸é µÉµí...?
+        // UIì— ì‚¬ìš©í•˜ë©´ ë ë“¯...?
         public Action OnDamaged;
         public Action OnDealDamage;
         public Action OnDeath;
 
-        public Action<CharBase> ½Å»ó°ø°³;
+        public Action<CharBase> ì‹ ìƒê³µê°œ;
 
         /// <summary>
-        /// °ø°İÀÚ ±âÁØ ´ë¹ÌÁö °ü¿© ¿ä¼ÒµéÀ» »êÃâÇÕ´Ï´Ù.
+        /// ê³µê²©ì ê¸°ì¤€ ëŒ€ë¯¸ì§€ ê´€ì—¬ ìš”ì†Œë“¤ì„ ì‚°ì¶œí•©ë‹ˆë‹¤.
         /// </summary>
-        /// <param name="statMultiplied"> ´ë¹ÌÁö¿¡ ¹İ¿µÇÒ ½ºÅÈ * ¹İ¿µ °è¼ö </param>
-        /// <param name="type"> NoneÀÎ °æ¿ì´Â µğÆúÆ®ÀÌ¹Ç·Î, ÆòÅ¸ÀÎ °æ¿ìÀÔ´Ï´Ù. ±× ¿Ü´Â ½ºÅ³À» »ç¿ëÇÏ¸é¼­ ¼¼ÆÃÇÕ´Ï´Ù. </param>
+        /// <param name="statMultiplied"> ëŒ€ë¯¸ì§€ì— ë°˜ì˜í•  ìŠ¤íƒ¯ * ë°˜ì˜ ê³„ìˆ˜ </param>
+        /// <param name="type"> Noneì¸ ê²½ìš°ëŠ” ë””í´íŠ¸ì´ë¯€ë¡œ, í‰íƒ€ì¸ ê²½ìš°ì…ë‹ˆë‹¤. ê·¸ ì™¸ëŠ” ìŠ¤í‚¬ì„ ì‚¬ìš©í•˜ë©´ì„œ ì„¸íŒ…í•©ë‹ˆë‹¤. </param>
         public DamageParameter SendDamage(float statMultiplied, eDamageType type = eDamageType.None)
         {
             float rawDamage =
-                (statMultiplied *                                           // ÁÖ½ºÅÈ * °è¼ö                                  
+                (statMultiplied *                                           // ì£¼ìŠ¤íƒ¯ * ê³„ìˆ˜                                  
                 (UnityEngine.Random.Range(0, 1) > GetStat(eStats.NCRIT_CHANCE) ?
-                    (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)                 // Ä¡¸íÅ¸ È®·ü ¹× ÇÇÇØ °è»ê
-                + GetStat(eStats.BONUS_DAMAGE)) *                           // Ãß°¡ ´ë¹ÌÁö  
-                (1 + GetStat(eStats.DAMAGE_INCREASE));                      // ÇÇÇØ·® Áõ°¡                 
+                    (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)                 // ì¹˜ëª…íƒ€ í™•ë¥  ë° í”¼í•´ ê³„ì‚°
+                + GetStat(eStats.BONUS_DAMAGE)) *                           // ì¶”ê°€ ëŒ€ë¯¸ì§€  
+                (1 + GetStat(eStats.DAMAGE_INCREASE));                      // í”¼í•´ëŸ‰ ì¦ê°€                 
             
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
@@ -206,7 +206,7 @@ namespace Client
         {
             if (_charStat[(int)eStats.NHP] <= 0) return;
 
-            // ÃÖÁ¾´ë¹ÌÁö °è»ê ÆÄÆ®(³»±¸·Â ¹İ¿µ)
+            // ìµœì¢…ëŒ€ë¯¸ì§€ ê³„ì‚° íŒŒíŠ¸(ë‚´êµ¬ë ¥ ë°˜ì˜)
             float finalDamage = 0;
             if(damage.damageType == eDamageType.TRUE)
             {
@@ -224,20 +224,20 @@ namespace Client
 
             }
 
-            // ½Çµå °è»ê ÆÄÆ®
+            // ì‹¤ë“œ ê³„ì‚° íŒŒíŠ¸
             var appliedDamage = AbsorbDamage((long)finalDamage);
 
-            // ½Ç´ë¹ÌÁö °è»ê ÆÄÆ®
+            // ì‹¤ëŒ€ë¯¸ì§€ ê³„ì‚° íŒŒíŠ¸
             _charStat[(int)eStats.NHP] -= appliedDamage;           
-             Debug.Log($"{StatOwner.GetID()}¹ø À¯´Ö ´ë¹ÌÁö {appliedDamage}¸¸Å­ ¹ŞÀ½. ÀÜ¿© HP {GetStat(eStats.NHP)}");
+             Debug.Log($"{StatOwner.GetID()}ë²ˆ ìœ ë‹› ëŒ€ë¯¸ì§€ {appliedDamage}ë§Œí¼ ë°›ìŒ. ì”ì—¬ HP {GetStat(eStats.NHP)}");
             
             OnDamaged?.Invoke();
 
-            // »ç¸Á °Ë»ç ÆÄÆ®
+            // ì‚¬ë§ ê²€ì‚¬ íŒŒíŠ¸
             if (_charStat[(int)eStats.NHP] <= 0)
             {
-                Debug.Log("À¸¿¢ Á×¾ú´Ù");
-                ½Å»ó°ø°³?.Invoke(damage.Attacker);
+                Debug.Log("ìœ¼ì—‘ ì£½ì—ˆë‹¤");
+                ì‹ ìƒê³µê°œ?.Invoke(damage.Attacker);
                 OnDeath?.Invoke();
             }
         }
@@ -245,9 +245,9 @@ namespace Client
         #endregion
 
         #region Shield Managing
-        //[TODO] : Ä¸½¶È­ ¾ÈÇØµµ µÇ·Á³ª...? °áÁ¤À» Àß ÇØº¼°Í.
+        //[TODO] : ìº¡ìŠí™” ì•ˆí•´ë„ ë˜ë ¤ë‚˜...? ê²°ì •ì„ ì˜ í•´ë³¼ê²ƒ.
 
-        // Function¿¡ µû¸¥ ½Çµå¸¦ ´ã´Â´Ù.
+        // Functionì— ë”°ë¥¸ ì‹¤ë“œë¥¼ ë‹´ëŠ”ë‹¤.
         private readonly List<Shield> Shields = new();
 
         public void AddShield(Shield shield) 
@@ -307,11 +307,11 @@ namespace Client
         
         public void ResetAfterBattle()
         {
-            // ÀüÅõ ÀÌÈÄ Ã¼·Â°ú ¸¶³ª ÃÊ±âÈ­
-            // ÀÌ°Ô ÀûÀıÇÑ°¡?
+            // ì „íˆ¬ ì´í›„ ì²´ë ¥ê³¼ ë§ˆë‚˜ ì´ˆê¸°í™”
+            // ì´ê²Œ ì ì ˆí•œê°€?
             _charStat[(int)eStats.NHP] = (long)GetStat(eStats.NMHP);
             _charStat[(int)eStats.N_MANA] = (long)GetStat(eStats.START_MANA);
-            Debug.Log($"¸®¼Â : Ã¼·Â {GetStat(eStats.NHP)}/{GetStat(eStats.NMHP)} ¸¶³ª {GetStat(eStats.N_MANA)}/{GetStat(eStats.START_MANA)}");
+            Debug.Log($"ë¦¬ì…‹ : ì²´ë ¥ {GetStat(eStats.NHP)}/{GetStat(eStats.NMHP)} ë§ˆë‚˜ {GetStat(eStats.N_MANA)}/{GetStat(eStats.START_MANA)}");
         }
 
     }

@@ -21,7 +21,7 @@ namespace Client
 
         private void Start()
         {
-            // ½ÃÀÛ ½Ã ¾ÆÀÌÅÛ µî·Ï
+            // ì‹œì‘ ì‹œ ì•„ì´í…œ ë“±ë¡
             ItemManager.Instance.RegisterItem(gameObject);
         }
 

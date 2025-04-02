@@ -9,9 +9,9 @@ namespace Client
     {
         private StageManager() { }
         
-        // ÇöÀç ½ºÅ×ÀÌÁö
+        // í˜„ì¬ ìŠ¤í…Œì´ì§€
         public int Stage { get; private set; }
-        // ½ºÅ×ÀÌÁö ½ÃÀÛ °¡´É »óÅÂ
+        // ìŠ¤í…Œì´ì§€ ì‹œì‘ ê°€ëŠ¥ ìƒíƒœ
         public bool CanStartStage { get; private set; } = true;
         public bool IsStageFinished { get; private set; } = false;
 
@@ -52,7 +52,7 @@ namespace Client
         }
 
         /// <summary>
-        /// ÀÌ°É È£ÃâÇÒ ¶§¸¶´Ù ´ÙÀ½ ½ºÅ×ÀÌÁö·Î °¥°í¿¹¿ä ¶ó´Â ¶æ
+        /// ì´ê±¸ í˜¸ì¶œí•  ë•Œë§ˆë‹¤ ë‹¤ìŒ ìŠ¤í…Œì´ì§€ë¡œ ê°ˆê³ ì˜ˆìš” ë¼ëŠ” ëœ»
         /// </summary>
         public void MoveToNextStage()
         {
@@ -64,36 +64,36 @@ namespace Client
             }
             else
             {
-                Debug.LogError("´ÙÀ½ ½ºÅ×ÀÌÁö ¾øÀ½");
+                Debug.LogError("ë‹¤ìŒ ìŠ¤í…Œì´ì§€ ì—†ìŒ");
             }
         }
 
         /// <summary>
-        /// ½ÂÆĞ ÆÇÁ¤
+        /// ìŠ¹íŒ¨ íŒì •
         /// </summary>
         public void CheckWinCondition(Type charType)
         {
-            // ÀüÅõ ³¡³ª°í ÇÑ¹ø¸¸ Ã¼Å©ÇÏµµ·Ï
+            // ì „íˆ¬ ëë‚˜ê³  í•œë²ˆë§Œ ì²´í¬í•˜ë„ë¡
             if (!IsStageFinished) IsStageFinished = true;
             else return;
 
-            Debug.Log($"{charType} Å¸ÀÔÀÇ ¸ğµç Ä³¸¯ÅÍ°¡ Á¦°ÅµÇ¾ú½À´Ï´Ù.");
+            Debug.Log($"{charType} íƒ€ì…ì˜ ëª¨ë“  ìºë¦­í„°ê°€ ì œê±°ë˜ì—ˆìŠµë‹ˆë‹¤.");
 
             if (charType == typeof(CharPlayer))
             {
-                Debug.Log("¸ğµç ÇÃ·¹ÀÌ¾î°¡ Á×¾ú½À´Ï´Ù. Á³´ç..");
-                // °ÔÀÓ ¿À¹ö Ã³¸®
+                Debug.Log("ëª¨ë“  í”Œë ˆì´ì–´ê°€ ì£½ì—ˆìŠµë‹ˆë‹¤. ì¡Œë‹¹..");
+                // ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬
             }
             else if (charType == typeof(CharMonster))
             {
-                Debug.Log("¸ğµç ÀûÀÌ »ç¶óÁ³½À´Ï´Ù. ÀÌ°å´ç!!");
+                Debug.Log("ëª¨ë“  ì ì´ ì‚¬ë¼ì¡ŒìŠµë‹ˆë‹¤. ì´ê²¼ë‹¹!!");
                 CharManager.Instance.CopyFieldPlayerID();
                 MoveToNextStage();
             }
         }
 
         /// <summary>
-        /// ´ÙÀ½ ½ºÅ×ÀÌÁö Á¤º¸ °¡Á®¿À±â
+        /// ë‹¤ìŒ ìŠ¤í…Œì´ì§€ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
         /// </summary>
         public bool TryGetNextStage(int _stage)
         {

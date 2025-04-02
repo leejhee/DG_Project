@@ -20,10 +20,10 @@ namespace Client
 
         enum DataCell
         {
-            °¡,
-            ³ª,
-            ´Ù,
-            ¶ó,
+            ê°€,
+            ë‚˜,
+            ë‹¤,
+            ë¼,
 
         }
         enum Data2Cell
@@ -31,10 +31,10 @@ namespace Client
 
         }
         /// <summary>
-        /// ½ÇÁ¦ µ¥ÀÌÅÍ °¡°ø ÇÔ¼ö
-        /// µ¥ÀÌÅÍ¸¦ ´Ù¸¥ ÀÚ·á±¸Á¶·Î ¹Ù²Ù°í ÀúÀå
+        /// ì‹¤ì œ ë°ì´í„° ê°€ê³µ í•¨ìˆ˜
+        /// ë°ì´í„°ë¥¼ ë‹¤ë¥¸ ìë£Œêµ¬ì¡°ë¡œ ë°”ê¾¸ê³  ì €ì¥
         /// </summary>
-        /// <param name="line"> \t À¸·Î CellÀ» ±¸ºĞÇÑ ÇÑ ÁÙ </param>
+        /// <param name="line"> \t ìœ¼ë¡œ Cellì„ êµ¬ë¶„í•œ í•œ ì¤„ </param>
         internal void GetData(string line)
         {
             string[] tmp = line.Split('\t');

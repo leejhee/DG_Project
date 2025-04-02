@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// °ÔÀÓ SceneUI
+    /// ê²Œìž„ SceneUI
     /// </summary>
     public abstract class UI_Scene : UI_Base
     {

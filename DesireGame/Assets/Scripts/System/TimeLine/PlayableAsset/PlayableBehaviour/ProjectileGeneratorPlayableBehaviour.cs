@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 namespace Client
 {
     /// <summary>
-    /// ½ºÅ³¿ë ÇÃ·¹ÀÌ¾îºí Çàµ¿
+    /// ìŠ¤í‚¬ìš© í”Œë ˆì´ì–´ë¸” í–‰ë™
     /// </summary>
     public class ProjectileGeneratorPlayableBehaviour : SkillTimeLinePlayableBehaviour
     {
@@ -46,7 +46,7 @@ namespace Client
                 Object.Destroy(ProjectileInstance);
                 playable.GetGraph().Stop();
                 elasped = 0f;
-                Debug.Log("»ç°Å¸®±îÁö projectile µµ´Ş. ¼Ò¸ê");
+                Debug.Log("ì‚¬ê±°ë¦¬ê¹Œì§€ projectile ë„ë‹¬. ì†Œë©¸");
             }
         }
     }

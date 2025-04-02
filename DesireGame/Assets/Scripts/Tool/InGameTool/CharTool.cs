@@ -11,43 +11,43 @@ namespace Client
     {
         private long charIndex = -1;
         private int tile = 0;
-        [MenuItem("DG_InGame/¸Ê¿¡ Ä³¸¯ÅÍ ¹èÄ¡")]
+        [MenuItem("DG_InGame/ë§µì— ìºë¦­í„° ë°°ì¹˜")]
         public static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(CharTool), false, "¸Ê¿¡ Ä³¸¯ÅÍ ¹èÄ¡");
+            EditorWindow.GetWindow(typeof(CharTool), false, "ë§µì— ìºë¦­í„° ë°°ì¹˜");
         }
 
         void OnGUI()
         {
-            GUILayout.Label("»ı¼º Ä³¸¯ÅÍ ÀÎµ¦½º", EditorStyles.boldLabel);
+            GUILayout.Label("ìƒì„± ìºë¦­í„° ì¸ë±ìŠ¤", EditorStyles.boldLabel);
 
-            #region Ä³¸¯ÅÍ Á¤º¸ ÀÔ·Â
+            #region ìºë¦­í„° ì •ë³´ ì…ë ¥
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Ä³¸¯ÅÍ ÀÎµ¦½º : ");
+            EditorGUILayout.LabelField("ìºë¦­í„° ì¸ë±ìŠ¤ : ");
             GUILayout.FlexibleSpace();
             charIndex = EditorGUILayout.LongField(charIndex);
             EditorGUILayout.EndHorizontal();
             #endregion
 
-            #region Å¸ÀÏ Á¤º¸ ÀÔ·Â
+            #region íƒ€ì¼ ì •ë³´ ì…ë ¥
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Å¸ÀÏ ÀÎµ¦½º : ");
+            EditorGUILayout.LabelField("íƒ€ì¼ ì¸ë±ìŠ¤ : ");
             GUILayout.FlexibleSpace();
             tile = EditorGUILayout.IntField(tile);
             EditorGUILayout.EndHorizontal();
             #endregion
             if (EditorApplication.isPlaying == false)
             {
-                EditorGUILayout.HelpBox($"UnityÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.", MessageType.Info);
+                EditorGUILayout.HelpBox($"Unityí”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.", MessageType.Info);
                 return;
             }
-            #region Ä³¸¯ÅÍ Á¤º¸ µµ¿ò¸»
+            #region ìºë¦­í„° ì •ë³´ ë„ì›€ë§
             StringBuilder stringBuilder = new();
             List<CharData> charDatas = new();
             var CharDataList =  DataManager.Instance.GetDataList<CharData>();
             if (CharDataList == null)
             {
-                Debug.LogWarning("CharTool : CharDataList ¸¦ Ã£Áö ¸øÇÔ");
+                Debug.LogWarning("CharTool : CharDataList ë¥¼ ì°¾ì§€ ëª»í•¨");
             }
             foreach (var _charData in CharDataList)
             {
@@ -55,22 +55,22 @@ namespace Client
                 if (charData == null)
                     continue;
 
-                stringBuilder.Append($" {charData.Index} ÀÇ Ä³¸¯ÅÍ ¸íÀº {charData.charName} ÀÔ´Ï´Ù. \n");
+                stringBuilder.Append($" {charData.Index} ì˜ ìºë¦­í„° ëª…ì€ {charData.charName} ì…ë‹ˆë‹¤. \n");
             }
 
-            EditorGUILayout.HelpBox($"»ç¿ë °¡´É Ä³¸¯ÅÍ ¸í´Ü \n {stringBuilder.ToString()}", MessageType.Info);
+            EditorGUILayout.HelpBox($"ì‚¬ìš© ê°€ëŠ¥ ìºë¦­í„° ëª…ë‹¨ \n {stringBuilder.ToString()}", MessageType.Info);
             var tileObj = TileManager.Instance.GetTile(tile);
             if (tileObj.IsCharSet())
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.HelpBox($"{tile} ¿¡´Â ÀÌ¹Ì Ä³¸¯ÅÍ°¡ ¿Ã¶ó°¡ÀÖ½À´Ï´Ù.", MessageType.Error);
+                EditorGUILayout.HelpBox($"{tile} ì—ëŠ” ì´ë¯¸ ìºë¦­í„°ê°€ ì˜¬ë¼ê°€ìˆìŠµë‹ˆë‹¤.", MessageType.Error);
                 EditorGUILayout.EndHorizontal();
                 return;
             }
             #endregion
 
             GUILayout.FlexibleSpace();
-            if (GUILayout.Button("Ä³¸¯ÅÍ ¿Ã¸®±â", GUILayout.Width(300)))
+            if (GUILayout.Button("ìºë¦­í„° ì˜¬ë¦¬ê¸°", GUILayout.Width(300)))
             {
                 SetChar();
             }
@@ -83,7 +83,7 @@ namespace Client
                 return;
 
             var tileObj = TileManager.Instance.GetTile(tile);
-            // Å¸ÀÏÀÌ nullÀÌ°Å³ª ÀÌ¹Ì Ä³¸¯ÅÍ°¡ ¼¼ÆÃµÇ¾îÀÖÀ¸¸é
+            // íƒ€ì¼ì´ nullì´ê±°ë‚˜ ì´ë¯¸ ìºë¦­í„°ê°€ ì„¸íŒ…ë˜ì–´ìˆìœ¼ë©´
             if (tileObj?.IsCharSet() ?? true)
             {
                 return;

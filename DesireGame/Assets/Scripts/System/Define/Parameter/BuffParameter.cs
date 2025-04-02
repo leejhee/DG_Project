@@ -5,7 +5,7 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    // ±âº» ¹öÇÁ »ı¼º µ¥ÀÌÅÍ 
+    // ê¸°ë³¸ ë²„í”„ ìƒì„± ë°ì´í„° 
     public struct BuffParameter
     {
         public eFunction eFunctionType;

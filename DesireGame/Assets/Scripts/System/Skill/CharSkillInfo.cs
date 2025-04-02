@@ -5,15 +5,15 @@ using System.Collections.Generic;
 namespace Client
 {
     /// <summary>
-    /// Ä³¸¯ÅÍ ½ºÅ³ Á¤º¸ (Ä³¸¯ÅÍ Start½ÃÁ¡¿¡ »ı¼º)
+    /// ìºë¦­í„° ìŠ¤í‚¬ ì •ë³´ (ìºë¦­í„° Startì‹œì ì— ìƒì„±)
     /// </summary>
     public class CharSKillInfo
     {
-        private Dictionary<long, SkillBase> _dicSkill = new Dictionary<long, SkillBase>(); // ½ºÅ³ ¸®½ºÆ®
-        private CharBase _charBase; // ½ºÅ³ ½ÃÀüÀÚ
-        private Transform _SkillRoot; // ½ºÅ³ ·çÆ® 
+        private Dictionary<long, SkillBase> _dicSkill = new Dictionary<long, SkillBase>(); // ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸
+        private CharBase _charBase; // ìŠ¤í‚¬ ì‹œì „ì
+        private Transform _SkillRoot; // ìŠ¤í‚¬ ë£¨íŠ¸ 
 
-        public Dictionary<long, SkillBase> DicSkill => _dicSkill; // ½ºÅ³ ¸®½ºÆ®
+        public Dictionary<long, SkillBase> DicSkill => _dicSkill; // ìŠ¤í‚¬ ë¦¬ìŠ¤íŠ¸
 
         public CharSKillInfo(CharBase charBase)
         {
@@ -21,12 +21,12 @@ namespace Client
         }
 
         /// <summary>
-        /// Char Start ½ÃÁ¡
+        /// Char Start ì‹œì 
         /// </summary>
         /// <param name="skillArray"></param>
         public void Init(List<long> skillArray)
         {
-            // ½ºÅ³ ·çÆ® ¿ÀºêÁ§Æ® Á¦ÀÛ
+            // ìŠ¤í‚¬ ë£¨íŠ¸ ì˜¤ë¸Œì íŠ¸ ì œì‘
             string SkillRoot = "SkillRoot";
             GameObject skillRoot = Util.FindChild(_charBase.gameObject, SkillRoot, false);
             if (skillRoot == null)
@@ -35,7 +35,7 @@ namespace Client
             }
             _SkillRoot = skillRoot.transform;
 
-            // ½ºÅ³ Ãß°¡
+            // ìŠ¤í‚¬ ì¶”ê°€
             for (int i = 0; i < skillArray.Count; i++)
             {
                 AddSkill(skillArray[i], i);

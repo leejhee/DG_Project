@@ -12,13 +12,13 @@ namespace Client
 {
     public class CharAnim 
     {
-        protected Animator  _Animator;       // ¾Ö´Ï¸ÞÀÌÅÍ
+        protected Animator  _Animator;       // ì• ë‹ˆë©”ì´í„°
 
         public Animator Animator => _Animator;
 
 
         /// <summary>
-        /// ÃÊ±âÈ­
+        /// ì´ˆê¸°í™”
         /// </summary>
         public void Initialized(Animator animator)
         {

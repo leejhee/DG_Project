@@ -13,7 +13,7 @@ namespace Client
 
         private GameObject _collider = null;
 
-        // Å¬¸³ÀÌ ½ÃÀÛµÉ ¶§ È£Ãâ
+        // í´ë¦½ì´ ì‹œì‘ë  ë•Œ í˜¸ì¶œ
         public override void OnBehaviourPlay(Playable playable, FrameData info)
         {
             Vector3 vec = OffSet;
@@ -27,7 +27,7 @@ namespace Client
             _collider.transform.localPosition = vec;
             _collider.transform.localScale = Size;
 
-            // GetComponent ÀÌ·¡µµ µÇ·Á³ª....
+            // GetComponent ì´ë˜ë„ ë˜ë ¤ë‚˜....
             //AttackCollider attackCollider = _collider.GetComponent<AttackCollider>();
 
             //if (attackCollider == null)
@@ -38,7 +38,7 @@ namespace Client
             //attackCollider.SetData(charBase,skillBase);
         }
 
-        // Å¬¸³ÀÌ ¸ØÃâ ¶§ È£Ãâ
+        // í´ë¦½ì´ ë©ˆì¶œ ë•Œ í˜¸ì¶œ
         public override void OnBehaviourPause(Playable playable, FrameData info)
         {
             if (_collider == null)

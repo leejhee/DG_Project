@@ -19,7 +19,7 @@ namespace Client
 
             if (_skillData == null)
             {
-                Debug.LogWarning($"CreateSkill : {skillIndex} 胶懦 积己 角菩.");
+                Debug.LogWarning($"CreateSkill : {skillIndex} 鞀ろ偓 靸濎劚 鞁ろ尐.");
                 return null;
             }
 
@@ -28,7 +28,7 @@ namespace Client
 
             if (_skillData == null)
             {
-                Debug.LogWarning($"CreateSkill : {skillIndex} 胶懦 积己 角菩.");
+                Debug.LogWarning($"CreateSkill : {skillIndex} 鞀ろ偓 靸濎劚 鞁ろ尐.");
             }
             return skillBase;
         }

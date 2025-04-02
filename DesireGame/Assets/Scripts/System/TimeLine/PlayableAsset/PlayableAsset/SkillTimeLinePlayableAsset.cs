@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 
 namespace Client
 {
-    /// <summary> ½ºÅ³¿ë ÇÃ·¹ÀÌ¾îºí ¿¡¼Â </summary>
+    /// <summary> ìŠ¤í‚¬ìš© í”Œë ˆì´ì–´ë¸” ì—ì…‹ </summary>
     /// <remarks> </remarks>
     public abstract class SkillTimeLinePlayableAsset : PlayableAsset
     {

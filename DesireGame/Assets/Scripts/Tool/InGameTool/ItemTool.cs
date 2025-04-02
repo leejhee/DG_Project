@@ -20,7 +20,7 @@ namespace Client
 
         void OnGUI()
         {
-            GUILayout.Label("ÀûÀ» ¼±ÅÃÇÏ¸é \n±× ÀûÀÌ µå¶øÇÏ´Â ¾ÆÀÌÅÛµéÀ» º¼ ¼ö ÀÖ½À´Ï´Ù.", EditorStyles.boldLabel);
+            GUILayout.Label("ì ì„ ì„ íƒí•˜ë©´ \nê·¸ ì ì´ ë“œëí•˜ëŠ” ì•„ì´í…œë“¤ì„ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.", EditorStyles.boldLabel);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Enemy ID : ");
@@ -30,7 +30,7 @@ namespace Client
 
             if (EditorApplication.isPlaying == false)
             {
-                EditorGUILayout.HelpBox($"Unity ÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.", MessageType.Info);
+                EditorGUILayout.HelpBox($"Unity í”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.", MessageType.Info);
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace Client
             var EnemyDataList = DataManager.Instance.GetDataList<EnemyData>();
             if (EnemyDataList == null)
             {
-                Debug.LogWarning("CharTool : CharDataList ¸¦ Ã£Áö ¸øÇÔ");
+                Debug.LogWarning("CharTool : CharDataList ë¥¼ ì°¾ì§€ ëª»í•¨");
             }
             foreach (var _enemyData in EnemyDataList)
             {
@@ -50,11 +50,11 @@ namespace Client
                 sb.AppendLine($"{enemyData.Index} {enemyData.enemyName}");
             }
 
-            EditorGUILayout.HelpBox($"»ç¿ë °¡´É Àû ¸í´Ü \n{sb.ToString()}", MessageType.Info);
+            EditorGUILayout.HelpBox($"ì‚¬ìš© ê°€ëŠ¥ ì  ëª…ë‹¨ \n{sb.ToString()}", MessageType.Info);
             GUILayout.FlexibleSpace();
 
 
-            if (GUILayout.Button("¾ÆÀÌÅÛ µå¶ø", GUILayout.Width(300)))
+            if (GUILayout.Button("ì•„ì´í…œ ë“œë", GUILayout.Width(300)))
             {
                 DropItems();
             }
@@ -70,7 +70,7 @@ namespace Client
             {
                 sb.Append($"{id} ");
             }
-            Debug.Log($"{enemyID}°¡ µå¶øÇÒ °Ç {dropList.Count}°³, {sb.ToString()}");
+            Debug.Log($"{enemyID}ê°€ ë“œëí•  ê±´ {dropList.Count}ê°œ, {sb.ToString()}");
 
         }
 

@@ -7,13 +7,13 @@ namespace Client
 {
     public class Inventory : Singleton<Inventory>
     {
-        // ½Ì±ÛÅÏ ³Ê¹« ³²¹ßÇÏ³ª?
-        // ±Ùµ¥ ½Ì±ÛÅÏÀ» ÇÏÁö ¾Ê°í¼­´Â »ÏÁ·ÇÑ ¼ö°¡ ¾ø´Ù ¤Ğ.¤Ğ
+        // ì‹±ê¸€í„´ ë„ˆë¬´ ë‚¨ë°œí•˜ë‚˜?
+        // ê·¼ë° ì‹±ê¸€í„´ì„ í•˜ì§€ ì•Šê³ ì„œëŠ” ë¾°ì¡±í•œ ìˆ˜ê°€ ì—†ë‹¤ ã… .ã… 
 
         private readonly int maxCount = 20;
         private List<Item> itemList = new();
 
-        public Action<ItemUIParameter> OnItemChange; // ÀÎº¥Åä¸®¿¡ º¯È­ »ı±æ ½Ã UI¿¡ º¯°æ»çÇ× Àü´Ş
+        public Action<ItemUIParameter> OnItemChange; // ì¸ë²¤í† ë¦¬ì— ë³€í™” ìƒê¸¸ ì‹œ UIì— ë³€ê²½ì‚¬í•­ ì „ë‹¬
 
         public override void Init()
         {
@@ -21,22 +21,22 @@ namespace Client
             InitInventory();
         }
 
-        // TODO : ÀúÀå ±¸Á¶ È®¸³ ÈÄ Load & Save ±â´É ±¸ÇöÇÏ±â
+        // TODO : ì €ì¥ êµ¬ì¡° í™•ë¦½ í›„ Load & Save ê¸°ëŠ¥ êµ¬í˜„í•˜ê¸°
         private void InitInventory()
         {
-            // TODO : º¸À¯ ¾ÆÀÌÅÛ ºÒ·¯¿À±â
+            // TODO : ë³´ìœ  ì•„ì´í…œ ë¶ˆëŸ¬ì˜¤ê¸°
         }
         
         private void SaveInventory()
         {
-            // TODO : º¸À¯ ¾ÆÀÌÅÛ ¸ñ·Ï ÀúÀå
+            // TODO : ë³´ìœ  ì•„ì´í…œ ëª©ë¡ ì €ì¥
         }
 
         public bool IsInventoryFull()
         {
             if (itemList.Count >= maxCount)
             {
-                Debug.LogError($"ÀÎº¥Åä¸®°¡ °¡µæ Â÷ ¾ÆÀÌÅÛÀ» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogError($"ì¸ë²¤í† ë¦¬ê°€ ê°€ë“ ì°¨ ì•„ì´í…œì„ ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
                 return true;
             }
             else
@@ -50,7 +50,7 @@ namespace Client
             if (IsInventoryFull()) return;
 
             itemList.Add(item);
-            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  È¹µæ");
+            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  íšë“");
 
             OnItemChange?.Invoke(new ItemUIParameter(item));
         }
@@ -59,14 +59,14 @@ namespace Client
         {
             if (!itemList.Contains(item))
             {
-                Debug.LogError("ÇØ´ç ¾ÆÀÌÅÛÀº ÀÎº¥Åä¸®¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+                Debug.LogError("í•´ë‹¹ ì•„ì´í…œì€ ì¸ë²¤í† ë¦¬ì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
                 return;
             }
 
             itemList.Remove(item);
-            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  Á¦°Å");
+            Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  ì œê±°");
         }
 
-        // TODO : ¾ÆÀÌÅÛ ¸®½ºÆ® º¯°æ½Ã UI ¾÷µ¥ÀÌÆ®
+        // TODO : ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ ë³€ê²½ì‹œ UI ì—…ë°ì´íŠ¸
     }
 }

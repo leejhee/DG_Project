@@ -9,12 +9,12 @@ namespace Client
 
     public class InputManager : Singleton<InputManager>
     {
-        public readonly int SKILL_NUM = (int)eInputSystem.MaxValue; //NoneÀ» °í·Á
+        public readonly int SKILL_NUM = (int)eInputSystem.MaxValue; //Noneì„ ê³ ë ¤
 
         #region ENUM
         /// <summary>
-        /// Input system¿¡¼­ ÀÔ·Â°ú ¹ÙÀÎµùÇÒ ½ºÅ³ÀÇ Á¾·ùµéÀ» ³ªÅ¸³À´Ï´Ù.
-        /// Skill_NumÀ» »ç¿ëÇÒ °æ¿ì ¹«Á¶°Ç 1ºÎÅÍ ÀÎµ¦½ÌÇÏ±â.(None ¶§¹®¿¡)
+        /// Input systemì—ì„œ ì…ë ¥ê³¼ ë°”ì¸ë”©í•  ìŠ¤í‚¬ì˜ ì¢…ë¥˜ë“¤ì„ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤.
+        /// Skill_Numì„ ì‚¬ìš©í•  ê²½ìš° ë¬´ì¡°ê±´ 1ë¶€í„° ì¸ë±ì‹±í•˜ê¸°.(None ë•Œë¬¸ì—)
         /// </summary>
         public enum eInputSystem
         {
@@ -41,7 +41,7 @@ namespace Client
         { }
         #endregion
         #region Containers 
-        // SkillBindDict¸¸ ÃßÈÄ ½ºÅ³µé °¡Áö°í ÀÖ´Â ½ºÅ©¸³Æ®¿¡¼­ ÇÒ´ç ÇÊ¿äÇÒ ¶§ »ç¿ë °¡´É
+        // SkillBindDictë§Œ ì¶”í›„ ìŠ¤í‚¬ë“¤ ê°€ì§€ê³  ìˆëŠ” ìŠ¤í¬ë¦½íŠ¸ì—ì„œ í• ë‹¹ í•„ìš”í•  ë•Œ ì‚¬ìš© ê°€ëŠ¥
         public Dictionary<eInputSystem, Action<SkillParameter>> SkillBindDict { get; set; } = new Dictionary<eInputSystem, Action<SkillParameter>>();
 
         private Dictionary<eMiddleLevel, eInputSystem> MidKeyBind;
@@ -51,9 +51,9 @@ namespace Client
 
         #endregion
 
-        //KeySetPrefab ±¸µ¶¿ë ¾×¼Ç.
+        //KeySetPrefab êµ¬ë…ìš© ì•¡ì…˜.
         public Action BindAction { get; set; }
-        // Å°ÄÚµå ÀÎ½ÄÇÒ ÇÔ¼öµéÀ» °¡Áü. Update ±â¹İÀ¸·Î µ¹¾Æ°¨.
+        // í‚¤ì½”ë“œ ì¸ì‹í•  í•¨ìˆ˜ë“¤ì„ ê°€ì§. Update ê¸°ë°˜ìœ¼ë¡œ ëŒì•„ê°.
         public Action InputAction;
 
         public override void Init()
@@ -61,7 +61,7 @@ namespace Client
             base.Init();
             GameManager.Instance.AddOnUpdate(OnUpdate);
 
-            #region ÀÎÇ² µñ¼Å³Ê¸® °ü·Ã ÇÏµåÄÚµù(ÃÊ±ê°ªÀ» µ¥ÀÌÅÍ¿¡¼­ °®°í ¿À°Ô µÈ´Ù¸é ¹İµå½Ã »èÁ¦ÇÒ °Í.)            
+            #region ì¸í’‹ ë”•ì…”ë„ˆë¦¬ ê´€ë ¨ í•˜ë“œì½”ë”©(ì´ˆê¹ƒê°’ì„ ë°ì´í„°ì—ì„œ ê°–ê³  ì˜¤ê²Œ ëœë‹¤ë©´ ë°˜ë“œì‹œ ì‚­ì œí•  ê²ƒ.)            
             {
                 AndBtnBind = new Dictionary<int, eInputSystem>()
                 {
@@ -103,24 +103,24 @@ namespace Client
             KeyBind();
         }
 
-        #region ½ºÅ³ µğ¹ö±ë¿ëÀ¸·Î ÇÏµåÄÚµù
+        #region ìŠ¤í‚¬ ë””ë²„ê¹…ìš©ìœ¼ë¡œ í•˜ë“œì½”ë”©
         void Skill1(SkillParameter param)
         {
-            Debug.Log("½ºÅ³1¹ø ¹ß»ç.");
+            Debug.Log("ìŠ¤í‚¬1ë²ˆ ë°œì‚¬.");
         }
 
         void Skill2(SkillParameter param)
         {
-            Debug.Log("½ºÅ³2¹ø ¹ß»ç.");
+            Debug.Log("ìŠ¤í‚¬2ë²ˆ ë°œì‚¬.");
         }
 
         void Skill3(SkillParameter param)
         {
-            Debug.Log("½ºÅ³3¹ø ¹ß»ç.");
+            Debug.Log("ìŠ¤í‚¬3ë²ˆ ë°œì‚¬.");
         }
         void Skill4(SkillParameter param)
         {
-            Debug.Log("½ºÅ³4¹ø ¹ß»ç.");
+            Debug.Log("ìŠ¤í‚¬4ë²ˆ ë°œì‚¬.");
         }
         #endregion
 
@@ -146,7 +146,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Update ±â¹İÀ¸·Î, Å° ¶Ç´Â ¹öÆ°ÀÇ ÀÔ·ÂÀ» °¨ÁöÇÏ¿© ¾×¼Ç ½ÇÇà
+        /// Update ê¸°ë°˜ìœ¼ë¡œ, í‚¤ ë˜ëŠ” ë²„íŠ¼ì˜ ì…ë ¥ì„ ê°ì§€í•˜ì—¬ ì•¡ì…˜ ì‹¤í–‰
         /// </summary>
         public void OnUpdate()
         {
@@ -154,10 +154,10 @@ namespace Client
                 InputAction.Invoke();
         }
 
-        #region Å° ¼³Á¤ °ü·Ã ¸Ş¼­µå
+        #region í‚¤ ì„¤ì • ê´€ë ¨ ë©”ì„œë“œ
 
         /// <summary>
-        /// ¼³Á¤Ã¢¿¡¼­ Å° ¹ÙÀÎµù¿¡ ´ëÇÑ Á¤º¸¸¦ ¶ç¿ì±â À§ÇØ¼­¸¸ »ç¿ëÇÕ´Ï´Ù.
+        /// ì„¤ì •ì°½ì—ì„œ í‚¤ ë°”ì¸ë”©ì— ëŒ€í•œ ì •ë³´ë¥¼ ë„ìš°ê¸° ìœ„í•´ì„œë§Œ ì‚¬ìš©í•©ë‹ˆë‹¤.
         /// </summary>
         /// <returns></returns>
         public Dictionary<KeyCode, eInputSystem> GetAllKeyBinds()
@@ -169,37 +169,37 @@ namespace Client
         }
 
         /// <summary>
-        /// ¼³Á¤Ã¢¿¡¼­ Å° ¼¼ÆÃÀ» ÇÒ ¶§ Å°ÄÚµå¸¦ ¹Ş¾Æ¼­ µñ¼Å³Ê¸®¸¦ ÆíÁı
+        /// ì„¤ì •ì°½ì—ì„œ í‚¤ ì„¸íŒ…ì„ í•  ë•Œ í‚¤ì½”ë“œë¥¼ ë°›ì•„ì„œ ë”•ì…”ë„ˆë¦¬ë¥¼ í¸ì§‘
         /// </summary>
         /// <param name="setKey"></param>
         public void SetKeyBinds(KeyCode originKey, KeyCode setKey, eInputSystem targetInput)
         {
             if (!WinKeyBind.ContainsKey(setKey))
             {
-                //»õ Å°°¡ À¯È¿ÇÏÁö ¾ÊÀ» ¶§
-                Debug.Log($"{setKey}´Â ¹İ¿µµÇ¾îÀÖÁö ¾ÊÀº Å°ÀÇ Á¾·ùÀÔ´Ï´Ù. ´Ù¸¥ Å°¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+                //ìƒˆ í‚¤ê°€ ìœ íš¨í•˜ì§€ ì•Šì„ ë•Œ
+                Debug.Log($"{setKey}ëŠ” ë°˜ì˜ë˜ì–´ìˆì§€ ì•Šì€ í‚¤ì˜ ì¢…ë¥˜ì…ë‹ˆë‹¤. ë‹¤ë¥¸ í‚¤ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
             }
             else if (originKey == setKey) { }
             else
             {
-                // »õ Å°°¡ À¯È¿ÇÒ ¶§
+                // ìƒˆ í‚¤ê°€ ìœ íš¨í•  ë•Œ
                 eMiddleLevel newMidKey = WinKeyBind[setKey];
                 eMiddleLevel originMidKey = WinKeyBind.ContainsKey(originKey) ? WinKeyBind[originKey] : eMiddleLevel.None;
 
-                // »õ Å°°¡ ¹ÙÀÎµùµÇ¾îÀÖÁö ¾Ê¾Ò´Ù¸é
+                // ìƒˆ í‚¤ê°€ ë°”ì¸ë”©ë˜ì–´ìˆì§€ ì•Šì•˜ë‹¤ë©´
                 if (!MidKeyBind.ContainsKey(newMidKey))
                 {
-                    // ÀÏ´Ü Ãß°¡¸¦ ÇÏ°í, Å¸°Ù Çàµ¿ÀÌ ¹ÙÀÎµùµÇ¾îÀÖ¾ú´Ù¸é ±×°Í¸¸ ²÷¾îÁØ´Ù.
+                    // ì¼ë‹¨ ì¶”ê°€ë¥¼ í•˜ê³ , íƒ€ê²Ÿ í–‰ë™ì´ ë°”ì¸ë”©ë˜ì–´ìˆì—ˆë‹¤ë©´ ê·¸ê²ƒë§Œ ëŠì–´ì¤€ë‹¤.
                     MidKeyBind.Add(newMidKey, targetInput);
                     if (!(originMidKey == eMiddleLevel.None))
                         MidKeyBind.Remove(originMidKey);
                 }
                 else
                 {
-                    // »õ Å°°¡ ÀÌ¹Ì ´Ù¸¥ ½ºÅ³¿¡ ¹ÙÀÎµùµÇ¾î ÀÖ¾ú´Ù¸é
-                    //¿ø·¡ Å°ÀÇ ¹ÙÀÎµùÀ» ¾ø¾Ö°í »õ ¹ÙÀÎµùÀ» ³Ö¾îÁØ´Ù. ¸¸¾à ÇÊ¿äÇÑ ¼ö¸¸Å­ ¼¼ÆÃÀÌ ¾ÈµÆ´Ù¸é ¸¶Àú ÇÏ°í ´İÀ» ¼ö ÀÖµµ·Ï Á¶°Ç ¼¼ÆÃÀÌ ÇÊ¿äÇÏ´Ù.
-                    Debug.Log($"±× Å°({setKey})´Â ÀÌ¹Ì ´Ù¸¥ ±â´É¿¡ ¹ÙÀÎµùµÇ¾îÀÖ½À´Ï´Ù. " +
-                        $"¿ø·¡ ¹ÙÀÎµùÀ» ÇØÁ¦ÇÏ°í »õ ¹ÙÀÎµùÀ¸·Î Ãß°¡ÇÕ´Ï´Ù. ¿ø·¡ ±â´ÉÀÇ ¹ÙÀÎµùÀ» ¿Ï·áÇØÁÖ¼¼¿ä.");
+                    // ìƒˆ í‚¤ê°€ ì´ë¯¸ ë‹¤ë¥¸ ìŠ¤í‚¬ì— ë°”ì¸ë”©ë˜ì–´ ìˆì—ˆë‹¤ë©´
+                    //ì›ë˜ í‚¤ì˜ ë°”ì¸ë”©ì„ ì—†ì• ê³  ìƒˆ ë°”ì¸ë”©ì„ ë„£ì–´ì¤€ë‹¤. ë§Œì•½ í•„ìš”í•œ ìˆ˜ë§Œí¼ ì„¸íŒ…ì´ ì•ˆëë‹¤ë©´ ë§ˆì € í•˜ê³  ë‹«ì„ ìˆ˜ ìˆë„ë¡ ì¡°ê±´ ì„¸íŒ…ì´ í•„ìš”í•˜ë‹¤.
+                    Debug.Log($"ê·¸ í‚¤({setKey})ëŠ” ì´ë¯¸ ë‹¤ë¥¸ ê¸°ëŠ¥ì— ë°”ì¸ë”©ë˜ì–´ìˆìŠµë‹ˆë‹¤. " +
+                        $"ì›ë˜ ë°”ì¸ë”©ì„ í•´ì œí•˜ê³  ìƒˆ ë°”ì¸ë”©ìœ¼ë¡œ ì¶”ê°€í•©ë‹ˆë‹¤. ì›ë˜ ê¸°ëŠ¥ì˜ ë°”ì¸ë”©ì„ ì™„ë£Œí•´ì£¼ì„¸ìš”.");
 
                     MidKeyBind.Remove(newMidKey);
                     if (originMidKey == eMiddleLevel.None)
@@ -216,7 +216,7 @@ namespace Client
         }
         
         /// <summary>
-        /// Å°ÄÚµå¿¡ ¿¬°áµÈ ¹ÌµéÅ°°¡ ¹ÙÀÎµùµÇ¾îÀÖ´ÂÁö ¿©ºÎ Á¡°Ë
+        /// í‚¤ì½”ë“œì— ì—°ê²°ëœ ë¯¸ë“¤í‚¤ê°€ ë°”ì¸ë”©ë˜ì–´ìˆëŠ”ì§€ ì—¬ë¶€ ì ê²€
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -242,7 +242,7 @@ namespace Client
         {
             if (MidKeyBind.Count < SKILL_NUM) 
             {
-                Debug.Log("½ºÅ³ ¹ÙÀÎµùÀ» ¸¶¹«¸®ÇØÁÖ¼¼¿ä.");
+                Debug.Log("ìŠ¤í‚¬ ë°”ì¸ë”©ì„ ë§ˆë¬´ë¦¬í•´ì£¼ì„¸ìš”.");
                 return false;
             }
             else return true;
@@ -252,11 +252,11 @@ namespace Client
 
         #region Throwing Skills
         /// <summary>
-        /// ¹öÆ°À» ´­·¶À» ¶§ Input Manager¿¡¼­ µñ¼Å³Ê¸® ÅëÇØ ¾Æ~ ÀÌ°Å ¾²·Á´Â±¸³ª! ÇÏ°í ¾²°Ô ÇØÁØ´Ù.
-        /// InputParameterÀº ¾î¶»°Ô ¹Ş¾Æ¾ßÇÏ´Â°É±î...?
+        /// ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ Input Managerì—ì„œ ë”•ì…”ë„ˆë¦¬ í†µí•´ ì•„~ ì´ê±° ì“°ë ¤ëŠ”êµ¬ë‚˜! í•˜ê³  ì“°ê²Œ í•´ì¤€ë‹¤.
+        /// InputParameterì€ ì–´ë–»ê²Œ ë°›ì•„ì•¼í•˜ëŠ”ê±¸ê¹Œ...?
         /// </summary>
         /// <param name="skillIndex">
-        /// ¹öÆ° ID¸¦ ¶æÇÔ 
+        /// ë²„íŠ¼ IDë¥¼ ëœ»í•¨ 
         /// </param>
         public void ThrowSkill(int skillIndex)
         {
@@ -265,21 +265,21 @@ namespace Client
                 Action<SkillParameter> targetAction = SkillBindDict[AndBtnBind[skillIndex]];
                 if (targetAction == null)
                 {
-                    Debug.Log($"À¸À× ½ºÅ³ {AndBtnBind[skillIndex]} ¹ÙÀÎµùµÈ°Å ¾ø´Âµª¼î");
+                    Debug.Log($"ìœ¼ì‰ ìŠ¤í‚¬ {AndBtnBind[skillIndex]} ë°”ì¸ë”©ëœê±° ì—†ëŠ”ëì‡¼");
                     return;
                 }
 
                 targetAction.Invoke(new SkillParameter());
-                //ÀÏ´Ü ¾Æ¹«°Íµµ ¾øÀ¸´Ï±î Àú·¸°Ô ³Ö´Â´Ù.
-                Debug.Log($"¿¾´Ù {targetAction} ½ºÅ³ÀÌ³ª ¸Ô¾î¶ó~");
+                //ì¼ë‹¨ ì•„ë¬´ê²ƒë„ ì—†ìœ¼ë‹ˆê¹Œ ì €ë ‡ê²Œ ë„£ëŠ”ë‹¤.
+                Debug.Log($"ì˜›ë‹¤ {targetAction} ìŠ¤í‚¬ì´ë‚˜ ë¨¹ì–´ë¼~");
             }
         }
 
         /// <summary>
-        /// Å°º¸µå Å°¸¦ ´­·¶À» ¶§ Input Manager¿¡¼­ µñ¼Å³Ê¸® ÅëÇØ ¾Æ~ ÀÌ°Å ¾²·Á´Â±¸³ª! ÇÏ°í ¾²°Ô ÇØÁØ´Ù.
+        /// í‚¤ë³´ë“œ í‚¤ë¥¼ ëˆŒë €ì„ ë•Œ Input Managerì—ì„œ ë”•ì…”ë„ˆë¦¬ í†µí•´ ì•„~ ì´ê±° ì“°ë ¤ëŠ”êµ¬ë‚˜! í•˜ê³  ì“°ê²Œ í•´ì¤€ë‹¤.
         /// </summary>
         /// <param name="keyCode">
-        /// ÀÔ·ÂÇÑ Å°ÄÚµå¸¦ ¶æÇÔ
+        /// ì…ë ¥í•œ í‚¤ì½”ë“œë¥¼ ëœ»í•¨
         /// </param>
         public void ThrowSkill(KeyCode keyCode)
         {
@@ -292,18 +292,18 @@ namespace Client
                     Action<SkillParameter> targetAction = SkillBindDict[inputByKey];
                     if (targetAction == null)
                     {
-                        Debug.Log($"À¸À× ½ºÅ³ {keyCode}¿¡ ¹ÙÀÎµùµÈ°Å ¾ø´Âµª¼î");
+                        Debug.Log($"ìœ¼ì‰ ìŠ¤í‚¬ {keyCode}ì— ë°”ì¸ë”©ëœê±° ì—†ëŠ”ëì‡¼");
                         return;
                     }
 
                     /*
-                     * ÇöÀç´Â ¸¶¶¥È÷ ¾µ °Ô ¾ø¾î¼­ new InputParameter·Î Çß´Âµ¥,
-                     * ÃßÈÄ InputParamGenerator°°Àº ¸Ş¼­µå¸¦ ¸¸µé¾î¼­, 
-                     * °¢ Àåºñ/Ä³¸¯ÅÍ¿¡ ºÙÀº ½ºÅ³µé¿¡ ´ëÇØ Á¤º¸(InputParameter)µéÀ» ÀÎ½ºÅÏ½ºÈ­ÇØ¼­
-                     * ³ªÁß¿£ InputParameter param = InputParamGenererator(¾îÂ¼±¸);·Î ÇÑ paramÀ» ÀÎÀÚ¿¡ ³ÖÀ¸¸é µÉ°ÍÀÌ´Ù.
+                     * í˜„ì¬ëŠ” ë§ˆë•…íˆ ì“¸ ê²Œ ì—†ì–´ì„œ new InputParameterë¡œ í–ˆëŠ”ë°,
+                     * ì¶”í›„ InputParamGeneratorê°™ì€ ë©”ì„œë“œë¥¼ ë§Œë“¤ì–´ì„œ, 
+                     * ê° ì¥ë¹„/ìºë¦­í„°ì— ë¶™ì€ ìŠ¤í‚¬ë“¤ì— ëŒ€í•´ ì •ë³´(InputParameter)ë“¤ì„ ì¸ìŠ¤í„´ìŠ¤í™”í•´ì„œ
+                     * ë‚˜ì¤‘ì—” InputParameter param = InputParamGenererator(ì–´ì©Œêµ¬);ë¡œ í•œ paramì„ ì¸ìì— ë„£ìœ¼ë©´ ë ê²ƒì´ë‹¤.
                      */
                     targetAction.Invoke(new SkillParameter());
-                    Debug.Log($"¿¾´Ù {targetAction} ½ºÅ³ÀÌ³ª ¸Ô¾î¶ó~");
+                    Debug.Log($"ì˜›ë‹¤ {targetAction} ìŠ¤í‚¬ì´ë‚˜ ë¨¹ì–´ë¼~");
                 }
             }            
         }

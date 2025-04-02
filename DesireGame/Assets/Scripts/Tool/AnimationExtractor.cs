@@ -6,7 +6,7 @@ public class AnimationExtractor : Editor
     [MenuItem("Tools/Extract Animations From FBX")]
     public static void ExtractAnimations()
     {
-        // ¼±ÅÃµÈ FBX ÆÄÀÏ °¡Á®¿À±â
+        // ì„ íƒëœ FBX íŒŒì¼ ê°€ì ¸ì˜¤ê¸°
         Object[] selectedObjects = Selection.objects;
 
         foreach (Object obj in selectedObjects)
@@ -18,7 +18,7 @@ public class AnimationExtractor : Editor
                 continue;
             }
 
-            // FBX ÆÄÀÏ ³»ºÎÀÇ ¿¡¼Â ºÒ·¯¿À±â
+            // FBX íŒŒì¼ ë‚´ë¶€ì˜ ì—ì…‹ ë¶ˆëŸ¬ì˜¤ê¸°
             Object[] assets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
             string folderPath = System.IO.Path.GetDirectoryName(assetPath);
             string fbxName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
@@ -27,7 +27,7 @@ public class AnimationExtractor : Editor
             {
                 if (asset is AnimationClip animationClip)
                 {
-                    // ¾Ö´Ï¸ŞÀÌ¼Ç Å¬¸³ ÃßÃâ
+                    // ì• ë‹ˆë©”ì´ì…˜ í´ë¦½ ì¶”ì¶œ
                     string clipPath = $"{folderPath}/{fbxName}_{animationClip.name}.anim";
                     AnimationClip newClip = Object.Instantiate(animationClip);
                     AssetDatabase.CreateAsset(newClip, clipPath);

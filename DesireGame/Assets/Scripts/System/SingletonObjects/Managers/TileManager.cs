@@ -11,11 +11,11 @@ namespace Client
         private Dictionary<int, TileObj> TileMap = new();
 
         private readonly float MaxDistSqrt = 10f;
-        #region »ı¼ºÀÚ
+        #region ìƒì„±ì
         TileManager() { }
         #endregion 
 
-        // ±¸¸°µ¥......
+        // êµ¬ë¦°ë°......
         public void SubscribePlayerMove()
         {
             MessageManager.SubscribeMessage<PlayerMove>(this, VecToTileIndex);
@@ -33,7 +33,7 @@ namespace Client
         {
             if (TileMap.ContainsKey(index))
             {
-                Debug.LogError($"TileManager.SetTile Å¸ÀÏ ÀÎµ¦½º : {index} °¡ Áßº¹ÀÔ´Ï´Ù.");
+                Debug.LogError($"TileManager.SetTile íƒ€ì¼ ì¸ë±ìŠ¤ : {index} ê°€ ì¤‘ë³µì…ë‹ˆë‹¤.");
                 return;
             }
 
@@ -46,11 +46,11 @@ namespace Client
             {
                 return TileMap[index];
             }
-            Debug.LogError($"TileManager.GetTile Å¸ÀÏ ÀÎµ¦½º : {index} °¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.LogError($"TileManager.GetTile íƒ€ì¼ ì¸ë±ìŠ¤ : {index} ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return null;
         }
 
-        // Å¸ÀÏ ÀÎµ¦½º idx1, idx2 ¸¦ ±³È¯ÇÑ´Ù.
+        // íƒ€ì¼ ì¸ë±ìŠ¤ idx1, idx2 ë¥¼ êµí™˜í•œë‹¤.
         public void TradeChar(int idx1, int idx2)
         {
             if ((TileMap.ContainsKey(idx1) == false) || (TileMap.ContainsKey(idx2) == false))
@@ -62,28 +62,28 @@ namespace Client
             GetTile(idx2)?.SetChar(charBase1);
         }
 
-        // Ä³¸¯ÅÍ Å¸ÀÏ¿¡ ¿Ã¸®±â
+        // ìºë¦­í„° íƒ€ì¼ì— ì˜¬ë¦¬ê¸°
         public void SetChar(int tileIndex, CharBase setChar)
         {
-            // ¿Ö null ÀÌ ¾Æ´Ñ == false³Ä? MonoBehaviour fake null ÀÌ½´ 
+            // ì™œ null ì´ ì•„ë‹Œ == falseëƒ? MonoBehaviour fake null ì´ìŠˆ 
             if (setChar == false)
                 return;
 
             if (TileMap.ContainsKey(tileIndex) == false)
             {
-                Debug.LogError($"TileManager.SetChar Å¸ÀÏ ÀÎµ¦½º : {tileIndex}´Â Á¸ÀçÇÏÁö ¾Ê´Â Å¸ÀÏ ÀÎµ¦½ºÀÔ´Ï´Ù.");
+                Debug.LogError($"TileManager.SetChar íƒ€ì¼ ì¸ë±ìŠ¤ : {tileIndex}ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íƒ€ì¼ ì¸ë±ìŠ¤ì…ë‹ˆë‹¤.");
                 return;
             }          
 
             var tile = TileMap[tileIndex];
             if(tile.TeamTile != setChar.GetCharType())
             {
-                Debug.LogWarning("»ó´ë ÆÀÀ¸·Î ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+                Debug.LogWarning("ìƒëŒ€ íŒ€ìœ¼ë¡œ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
                 return;
             }
             tile.SetChar(setChar);
 
-            // ¹º°¡ Ã¼Å©.
+            // ë­”ê°€ ì²´í¬.
             {
 
             }
@@ -135,7 +135,7 @@ namespace Client
 
         #region Character Tile Movement Helper Method
 
-        /// <summary> Ä³¸¯ÅÍ Å¸ÀÔ ±âÁØ ¾Æ±º ¹× Àû±º Æ¯Á¤ ¿­ÀÇ ÀÎµ¦½ºµéÀ» ¹İÈ¯ </summary>
+        /// <summary> ìºë¦­í„° íƒ€ì… ê¸°ì¤€ ì•„êµ° ë° ì êµ° íŠ¹ì • ì—´ì˜ ì¸ë±ìŠ¤ë“¤ì„ ë°˜í™˜ </summary>
         public List<int> GetDemandingPositions(eCharType type, bool sameSide, int col)
         {
             List<int> results = new();
@@ -157,7 +157,7 @@ namespace Client
             return results;
         }
 
-        /// <summary> Ä³¸¯ÅÍ Å¸ÀÔ ±âÁØ ¾Æ±º, Àû±º Ãø ¸®½ºÆ®¸¦ ¹İÈ¯ </summary>
+        /// <summary> ìºë¦­í„° íƒ€ì… ê¸°ì¤€ ì•„êµ°, ì êµ° ì¸¡ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°˜í™˜ </summary>
         public List<int> GetDemandingPositions(eCharType type, bool sameSide)
         {
             List<int> results = new();
@@ -192,7 +192,7 @@ namespace Client
         {
             if(candidates == null || candidates.Count == 0)
             {
-                Debug.LogError("ÈÄº¸±º¿¡ ÀÌ»ó »ı±è. µğ¹ö±ë ¹Ù¶ø´Ï´Ù.");
+                Debug.LogError("í›„ë³´êµ°ì— ì´ìƒ ìƒê¹€. ë””ë²„ê¹… ë°”ëë‹ˆë‹¤.");
                 return Vector3.zero;
             }
 
@@ -217,7 +217,7 @@ namespace Client
             var filteredPositions = FilterIndices(demandingPositions);
             var beforePos = client.CharTransform.position;
             client.CharTransform.position = GetFarthestPos(beforePos, filteredPositions);
-            Debug.Log($"ÅÚ·¹Æ÷Æ® ¿Ï·á. {client.GetID()}¹ø {client.name}ÀÌ {beforePos}¿¡¼­ {client.CharTransform.position}À¸·Î ÀÌµ¿");
+            Debug.Log($"í…”ë ˆí¬íŠ¸ ì™„ë£Œ. {client.GetID()}ë²ˆ {client.name}ì´ {beforePos}ì—ì„œ {client.CharTransform.position}ìœ¼ë¡œ ì´ë™");
         }
 
         #endregion

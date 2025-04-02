@@ -15,7 +15,7 @@ namespace Client
         private Vector3 size;
 
         [SerializeField]
-        [Header("°ø°İ Å¸ÀÔ(ÇÇ°İÀÚ)")]
+        [Header("ê³µê²© íƒ€ì…(í”¼ê²©ì)")]
         private eIsAttack IsAttack;
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)

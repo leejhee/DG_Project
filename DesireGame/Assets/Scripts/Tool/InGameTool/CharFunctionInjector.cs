@@ -19,12 +19,12 @@ namespace Client
 
         Vector2 scrollPos;
 
-        [MenuItem("DG_InGame/Ä³¸¯ÅÍ¿¡ Function ÁÖÀÔ")]
+        [MenuItem("DG_InGame/ìºë¦­í„°ì— Function ì£¼ì…")]
         public static void ShowWindow()
         {
             if (!EditorApplication.isPlaying)
             {
-                Debug.LogError("Unity ÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.");
+                Debug.LogError("Unity í”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.");
                 return;
             }
             EditorWindow.GetWindow(typeof(CharFunctionInjector), false, "Character Function Injector");
@@ -65,23 +65,23 @@ namespace Client
         {
             if (!EditorApplication.isPlaying)
             {
-                Debug.LogError("Unity ÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.");
+                Debug.LogError("Unity í”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.");
                 Close();
             }
 
             string[] characterNames = characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
 
-            EditorGUILayout.LabelField("FunctionÀ» ÁÖ´Â Ä³¸¯ÅÍ ¼±ÅÃ", EditorStyles.boldLabel);
-            CasterOrder = EditorGUILayout.Popup("Ä³¸¯ÅÍ ¼±ÅÃ", CasterOrder, characterNames);
+            EditorGUILayout.LabelField("Functionì„ ì£¼ëŠ” ìºë¦­í„° ì„ íƒ", EditorStyles.boldLabel);
+            CasterOrder = EditorGUILayout.Popup("ìºë¦­í„° ì„ íƒ", CasterOrder, characterNames);
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("FunctionÀ» ¹Ş´Â Ä³¸¯ÅÍ ¼±ÅÃ", EditorStyles.boldLabel);
-            TargetOrder = EditorGUILayout.Popup("Ä³¸¯ÅÍ ¼±ÅÃ", TargetOrder, characterNames);
+            EditorGUILayout.LabelField("Functionì„ ë°›ëŠ” ìºë¦­í„° ì„ íƒ", EditorStyles.boldLabel);
+            TargetOrder = EditorGUILayout.Popup("ìºë¦­í„° ì„ íƒ", TargetOrder, characterNames);
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField(new GUIContent("ÁÖÀÔÇÒ Function ¼±ÅÃ"), EditorStyles.boldLabel);
+            EditorGUILayout.LabelField(new GUIContent("ì£¼ì…í•  Function ì„ íƒ"), EditorStyles.boldLabel);
             searchFunctionTerm = EditorGUILayout.TextField("Search Field", searchFunctionTerm);
 
             EditorGUILayout.Space();
@@ -94,7 +94,7 @@ namespace Client
             .ToList();
 
 
-            // °Ë»ö °á°ú Ãâ·Â (¼±ÅÃ °¡´É)
+            // ê²€ìƒ‰ ê²°ê³¼ ì¶œë ¥ (ì„ íƒ ê°€ëŠ¥)
             if (filteredFunctions.Count > 0)
             {
                 GUIStyle headerStyle = new(EditorStyles.boldLabel)
@@ -125,7 +125,7 @@ namespace Client
                     EditorGUILayout.LabelField(function.function.ToString(), rowStyle, GUILayout.Width(200));
                     EditorGUILayout.LabelField(TimeGuide(function.time), rowStyle, GUILayout.Width(80));
 
-                    if (GUILayout.Button("¼±ÅÃ", GUILayout.Width(80)))
+                    if (GUILayout.Button("ì„ íƒ", GUILayout.Width(80)))
                     {
                         selectedFunction = function;
                     }
@@ -137,12 +137,12 @@ namespace Client
             }
             else
             {
-                EditorGUILayout.HelpBox("°Ë»ö °á°ú°¡ ¾ø½À´Ï´Ù.", MessageType.Warning);
+                EditorGUILayout.HelpBox("ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.", MessageType.Warning);
             }
 
             GUILayout.FlexibleSpace();
 
-            string result = selectedFunction == null ? "¹öÇÁ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä" : selectedFunction.Index.ToString() + "¹ø ¹öÇÁ Àû¿ë";
+            string result = selectedFunction == null ? "ë²„í”„ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”" : selectedFunction.Index.ToString() + "ë²ˆ ë²„í”„ ì ìš©";
 
             GUIStyle ButtonStyle = new(GUI.skin.button)
             {
@@ -164,7 +164,7 @@ namespace Client
                     FunctionIndex = selectedFunction.Index,
                     eFunctionType = selectedFunction.function
                 });
-                Debug.LogWarning($"{caster.GetID()}¹ø Ä³¸¯ÅÍ¿¡¼­ {target.GetID()}¹ø Ä³¸¯ÅÍ¿¡ {selectedFunction.Index}¹ø function ÁÖÀÔ");
+                Debug.LogWarning($"{caster.GetID()}ë²ˆ ìºë¦­í„°ì—ì„œ {target.GetID()}ë²ˆ ìºë¦­í„°ì— {selectedFunction.Index}ë²ˆ function ì£¼ì…");
             }
         }
 

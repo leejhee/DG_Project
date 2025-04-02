@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Client
 {
-    // ÀÌ°É ¿Ö ¸¸µé¾ú´Â°¡ : 
-    // ÇÏÀÌ¾î¶óÅ°¿¡¼­ Delete·Î Ä³¸¯ÅÍ¸¦ ¾ø¾Ö¸é NRE°¡ ¿ÕÃ¢ ¶ã°Å±â ¶§¹®.
-    // ¾ÈÀüÇÑ Å×½ºÆÃÀ» À§ÇÑ °ÔÀÓ ·ÎÁ÷À¸·Î Ä³¸¯ÅÍ¸¦ ¾ø¾Ö´Â ±â´ÉÀÓ
+    // ì´ê±¸ ì™œ ë§Œë“¤ì—ˆëŠ”ê°€ : 
+    // í•˜ì´ì–´ë¼í‚¤ì—ì„œ Deleteë¡œ ìºë¦­í„°ë¥¼ ì—†ì• ë©´ NREê°€ ì™•ì°½ ëœ°ê±°ê¸° ë•Œë¬¸.
+    // ì•ˆì „í•œ í…ŒìŠ¤íŒ…ì„ ìœ„í•œ ê²Œì„ ë¡œì§ìœ¼ë¡œ ìºë¦­í„°ë¥¼ ì—†ì• ëŠ” ê¸°ëŠ¥ì„
     public class CharManagingTool : EditorWindow
     {
         private List<CharBase> characterList = new();
@@ -17,12 +17,12 @@ namespace Client
 
         Vector2 scrollPos;
 
-        [MenuItem("DG_InGame/Ä³¸¯ÅÍ »ı¼º ¹× »èÁ¦")]
+        [MenuItem("DG_InGame/ìºë¦­í„° ìƒì„± ë° ì‚­ì œ")]
         public static void ShowWindow()
         {
             if (!EditorApplication.isPlaying)
             {
-                Debug.LogError("Unity ÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.");
+                Debug.LogError("Unity í”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.");
                 return;
             }
             GetWindow(typeof(CharManagingTool), false, "Character Managing Tool");
@@ -43,21 +43,21 @@ namespace Client
         {
             if (!EditorApplication.isPlaying)
             {
-                Debug.LogError("Unity ÇÃ·¹ÀÌ ÈÄ »ç¿ë ¹Ù¶ø´Ï´Ù.");
+                Debug.LogError("Unity í”Œë ˆì´ í›„ ì‚¬ìš© ë°”ëë‹ˆë‹¤.");
                 Close();
             }
                         
-            EditorGUILayout.HelpBox("ºñÀüÅõ ½Ã »ç¿ëÀ» ±ÇÀåÇÕ´Ï´Ù.", MessageType.Warning);
+            EditorGUILayout.HelpBox("ë¹„ì „íˆ¬ ì‹œ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤.", MessageType.Warning);
             
             EditorGUILayout.Space();
 
             string[] characterNames = characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
 
-            EditorGUILayout.LabelField("»èÁ¦ÇÒ Ä³¸¯ÅÍ ¼±ÅÃ", EditorStyles.boldLabel);
-            VictimOrder = EditorGUILayout.Popup("Ä³¸¯ÅÍ ¼±ÅÃ", VictimOrder, characterNames);
+            EditorGUILayout.LabelField("ì‚­ì œí•  ìºë¦­í„° ì„ íƒ", EditorStyles.boldLabel);
+            VictimOrder = EditorGUILayout.Popup("ìºë¦­í„° ì„ íƒ", VictimOrder, characterNames);
 
             var victim = VictimOrder == -1 ? null : characterList[VictimOrder];
-            string guide = victim == null ? "»èÁ¦ÇÒ Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇØÁÖ¼¼¿ä." : $"{victim.GetID()}¹ø Ä³¸¯ÅÍ {victim.name}À» »èÁ¦ÇÕ´Ï´Ù.";
+            string guide = victim == null ? "ì‚­ì œí•  ìºë¦­í„°ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”." : $"{victim.GetID()}ë²ˆ ìºë¦­í„° {victim.name}ì„ ì‚­ì œí•©ë‹ˆë‹¤.";
 
             GUIStyle ButtonStyle = new(GUI.skin.button)
             {

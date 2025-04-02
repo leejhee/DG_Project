@@ -8,19 +8,19 @@ namespace Client
 {
     public class DataTool
     {
-        [MenuItem("Data/µ¥ÀÌÅÍ°ËÁõ")]
+        [MenuItem("Data/ë°ì´í„°ê²€ì¦")]
         public static void DataVerification()
         {
             DataManager.Instance.ClearCache();
             DataManager.Instance.DataLoad();
 
-            Debug.Log("µ¥ÀÌÅÍ °ËÁõ ³¡.");
+            Debug.Log("ë°ì´í„° ê²€ì¦ ë.");
         }
 
         //[MenuItem("Data/Verify Dialougue")]
         //public static void DialogueDataVerification()
         //{
-        //    //dialougedataÀÇ ¸ğµç ·¹ÄÚµå ±âº»ÀûÀ¸·Î ¼øÈ¸ÇÏ±â
+        //    //dialougedataì˜ ëª¨ë“  ë ˆì½”ë“œ ê¸°ë³¸ì ìœ¼ë¡œ ìˆœíšŒí•˜ê¸°
         //    DataManager.Instance.DataLoad();
         //    var DialogueDict = DataManager.Instance.GetDictionary("DialogueData");
 

@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Client
 {
-    /// <summary> DAMAGE_BY_TARGET_MAXHP : Å¸°Ù ÃÖ´ëÃ¼·ÂÀÇ {1}%ÀÇ ÇÇÇØ¸¦ ÀÔÈù´Ù. </summary>
+    /// <summary> DAMAGE_BY_TARGET_MAXHP : íƒ€ê²Ÿ ìµœëŒ€ì²´ë ¥ì˜ {1}%ì˜ í”¼í•´ë¥¼ ì…íŒë‹¤. </summary>
     public class DamageByTargetMaxHP : FunctionBase
     {
         public DamageByTargetMaxHP(BuffParameter buffParam) : base(buffParam)
         {
         }
 
-        // ÀÌ°Å Áï¹ßÀÌ¶ó ±×³É Æ®¸®°ÅÇÏÀÚ¸¶ÀÚ ½è´Âµ¥, ¾ö°İÇÏ°Ô update¿¡ ¾µÁö °í¹Î.
+        // ì´ê±° ì¦‰ë°œì´ë¼ ê·¸ëƒ¥ íŠ¸ë¦¬ê±°í•˜ìë§ˆì ì¼ëŠ”ë°, ì—„ê²©í•˜ê²Œ updateì— ì“¸ì§€ ê³ ë¯¼.
         public override void RunFunction(bool StartFunction = true)
         {
             base.RunFunction(StartFunction);
@@ -26,7 +26,7 @@ namespace Client
                         rawDamage = stat.GetStat(SystemEnum.eStats.NMHP) * ratio,
                         penetration = _CastChar.CharStat.GetPenetration(_FunctionData.damageType)
                     });
-                    Debug.Log($"ÃÖ´ëHP {ratio * 100} ºñ·Êµ© ¹ßµ¿.");
+                    Debug.Log($"ìµœëŒ€HP {ratio * 100} ë¹„ë¡€ë€ ë°œë™.");
                 }                
             }
         }

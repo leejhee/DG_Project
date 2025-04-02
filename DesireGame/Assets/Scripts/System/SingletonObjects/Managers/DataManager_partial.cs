@@ -6,33 +6,33 @@ namespace Client
 {
     public partial class DataManager
     {
-        #region °³º° µ¥ÀÌÅÍ
+        #region ê°œë³„ ë°ì´í„°
 
-        // ÇÃ·¹ÀÌ¾î À§Ä¡Á¤º¸
+        // í”Œë ˆì´ì–´ ìœ„ì¹˜ì •ë³´
         private Dictionary<eScene, Vector3> _positionMap = new Dictionary<eScene, Vector3>();
         public Dictionary<eScene, Vector3> PositionMap => _positionMap;
 
-        // ¹ø¿ªÁ¤º¸
+        // ë²ˆì—­ì •ë³´
         private Dictionary<string, Dictionary<eLocalize, string>> _localizeStringCodeMap = new();
         public Dictionary<string, Dictionary<eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
 
-        // ½ºÅ×ÀÌÁö µ¥ÀÌÅÍ 
+        // ìŠ¤í…Œì´ì§€ ë°ì´í„° 
         private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
         public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
 
-        // ½Ã³ÊÁö º° Ä³¸¯ÅÍ ºĞ·ù
+        // ì‹œë„ˆì§€ ë³„ ìºë¦­í„° ë¶„ë¥˜
         private Dictionary<eSynergy, List<CharData>> _synergyCharacterMap = new();
         public Dictionary<eSynergy, List<CharData>> SynergyCharacterMap => _synergyCharacterMap;
 
-        // ½Ã³ÊÁö °ü·Ã function Data
+        // ì‹œë„ˆì§€ ê´€ë ¨ function Data
         private Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> _synergyDataMap = new();
         public Dictionary<eSynergy, Dictionary<int, List<SynergyData>>> SynergyDataMap => _synergyDataMap;
 
-        // ½Ã³ÊÁö Æ®¸®°Å µñ¼Å³Ê¸®
+        // ì‹œë„ˆì§€ íŠ¸ë¦¬ê±° ë”•ì…”ë„ˆë¦¬
         private Dictionary<eSynergy, FunctionData> _synergyTriggerMap = new();
         public Dictionary<eSynergy, FunctionData> SynergyTriggerMap => _synergyTriggerMap;
         
-        // ¾ÆÀÌÅÛ µ¥ÀÌÅÍ
+        // ì•„ì´í…œ ë°ì´í„°
         private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
         public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
 
@@ -40,9 +40,9 @@ namespace Client
 
         #endregion
 
-        #region °³º° µ¥ÀÌÅÍ
+        #region ê°œë³„ ë°ì´í„°
 
-        // °³º° µ¥ÀÌÅÍ °¡°ø
+        // ê°œë³„ ë°ì´í„° ê°€ê³µ
         private void SetTypeData(string data)
         {
             if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
@@ -54,7 +54,7 @@ namespace Client
             if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
 
         }
-        // ÇÃ·¹ÀÌ¾î À§Ä¡Á¤º¸
+        // í”Œë ˆì´ì–´ ìœ„ì¹˜ì •ë³´
         private void SetCharPositionData()
         {
             string key = typeof(CharPositionData).Name;
@@ -80,7 +80,7 @@ namespace Client
             }
         }
 
-        // ½ºÆ®¸µ ÄÚµå
+        // ìŠ¤íŠ¸ë§ ì½”ë“œ
         private void SetStringCodeData()
         {
             string key = typeof(StringCodeData).Name;
@@ -103,7 +103,7 @@ namespace Client
             }
         }
 
-        // ½ºÅ×ÀÌÁö ¸ó½ºÅÍ µ¥ÀÌÅÍ 
+        // ìŠ¤í…Œì´ì§€ ëª¬ìŠ¤í„° ë°ì´í„° 
         private void SetMonsterSpawnData()
         {
             string key = typeof(MonsterSpawnData).Name;
@@ -162,7 +162,7 @@ namespace Client
 
 
 
-        // ½Ã³ÊÁö Á¾·ùº° µ¥ÀÌÅÍ ¹¶ÅÖÀÌ.
+        // ì‹œë„ˆì§€ ì¢…ë¥˜ë³„ ë°ì´í„° ë­‰í……ì´.
         private void SetSynergyMappingData()
         {
             string key =  typeof(SynergyData).Name;
@@ -184,7 +184,7 @@ namespace Client
             }
         }
 
-        // ½Ã³ÊÁöº° Æ®¸®°Å ºĞ·ù
+        // ì‹œë„ˆì§€ë³„ íŠ¸ë¦¬ê±° ë¶„ë¥˜
         private void SetSynergyTriggerMap()
         {
             string key = typeof(FunctionData).Name;
@@ -210,7 +210,7 @@ namespace Client
         }
 
 
-        // ¾ÆÀÌÅÛ Æ¼¾îº° µ¥ÀÌÅÍ
+        // ì•„ì´í…œ í‹°ì–´ë³„ ë°ì´í„°
         private void SetItemDataMap()
         {
             string key = typeof(ItemData).Name;
@@ -241,7 +241,7 @@ namespace Client
                     return Instance._localizeStringCodeMap[stringCode][Instance.Localize];
                 }
             }
-            return $"(½ºÆ®¸µ ÄÚµå°¡ ¾ø½À´Ï´Ù!){stringCode}";
+            return $"(ìŠ¤íŠ¸ë§ ì½”ë“œê°€ ì—†ìŠµë‹ˆë‹¤!){stringCode}";
         }
         #endregion
     }

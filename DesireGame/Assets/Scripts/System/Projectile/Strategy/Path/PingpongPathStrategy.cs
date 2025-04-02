@@ -15,7 +15,7 @@ namespace Client
 
         public PingpongPathStrategy(PathStrategyParameter param)
         {
-            //ÇØ´ç ÀÚ¸®¸¸À» ¸ñÇ¥·Î ÇÏ°í °©´Ï´Ù. µû¶ó¼­ Å¸°ÙÀÇ ½ÇÁ¸ ¿©ºÎ È®ÀÎ ¾ÈÇÔ
+            //í•´ë‹¹ ìë¦¬ë§Œì„ ëª©í‘œë¡œ í•˜ê³  ê°‘ë‹ˆë‹¤. ë”°ë¼ì„œ íƒ€ê²Ÿì˜ ì‹¤ì¡´ ì—¬ë¶€ í™•ì¸ ì•ˆí•¨
             if(param.target == false)
             {
                 AbstractTarget = default;
@@ -53,7 +53,7 @@ namespace Client
 
             Vector3 direction = displacement.normalized;
             projectile.ProjectileTransform.position += InitialSpeed * Time.deltaTime * direction;
-            // °¨¼Ó ¹× °¡¼ÓÀº ¾ÈÇÏ°í ÀÏ´Ü ±×³É µî¼ÓÀ¸·Î¸¸ °¨.
+            // ê°ì† ë° ê°€ì†ì€ ì•ˆí•˜ê³  ì¼ë‹¨ ê·¸ëƒ¥ ë“±ì†ìœ¼ë¡œë§Œ ê°.
         }
 
         public bool ManageCollision(Collider other, SystemEnum.eCharType enemyType)
@@ -62,7 +62,7 @@ namespace Client
             {
                 if (collidedChar.GetCharType() == enemyType)
                 {
-                    Debug.Log($"{collidedChar.GetID()}¹ø Ä³¸¯ÅÍ ¸ÂÀ½");
+                    Debug.Log($"{collidedChar.GetID()}ë²ˆ ìºë¦­í„° ë§ìŒ");
                     return true;
                 }
             }

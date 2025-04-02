@@ -5,9 +5,9 @@ using UnityEngine;
 namespace Client
 {
     /// <summary>
-    /// SHIELD°¡ ½ÃÀüÀÚÀÇ {statsType}ÀÇ {1}%¸¸Å­ ÇÑ ¹ø Áõ°¡ÇÑ´Ù. Shield´Â {time}ms ÀÌÈÄ »ç¶óÁø´Ù.
+    /// SHIELDê°€ ì‹œì „ìì˜ {statsType}ì˜ {1}%ë§Œí¼ í•œ ë²ˆ ì¦ê°€í•œë‹¤. ShieldëŠ” {time}ms ì´í›„ ì‚¬ë¼ì§„ë‹¤.
     /// </summary>
-    /// <remarks> ±âÈ¹ ÀÇµµ¿¡ µû¶ó º°µµÀÇ °´Ã¼¸¦ »ç¿ëÇÏµµ·Ï ÇÔ.</remarks>
+    /// <remarks> ê¸°íš ì˜ë„ì— ë”°ë¼ ë³„ë„ì˜ ê°ì²´ë¥¼ ì‚¬ìš©í•˜ë„ë¡ í•¨.</remarks>
     public class CreateShield : FunctionBase
     {
         private Shield ShieldInstance = null;
@@ -30,12 +30,12 @@ namespace Client
                 ShieldInstance = new Shield(shieldAmount, this);
 
                 _TargetChar.CharStat.AddShield(ShieldInstance);
-                Debug.Log($"½Çµå Ãß°¡: {_CastChar.GetID()}¹øÀÌ {_TargetChar.GetID()}¹ø¿¡°Ô ½Çµå ºÎ¿©");
+                Debug.Log($"ì‹¤ë“œ ì¶”ê°€: {_CastChar.GetID()}ë²ˆì´ {_TargetChar.GetID()}ë²ˆì—ê²Œ ì‹¤ë“œ ë¶€ì—¬");
             }
             else
             {
                 _TargetChar.CharStat.RemoveShield(ShieldInstance);
-                Debug.Log($"½Çµå Á¦°Å: {_CastChar.GetID()}¹øÀÌ {_TargetChar.GetID()}¹ø¿¡°Ô ÁØ ½Çµå ¸¸·á");
+                Debug.Log($"ì‹¤ë“œ ì œê±°: {_CastChar.GetID()}ë²ˆì´ {_TargetChar.GetID()}ë²ˆì—ê²Œ ì¤€ ì‹¤ë“œ ë§Œë£Œ");
             }
         }
 
@@ -57,7 +57,7 @@ namespace Client
             this.owner = owner;
         }
 
-        /// <returns> ÀÌ ½Çµå ÀÎ½ºÅÏ½º¿¡¼­ Èí¼öÇÏ°í ³²Àº ´ë¹ÌÁö¸¦ ¹İÈ¯ÇÑ´Ù. </returns>
+        /// <returns> ì´ ì‹¤ë“œ ì¸ìŠ¤í„´ìŠ¤ì—ì„œ í¡ìˆ˜í•˜ê³  ë‚¨ì€ ëŒ€ë¯¸ì§€ë¥¼ ë°˜í™˜í•œë‹¤. </returns>
         public long AbsorbDamage(long damage)
         {
             if (Amount >= damage)
@@ -70,7 +70,7 @@ namespace Client
                 long remainingDamage = damage - Amount;
                 Amount = 0;
                 owner.OnShieldBreak();
-                Debug.Log($"½Çµå ºÎ¼­Áü. ³²Àº ´ë¹ÌÁö : {remainingDamage}");
+                Debug.Log($"ì‹¤ë“œ ë¶€ì„œì§. ë‚¨ì€ ëŒ€ë¯¸ì§€ : {remainingDamage}");
                 return remainingDamage;
             }
         }

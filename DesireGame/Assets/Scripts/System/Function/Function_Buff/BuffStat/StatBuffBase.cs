@@ -3,12 +3,12 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    /// <summary> ½ºÅÈ ¹öÇÁ¿Í °ü·ÃµÈ Function </summary>
+    /// <summary> ìŠ¤íƒ¯ ë²„í”„ì™€ ê´€ë ¨ëœ Function </summary>
     public class StatBuffBase : FunctionBase
     {
         protected bool isTemporal;
 
-        // µ¥ÀÌÅÍ »óÀ¸·Î º£ÀÌ½ºÀÎ ½ºÅÈ
+        // ë°ì´í„° ìƒìœ¼ë¡œ ë² ì´ìŠ¤ì¸ ìŠ¤íƒ¯
         protected eStats targetStat;
         protected float delta = 0;
       
@@ -35,7 +35,7 @@ namespace Client
             }
         }
 
-        /// <remarks> <b>°è»êÀº GetStatRaw¸¦ »ç¿ëÇØ¼­ ÇÒ °Í</b> </remarks>
+        /// <remarks> <b>ê³„ì‚°ì€ GetStatRawë¥¼ ì‚¬ìš©í•´ì„œ í•  ê²ƒ</b> </remarks>
         public virtual void ComputeDelta() { }
 
         public virtual void ChangeStat(eStats stat, float delta)

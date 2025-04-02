@@ -7,7 +7,7 @@ namespace Client
 {
     public class LocalizeStringCode : MonoBehaviour
     {
-        [Header("º¯¿ª ½ºÆ®¸µ ÄÚµå")]
+        [Header("ë³€ì—­ ìŠ¤íŠ¸ë§ ì½”ë“œ")]
         [SerializeField] private string localizeTxt;
 
         void OnEnable()
