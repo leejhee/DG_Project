@@ -49,10 +49,11 @@ namespace Client
 
             foreach(var other in otherSynergies)
             {
-                _synergyActivator[other].GetCurrentSynergyBuff(registrar);
+                _synergyActivator[other].GuestRegister(registrar);
             }
 
         }
+        
 
         public void DeleteCharSynergy(CharLightWeightInfo leaver)
         {
@@ -66,7 +67,7 @@ namespace Client
 
             foreach (var other in otherSynergies)
             {
-                _synergyActivator[other].KillLeaverBuff(leaver);
+                _synergyActivator[other].GuestDelete(leaver);
             }
 
         }

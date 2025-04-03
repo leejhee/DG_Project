@@ -1,9 +1,9 @@
 using static Client.SystemEnum;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 using UnityEngine;
 using System.Collections.ObjectModel;
+using System.Collections;
 
 namespace Client
 {
@@ -13,21 +13,22 @@ namespace Client
 
         private List<CharLightWeightInfo> _synergyMembers;
         public ReadOnlyCollection<CharLightWeightInfo> SynergyMembers => _synergyMembers.AsReadOnly();
+        
+        private HashSet<CharLightWeightInfo> _guestMemberSet;
 
         #region 생성자
         public SynergyContainer(eSynergy synergy)
         {
             _synergyMembers = new();
+            _guestMemberSet = new();
             mySynergy = synergy;
         }
-
+        #endregion
         public override string ToString()
         {
             return $"{mySynergy} 시너지, Members : {_synergyMembers.Count}, DistinctMembers : {DistinctMembers}";
         }
-
-        #endregion
-
+        
         #region Synergy Member Control
 
         public int MemberCount => _synergyMembers.Count;
@@ -35,6 +36,8 @@ namespace Client
         // 해당 시너지에 포함되는 멤버가 등록될 때 호출된다.
         public void Register(CharLightWeightInfo registrar)
         {
+            if(_guestMemberSet.Contains(registrar))
+                _guestMemberSet.Remove(registrar);
             if(!_synergyMembers.Contains(registrar))
                 _synergyMembers.Add(registrar);
 
@@ -42,8 +45,15 @@ namespace Client
                 SetCurrentSynergy();
             else
                 GetCurrentSynergyBuff(registrar);
+
         }
 
+        public void GuestRegister(CharLightWeightInfo guest)
+        {
+            _guestMemberSet.Add(guest);
+            GetCurrentSynergyBuff(guest);
+        }
+        
         // 해당 시너지에 포함되는 멤버가 탈퇴할 때 호출된다.
         public void Delete(CharLightWeightInfo leaver)
         {
@@ -54,8 +64,38 @@ namespace Client
 
             if (CheckSynergyChange())
                 SetCurrentSynergy();
+
         }
 
+        public void GuestDelete(CharLightWeightInfo guestLeaver)
+        {
+            _guestMemberSet.Remove(guestLeaver);
+            KillLeaverBuff(guestLeaver);
+        }
+
+        private void OnNewBuffDistributed(CharBase specifiedMember)
+        {
+            specifiedMember.StartCoroutine(DelayedEvaluateCondition(
+                new SynergyConditionInput() { ChangedSynergy = mySynergy, RegistrarIndex = specifiedMember.Index },
+                specifiedMember));
+        }
+
+        private void ScanAllMembers()
+        {
+            foreach(var member in _synergyMembers)
+                OnNewBuffDistributed(member.SpecifyCharBase());
+            foreach(var guest in _guestMemberSet)
+                OnNewBuffDistributed(guest.SpecifyCharBase());
+        }
+        
+        private IEnumerator DelayedEvaluateCondition(ConditionCheckInput param, CharBase target)
+        {
+            Debug.Log($"{target.GetID()}번 캐릭터에서 시너지 변경으로 인한 조건 검사");
+
+            yield return null;
+            
+            target.FunctionInfo.EvaluateCondition(param);
+        }
         #endregion
 
         #region Synergy Data Getter
@@ -106,19 +146,19 @@ namespace Client
         {
             var newSynergy = GetSynergyByLevel();
             if (_currentSynergyBuff == newSynergy)
-                return false;
-            else
             {
-                _currentSynergyBuff = newSynergy;
-                return true;
+                return false;
             }
+            
+            _currentSynergyBuff = newSynergy;
+            return true;
         }
 
         // 현재 적용되는 글로벌 시너지 버프를 얻는 함수
         public void GetCurrentSynergyBuff(CharLightWeightInfo receiver)
         {
             var caster = receiver.SpecifyCharBase();
-            if (caster == null) return;
+            if (caster == false) return;
 
             foreach(var synergyData in _currentSynergyBuff)
             {
@@ -127,13 +167,14 @@ namespace Client
                     GetBuff(caster, synergyData);
                 }
             }
-
+            
+            OnNewBuffDistributed(caster);
         }
 
         public void KillLeaverBuff(CharLightWeightInfo releaser)
         {
             var caster = releaser.SpecifyCharBase();
-            if (caster == null) return;
+            if (caster == false) return;
 
             // 안전하게 하자.
             int count = synergyBuffRecords.Count;
@@ -158,14 +199,14 @@ namespace Client
                 return;
             }
             
-            var IntendedTargets = TargetStrategyFactory.CreateTargetStrategy
+            var intendedTargets = TargetStrategyFactory.CreateTargetStrategy
                 (new TargettingStrategyParameter() { Caster = caster, type = data.skillTarget }).GetTargets();
 
             CharBase target = null;
-            if (IntendedTargets.Count == 0)
+            if (intendedTargets.Count == 0)
                 Debug.Log($"현재 타겟이 타게팅 타입 {data.skillTarget}에 따라 정해지지 않습니다.");
             else
-                target = IntendedTargets[0];
+                target = intendedTargets[0];
             #endregion
 
             #region ADD BUFF AND RECORD
@@ -178,16 +219,16 @@ namespace Client
                 FunctionIndex = funcData.Index
             });
 
-            //TODO : FunctionInfo에 '전투 시작'에 대한 지시 철회할 것. 시너지컨테이너에서 책임 진다.
-            //TODO : SynergyContainer에서 Distributer로 객체 분리할지 생각해볼 것
             caster.FunctionInfo.AddFunction(synergyFunction, data.buffTriggerTime);
             Debug.Log($"{caster.GetID()}번 캐릭터 {caster.name}에 synergy Function {funcData.Index}번 function 주입. " +
                                     $"기능 : {funcData.function}");
             //////////Add Record/////////
             synergyBuffRecords.Enqueue(new SynergyBuffRecord(caster, synergyFunction));
             #endregion
+
         }
 
+        // todo : guest와 synergyMembers 구조 참고하여 작성. charManager 간 연관 자제할것. 
         // 시너지 갱신 함수
         public void SetCurrentSynergy()
         {            
@@ -231,9 +272,11 @@ namespace Client
                 // 캐스터 순회하여 각각 caster로 설정한 function을 만들어 add한다.
                 foreach (var caster in casters)
                 {
-                    GetBuff(caster, synergyData);                       
+                    GetBuff(caster, synergyData); 
                 }
-            }            
+            }
+
+            ScanAllMembers();
         }
 
         #endregion
@@ -254,7 +297,6 @@ namespace Client
         public void KillSynergyBuff()
         {
             BuffFunction.KillSelfFunction(true, true);
-            //Caster.FunctionInfo.KillFunction(BuffFunction);
             Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
         }
 

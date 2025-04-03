@@ -151,7 +151,7 @@ namespace Client
             _conditions.Remove(condition);
         }
 
-        public void EvaluateCondition(ConditionCheckParameter param)
+        public void EvaluateCondition(ConditionCheckInput param)
         {
             foreach(var condition in _conditions)
                 condition.CheckInput(param);

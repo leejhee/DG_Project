@@ -5,7 +5,7 @@ using System.Linq;
 using static Client.SystemEnum;
 using System;
 
-// TODO : 자잘한 Condition 계산을 위한 기준을 부여할 Static helper 만들 것.
+// TODO : 캐스팅으로 인한 성능 리스크 괜찮을지.
 namespace Client
 {
     public struct ConditionParameter
@@ -15,23 +15,25 @@ namespace Client
     }
 
     // 원형
-    public class ConditionCheckParameter
+    public class ConditionCheckInput
     {
-        public eCondition conditionType;
+        public eCondition ConditionType;
     }
 
-    public class StatConditionParameter : ConditionCheckParameter
+    public class StatConditionInput : ConditionCheckInput
     {
-        public CharStat stat;
-        public eStats changedStat;
-
-        public long input;
+        public CharStat Stat;
+        public eStats ChangedStat;
+        public long Delta;
+        public long Input;
     }
     
-    public class SynergyConditionParameter : ConditionCheckParameter
+    public class SynergyConditionInput : ConditionCheckInput
     {
-        public eSynergy changedSynergy;
+        public eSynergy ChangedSynergy;
+        public long RegistrarIndex;
     }
+
     
     /// /////////////////////////////////////////////////////////////////////
     
@@ -49,7 +51,7 @@ namespace Client
 
         //public abstract bool CheckCondition(ConditionCheckParameter param);
 
-        public virtual void CheckInput(ConditionCheckParameter param) { }
+        public virtual void CheckInput(ConditionCheckInput param) { }
     }
 
     public abstract class StatCondition : ConditionBase
@@ -58,11 +60,13 @@ namespace Client
         {
         }
 
-        public override void CheckInput(ConditionCheckParameter param)
+        public override void CheckInput(ConditionCheckInput param)
         {
             base.CheckInput(param);
-            if (param is not StatConditionParameter) 
-                return;            
+            if (param is not StatConditionInput)
+            {
+                Debug.LogError($"형변환 실패 {typeof(StatConditionInput)}");
+            }
         }
 
     }
@@ -80,30 +84,39 @@ namespace Client
         {
         }
 
-        public override void CheckInput(ConditionCheckParameter param)
+        public override void CheckInput(ConditionCheckInput param)
         {
             base.CheckInput(param);
-            if (param is not SynergyConditionParameter) return;
+            if (param is not SynergyConditionInput) return;
         }
     }
 
-
+    
+    
     public class HPUnderNPercent : StatCondition
     {
+        private bool _invokedOnce;
+        
         public HPUnderNPercent(ConditionParameter param) : base(param)
         {
         }
 
-        public override void CheckInput(ConditionCheckParameter param)
+        public override void CheckInput(ConditionCheckInput param)
         {
             base.CheckInput(param);
-            if (param is not StatConditionParameter statCondition)
+            if (param is not StatConditionInput statCondition)
             {
-                Debug.LogError($"형변환 실패로 조건 체크 종료. {typeof(StatConditionParameter)}");
+                Debug.LogError($"형변환 실패로 조건 체크 종료. {typeof(StatConditionInput)}");
                 return;
             }
-            
-            _conditionCallback.Invoke(statCondition.input < _conditionData.value1);
+
+            if (_invokedOnce ||
+                statCondition.Delta >= 0 ||
+                statCondition.ChangedStat != eStats.NHP)
+                return;
+
+            _conditionCallback.Invoke(statCondition.Input < _conditionData.value1);
+            _invokedOnce = true;
         }
     }
 
@@ -114,14 +127,17 @@ namespace Client
 
         public LaplacianUnitOnly(ConditionParameter param) : base(param)
         {
-
+            checkTargetIndex = _conditionData.value1;
         }
 
-        public override void CheckInput(ConditionCheckParameter param)
+        public override void CheckInput(ConditionCheckInput param)
         {
             base.CheckInput(param);
+            if (param is not SynergyConditionInput laplacian)
+                return;
+            
             var members = SynergyManager.Instance.GetInfo(eSynergy.LAPLACIAN);
-            if (members == null || members.Count == 0)
+            if (members == null || members.Count == 0 || laplacian.ChangedSynergy != eSynergy.LAPLACIAN)
             {
                 return;
             }
@@ -132,13 +148,14 @@ namespace Client
 
     }
 
+    // 있으면 안될 거 같음. 아무리 생각해도요.
     public class TrueCondition : ConditionBase
     {
         public TrueCondition(ConditionParameter param) : base(param)
         {
         }
 
-        public override void CheckInput(ConditionCheckParameter param)
+        public override void CheckInput(ConditionCheckInput param)
         {
             base.CheckInput(param);
             _conditionCallback.Invoke(true);

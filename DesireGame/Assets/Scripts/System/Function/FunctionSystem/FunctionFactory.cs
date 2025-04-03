@@ -29,6 +29,7 @@ namespace Client
                 case eFunction.TELEPORT_TO_ALLY_REAR:   return new TeleportToAllyRear(buffParam);
                 case eFunction.SWORD_SYNERGY_AABUFF:    return new SWORD_AA(buffParam);
                 case eFunction.LAPLACIAN_ENTRYPOINT:    return new LAPLACIAN_ENTRYPOINT(buffParam);
+                case eFunction.SHIELD_SYNERGY_HEAL:     return new ArmorSynergyHeal(buffParam);
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);

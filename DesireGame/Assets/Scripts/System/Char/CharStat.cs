@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using static Client.SystemEnum;
 using System;
@@ -118,8 +117,8 @@ namespace Client
         public void ChangeStateByBuff(eStats stat, long delta)
         {
             eStats properTargetStat = CurrentStatByBaseStat(stat);
-            var tempStat = GetStatRaw(properTargetStat);
-            var afterStat = GetStatRaw(properTargetStat) + delta;
+            long tempStat = GetStatRaw(properTargetStat);
+            long afterStat = GetStatRaw(properTargetStat) + delta;
 
             switch (properTargetStat)
             {
@@ -135,17 +134,14 @@ namespace Client
             
             #region 스탯에 따른 조건 Trigging
             {
-                Queue<ConditionCheckParameter> triggers = new();
-
-                if (delta < 0)
+                // TODO : Queue 써야 할지 판단 
+                Queue<ConditionCheckInput> triggers = new();
+                
+                triggers.Enqueue(new StatConditionInput()
                 {
-                    triggers.Enqueue(new StatConditionParameter()
-                    {
-                        changedStat = properTargetStat,
-                        conditionType = eCondition.HP_UNDER_N, // HP 깎일 때
-                        input = (long)(GetStat(eStats.NHP) / GetStat(eStats.NMHP))
-                    });
-                }
+                    ChangedStat = properTargetStat,
+                    Input = (long)(GetStat(eStats.NHP) / GetStat(eStats.NMHP))
+                });
                 
                 while (triggers.Count > 0)
                 {
@@ -244,7 +240,7 @@ namespace Client
             }
 
             // 실드 계산 파트
-            var appliedDamage = AbsorbDamage((long)finalDamage);
+            long appliedDamage = AbsorbDamage((long)finalDamage);
 
             // 실대미지 계산 파트
             ChangeStateByBuff(eStats.NHP, -appliedDamage);

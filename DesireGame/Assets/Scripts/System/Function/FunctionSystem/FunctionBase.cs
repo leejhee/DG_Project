@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Client
 {
@@ -61,6 +58,8 @@ namespace Client
                     $"인덱스 {_FunctionData.Index} " +
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
+
+                CheckFollowingCondition();
             }
             else
             {
@@ -95,31 +94,20 @@ namespace Client
 
         public void CheckFollowingCondition()
         {
-            if (_FunctionData.ConditionCheck != 0)
+            if (_FunctionData.ConditionCheck == 0)
             {
-                var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
-                if (data == null) return;
-                _condition = ConditionFactory.CreateCondition(new ConditionParameter()
-                {
-                    conditionData = data,
-                    conditionCallback = ConditionCheckCallback
-                });
-                _TargetChar.FunctionInfo.AddCondition(_condition);
-                {
-                //if (condition.CheckCondition())
-                //{
-                //    foreach(var followingfunction in _FunctionData.ConditionFuncList)
-                //    {
-                //        var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
-                //        AddChildFunctionToTarget(func);
-                //    }
-                //}
-                //else
-                //{
-                //    Debug.Log("컨디션 만족하지 못하여 발동 안함");
-                //}
-                }
+                return;
             }
+
+            var data = DataManager.Instance.GetData<ConditionData>(_FunctionData.ConditionCheck);
+            if (data == null) return;
+            _condition = ConditionFactory.CreateCondition(new ConditionParameter()
+            {
+                conditionData = data,
+                conditionCallback = ConditionCheckCallback
+            });
+            _TargetChar.FunctionInfo.AddCondition(_condition);
+            Debug.Log($"{_TargetChar.GetID()}번 캐릭터 {_TargetName}에 condition {_FunctionData.ConditionCheck}번 대입");
         }
 
         private void ConditionCheckCallback(bool result)
@@ -139,10 +127,10 @@ namespace Client
         }
 
 
-        protected List<FunctionBase> _children = new();
-        public void AddChildFunctionToTarget(FunctionData childData)
+        private List<FunctionBase> _children = new();
+        protected void AddChildFunctionToTarget(FunctionData childData)
         {
-            if (childData == null || childData.function == default)
+            if (childData.function == default)
                 return;
             else
             {
@@ -161,7 +149,7 @@ namespace Client
             }               
         }
 
-        public void KillChildFunctionToTarget(bool killAfterChildren=false)
+        private void KillChildFunctionToTarget(bool killAfterChildren=false)
         {
             foreach(var child in _children)
             {
