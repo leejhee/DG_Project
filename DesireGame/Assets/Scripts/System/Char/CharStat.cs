@@ -179,7 +179,7 @@ namespace Client
         public Action OnDealDamage;
         public Action OnDeath;
 
-        //public Action<CharBase> 신상공개;
+        public Action<CharBase> 신상공개;
 
         /// <summary>
         /// 공격자 기준 대미지 관여 요소들을 산출합니다.
@@ -252,7 +252,7 @@ namespace Client
             if (_charStat[(int)eStats.NHP] <= 0)
             {
                 Debug.Log("으엑 죽었다");
-                //신상공개?.Invoke(damage.Attacker);
+                신상공개?.Invoke(damage.Attacker);
                 OnDeath?.Invoke();
             }
         }

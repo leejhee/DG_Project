@@ -13,28 +13,7 @@ namespace Client
         public Action<bool> conditionCallback;
         public ConditionData conditionData;
     }
-
-    // 원형
-    public class ConditionCheckInput
-    {
-        public eCondition ConditionType;
-    }
-
-    public class StatConditionInput : ConditionCheckInput
-    {
-        public CharStat Stat;
-        public eStats ChangedStat;
-        public long Delta;
-        public long Input;
-    }
-    
-    public class SynergyConditionInput : ConditionCheckInput
-    {
-        public eSynergy ChangedSynergy;
-        public long RegistrarIndex;
-    }
-
-    
+ 
     /// /////////////////////////////////////////////////////////////////////
     
     // 파생 클래스에서는 각 생성자 부분에 구독하는 부분을 추가할 것

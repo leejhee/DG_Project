@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using static Client.SystemEnum;
 
 namespace Client
@@ -22,6 +19,7 @@ namespace Client
                 case eFunction.BUFF_ONCE:               return new BuffOnce(buffParam);
                 case eFunction.BUFF_ONCE_BY_AD:         return new BuffOnceByAD(buffParam);
                 case eFunction.BUFF_ONCE_BY_AP:         return new BuffOnceByAP(buffParam);
+                case eFunction.BUFF_ONCE_PLUS:          return new BuffOncePlus(buffParam);
                 case eFunction.CREATE_SHIELD:           return new CreateShield(buffParam);
                 case eFunction.EXTEND_RANGE:            return new ExtendRange(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
@@ -30,11 +28,10 @@ namespace Client
                 case eFunction.SWORD_SYNERGY_AABUFF:    return new SWORD_AA(buffParam);
                 case eFunction.LAPLACIAN_ENTRYPOINT:    return new LAPLACIAN_ENTRYPOINT(buffParam);
                 case eFunction.SHIELD_SYNERGY_HEAL:     return new ArmorSynergyHeal(buffParam);
+                case eFunction.RANGED_SYNERGY_ADBUFF:   return new RangedSynergyADBUFF(buffParam);
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);
-                default:
-                    break;
             }
             return null;
         }

@@ -56,4 +56,18 @@ namespace Client
         }
     }
 
+    public class BuffOncePlus : StatBuffBase
+    {
+        public BuffOncePlus(BuffParameter buffParam) : base(buffParam)
+        {
+            
+        }
+
+        public override void ComputeDelta()
+        {
+            base.ComputeDelta();
+            delta = _FunctionData.input1;
+        }
+    }
+    
 }

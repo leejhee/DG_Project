@@ -228,7 +228,6 @@ namespace Client
 
         }
 
-        // todo : guest와 synergyMembers 구조 참고하여 작성. charManager 간 연관 자제할것. 
         // 시너지 갱신 함수
         public void SetCurrentSynergy()
         {            

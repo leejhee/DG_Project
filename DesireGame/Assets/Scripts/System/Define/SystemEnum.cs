@@ -185,6 +185,7 @@ namespace Client
             BUFF_ONCE_BY_AD,
             BUFF_ONCE_BY_AP,
             BUFF_ONCE,
+            BUFF_ONCE_PLUS,
 
             CREATE_SHIELD,
             EXTEND_RANGE,
