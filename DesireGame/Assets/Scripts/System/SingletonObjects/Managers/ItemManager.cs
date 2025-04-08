@@ -94,10 +94,10 @@ namespace Client
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public List<(SystemEnum.eStats eStat, int increase)> GenerateSubStats(int count)
+        public List<(ItemSubStatData subStatData, int increase)> GenerateSubStats(int count)
         {
 
-            List<(SystemEnum.eStats eStat, int increase)> list = new();
+            List<(ItemSubStatData subStatData, int increase)> list = new();
             if (count == 0) return list;
 
             var ItemSubStatDataList = DataManager.Instance.GetDataList<ItemSubStatData>();
@@ -115,8 +115,8 @@ namespace Client
 
                 var _itemSubStatData = ItemSubStatDataList[index];
                 var itemSubStatData = _itemSubStatData as ItemSubStatData;
-                list.Add((itemSubStatData.subStats, SetStatIncrease(itemSubStatData)));
-                Debug.Log($"{i} 서브 스탯 : {list[i].eStat}, 증가량 : {list[i].increase}");
+                list.Add((itemSubStatData, SetStatIncrease(itemSubStatData)));
+                Debug.Log($"{i} 서브 스탯 : {list[i].subStatData}, 증가량 : {list[i].increase}");
             }
             return list;
         }

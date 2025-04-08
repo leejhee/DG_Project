@@ -5,7 +5,7 @@ using static UnityEditor.Progress;
 
 namespace Client
 {
-    public class ItemSlot
+    public class ItemCharSlot
     {
         private CharPlayer charOwner;
         private List<Item> items = new(); // 장착한 아이템 리스트
@@ -43,7 +43,7 @@ namespace Client
             charOwner.CharStat.ChangeStateByBuff(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
             foreach(var substat in item.SubStatList)
             {
-                charOwner.CharStat.ChangeStateByBuff(substat.eStat, substat.increase);
+                charOwner.CharStat.ChangeStateByBuff(substat.subStatData.subStats, substat.increase);
             }
 
         }
@@ -52,7 +52,7 @@ namespace Client
             charOwner.CharStat.ChangeStateByBuff(item.ItemData.mainStats, item.ItemData.mainStatsIncrease);
             foreach (var substat in item.SubStatList)
             {
-                charOwner.CharStat.ChangeStateByBuff(substat.eStat, -substat.increase);
+                charOwner.CharStat.ChangeStateByBuff(substat.subStatData.subStats, -substat.increase);
             }
 
         }

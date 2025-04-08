@@ -11,15 +11,12 @@ using System.Text.RegularExpressions;
 namespace Client
 {
     [Serializable]
-    public partial class ItemSubStatData : SheetData
+    public partial class TierColorData : SheetData
     {
-public long Index; // itemID
-		public int proWeight; // 확률가중치
+public long Index; // ID
 		
-		public SystemEnum.eStats subStats; // 서브스탯이름
-		public int min; // 최소값
-		public int max; // 최댓값
-		public string stringCode; // 설명텍스트
+		public SystemEnum.eItemTier tier; // 등급
+		public string hexColorForItemDes; // 아이템창 설명용 색상
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -42,7 +39,7 @@ public long Index; // itemID
 
                     line = i;
 
-                    ItemSubStatData data = new ItemSubStatData();
+                    TierColorData data = new TierColorData();
 
                     
 					if(values[0] == "")
@@ -51,29 +48,14 @@ public long Index; // itemID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[1] == "")
-					    data.proWeight = default;
+					    data.tier = default;
 					else
-					    data.proWeight = Convert.ToInt32(values[1]);
+					    data.tier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[1]);
 					
 					if(values[2] == "")
-					    data.subStats = default;
+					    data.hexColorForItemDes = default;
 					else
-					    data.subStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[2]);
-					
-					if(values[3] == "")
-					    data.min = default;
-					else
-					    data.min = Convert.ToInt32(values[3]);
-					
-					if(values[4] == "")
-					    data.max = default;
-					else
-					    data.max = Convert.ToInt32(values[4]);
-					
-					if(values[5] == "")
-					    data.stringCode = default;
-					else
-					    data.stringCode = Convert.ToString(values[5]);
+					    data.hexColorForItemDes = Convert.ToString(values[2]);
 					
 
                     dataList[data.Index] = data;

@@ -7,11 +7,9 @@ namespace Client
 {
     public class Inventory : Singleton<Inventory>
     {
-        // 싱글턴 너무 남발하나?
-        // 근데 싱글턴을 하지 않고서는 뾰족한 수가 없다 ㅠ.ㅠ
-
-        private readonly int maxCount = 20;
+        private readonly int maxCount = 100;
         private List<Item> itemList = new();
+        public List<Item> ItemList => itemList;
 
         public Action<ItemUIParameter> OnItemChange; // 인벤토리에 변화 생길 시 UI에 변경사항 전달
 
@@ -65,8 +63,9 @@ namespace Client
 
             itemList.Remove(item);
             Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  제거");
-        }
 
-        // TODO : 아이템 리스트 변경시 UI 업데이트
+            OnItemChange?.Invoke(new ItemUIParameter(item));
+
+        }
     }
 }

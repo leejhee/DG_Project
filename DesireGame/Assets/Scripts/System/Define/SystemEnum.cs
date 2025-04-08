@@ -335,7 +335,7 @@ namespace Client
             
             eMax
         }
-        
+
         #region 교체될 수 있는 enum들이므로 용도가 겹칠 경우 삭제해줄 것
 
         public enum eState

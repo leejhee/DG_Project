@@ -17,6 +17,7 @@ public long Index; // itemID
 		public string nameStringCode; // 이름 스트링 코드
 		
 		public SystemEnum.eItemType itemType; // 아이템타입
+		public string iconImagePath; // 아이템 아이콘
 		
 		public SystemEnum.eItemTier itemTier; // 아이템 티어
 		
@@ -26,6 +27,7 @@ public long Index; // itemID
 		
 		public SystemEnum.eFunction func; // 특수효과
 		public string descID; // 설명ID
+		public string mainOpStringCode; // 메인스탯 스트링코드
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -67,34 +69,44 @@ public long Index; // itemID
 					    data.itemType = (SystemEnum.eItemType)Enum.Parse(typeof(SystemEnum.eItemType), values[3]);
 					
 					if(values[4] == "")
-					    data.itemTier = default;
+					    data.iconImagePath = default;
 					else
-					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[4]);
+					    data.iconImagePath = Convert.ToString(values[4]);
 					
 					if(values[5] == "")
-					    data.mainStats = default;
+					    data.itemTier = default;
 					else
-					    data.mainStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[5]);
+					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[5]);
 					
 					if(values[6] == "")
-					    data.mainStatsIncrease = default;
+					    data.mainStats = default;
 					else
-					    data.mainStatsIncrease = Convert.ToInt32(values[6]);
+					    data.mainStats = (SystemEnum.eStats)Enum.Parse(typeof(SystemEnum.eStats), values[6]);
 					
 					if(values[7] == "")
-					    data.subStatsCount = default;
+					    data.mainStatsIncrease = default;
 					else
-					    data.subStatsCount = Convert.ToInt32(values[7]);
+					    data.mainStatsIncrease = Convert.ToInt32(values[7]);
 					
 					if(values[8] == "")
-					    data.func = default;
+					    data.subStatsCount = default;
 					else
-					    data.func = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[8]);
+					    data.subStatsCount = Convert.ToInt32(values[8]);
 					
 					if(values[9] == "")
+					    data.func = default;
+					else
+					    data.func = (SystemEnum.eFunction)Enum.Parse(typeof(SystemEnum.eFunction), values[9]);
+					
+					if(values[10] == "")
 					    data.descID = default;
 					else
-					    data.descID = Convert.ToString(values[9]);
+					    data.descID = Convert.ToString(values[10]);
+					
+					if(values[11] == "")
+					    data.mainOpStringCode = default;
+					else
+					    data.mainOpStringCode = Convert.ToString(values[11]);
 					
 
                     dataList[data.Index] = data;

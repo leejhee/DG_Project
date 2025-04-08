@@ -36,6 +36,10 @@ namespace Client
         private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
         public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
 
+        // 아이템 티어별 UI 색상 헥사 코드
+        private Dictionary<eItemTier, string> _tierColorDataMap = new();
+        public Dictionary<eItemTier, string> TierColorDataMap => _tierColorDataMap;
+
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
         #endregion
@@ -52,6 +56,7 @@ namespace Client
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
             if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
             if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
+            if (typeof(TierColorData).ToString().Contains(data)) { SetTierColorData(); return; }
 
         }
         // 플레이어 위치정보
@@ -231,6 +236,25 @@ namespace Client
             }
         }
 
+        // 아이템 티어별 UI 색상
+        private void SetTierColorData()
+        {
+            string key = typeof(TierColorData).Name;
+            if (_cache.ContainsKey(key) == false)
+                return;
+
+            var colorDict = _cache[key];
+            if (colorDict is null) return;
+
+            foreach (var kvp in colorDict)
+            {
+                var tierColorData = kvp.Value as TierColorData;
+
+                if (!_tierColorDataMap.ContainsKey(tierColorData.tier))
+                    _tierColorDataMap.Add(tierColorData.tier, tierColorData.hexColorForItemDes);
+            }
+
+        }
 
         public static string GetStringCode(string stringCode)
         {

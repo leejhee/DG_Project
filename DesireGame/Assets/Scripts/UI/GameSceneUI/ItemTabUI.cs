@@ -1,20 +1,74 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client
 {
     public class ItemTabUI : MonoBehaviour
     {
-        [SerializeField] Transform ItemGridPanel; // 네모난~ 아이템 슬롯들이 자리잡을 Vertical Layout Panel의 Transform(여기다가 Instantiate하겠지?)
+        [SerializeField] Transform itemGridPanel; // Vertical Layout Panel의 Transform
+        [SerializeField] GameObject itemSlotPrefab;
+        [SerializeField] Button NextPageButton;
+        [SerializeField] ItemInfoPanelUI itemInfoPanel;
+
+        private List<ItemSlotUI> itemSlots = new();
+        private int currentPage = 0;
+        private const int maxCountPerPage = 9;
 
         private void Start()
         {
-            Inventory.Instance.OnItemChange += 아이템띄우기;
+            Inventory.Instance.OnItemChange += RefreshItemUI;
+
+            NextPageButton.onClick.AddListener(GoNextPage);
         }
 
-        private void 아이템띄우기(ItemUIParameter itemParameter)
+        private void InitSlots()
         {
-            //대충 새로운 아이템 하나를 띄워주는 내용
+            for (int i = 0; i < maxCountPerPage; i++)
+            {
+                GameObject slotObj = Instantiate(itemSlotPrefab, itemGridPanel);
+                ItemSlotUI slot = slotObj.GetComponent<ItemSlotUI>();
+                slot.Setup(OnItemSlotClicked);
+                itemSlots.Add(slot);
+            }
         }
+
+        private void OnItemSlotClicked(Item item)
+        {
+            itemInfoPanel.Show(item); // 아이템 정보 표시
+        }
+
+        private void RefreshItemUI(ItemUIParameter itemParameter)
+        {
+            List<Item> items = Inventory.Instance.ItemList;
+
+            int totalPages = Mathf.CeilToInt((float)items.Count / maxCountPerPage);
+            currentPage = Mathf.Clamp(currentPage, 0, Mathf.Max(totalPages - 1, 0));
+            
+            int startIndex = currentPage * maxCountPerPage;
+
+            for (int i = 0; i < maxCountPerPage; i++)
+            {
+                if (startIndex + i < items.Count)
+                {
+                    itemSlots[i].SetItem(items[startIndex + i]);
+                }
+                else
+                {
+                    itemSlots[i].Clear();
+                }
+            }
+        }
+
+
+        private void GoNextPage()
+        {
+            int totalPages = Mathf.CeilToInt((float)Inventory.Instance.ItemList.Count / maxCountPerPage);
+
+            currentPage = (currentPage + 1) % Mathf.Max(totalPages, 1);
+            RefreshItemUI(null);
+        }
+
     }
 }
