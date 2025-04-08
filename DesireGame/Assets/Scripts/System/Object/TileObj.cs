@@ -19,7 +19,7 @@ namespace Client
 
         #region 전투 컴포넌트 기능 연결
         public void SwitchCombatBehaviour(bool iscombat) => _tileCombat.enabled = iscombat;
-        public bool Accessable => _tileCombat.IsEmpty;
+        public bool Accessible => _tileCombat.IsEmpty;
         public HashSet<CharBase> GetTotalSteppingChar(HashSet<CharBase> other) { return _tileCombat.GetTotalChar(other); }
         #endregion
 

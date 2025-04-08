@@ -103,6 +103,7 @@ namespace Client
                 case (eStats.NCRIT_DAMAGE):
                 case (eStats.DAMAGE_INCREASE):
                 case (eStats.DAMAGE_REDUCTION):
+                case eStats.MANA_RESTORE_INCREASE:
                     return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
                     return _charStat[(int)eStats];

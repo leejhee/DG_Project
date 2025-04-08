@@ -90,18 +90,6 @@ namespace Client
             eMax, 
         }
 
-        public enum eSynergyLevel
-        {
-            None,
-
-            bronze,
-            silver,
-            gold,
-            prism,
-
-            eMax
-        }
-
         public enum eItemTier
         {
             NORMAL,
@@ -190,14 +178,14 @@ namespace Client
             CREATE_SHIELD,
             EXTEND_RANGE,
             TELEPORT_TO_ALLY_REAR,
-            COUNT,
             SWORD_SYNERGY_AABUFF,
             RANGED_SYNERGY_ADBUFF,
             SHIELD_SYNERGY_HEAL,
             MAGIC_SYNERGY_MANABUFF,
             DUALBLADE_SYNERGY_JUMP,
             CHANGE_PROJECTILE,
-
+            COUNT,
+            
             INCREASE_MAX_HP,
             BUFF_TOTAL_DAMAGE,
 
@@ -215,7 +203,6 @@ namespace Client
             None,
 
             LAPLACIAN_ONLY,
-            LAPLACIAN_ALL,
             HP_UNDER_N,
             TRUE,
 
@@ -338,6 +325,17 @@ namespace Client
             ITEM,
             eMax
         }
+
+        public enum eRowType
+        {
+            ALLY_REAR,
+            ALLY_FRONT,
+            ENEMY_FRONT,
+            ENEMY_REAR,
+            
+            eMax
+        }
+        
         #region 교체될 수 있는 enum들이므로 용도가 겹칠 경우 삭제해줄 것
 
         public enum eState

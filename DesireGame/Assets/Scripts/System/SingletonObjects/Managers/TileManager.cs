@@ -151,7 +151,7 @@ namespace Client
             }
 
             int startIndex = colOffset * TILE_COL_OFFSET;
-            for (int idx = startIndex; idx < startIndex + TILE_SIDE_OFFSET; idx++)
+            for (int idx = startIndex; idx < startIndex + TILE_COL_OFFSET; idx++)
                 results.Add(idx);
 
             return results;
@@ -182,10 +182,10 @@ namespace Client
             List<int> indices = new();
             foreach(int i in rawIndices)
             {
-                if (GetTile(i) == false || GetTile(i).Accessable == false) continue;
+                if (GetTile(i) == false || GetTile(i).Accessible == false) continue;
                 indices.Add(i);
             }
-           return indices;
+            return indices;
         }
 
         public Vector3 GetFarthestPos(Vector3 charPos, List<int> candidates)
@@ -197,15 +197,17 @@ namespace Client
             }
 
             int result = -1;
-            float farthest = 0;
+            int farthest = 0;
             foreach(var idx in candidates)
             {
-                var originDist = (GetTile(idx).transform.position - charPos).sqrMagnitude;
-                if(originDist > farthest)
+                var originDist = (int)(GetTile(idx).transform.position - charPos).sqrMagnitude;
+                if(originDist > farthest ||
+                   (originDist == farthest && result/TILE_COL_OFFSET > idx/TILE_COL_OFFSET))
                 {
                     farthest = originDist;
                     result = idx;
                 }
+                
             }
             return GetTile(result).transform.position;
         } 
@@ -213,13 +215,30 @@ namespace Client
         
         public void TeleportAllyFarthest(CharBase client)
         {
-            var demandingPositions = GetDemandingPositions(client.GetCharType(), true);
-            var filteredPositions = FilterIndices(demandingPositions);
+            var targetPositions = new List<int>();
+            var startPoint = TileIndexToRowType[NearTileIndex(client.transform.position)] == eRowType.ALLY_FRONT
+                ? TILE_COL_COUNT
+                : 0;
+            
+            // 여기 수정해야함
+            for (int i = 0; i < TILE_COL_COUNT; i++)
+            {
+                int targetCol = startPoint == 0 ? i + 1 : TILE_COL_COUNT - i;
+
+                targetPositions = GetDemandingPositions(eCharType.ALLY, true, targetCol);
+                targetPositions = FilterIndices(targetPositions);
+    
+                if (targetPositions.Count > 0)
+                    break;
+            }
+            
             var beforePos = client.CharTransform.position;
-            client.CharTransform.position = GetFarthestPos(beforePos, filteredPositions);
+            client.CharTransform.position = GetFarthestPos(beforePos, targetPositions);
             Debug.Log($"텔레포트 완료. {client.GetID()}번 {client.name}이 {beforePos}에서 {client.CharTransform.position}으로 이동");
         }
-
+        
+        
+        
         #endregion
     }
 }
