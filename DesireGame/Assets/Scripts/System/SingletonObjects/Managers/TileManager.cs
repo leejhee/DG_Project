@@ -136,29 +136,81 @@ namespace Client
         #region Character Tile Movement Helper Method
 
         /// <summary> 캐릭터 타입 기준 아군 및 적군 특정 열의 인덱스들을 반환 </summary>
-        public List<int> GetDemandingPositions(eCharType type, bool sameSide, int col)
+        /// <param name="type"> 내가 무슨 캐릭터 타입? </param>
+        /// <param name="sameSide"> true일 경우 내 타입 기준 아군, false일 경우 적군</param>
+        public List<int> GetDemandingColPositions(eCharType type, bool sameSide, int offset)
         {
             List<int> results = new();
-            int colOffset = 0;                    
-
+            int Offset = 0;
+            
             if (type == eCharType.ALLY)
             {
-                colOffset += sameSide ? TILE_COL_COUNT - col : TILE_COL_COUNT + col - 1;
+                Offset += sameSide ? TILE_COL_COUNT - offset : TILE_COL_COUNT + offset - 1;
             }
             else if (type == eCharType.ENEMY)
             {
-                colOffset += sameSide ? TILE_COL_COUNT + col - 1 : TILE_COL_COUNT - col;
+                Offset += sameSide ? TILE_COL_COUNT + offset - 1 : TILE_COL_COUNT - offset;
             }
 
-            int startIndex = colOffset * TILE_COL_OFFSET;
+            int startIndex = Offset * TILE_COL_OFFSET;
             for (int idx = startIndex; idx < startIndex + TILE_COL_OFFSET; idx++)
                 results.Add(idx);
-
+            
+            
             return results;
         }
 
+        public List<int> GetDemandingRowPositions(eCharType type, bool sameSide, int offset)
+        {
+            List<int> results = new();
+            int startIndex = offset;
+
+            if (sameSide)
+            {
+                if (type == eCharType.ALLY)
+                {
+                    startIndex += TILE_COL_OFFSET * (TILE_COL_COUNT - 1);
+                    for (int i = 0; i < TILE_COL_COUNT; i++)
+                        results.Add(startIndex - i * TILE_COL_OFFSET);
+                }
+                else if (type == eCharType.ENEMY)
+                {
+                    startIndex += TILE_COL_OFFSET * TILE_COL_COUNT;
+                    for (int i = 0; i < TILE_COL_COUNT; i++)
+                        results.Add(startIndex + i * TILE_COL_OFFSET);
+                }
+            }
+            else
+            {
+                if (type == eCharType.ALLY)
+                {
+                    startIndex += TILE_COL_OFFSET * TILE_COL_COUNT;
+                    for (int i = 0; i < TILE_COL_COUNT; i++)
+                        results.Add(startIndex + i * TILE_COL_OFFSET);
+                }
+                else if (type == eCharType.ENEMY)
+                {
+                    startIndex += TILE_COL_OFFSET * (TILE_COL_COUNT - 1);
+                    for (int i = 0; i < TILE_COL_COUNT; i++)
+                        results.Add(startIndex - i * TILE_COL_OFFSET);
+                }
+            }
+            
+            return results;
+
+        }
+
+
         /// <summary> 캐릭터 타입 기준 아군, 적군 측 리스트를 반환 </summary>
-        public List<int> GetDemandingPositions(eCharType type, bool sameSide)
+
+        public void TeleportCharacter(CharBase character, int tileIndex)
+        {
+            TileObj tile = GetTile(tileIndex);
+            if(tile)
+                character.transform.position = tile.transform.position;
+        }
+        
+        public List<int> GetDemandingSidePositions(eCharType type, bool sameSide)
         {
             List<int> results = new();
             int startPoint = 0;
@@ -177,12 +229,14 @@ namespace Client
             return results;
         }
 
-        public List<int> FilterIndices(List<int> rawIndices)
+        public List<int> FilterIndices(List<int> rawIndices, bool includeReserved=true)
         {
             List<int> indices = new();
             foreach(int i in rawIndices)
             {
-                if (GetTile(i) == false || GetTile(i).Accessible == false) continue;
+                TileObj tile = GetTile(i);
+                if (tile == false || tile.Accessible == false) continue;
+                if (!includeReserved && tile.Reserved) continue;
                 indices.Add(i);
             }
             return indices;
@@ -201,8 +255,7 @@ namespace Client
             foreach(var idx in candidates)
             {
                 var originDist = (int)(GetTile(idx).transform.position - charPos).sqrMagnitude;
-                if(originDist > farthest ||
-                   (originDist == farthest && result/TILE_COL_OFFSET > idx/TILE_COL_OFFSET))
+                if(originDist > farthest)
                 {
                     farthest = originDist;
                     result = idx;
@@ -213,19 +266,19 @@ namespace Client
         } 
 
         
+        // TODO : ENEMY도 해당 기능을 사용할 수 있어야 하는지 알아볼 것
         public void TeleportAllyFarthest(CharBase client)
         {
             var targetPositions = new List<int>();
-            var startPoint = TileIndexToRowType[NearTileIndex(client.transform.position)] == eRowType.ALLY_FRONT
-                ? TILE_COL_COUNT
-                : 0;
+            var startPoint = TileIndexToRowType[NearTileIndex(client.transform.position)] == eRowType.ALLY_REAR
+                ? 0
+                : TILE_COL_COUNT;
             
-            // 여기 수정해야함
             for (int i = 0; i < TILE_COL_COUNT; i++)
             {
                 int targetCol = startPoint == 0 ? i + 1 : TILE_COL_COUNT - i;
 
-                targetPositions = GetDemandingPositions(eCharType.ALLY, true, targetCol);
+                targetPositions = GetDemandingColPositions(eCharType.ALLY, true, targetCol);
                 targetPositions = FilterIndices(targetPositions);
     
                 if (targetPositions.Count > 0)
@@ -236,8 +289,29 @@ namespace Client
             client.CharTransform.position = GetFarthestPos(beforePos, targetPositions);
             Debug.Log($"텔레포트 완료. {client.GetID()}번 {client.name}이 {beforePos}에서 {client.CharTransform.position}으로 이동");
         }
-        
-        
+
+        public int ReserveTeleportEnemyRear(CharBase client)
+        {
+            int rowOffset = NearTileIndex(client.transform.position) % TILE_COL_OFFSET;
+            List<int> candidates = GetDemandingRowPositions(client.GetCharType(), false, rowOffset);
+            candidates = FilterIndices(candidates, includeReserved: false);
+            
+            if (candidates.Count == 0) return -1;
+            candidates.Reverse();
+
+            return candidates[0];
+        }
+
+        public void ChangeReserved(int before, int after)
+        {
+            TileObj reservedTile = GetTile(before);
+            TileObj reservingTile = GetTile(after);
+            
+            if(reservedTile)
+                reservedTile.Reserved = false;
+            if (reservingTile)
+                reservingTile.Reserved = true;
+        }
         
         #endregion
     }

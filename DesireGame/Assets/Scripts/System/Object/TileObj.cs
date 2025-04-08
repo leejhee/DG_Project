@@ -1,5 +1,3 @@
-using Client;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Client.SystemEnum;
@@ -13,10 +11,12 @@ namespace Client
         [SerializeField] private TileCombatBehaviour _tileCombat;
 
         private CharBase _charBase = null;
-
+        
         public int TileIndex => _tileIndex;
         public eCharType TeamTile => _teamTile;
-
+        
+        public bool Reserved = false;
+        
         #region 전투 컴포넌트 기능 연결
         public void SwitchCombatBehaviour(bool iscombat) => _tileCombat.enabled = iscombat;
         public bool Accessible => _tileCombat.IsEmpty;

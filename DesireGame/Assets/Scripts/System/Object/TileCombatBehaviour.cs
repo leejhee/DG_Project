@@ -8,7 +8,7 @@ namespace Client
     {
         private HashSet<CharBase> steppingOnChar = new();
         public bool IsEmpty => steppingOnChar.Count == 0;
-
+        
         /// <summary> 타일 간 해시셋의 합집합을 구함. 타일 기반 범위기 처리 </summary>
         /// <param name="charList"> union할 해시셋 </param>
         /// <returns> 현재 타일과 union된 캐릭터 해시셋 </returns>
