@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Client.SystemEnum;
@@ -11,6 +11,9 @@ namespace Client
         private Dictionary<int, TileObj> TileMap = new();
 
         private readonly float MaxDistSqrt = 10f;
+
+        public event Action OnTileSetCharacter;
+        
         #region 생성자
         TileManager() { }
         #endregion 
@@ -82,7 +85,8 @@ namespace Client
                 return;
             }
             tile.SetChar(setChar);
-
+            
+            OnTileSetCharacter?.Invoke();
             // 뭔가 체크.
             {
 

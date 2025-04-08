@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/DualBladeSynergyJump.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/DualBladeSynergyJump.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileCombatBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileCombatBehaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/J_SKILL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/J_SKILL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/M_AA.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/M_AA.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/M_SKILL.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Skill/M_SKILL.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/DualBladeSynergyJump.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/DualBladeSynergyJump.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +144,7 @@
       <workItem from="1743769284472" duration="8357000" />
       <workItem from="1743856823524" duration="8886000" />
       <workItem from="1744025563569" duration="17807000" />
-      <workItem from="1744088942360" duration="21736000" />
+      <workItem from="1744088942360" duration="27174000" />
     </task>
     <servers />
   </component>
@@ -208,39 +206,39 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs</url>
-          <line>189</line>
+          <line>193</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\TileManager.cs" containingFunctionPresentation="Method 'GetDemandingRowPositions'">
             <startOffsets>
-              <option value="5896" />
+              <option value="5996" />
             </startOffsets>
             <endOffsets>
-              <option value="5897" />
+              <option value="5997" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/DualBladeSynergyJump.cs</url>
-          <line>57</line>
+          <line>61</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Function\SynergyFunction\DualBladeSynergyJump.cs" containingFunctionPresentation="Method 'SetJumpTarget'">
             <startOffsets>
-              <option value="1951" />
+              <option value="1985" />
             </startOffsets>
             <endOffsets>
-              <option value="1990" />
+              <option value="2024" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs</url>
-          <line>296</line>
+          <line>300</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\TileManager.cs" containingFunctionPresentation="Method 'ReserveTeleportEnemyRear'">
             <startOffsets>
-              <option value="9662" />
+              <option value="9762" />
             </startOffsets>
             <endOffsets>
-              <option value="9725" />
+              <option value="9825" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />
