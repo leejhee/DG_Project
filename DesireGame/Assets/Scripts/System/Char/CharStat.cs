@@ -124,7 +124,7 @@ namespace Client
             switch (properTargetStat)
             {
                 case eStats.NHP:
-                    _charStat[(int)eStats.NHP] = (long)Mathf.Clamp(_charStat[(int)eStats.NHP], 0, _charStat[(int)eStats.NMHP]);
+                    _charStat[(int)eStats.NHP] = (long)Mathf.Clamp(afterStat, 0, _charStat[(int)eStats.NMHP]);
                     break;
                 default:
                     _charStat[(int)properTargetStat] = afterStat;

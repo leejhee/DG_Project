@@ -78,7 +78,7 @@ namespace Client
                     break;
 
                 case PlayerState.MOVE:
-                    interval = 1 / charAgent.CharStat.GetStat(eStats.NMOVE_SPEED); // TODO : 이동 거리 단위 기획에 물어보기
+                    interval = 1 / charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
                     break;
 
                 default:
@@ -178,13 +178,12 @@ namespace Client
 
         public void SetAction(eAttackMode attackMode)
         {
-            var skillIndex = ReloadSkill(attackMode);
-            var skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
-            //데이터 기반 타겟 설정
+            long skillIndex = ReloadSkill(attackMode);
+            SkillBase skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
             SetTarget(skill.TargetType);
-            if (FinalTarget == null)
+            if (!FinalTarget)
             {
-                Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 프레임에 타겟 할당합니다.");
+                Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
                 return;
             }
 
@@ -195,8 +194,6 @@ namespace Client
 
             // 사거리와 비교 후 이동 결정
             bool inRange = distance <= skillRange + tolerance || skillRange == 0;
-            if(charAgent.Index == 200)
-                Debug.Log(skillRange);
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));

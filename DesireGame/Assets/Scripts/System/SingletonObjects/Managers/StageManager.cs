@@ -97,7 +97,7 @@ namespace Client
         /// </summary>
         public bool TryGetNextStage(int _stage)
         {
-            SynergyManager.Instance.Reset();
+            //SynergyManager.Instance.Reset();
             CharManager.Instance.ClearAllChar();
 
             int nextStage = _stage + 1;

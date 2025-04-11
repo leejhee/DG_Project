@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace Client
 {
-    // [TODO] : 복수 타겟 작업할 때 skillTarget을 List<CharBase>로 변경할 것.
     public class SkillParameter
     {
         public List<CharBase> skillTargets { get; private set; }

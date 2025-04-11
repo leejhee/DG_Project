@@ -163,9 +163,9 @@ namespace Client
 
         public virtual void CharDead()
         {
+            gameObject.SetActive(false);
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
-            gameObject.SetActive(false);
         }
 
         public long GetID() => _uid;
