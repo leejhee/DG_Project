@@ -10,11 +10,11 @@ namespace Client
         public CharAI.eAttackMode mode;
 
         public CharAttackParameter
-            (
-                List<CharBase> targetCharList, 
-                long skillIndex,
-                CharAI.eAttackMode mode
-            )
+        (
+            List<CharBase> targetCharList,
+            CharAI.eAttackMode mode,
+            long skillIndex = 0
+        )
         {
             this.targetChar = targetCharList;
             this.skillIndex = skillIndex;

@@ -40,7 +40,7 @@ namespace Client
             }
 
             TileManager.Instance.SwitchTileCombatmode(false);
-
+            Debug.Log($"<color=red>새 스테이지 시작. StageNum = {stageNum}</color>");
         }
 
         public void StartCombat()
@@ -81,12 +81,12 @@ namespace Client
 
             if (charType == typeof(CharPlayer))
             {
-                Debug.Log("모든 플레이어가 죽었습니다. 졌당..");
+                Debug.Log("<color=#00FF22>모든 플레이어가 죽었습니다. 졌당..</color>");
                 // 게임 오버 처리
             }
             else if (charType == typeof(CharMonster))
             {
-                Debug.Log("모든 적이 사라졌습니다. 이겼당!!");
+                Debug.Log("<color=green>모든 적이 사라졌습니다. 이겼당!!</color>");
                 CharManager.Instance.CopyFieldPlayerID();
                 MoveToNextStage();
             }

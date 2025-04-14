@@ -67,7 +67,7 @@ namespace Client
         /// </summary>
         /// <param name="newState"></param>
         /// <returns></returns>
-        public float GetActionInterval(PlayerState newState)
+        private float GetActionInterval(PlayerState newState)
         {
             float interval = 0;
 
@@ -93,7 +93,7 @@ namespace Client
         /// 마나 양에 따라 공격 모드 판단
         /// </summary>
         /// <returns></returns>
-        public eAttackMode SetAttackMode()
+        private eAttackMode SetAttackMode()
         {
             // 스킬 사용 조건
             // 1: 최대 마나가 0보다 크다
@@ -106,21 +106,11 @@ namespace Client
             else
                 return eAttackMode.Auto;
         }
-
-        ///// <summary>
-        ///// 최종 타겟 정하기
-        ///// </summary>
-        //public void SetFinalTarget(eAttackMode mode = eAttackMode.None)
-        //{
-        //    finalTarget = CharManager.Instance.GetNearestEnemy(charAgent);
-        //    if (finalTarget != null)
-        //        Debug.Log($"{charAgent.CharData.charName}{charAgent.GetID()}의 final target : {finalTarget.CharData.charName}");
-        //}
-
+        
         /// <summary>
         /// 상태 계산 및 행동 설정
         /// </summary>
-        public void SetStateByAttackMode(eAttackMode attackMode)
+        private void SetStateByAttackMode(eAttackMode attackMode)
         {
             switch (attackMode)
             {
@@ -135,7 +125,7 @@ namespace Client
             }
         }
 
-        public void ChangeState(PlayerState newState)
+        private void ChangeState(PlayerState newState)
         {
             // 상태 변경 감지 시 
             if (currentState != newState)
@@ -145,7 +135,7 @@ namespace Client
                 resetTimer = true; // 타이머 리셋 플래그 설정
             }
         }
-
+        /*
         // 어택모드에 따른 스킬 인덱스 할당
         public long ReloadSkill(eAttackMode mode)
         {
@@ -162,9 +152,9 @@ namespace Client
                 Debug.Log("어택모드 할당 안되어 스킬 미사용");
                 return SystemConst.NO_CONTENT;
             }
-        }
+        }*/
 
-        public void SetTarget(eSkillTargetType targetType)
+        private void SetTarget(eSkillTargetType targetType)
         {
             var targettingGuide = TargetStrategyFactory.CreateTargetStrategy(new TargettingStrategyParameter()
             {
@@ -176,19 +166,28 @@ namespace Client
             OnTargetSet?.Invoke(FinalTarget);
         }
 
-        public void SetAction(eAttackMode attackMode)
+        private void SetAction(eAttackMode attackMode)
         {
-            long skillIndex = ReloadSkill(attackMode);
-            SkillBase skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
-            SetTarget(skill.TargetType);
+            /*
+            //long skillIndex = ReloadSkill(attackMode);
+            //SkillBase skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
+            //SetTarget(skill.TargetType);
+            //if (!FinalTarget)
+            //{
+            //    Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
+            //    return;
+            //}*/
+
+            SkillAIInfo info = charAgent.CharSKillInfo.GetInfoByMode(attackMode);
+            SetTarget(info.TargetType);
             if (!FinalTarget)
             {
                 Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
                 return;
             }
-
+            
             //데이터 기반 사거리 설정 및 행동 결정
-            int skillRange = skill.NSkillRange;
+            int skillRange = info.Range;
             var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
             var tolerance = 0.01f;
 
@@ -196,8 +195,7 @@ namespace Client
             bool inRange = distance <= skillRange + tolerance || skillRange == 0;
             if (inRange)
             {
-                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, skillIndex, attackMode));
-                Debug.Log($"캐릭터 {charAgent.CharData.charName} {charAgent.GetID()}의 스킬 {skillIndex} 사용");
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, attackMode));
             }
             else
             {

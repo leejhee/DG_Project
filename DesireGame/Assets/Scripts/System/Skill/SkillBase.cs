@@ -16,14 +16,16 @@ namespace Client
         private CharBase _caster;
 
         private SkillData _skillData;
-
+        
+        private int _nSkillRange;
+        private SystemEnum.eSkillTargetType _targetType;
 
         public PlayableDirector PlayableDirector => _PlayableDirector;
         public CharBase CharPlayer => _caster;
         public SkillParameter InputParameter { get; private set; }
-        public int NSkillRange { get; private set; }
-        public SystemEnum.eSkillTargetType TargetType {  get; private set; }
-
+        
+        public SkillAIInfo GetAIInfo() => new(){ TargetType = _targetType, Range = _nSkillRange };
+        
         public void SetCharBase(CharBase caster)
         {
             _caster = caster;
@@ -33,8 +35,8 @@ namespace Client
         public void Init(SkillData data)
         {
             _skillData = data;
-            NSkillRange = data.skillRange;
-            TargetType = data.skillTarget;
+            _nSkillRange = data.skillRange;
+            _targetType = data.skillTarget;
         }
 
         public void ResetSkill()
@@ -42,16 +44,15 @@ namespace Client
             Init(_skillData);
         }
         
-        // 구린데 이거말고 방법 있는지 모르겠음
         public void SetRange(int value, bool delta=false)
         {
-            if (NSkillRange == 0) 
+            if (_nSkillRange == 0) 
                 return;
 
             if (delta)
-                NSkillRange += value;
+                _nSkillRange += value;
             else
-                NSkillRange = value;
+                _nSkillRange = value;
         }
 
         private void Awake()
@@ -61,7 +62,7 @@ namespace Client
     
         public void PlaySkill(SkillParameter parameter)
         {
-            if (_PlayableDirector == null)
+            if (!_PlayableDirector)
                 return;
 
             InputParameter = parameter;         
