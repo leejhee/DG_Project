@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 namespace Client
 {
-    public class ItemSlotUI : MonoBehaviour
+    public class ItemIconUI : MonoBehaviour
     {
+        // 드래그 앤 드롭이 가능한 아이템 아이콘 UI
         [SerializeField] Image icon;
         [SerializeField] Button button;
-        [SerializeField] GameObject emptyOverlay;
+        [SerializeField] TMPro.TextMeshProUGUI iconReplacedByID; // TODO : 아이콘 이미지 나오면 바꿈, 일단 임시
 
         private Item currentItem;
         private System.Action<Item> onClick;
@@ -26,12 +27,12 @@ namespace Client
             });
         }
 
-        public void SetItem(Item item)
+        public void SetIcon(Item item)
         {
             currentItem = item;
             //icon.sprite = item.ItemData.icon;
             icon.enabled = true;
-            emptyOverlay.SetActive(false);
+            iconReplacedByID.text = $"{item.GetID()}";
         }
 
         public void Clear()
@@ -39,7 +40,8 @@ namespace Client
             currentItem = null;
             icon.sprite = null;
             icon.enabled = false;
-            emptyOverlay.SetActive(true);
+            iconReplacedByID.text = null;
         }
+
     }
 }

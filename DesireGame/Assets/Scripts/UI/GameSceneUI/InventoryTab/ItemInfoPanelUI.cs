@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using System.Text;
+using Unity.VisualScripting;
 
 namespace Client
 {
@@ -18,7 +19,9 @@ namespace Client
         public void Show(Item item)
         {
             var hex = DataManager.Instance.TierColorDataMap[item.ItemData.itemTier];
-            TMP_name.text = $"<color={hex}>{DataManager.GetStringCode(item.ItemData.nameStringCode)}</color>";
+            Color color = Util.GetHexColor(hex);
+            TMP_name.color = color;
+            TMP_name.text = $"{DataManager.GetStringCode(item.ItemData.nameStringCode)}";
             TMP_mainDesc.text = string.Format(DataManager.GetStringCode(item.ItemData.mainOpStringCode), item.ItemData.mainStatsIncrease);
 
             StringBuilder sb = new();

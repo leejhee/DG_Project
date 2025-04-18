@@ -13,6 +13,10 @@ namespace Client
 
         public Action<ItemUIParameter> OnItemChange; // 인벤토리에 변화 생길 시 UI에 변경사항 전달
 
+        #region 생성자
+        Inventory() { }
+        #endregion
+
         public override void Init()
         {
             base.Init();
@@ -43,9 +47,23 @@ namespace Client
             }
         }
 
+        public bool IsInventoryEmpty()
+        {
+            if (itemList.Count <= 0)
+            {
+                Debug.LogError($"인벤토리가 비어있어 아이템을 삭제할 수 없습니다.");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public int GetItemCount() => ItemList.Count;
         public void AddItem(Item item)
         {
             if (IsInventoryFull()) return;
+            if (ItemList.Contains(item)) return; // 클릭 중복 방지
 
             itemList.Add(item);
             Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  획득");
@@ -64,7 +82,7 @@ namespace Client
             itemList.Remove(item);
             Debug.Log($"{item.ItemData.nameStringCode} (ID : {item.GetID()})  제거");
 
-            OnItemChange?.Invoke(new ItemUIParameter(item));
+            //OnItemChange?.Invoke(new ItemUIParameter(item));
 
         }
     }

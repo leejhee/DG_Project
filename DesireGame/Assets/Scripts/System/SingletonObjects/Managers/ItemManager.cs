@@ -191,7 +191,7 @@ namespace Client
                     GameObject itemBead = GetItemBeadwithColor(beadPrefab, dropTable.beadColor);
                     itemBead.transform.position = position + randPos;
                     itemBead.GetComponent<ItemBead>().WrapItem(item, dropTable.amount);
-
+                    Debug.Log($"아이템 {item.GetID()} 생성");
                 }
             }
         }
