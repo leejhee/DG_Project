@@ -1,8 +1,6 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
+using System;
 
 namespace Client
 {
@@ -22,7 +20,6 @@ namespace Client
 
         private int _skillPlayCount;
         private SkillParameter _inputParameter;
-
         public CharBase CharPlayer => _caster;
         public PlayableDirector Director => _PlayableDirector;
         public SkillParameter InputParameter
@@ -49,6 +46,9 @@ namespace Client
             _nSkillRange = data.skillRange;
             _targetType = data.skillTarget;
             _skillPlayCount = 0;
+
+            _PlayableDirector.played += _ => _caster.CharAI.isSkillPlaying = true;
+            _PlayableDirector.stopped += _ =>  _caster.CharAI.isSkillPlaying = false;
         }
 
         public void ResetSkill()
@@ -76,7 +76,7 @@ namespace Client
         {
             if (!_PlayableDirector)
                 return;
-            
+          
             InputParameter = parameter;
             _PlayableDirector.Play();
             _skillPlayCount++;

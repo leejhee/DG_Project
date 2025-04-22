@@ -17,6 +17,8 @@ namespace Client
         private PlayerState currentState; // 새로운 모드 변경 여부
 
         private bool resetTimer = false;
+
+        public bool isSkillPlaying = false;
         
         public Action<CharBase> OnTargetSet;    
         
@@ -52,6 +54,12 @@ namespace Client
                     waitTime = new WaitForSeconds(actionInterval);
                 }
 
+                if (isSkillPlaying)
+                {
+                    yield return waitTime;
+                    continue;
+                }
+                
                 eAttackMode attackMode = SetAttackMode();
 
                 SetStateByAttackMode(attackMode);

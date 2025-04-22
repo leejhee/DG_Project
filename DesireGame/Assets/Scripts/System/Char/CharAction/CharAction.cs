@@ -44,8 +44,6 @@ namespace Client
         public void CharAttackAction(CharAttackParameter param)
         {
             CharSKillInfo skillInfo = Actor.CharSKillInfo;
-            //SkillInfo.PlaySkill(param.skillIndex,
-            //    new SkillParameter(param.targetChar, Actor));
             skillInfo.PlayByMode(param.mode, new SkillParameter(param.targetChar, Actor));
             Actor.CharStat.GainMana(param.mode);
             OnAttackAction?.Invoke(param.mode);
