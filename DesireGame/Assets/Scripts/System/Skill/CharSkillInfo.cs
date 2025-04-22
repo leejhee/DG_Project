@@ -9,11 +9,10 @@ namespace Client
     /// </summary>
     public class CharSKillInfo
     {
-        private Dictionary<long, SkillBase> _dicSkill = new Dictionary<long, SkillBase>(); // 스킬 리스트
+        private Dictionary<long, SkillBase> _dicSkill = new(); // 스킬 리스트
         private CharBase _charBase; // 스킬 시전자
         private Transform _SkillRoot; // 스킬 루트 
         
-        // TODO : 이것도 Dictionary를 통해 연결해야하나?
         private long _currentAutoAttack;
         private long _currentSkill;
 
@@ -26,7 +25,6 @@ namespace Client
         public CharSKillInfo(CharBase charBase)
         {
             _charBase = charBase;
-            //TODO : 이 부분 AddSkill에서 자연스럽게 할당할 수 있도록 다시 리팩토링하기
             _currentAutoAttack = _defaultAutoAttack = charBase.CharData.skill1;
             _currentSkill = _defaultSkill = charBase.CharData.skill2;
         }
@@ -52,17 +50,6 @@ namespace Client
                 AddSkill(skillArray[i]);
             }
         }
-
-        //public void DeleteSkill(eInputSystem skillIndex)
-        //{
-        //    if (_dicSkill == null)
-        //        return;
-
-        //    if (_dicSkill.ContainsKey(skillIndex))
-        //    {
-        //        _dicSkill.Remove(skillIndex);
-        //    }
-        //}
 
         public void ChangeSkill(CharAI.eAttackMode changingMode, long changingIndex)
         {

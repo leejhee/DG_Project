@@ -24,17 +24,17 @@ namespace Client
                 return;
             }
 
-            var targets = skillParam.skillTargets;
+            var targets = SkillParam.skillTargets;
             for(int i = 0; i< targets.Count; i++)
             {
                 targets[i].FunctionInfo.AddFunction(new BuffParameter()
                 {
-                    CastChar = skillParam.skillCaster,
+                    CastChar = SkillParam.skillCaster,
                     TargetChar = targets[i],
                     eFunctionType = data.function,
                     FunctionIndex = functionIndex
                 });
-                Debug.Log($"{skillParam.skillCaster.GetID()}번 캐릭터에서 {targets[i].GetID()}번 캐릭터로 {functionIndex}번 function 주입 완료");
+                Debug.Log($"{SkillParam.skillCaster.GetID()}번 캐릭터에서 {targets[i].GetID()}번 캐릭터로 {functionIndex}번 function 주입 완료");
             }
 
         }

@@ -7,6 +7,7 @@ namespace Client
         public List<CharBase> skillTargets { get; private set; }
         public CharBase skillCaster { get; private set; }
 
+        public int SkillUseCount = 0;
         // InputManager 사라지면 protected 전환 예정
         public SkillParameter() { }
 

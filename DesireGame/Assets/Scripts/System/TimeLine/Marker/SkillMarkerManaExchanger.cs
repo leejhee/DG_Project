@@ -17,18 +17,18 @@ namespace Client
         {
             base.MarkerAction();
            
-            var stat = skillParam.skillCaster.CharStat;
+            var stat = SkillParam.skillCaster.CharStat;
             if (Choice == choice.Earn)
             {
                 stat.GainMana(amount, true);
-                Debug.Log(@$"{skillParam.skillCaster.GetID()}번 캐릭터에서 평타로 {amount}마나 획득
+                Debug.Log(@$"{SkillParam.skillCaster.GetID()}번 캐릭터에서 평타로 {amount}마나 획득
 현재 마나 {stat.GetStat(SystemEnum.eStats.N_MANA)}");
             }
             else if(Choice == choice.Pay)
             {
                 amount = (int)stat.GetStat(SystemEnum.eStats.MAX_MANA);
                 stat.GainMana(amount, false);
-                Debug.Log(@$"{skillParam.skillCaster.GetID()}번 캐릭터에서 스킬로 {amount}마나 소비
+                Debug.Log(@$"{SkillParam.skillCaster.GetID()}번 캐릭터에서 스킬로 {amount}마나 소비
 현재 마나 {stat.GetStat(SystemEnum.eStats.N_MANA)}");
             }
 

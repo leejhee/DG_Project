@@ -10,7 +10,7 @@ namespace Client
     /// 스킬 객체
     /// </summary>
     [RequireComponent(typeof(SkillMarkerReceiver))]
-    public class SkillBase : MonoBehaviour, IContextProvider
+    public class SkillBase : MonoBehaviour
     {
         private PlayableDirector _PlayableDirector;
         private CharBase _caster;
@@ -20,10 +20,21 @@ namespace Client
         private int _nSkillRange;
         private SystemEnum.eSkillTargetType _targetType;
 
-        public PlayableDirector PlayableDirector => _PlayableDirector;
+        private int _skillPlayCount;
+        private SkillParameter _inputParameter;
+
         public CharBase CharPlayer => _caster;
-        public SkillParameter InputParameter { get; private set; }
-        
+        public PlayableDirector Director => _PlayableDirector;
+        public SkillParameter InputParameter
+        {
+            get => _inputParameter;
+            private set
+            {
+                _inputParameter = value;
+                _inputParameter.SkillUseCount = _skillPlayCount;
+            }
+        }
+
         public SkillAIInfo GetAIInfo() => new(){ TargetType = _targetType, Range = _nSkillRange };
         
         public void SetCharBase(CharBase caster)
@@ -37,6 +48,7 @@ namespace Client
             _skillData = data;
             _nSkillRange = data.skillRange;
             _targetType = data.skillTarget;
+            _skillPlayCount = 0;
         }
 
         public void ResetSkill()
@@ -64,9 +76,10 @@ namespace Client
         {
             if (!_PlayableDirector)
                 return;
-
-            InputParameter = parameter;         
+            
+            InputParameter = parameter;
             _PlayableDirector.Play();
+            _skillPlayCount++;
         }
     }
 }

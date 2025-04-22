@@ -14,9 +14,9 @@ namespace Client
 
         [Header("Test(shootindex의 경우 편하게 하려고 임의로 이렇게 함)")]
         [SerializeField] private CharBase TestChar;
-        [SerializeField] private Vector3 testPlayerPoint;
+        [SerializeField] private int testPlayerTile;
         [SerializeField] private CharBase TestEnemy;
-        [SerializeField] private Vector3 testEnemyPoint;
+        [SerializeField] private int testEnemyTile;
         [SerializeField] private long projectileShootIndex;
 
         private void Awake()
@@ -32,12 +32,12 @@ namespace Client
             // 타일 시스템 결합
             TestChar = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
-                15,
-                100));
+                    testPlayerTile,
+                700));
             
             TestEnemy = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
-                35,
+                    testEnemyTile,
                 10000));
 
             MessageManager.SubscribeMessage<GameSceneMessageParam>(this, TestMessageSystem);

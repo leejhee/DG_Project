@@ -25,10 +25,10 @@ namespace Client
             }
 
             // 스탯패키지 내부에서 계산하도록 할까...?
-            for (int idx = 0; idx < skillParam.skillTargets.Count; idx++)
+            for (int idx = 0; idx < SkillParam.skillTargets.Count; idx++)
             {
-                var casterStat = skillParam.skillCaster.CharStat;
-                var target = skillParam.skillTargets[idx];
+                var casterStat = SkillParam.skillCaster.CharStat;
+                var target = SkillParam.skillTargets[idx];
                 if (target == null || casterStat is null) continue;
                 var calculated = casterStat.GetStat(_statName) * 
                                 (percent / SystemConst.PER_CENT);

@@ -8,9 +8,9 @@ namespace Client
         {
             if (notification is SkillTimeLineMarker skillMarker)
             {
-                IContextProvider provider = GetComponent<IContextProvider>();
-
-                skillMarker.InitInput(provider.InputParameter);
+                SkillBase provider = GetComponent<SkillBase>();
+                
+                skillMarker.InitInput(provider.InputParameter, provider.Director);
                 skillMarker.MarkerAction();
 
             }

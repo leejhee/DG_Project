@@ -168,16 +168,6 @@ namespace Client
 
         private void SetAction(eAttackMode attackMode)
         {
-            /*
-            //long skillIndex = ReloadSkill(attackMode);
-            //SkillBase skill = charAgent.CharSKillInfo.DicSkill[skillIndex];
-            //SetTarget(skill.TargetType);
-            //if (!FinalTarget)
-            //{
-            //    Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
-            //    return;
-            //}*/
-
             SkillAIInfo info = charAgent.CharSKillInfo.GetInfoByMode(attackMode);
             SetTarget(info.TargetType);
             if (!FinalTarget)
