@@ -28,12 +28,6 @@ namespace Client
                 projectile.InjectProjectileFunction(indices);            
             }
         }
-
-        // 이건 에디터 상에서 호출되는 함수. 런타임 작업 아니면 건들지 맙시다.
-        public override void SkillInitialize()
-        {
-
-        }
     }
 
 }

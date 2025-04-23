@@ -80,19 +80,8 @@ namespace Client
                 _dicSkill.Add(skillIndex, skillBase);
                 skillBase.transform.parent = _SkillRoot;
             }
-            
-            /*
-            //if (!_dicSkill.ContainsKey(idx + 1))
-            //{
-            //    SkillBase skillBase = SkillCreator.CreateSkill(skillIndex);
-            //    if (skillBase == null)
-            //        return;
-
-            //    skillBase.SetCharBase(_charBase);
-            //    _dicSkill.Add(skillIndex, skillBase);
-            //    skillBase.transform.parent = _SkillRoot;
-            //}*/
         }
+        
         private void PlaySkill(long skillIndex, SkillParameter parameter)
         {
             if (_dicSkill == null)
@@ -117,7 +106,7 @@ namespace Client
             if (mode == CharAI.eAttackMode.Auto)
                 return _dicSkill[_currentAutoAttack].GetAIInfo();
             else if (mode == CharAI.eAttackMode.Skill)
-                return _dicSkill[_currentAutoAttack].GetAIInfo();
+                return _dicSkill[_currentSkill].GetAIInfo();
 
             return default;
         }

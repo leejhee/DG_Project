@@ -34,6 +34,7 @@ namespace Client
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);
+                case eFunction.CHANGE_AA:               return new ChangeAA(buffParam);
             }
             return null;
         }

@@ -79,6 +79,8 @@ namespace Client
           
             InputParameter = parameter;
             _PlayableDirector.Play();
+            if(_caster.Index == 600 && _skillData.Index == 500611)
+                Debug.Log("test");
             _skillPlayCount++;
         }
     }

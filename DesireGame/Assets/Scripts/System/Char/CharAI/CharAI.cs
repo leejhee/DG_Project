@@ -143,24 +143,6 @@ namespace Client
                 resetTimer = true; // 타이머 리셋 플래그 설정
             }
         }
-        /*
-        // 어택모드에 따른 스킬 인덱스 할당
-        public long ReloadSkill(eAttackMode mode)
-        {
-            if (mode == eAttackMode.Auto)
-            {
-                return charAgent.CharData.skill1;
-            }
-            else if (mode == eAttackMode.Skill)
-            {
-                return charAgent.CharData.skill2;
-            }
-            else
-            {
-                Debug.Log("어택모드 할당 안되어 스킬 미사용");
-                return SystemConst.NO_CONTENT;
-            }
-        }*/
 
         private void SetTarget(eSkillTargetType targetType)
         {

@@ -15,7 +15,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 600511,,1) 아군 진영의 후방으로 순간이동,TELEPORT_TO_ALLY_REAR,,,,,,,,,,,,
 600512,,2) AD의 100%만큼 HP 회복,BUFF_ONCE_BY_AD,HP,,,,10000,,,,,,,
 600610,500610,그레이스 Skill 1) AA RANGE 확장,EXTEND_RANGE,,,,6000,5,,,,,,,
-600611,500611,그레이스 Skill 2) 대상과 범위 내 적에게 스플래시 데미지 - 투사체 변경,CHANGE_PROJECTILE,,,,,15000,,,,,,,
+600611,500611,그레이스 Skill 2) 대상과 범위 내 적에게 스플래시 데미지 - 투사체 변경,CHANGE_AA,,,,6000,500611,,,,,,,
 600710,500710,샤나 Skill MultiCasting:,MULTICASTING,,,,,600711,600712,600713,,,,,
 600711,,1) AS 50% 증가,BUFF_ONCE,AS,,,4000,5000,,,,,,,
 600712,,2) CRIT_CHANCE 25% 증가,BUFF_ONCE,CRIT_CHANCE,,,4000,2500,,,,,,,

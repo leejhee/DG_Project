@@ -78,7 +78,7 @@ namespace Client
 
             SWORD,
             RANGED,
-            ARMOR,
+            SHIELD,
             DUAL_BLADE,
             MAGIC_WAND,
             LAPLACIAN,
@@ -183,7 +183,7 @@ namespace Client
             SHIELD_SYNERGY_HEAL,
             MAGIC_SYNERGY_MANABUFF,
             DUALBLADE_SYNERGY_JUMP,
-            CHANGE_PROJECTILE,
+            CHANGE_AA,
             COUNT,
             
             INCREASE_MAX_HP,
