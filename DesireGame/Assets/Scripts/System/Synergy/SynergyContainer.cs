@@ -263,14 +263,10 @@ namespace Client
                             $"Synergy {mySynergy}에서 {DistinctMembers}명 달성하여 {synergyData.Index}번 버프 " +
                             $"casters {casters.Count}에게 들어감");
 
-                foreach(var caster in casters)
-                {
-                    Debug.Log(caster.name);
-                }
-
                 // 캐스터 순회하여 각각 caster로 설정한 function을 만들어 add한다.
                 foreach (var caster in casters)
                 {
+                    if (caster == false) continue;
                     GetBuff(caster, synergyData); 
                 }
             }

@@ -40,6 +40,7 @@ namespace Client
 
             for (int i = 0; i< targetList.Count; i++)
             {
+                if (!targetList[i]) continue;
                 float distSqr = (clientPosition - targetList[i].CharTransform.position).sqrMagnitude;
                 distances.Add((targetList[i], distSqr));
             }

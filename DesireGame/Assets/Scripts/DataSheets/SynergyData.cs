@@ -16,14 +16,18 @@ namespace Client
 public long Index; // synergyID
 		public long functionIndex; // 기능
 		
-		public SystemEnum.eBuffTriggerTime buffTriggerTime; // 시너지효과적용시작시간
+		public SystemEnum.eBuffTriggerTime buffTriggerTime; // 시전 시작 시간
 		
-		public SystemEnum.eSynergyRange casterType; // 시너지효과적용대상
+		public SystemEnum.eSynergyRange casterType; // 시전자
 		
 		public SystemEnum.eSkillTargetType skillTarget; // 스킬 대상
 		
 		public SystemEnum.eSynergy synergy; // 시너지
 		public int synergyCount; // 인원 수
+		public string synergyIcon; // 아이콘
+		public string synergyIconColor; // 아이콘 색상
+		public string nameStringCode; // 이름
+		public string desStringCode; // 설명
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -83,6 +87,26 @@ public long Index; // synergyID
 					    data.synergyCount = default;
 					else
 					    data.synergyCount = Convert.ToInt32(values[6]);
+					
+					if(values[7] == "")
+					    data.synergyIcon = default;
+					else
+					    data.synergyIcon = Convert.ToString(values[7]);
+					
+					if(values[8] == "")
+					    data.synergyIconColor = default;
+					else
+					    data.synergyIconColor = Convert.ToString(values[8]);
+					
+					if(values[9] == "")
+					    data.nameStringCode = default;
+					else
+					    data.nameStringCode = Convert.ToString(values[9]);
+					
+					if(values[10] == "")
+					    data.desStringCode = default;
+					else
+					    data.desStringCode = Convert.ToString(values[10]);
 					
 
                     dataList[data.Index] = data;

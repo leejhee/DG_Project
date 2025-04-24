@@ -20,7 +20,7 @@ namespace Client
                 case eFunction.BUFF_ONCE_BY_AD:         return new BuffOnceByAD(buffParam);
                 case eFunction.BUFF_ONCE_BY_AP:         return new BuffOnceByAP(buffParam);
                 case eFunction.BUFF_ONCE_PLUS:          return new BuffOncePlus(buffParam);
-                case eFunction.CREATE_SHIELD:           return new CreateShield(buffParam);
+                case eFunction.CREATE_BARRIER:           return new CreateShield(buffParam);
                 case eFunction.EXTEND_RANGE:            return new ExtendRange(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);

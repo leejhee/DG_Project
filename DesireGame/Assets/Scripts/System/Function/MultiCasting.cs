@@ -35,14 +35,6 @@ namespace Client
                         }
                         
                         AddChildFunctionToTarget(data);
-
-                        //_TargetChar.FunctionInfo.AddFunction(new BuffParameter()
-                        //{
-                        //    CastChar = _CastChar,
-                        //    TargetChar = _TargetChar,
-                        //    eFunctionType = data.function,
-                        //    FunctionIndex = index
-                        //});
                         Debug.Log($"성공적으로 주입 완료 _CastChar {_CastChar.GetID()} _TargetChar {_TargetChar.GetID()} index {index}");
                     }
                 }

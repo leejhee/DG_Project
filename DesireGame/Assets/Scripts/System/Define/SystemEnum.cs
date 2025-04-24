@@ -126,8 +126,8 @@ namespace Client
             DAMAGE_INCREASE,
             BONUS_DAMAGE,
 
-            ARMOR,
-            NARMOR,
+            DEFENSE,
+            NDEFENSE,
 
             MAGIC_RESIST,
             NMAGIC_RESIST,
@@ -149,7 +149,7 @@ namespace Client
 
             DAMAGE_REDUCTION,
 
-            SHIELD,
+            BARRIER,
 
             eMax,
         }
@@ -165,6 +165,7 @@ namespace Client
             DAMAGE_BY_AD,
             DAMAGE_BY_AP,
             DOT_BY_AP,
+            DOT_BY_AD,
             DAMAGE_BY_TARGET_MAXHP,
 
             APPLY_CC,
@@ -175,7 +176,7 @@ namespace Client
             BUFF_ONCE,
             BUFF_ONCE_PLUS,
 
-            CREATE_SHIELD,
+            CREATE_BARRIER,
             EXTEND_RANGE,
             TELEPORT_TO_ALLY_REAR,
             SWORD_SYNERGY_AABUFF,
@@ -184,7 +185,6 @@ namespace Client
             MAGIC_SYNERGY_MANABUFF,
             DUALBLADE_SYNERGY_JUMP,
             CHANGE_AA,
-            COUNT,
             
             INCREASE_MAX_HP,
             BUFF_TOTAL_DAMAGE,
@@ -194,17 +194,21 @@ namespace Client
             SYNERGY_TRIGGER,
             LAPLACIAN_ENTRYPOINT,
             GET_FUNCTION_AFTER_WAIT,
-
+            SPAWN_ALLY,
+            KILL_ENEMY,
+            
             eMax
         }
 
         public enum eCondition
         {
             None,
-
+            
+            TRUE,
             LAPLACIAN_ONLY,
             HP_UNDER_N,
-            TRUE,
+            HIT_BY_AA,
+            HP_UNDER_N_ENEMY,
 
             eMax
         }
@@ -250,11 +254,18 @@ namespace Client
             FARTHEST_ENEMY,            
             FARTHEST_ENEMY_2,
             LOW_HP_ENEMY,
-            LOW_HP_ALLY,           
+            LOW_HP_ALLY, 
+            LOW_HP_ALLY_2,           
             NEAR_ALLY_3,
             EVERY_ENEMY,
             EVERY_ALLY,
             CONTACT_ENEMY,
+            NEAR_ALLY,
+            NEAR_ALLY_2,
+            NEAR1_ENEMY,
+            RANDOM_ENEMY_3,
+            CURRENT_CLOSE_ENEMY_2,
+            ROW1_ALLY,
 
             eMax
         }
@@ -263,7 +274,7 @@ namespace Client
         {
             None,
             ONCE,
-            SELF,
+            SELF, 
             GLOBAL_ALLY,
             GLOBAL_ENEMY,
             eMax

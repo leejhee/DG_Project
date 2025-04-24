@@ -72,20 +72,20 @@ public long Index; // ID
 					else
 					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[6]);
 					
-					if(values[7] == "")
+					if(values[8] == "")
 					    data.animPath = default;
 					else
-					    data.animPath = Convert.ToString(values[7]);
-					
-					if(values[8] == "")
-					    data.fxPath = default;
-					else
-					    data.fxPath = Convert.ToString(values[8]);
+					    data.animPath = Convert.ToString(values[8]);
 					
 					if(values[9] == "")
+					    data.fxPath = default;
+					else
+					    data.fxPath = Convert.ToString(values[9]);
+					
+					if(values[10] == "")
 					    data.sfxPath = default;
 					else
-					    data.sfxPath = Convert.ToString(values[9]);
+					    data.sfxPath = Convert.ToString(values[10]);
 					
 
                     dataList[data.Index] = data;

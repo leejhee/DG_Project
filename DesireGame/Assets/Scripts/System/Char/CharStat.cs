@@ -62,8 +62,8 @@ namespace Client
             _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease;   // 피해량 증가(만분율)
             _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage;         // 추가 피해
 
-            _charStat[(int)eStats.ARMOR] = charStat.defense;    // 방어력
-            _charStat[(int)eStats.NARMOR] = charStat.defense;   // 현재 방어력
+            _charStat[(int)eStats.DEFENSE] = charStat.defense;    // 방어력
+            _charStat[(int)eStats.NDEFENSE] = charStat.defense;   // 현재 방어력
 
             _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist;     // 마법 방어력
             _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist;    // 현재 마법 방어력
@@ -163,7 +163,7 @@ namespace Client
                 case eStats.AS:             return eStats.NAS;
                 case eStats.CRIT_CHANCE:    return eStats.NCRIT_CHANCE;
                 case eStats.CRIT_DAMAGE:    return eStats.NCRIT_CHANCE;
-                case eStats.ARMOR:          return eStats.NARMOR;
+                case eStats.DEFENSE:          return eStats.NDEFENSE;
                 case eStats.MAGIC_RESIST:   return eStats.NMAGIC_RESIST;
                 case eStats.RANGE:          return eStats.NRANGE;
                 case eStats.MOVE_SPEED:     return eStats.NMOVE_SPEED;
@@ -231,7 +231,7 @@ namespace Client
             else
             {
                 float defender = damage.damageType == eDamageType.PHYSICS ?
-                    GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
+                    GetStat(eStats.NDEFENSE) : GetStat(eStats.NMAGIC_RESIST);
 
                 finalDamage =
                     damage.rawDamage *
@@ -269,7 +269,7 @@ namespace Client
         public void AddShield(Shield shield) 
         {
             Shields.Add(shield);
-            _charStat[(int)eStats.SHIELD] += shield.Amount;
+            _charStat[(int)eStats.BARRIER] += shield.Amount;
         } 
         public void RemoveShield(Shield shield) => Shields.Remove(shield);
         public long AbsorbDamage(long damage)

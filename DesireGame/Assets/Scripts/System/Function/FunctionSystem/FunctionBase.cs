@@ -132,29 +132,25 @@ namespace Client
         {
             if (childData.function == default)
                 return;
-            else
+            var child = FunctionFactory.FunctionGenerate(new BuffParameter()
             {
-                var child = FunctionFactory.FunctionGenerate(new BuffParameter()
-                {
-                    CastChar = _CastChar,
-                    TargetChar = _TargetChar,
-                    eFunctionType = childData.function,
-                    FunctionIndex = childData.Index
-                });
-                _children.Add(child);
-                _TargetChar.FunctionInfo.AddFunction(child);
+                CastChar = _CastChar,
+                TargetChar = _TargetChar,
+                eFunctionType = childData.function,
+                FunctionIndex = childData.Index
+            });
+            _children.Add(child);
+            _TargetChar.FunctionInfo.AddFunction(child);
 
-                Debug.Log($"{_CasterName}에서 {_TargetName}으로의, {_FunctionData.Index}의 " +
-                            $"child function {childData.Index}번 추가");
-            }               
+            Debug.Log($"{_CasterName}에서 {_TargetName}으로의, {_FunctionData.Index}의 " +
+                      $"child function {childData.Index}번 추가");
         }
 
         private void KillChildFunctionToTarget(bool killAfterChildren=false)
         {
             foreach(var child in _children)
             {
-                if(child == null) continue;
-                child.KillSelfFunction(killAfterChildren, inCaster: false);
+                child?.KillSelfFunction(killAfterChildren, inCaster: false);
             }                              
         }
 
