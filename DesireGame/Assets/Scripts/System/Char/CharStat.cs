@@ -62,8 +62,8 @@ namespace Client
             _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease;   // 피해량 증가(만분율)
             _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage;         // 추가 피해
 
-            _charStat[(int)eStats.DEFENSE] = charStat.defense;    // 방어력
-            _charStat[(int)eStats.NDEFENSE] = charStat.defense;   // 현재 방어력
+            _charStat[(int)eStats.ARMOR] = charStat.armor;    // 방어력
+            _charStat[(int)eStats.NARMOR] = charStat.armor;   // 현재 방어력
 
             _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist;     // 마법 방어력
             _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist;    // 현재 마법 방어력
@@ -71,11 +71,11 @@ namespace Client
             _charStat[(int)eStats.ARMOR_PENETRATION] = 0;   // 물리 방어력 관통
             _charStat[(int)eStats.MAGIC_PENETRATION] = 0;   // 마법 방어력 관통
 
-            _charStat[(int)eStats.RANGE] = charStat.Range;  // 공격 사거리
-            _charStat[(int)eStats.NRANGE] = charStat.Range; // 현재 공격 사거리
+            _charStat[(int)eStats.RANGE] = charStat.range;  // 공격 사거리
+            _charStat[(int)eStats.NRANGE] = charStat.range; // 현재 공격 사거리
 
-            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);    // 이동 속도(천분율 처리함)
-            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.moveSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도(천분율 처리함)
+            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND);    // 이동 속도(천분율 처리함)
+            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도(천분율 처리함)
 
             _charStat[(int)eStats.START_MANA] = charStat.startMana; // 마나
             _charStat[(int)eStats.N_MANA] = charStat.startMana;     // 현재 마나
@@ -163,7 +163,7 @@ namespace Client
                 case eStats.AS:             return eStats.NAS;
                 case eStats.CRIT_CHANCE:    return eStats.NCRIT_CHANCE;
                 case eStats.CRIT_DAMAGE:    return eStats.NCRIT_CHANCE;
-                case eStats.DEFENSE:          return eStats.NDEFENSE;
+                case eStats.ARMOR:          return eStats.NARMOR;
                 case eStats.MAGIC_RESIST:   return eStats.NMAGIC_RESIST;
                 case eStats.RANGE:          return eStats.NRANGE;
                 case eStats.MOVE_SPEED:     return eStats.NMOVE_SPEED;
@@ -231,7 +231,7 @@ namespace Client
             else
             {
                 float defender = damage.damageType == eDamageType.PHYSICS ?
-                    GetStat(eStats.NDEFENSE) : GetStat(eStats.NMAGIC_RESIST);
+                    GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
 
                 finalDamage =
                     damage.rawDamage *

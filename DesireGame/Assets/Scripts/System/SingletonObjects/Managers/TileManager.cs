@@ -316,6 +316,17 @@ namespace Client
             if (reservingTile)
                 reservingTile.Reserved = true;
         }
+
+        public int GetSmallestAllyTileIndex()
+        {
+            for (int index = TILE_SIDE_OFFSET - 1; index >= 0; index--)
+            {
+                if(!TileMap[index].GetChar())
+                    return index;
+            }
+
+            return -1;
+        }
         
         #endregion
     }

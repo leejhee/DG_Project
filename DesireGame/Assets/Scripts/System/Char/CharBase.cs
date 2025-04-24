@@ -60,7 +60,6 @@ namespace Client
         public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
-        //public CharItemInfo CharItemInfo => _charItemInfo;
         public GameObject CharCamaraPos => _CharCamaraPos; // 카메라 위치
         public CharAnim CharAnim => _charAnim; // 카메라 위치
         public NavMeshAgent Nav => _NavMeshAgent;
@@ -142,14 +141,13 @@ namespace Client
             foreach (long functionIndex in _charData.func)
             {
                 var functiondata = DataManager.Instance.GetData<FunctionData>(functionIndex);
-                var passiveFunction = FunctionFactory.FunctionGenerate(
-                    new BuffParameter()
-                    {
-                        FunctionIndex = functiondata.Index,
-                        CastChar = this,
-                        TargetChar = this,
-                        eFunctionType = functiondata.function
-                    });
+                _functionInfo.AddFunction(new BuffParameter()
+                {
+                    FunctionIndex = functiondata.Index,
+                    CastChar = this,
+                    TargetChar = this,
+                    eFunctionType = functiondata.function
+                });
             }
             #endregion
          

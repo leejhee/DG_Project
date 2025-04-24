@@ -126,8 +126,8 @@ namespace Client
             DAMAGE_INCREASE,
             BONUS_DAMAGE,
 
-            DEFENSE,
-            NDEFENSE,
+            ARMOR,
+            NARMOR,
 
             MAGIC_RESIST,
             NMAGIC_RESIST,

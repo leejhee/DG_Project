@@ -56,12 +56,12 @@ namespace Client
 
         public static eCharType GetEnemyType(eCharType clientType)
         {
-            if (clientType == eCharType.ALLY)
-                return eCharType.ENEMY;
-            else if (clientType == eCharType.ENEMY)
-                return eCharType.ALLY;
-            else
-                return eCharType.None;
+            return clientType switch
+            {
+                eCharType.ALLY or eCharType.NEUTRAL => eCharType.ENEMY,
+                eCharType.ENEMY => eCharType.ALLY,
+                _ => eCharType.None
+            };
         }
     }
 

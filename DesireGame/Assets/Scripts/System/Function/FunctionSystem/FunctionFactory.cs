@@ -31,6 +31,7 @@ namespace Client
                 case eFunction.RANGED_SYNERGY_ADBUFF:   return new RangedSynergyADBUFF(buffParam);
                 case eFunction.MAGIC_SYNERGY_MANABUFF:  return new MagicSynergyManaBuff(buffParam);
                 case eFunction.DUALBLADE_SYNERGY_JUMP:  return new DualBladeSynergyJump(buffParam);
+                case eFunction.SPAWN_ALLY:              return new SpawnAlly(buffParam);
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);

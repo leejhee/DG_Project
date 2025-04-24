@@ -75,6 +75,7 @@ namespace Client
 
         private void OnNewBuffDistributed(CharBase specifiedMember)
         {
+            if (specifiedMember == false) return;
             specifiedMember.StartCoroutine(DelayedEvaluateCondition(
                 new SynergyConditionInput() { ChangedSynergy = mySynergy, RegistrarIndex = specifiedMember.Index },
                 specifiedMember));
