@@ -146,11 +146,11 @@ namespace Client
             MAX_MANA,
             
             MANA_RESTORE_INCREASE,
-
             DAMAGE_REDUCTION,
-
             BARRIER,
-
+            
+            FINAL_DAMAGE,
+            
             eMax,
         }
 
@@ -195,7 +195,7 @@ namespace Client
             LAPLACIAN_ENTRYPOINT,
             GET_FUNCTION_AFTER_WAIT,
             SPAWN_ALLY,
-            KILL_ENEMY,
+            KILL_ENEMY_BY_DAMAGE,
             
             eMax
         }

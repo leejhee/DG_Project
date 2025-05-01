@@ -83,6 +83,7 @@ namespace Client
 
             _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
             _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 (최종 피해량 퍼센트 경감)
+            _charStat[(int)eStats.FINAL_DAMAGE] = 0;
 
             #endregion
 
@@ -103,7 +104,8 @@ namespace Client
                 case (eStats.NCRIT_DAMAGE):
                 case (eStats.DAMAGE_INCREASE):
                 case (eStats.DAMAGE_REDUCTION):
-                case eStats.MANA_RESTORE_INCREASE:
+                case (eStats.MANA_RESTORE_INCREASE):
+                case (eStats.FINAL_DAMAGE):
                     return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
                     return _charStat[(int)eStats];
@@ -194,7 +196,8 @@ namespace Client
                 (UnityEngine.Random.Range(0, 1) > GetStat(eStats.NCRIT_CHANCE) ?
                     (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)                 // 치명타 확률 및 피해 계산
                 + GetStat(eStats.BONUS_DAMAGE)) *                           // 추가 대미지  
-                (1 + GetStat(eStats.DAMAGE_INCREASE));                      // 피해량 증가                 
+                (1 + GetStat(eStats.DAMAGE_INCREASE)) *                     // 피해량 증가
+                (1 + GetStat(eStats.FINAL_DAMAGE));                         // 최종 대미지 증가                                       
             
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
@@ -211,6 +214,12 @@ namespace Client
             };
         }
 
+        public DamageParameter SendDamage(eStats damageOriginStat, long rawPercent, eDamageType type = eDamageType.None)
+        {
+            float statMultiplied = GetStat(damageOriginStat) * rawPercent / SystemConst.PER_TEN_THOUSAND;
+            return SendDamage(statMultiplied, type);       
+        }
+        
         public float GetPenetration(eDamageType damageType)
         {
             return damageType == eDamageType.PHYSICS ?

@@ -13,6 +13,7 @@ namespace Client
                 case eFunction.DAMAGE_BY_AP:            return new DamageByCasterAP(buffParam);
                 case eFunction.DAMAGE_BY_TARGET_MAXHP:  return new DamageByTargetMaxHP(buffParam);
                 case eFunction.DOT_BY_AP:               return new DamageOverTimeByAP(buffParam);
+                case eFunction.DOT_BY_AD:               return new DamageOverTimeByAD(buffParam);
                 case eFunction.SYNERGY_TRIGGER:         return new SynergyTrigger(buffParam);
                 case eFunction.BUFF_AA:                 return new Buff_AA(buffParam);
                 case eFunction.ADDMANA_ON_AA:           return new AddMana_AA(buffParam);
@@ -20,7 +21,7 @@ namespace Client
                 case eFunction.BUFF_ONCE_BY_AD:         return new BuffOnceByAD(buffParam);
                 case eFunction.BUFF_ONCE_BY_AP:         return new BuffOnceByAP(buffParam);
                 case eFunction.BUFF_ONCE_PLUS:          return new BuffOncePlus(buffParam);
-                case eFunction.CREATE_BARRIER:           return new CreateShield(buffParam);
+                case eFunction.CREATE_BARRIER:          return new CreateShield(buffParam);
                 case eFunction.EXTEND_RANGE:            return new ExtendRange(buffParam);
                 case eFunction.MULTICASTING:            return new MultiCasting(buffParam);
                 case eFunction.APPLY_CC:                return new ApplyCC(buffParam);
@@ -36,8 +37,9 @@ namespace Client
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);
                 case eFunction.CHANGE_AA:               return new ChangeAA(buffParam);
+                case eFunction.KILL_ENEMY_BY_DAMAGE:    return new KillEnemyByDamage(buffParam);       
             }
-            return null;
+            return null;            
         }
 
     }

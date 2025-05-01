@@ -158,7 +158,9 @@ namespace Client
             };
 
         }
-
+        
+        public bool IsAlive => CharStat.GetStat(eStats.NHP) > 0;
+        
         public virtual void CharDead()
         {
             gameObject.SetActive(false);

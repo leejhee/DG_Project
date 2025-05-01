@@ -5,29 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/SpawnAlly.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/SpawnAlly.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/ItemSubStatData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/ItemSubStatData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/SkillData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/SkillData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/StatsData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/StatsData.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DataGenerator/.idea/.idea.DataGenerator/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DataGenerator/.idea/.idea.DataGenerator/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../DataGenerator/.idea/.idea.DataGenerator/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/DamageOverTimeByAD.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/DamageOverTimeByAD.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/KillEnemyByDamage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/KillEnemyByDamage.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/ItemSubStatData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/ItemSubStatData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/SkillData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/SkillData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/StatsData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/StatsData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/GRACE_SKILL_2.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/GRACE_SKILL_2.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StatsData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StatsData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/PlayableAsset/PlayableAsset/ProjectileGeneratorPlayableAsset.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/PlayableAsset/PlayableAsset/ProjectileGeneratorPlayableAsset.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,9 +39,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c0b7b90d34a54066a7234dad6925511646ac00/cc/0f2f985c/Int32.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Function/ConditionCheck.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -75,23 +65,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Unity 에디터에 연결.Unity 에디터에 연결.executor&quot;: &quot;Debug&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.2748268&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Unity 에디터에 연결.Unity 에디터에 연결.executor": "Debug",
+    "XThreadsFramesViewSplitterKey": "0.2748268",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity 2022.3.37f1\Editor\Unity.exe" />
@@ -192,7 +183,14 @@
       <workItem from="1745350406507" duration="39000" />
       <workItem from="1745379722590" duration="5452000" />
       <workItem from="1745465893132" duration="19614000" />
-      <workItem from="1745505536652" duration="245000" />
+      <workItem from="1745505536652" duration="635000" />
+      <workItem from="1745585069320" duration="1694000" />
+      <workItem from="1745844316123" duration="400000" />
+      <workItem from="1745844738101" duration="3328000" />
+      <workItem from="1745861534526" duration="3000" />
+      <workItem from="1745931027230" duration="733000" />
+      <workItem from="1746009319325" duration="3450000" />
+      <workItem from="1746014375321" duration="3884000" />
     </task>
     <servers />
   </component>
@@ -225,19 +223,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs</url>
-          <line>108</line>
-          <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Function\FunctionSystem\FunctionBase.cs" containingFunctionPresentation="메서드 'CheckFollowingCondition'">
-            <startOffsets>
-              <option value="3360" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3410" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs</url>
