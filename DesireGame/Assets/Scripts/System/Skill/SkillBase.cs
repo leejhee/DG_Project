@@ -49,8 +49,17 @@ namespace Client
 
             _PlayableDirector.played += _ => _caster.CharAI.isSkillPlaying = true;
             _PlayableDirector.stopped += _ =>  _caster.CharAI.isSkillPlaying = false;
+            
+            _PlayableDirector.stopped += OnSkillTimelineEnd;
         }
 
+        public event Action OnSkillEnd;
+
+        private void OnSkillTimelineEnd(PlayableDirector director)
+        {
+            OnSkillEnd?.Invoke();
+        }
+        
         public void ResetSkill()
         {
             Init(_skillData);
@@ -79,8 +88,6 @@ namespace Client
           
             InputParameter = parameter;
             _PlayableDirector.Play();
-            if(_caster.Index == 600 && _skillData.Index == 500611)
-                Debug.Log("test");
             _skillPlayCount++;
         }
     }

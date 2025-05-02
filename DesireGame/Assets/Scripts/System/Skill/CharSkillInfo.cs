@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -110,6 +111,15 @@ namespace Client
 
             return default;
         }
+
+		public void SubscribeSkillEnd(CharAI.eAttackMode attackMode, Action onSkillEnd) 
+            => _dicSkill[_currentAutoAttack].OnSkillEnd += onSkillEnd;
+
+        public void UnsubscribeSkillEnd(CharAI.eAttackMode attackMode, Action onSkillEnd)
+            => _dicSkill[_currentAutoAttack].OnSkillEnd -= onSkillEnd;
+        
+        
+
     }
 
     public struct SkillAIInfo

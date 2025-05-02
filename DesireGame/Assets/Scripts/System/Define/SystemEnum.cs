@@ -196,7 +196,7 @@ namespace Client
             LAPLACIAN_ENTRYPOINT,
             GET_FUNCTION_AFTER_WAIT,
             SPAWN_ALLY,
-            KILL_ENEMY_BY_DAMAGE,
+            KILL_ENEMY,
             
             eMax
         }
@@ -274,7 +274,7 @@ namespace Client
         public enum eSynergyRange
         {
             None,
-            ONCE,
+            SYSTEM,
             SELF, 
             GLOBAL_ALLY,
             GLOBAL_ENEMY,

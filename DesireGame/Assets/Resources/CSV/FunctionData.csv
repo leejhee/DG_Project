@@ -115,7 +115,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 601711,,Skill: 인접한 적에게 주문력의 100%에 해당하는 마법 피해를 가합니다.,DAMAGE_BY_AP,,MAGIC,,,10000,,,,,,,
 601810,501810,Skill 1) 주문력의 200%에 해당하는 마법 피해를 가합니다.,DAMAGE_BY_AP,,MAGIC,,,20000,,,,,,,
 601811,,Skill Condition: 해당 스킬 사용으로 적의 현재 체력이 최대 체력의 10% 미만이 되었는가?,,,,,,,,,,,701800,601812,
-601812,501811,Skill 2) 적 즉시 사망.,KILL_ENEMY,,,,,,,,,,,,
+601812,501811,Skill 2) 적 즉시 사망.,KILL_ENEMY,,MAGIC,,,20000,1000,,,,,,
 601910,501910,Skill Multicasting:,MULTICASTING,,,,,601911,601912,,,,,,
 601911,,1) 주변 1칸 내의 적에게 주문력의 50%에 해당하는 마법 피해를 줍니다.,DAMAGE_BY_AP,,MAGIC,,,5000,,,,,,,
 601912,,2) 주변 1칸 내의 적에게 1.5초간 침묵을 부여함.,APPLY_CC,,,SILENCE,1500,,,,,,,,

@@ -60,6 +60,12 @@ namespace Client
             if (_synergyMembers.Contains(leaver))
                 _synergyMembers.Remove(leaver);
 
+            if (_synergyMembers.Count == 0)
+            {
+                ClearSynergyBuff();
+                return;           
+            }
+            
             KillLeaverBuff(leaver);
 
             if (CheckSynergyChange())
@@ -201,11 +207,15 @@ namespace Client
             }
             
             var intendedTargets = TargetStrategyFactory.CreateTargetStrategy
-                (new TargettingStrategyParameter() { Caster = caster, type = data.skillTarget }).GetTargets();
+                (new TargettingStrategyParameter { Caster = caster, type = data.skillTarget })?.GetTargets();
 
             CharBase target = null;
-            if (intendedTargets.Count == 0)
-                Debug.Log($"현재 타겟이 타게팅 타입 {data.skillTarget}에 따라 정해지지 않습니다.");
+            if (intendedTargets == null)
+            {
+                Debug.LogWarning($"현재 버프 {data.functionIndex}가 타겟이 null입니다. 시스템 제공 대상인지 확인하세요.");
+            }
+            else if (intendedTargets.Count == 0)
+                Debug.Log($"현재 타겟이 아직 타게팅 타입 {data.skillTarget}에 따라 정해지지 않습니다.");
             else
                 target = intendedTargets[0];
             #endregion
@@ -228,16 +238,36 @@ namespace Client
             #endregion
 
         }
+        
+        //TODO : 반드시 이 겹치는 생성부를 리팩토링 할 것.
+        public void GetSynergySystemBuff(SynergyData data)
+        {
+            var funcData = DataManager.Instance.GetData<FunctionData>(data.functionIndex);
+            var synergyFunction = FunctionFactory.FunctionGenerate(new BuffParameter()
+            {
+                CastChar = null,
+                TargetChar = null,
+                eFunctionType = funcData.function,
+                FunctionIndex = funcData.Index
+            });
+            
+            synergyBuffRecords.Enqueue(new SynergyBuffRecord(null, synergyFunction));
+            synergyFunction.RunFunction(); // TODO : 단일로 그냥 돌아가게 하는 거긴 한데, 전역 클래스에서 관리하게 할지 고민할 것
+        }
 
-        // 시너지 갱신 함수
-        public void SetCurrentSynergy()
-        {            
+        private void ClearSynergyBuff()
+        {
             while(synergyBuffRecords.Count > 0)
             {
-                var record = synergyBuffRecords.Dequeue();
-                if (record.Caster) // 만약 팔아서 나가고 Destroy되면 null일 거라서
-                    record.KillSynergyBuff();
+                SynergyBuffRecord record = synergyBuffRecords.Dequeue();
+                record?.KillSynergyBuff();
             }
+        }
+        
+        // 시너지 갱신 함수
+        public void SetCurrentSynergy()
+        {
+            ClearSynergyBuff();
 
             List<CharBase> casters = new();            
             foreach(var synergyData in _currentSynergyBuff)
@@ -245,8 +275,9 @@ namespace Client
                 // eSynergyRange에 따라서, Caster로 지정할 아군의 범위를 지정한다.
                 switch (synergyData.casterType)
                 {
-                    case eSynergyRange.ONCE:                        
-                        break;
+                    case eSynergyRange.SYSTEM:
+                        GetSynergySystemBuff(synergyData);
+                        return;
                     case eSynergyRange.SELF:
                         foreach (var info in _synergyMembers)
                             casters.Add(info.SpecifyCharBase());
@@ -292,8 +323,16 @@ namespace Client
 
         public void KillSynergyBuff()
         {
-            BuffFunction.KillSelfFunction(true, true);
-            Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
+            if (Caster)
+            {
+                BuffFunction.KillSelfFunction(true, true);
+                Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
+            }
+            else
+            {
+                BuffFunction.RunFunction(false);
+                Debug.Log($"시너지 버프 삭제 : {BuffFunction.functionType}");
+            }
         }
 
     }
