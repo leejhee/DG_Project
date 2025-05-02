@@ -185,6 +185,7 @@ namespace Client
             MAGIC_SYNERGY_MANABUFF,
             DUALBLADE_SYNERGY_JUMP,
             CHANGE_AA,
+            CHANGE_AA_BY_AA_COUNT,
             
             INCREASE_MAX_HP,
             BUFF_TOTAL_DAMAGE,
