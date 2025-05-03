@@ -27,7 +27,7 @@ namespace Client
 
         private void Start()
         {
-            UIManager.Instance.ShowUI(GameSceneUIPrefab);
+            //UIManager.Instance.ShowUI(GameSceneUIPrefab);
 
             // 타일 시스템 결합
             TestChar = CharManager.Instance.CharGenerate

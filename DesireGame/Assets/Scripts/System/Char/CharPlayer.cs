@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Client.SystemEnum;
 
 namespace Client
@@ -15,6 +16,9 @@ namespace Client
         private CharLightWeightInfo lightWeightInfo;
         private List<eSynergy> _charSynergies = null;
 
+        private CharItemSlot _CharItemSlots = null;
+        public CharItemSlot CharItemSlot => _CharItemSlots;
+
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
         
         protected override void Start()
@@ -27,6 +31,8 @@ namespace Client
         {
             base.CharInit();
             CharManager.Instance.SetChar<CharPlayer>(this);
+
+            _CharItemSlots = new(this);
 
             #region 시너지
             _charSynergies = new List<eSynergy>()
@@ -91,6 +97,24 @@ namespace Client
             Vector3 mouseScreenPos = Input.mousePosition;
             mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z; // 현재 Z 값 유지
             return mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        }
+
+        //public void OnDrop(PointerEventData eventData)
+        //{
+        //    // 드랍된 아이템 받아서 처리
+        //    var itemIconUI = eventData.pointerDrag?.GetComponent<Client.ItemIconUI>();
+        //    if (itemIconUI != null)
+        //    {
+        //        Debug.Log("캐릭터 위에 드랍됨!");
+        //        ReceiveDrop(itemIconUI.GetItem());
+        //        Destroy(itemIconUI.gameObject);
+        //    }
+        //}
+
+        public void ReceiveDrop(Item item)
+        {
+            Debug.Log("UI 오브젝트가 이곳에 드랍되었습니다!");
+            _CharItemSlots.EquipItem(item);
         }
         
     }

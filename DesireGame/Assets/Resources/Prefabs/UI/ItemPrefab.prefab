@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4149534126835920039}
   - component: {fileID: 3303331387563324418}
+  - component: {fileID: 4644134519249860610}
   m_Layer: 5
   m_Name: ItemPrefab
   m_TagString: Untagged
@@ -53,6 +54,21 @@ MonoBehaviour:
   icon: {fileID: 4968210293541777856}
   button: {fileID: 3477152695462219299}
   iconReplacedByID: {fileID: 3577136643309331638}
+  canvasGroup: {fileID: 0}
+  rectTransform: {fileID: 0}
+  originalParent: {fileID: 0}
+--- !u!225 &4644134519249860610
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614738434686423822}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4330076791425806926
 GameObject:
   m_ObjectHideFlags: 0

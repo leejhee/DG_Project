@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 namespace Client
 {
-    public class ItemTabUI : MonoBehaviour
+    public class ItemTabUI : MonoBehaviour, IDropHandler
     {
         [SerializeField] Transform          itemGridPanel; // Vertical Layout Panel의 Transform
         [SerializeField] Button             NextPageButton;// 다음 버튼
@@ -44,6 +44,7 @@ namespace Client
                     itemInfoPanel.Hide();
                 }
             }
+
         }
 
 
@@ -78,11 +79,26 @@ namespace Client
 
         }
 
+        public void OnDrop(PointerEventData eventData)
+        {
+            Debug.Log("아이콘 원래 자리로 돌려보내던가 뭐 하던가..");
+            var itemIcon = eventData.pointerDrag.GetComponent<ItemIconUI>();
+
+            if (itemIcon == null)
+            {
+                Debug.LogError("전달된 아이템 아이콘이 잘못된 듯");
+                return;
+            }
+            AddNewItemUI(itemIcon.GetItemParameter());
+        }
+
         private void OnItemIconClicked(Item item)
         {
             // 아이콘 클릭 시 아이템 정보 표시
+            Debug.Log($"아이템 {item.GetID()} 클릭.. 판넬아 뜨렴");
             itemInfoPanel.gameObject.SetActive(true);
             itemInfoPanel.Show(item); 
+
         }
 
         /// <summary>
