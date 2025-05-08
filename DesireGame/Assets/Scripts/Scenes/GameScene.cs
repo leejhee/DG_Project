@@ -62,7 +62,19 @@ namespace Client
             SynergyManager.Instance.ShowCurrentSynergies();
         }
 
+        [ContextMenu("애니메이션 테스트")]
+        public void TestAnimation()
+        {
+            TestChar.CharAnim.PlayAnimation(state: PlayerState.ATTACK);
+            StartCoroutine(playafter10frame());
+        }
 
+        private IEnumerator playafter10frame()
+        {
+            yield return new WaitForEndOfFrame();
+            TestEnemy.CharAnim.PlayAnimation(PlayerState.DAMAGED);
+        }
+        
         public void TestMessageSystem(GameSceneMessageParam param)
         {
             Debug.Log($"GameScene 에서 수신 완료 메시지 내용은 - {param.message} - ");

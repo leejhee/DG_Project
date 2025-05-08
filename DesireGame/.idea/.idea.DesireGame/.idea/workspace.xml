@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CC.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CC.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCBase.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCFactory.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCParameter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCParameter.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/SynergyData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/SynergyData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Skill/CharSkillInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Skill/CharSkillInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Skill/SkillBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Skill/SkillBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SPUM/Basic_Resources/Animator/Unit/SPUMController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SPUM/Basic_Resources/Animator/Unit/SPUMController.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scenes/GameScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scenes/GameScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/ApplyCC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/ApplyCC.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +40,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharParameter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Function/ConditionCheck.cs" root0="FORCE_HIGHLIGHTING" />
@@ -189,7 +195,10 @@
       <workItem from="1746014375321" duration="3884000" />
       <workItem from="1746093000014" duration="10909000" />
       <workItem from="1746164218070" duration="4596000" />
-      <workItem from="1746169702372" duration="7844000" />
+      <workItem from="1746169702372" duration="8174000" />
+      <workItem from="1746451252106" duration="1671000" />
+      <workItem from="1746623157304" duration="2043000" />
+      <workItem from="1746706629296" duration="4282000" />
     </task>
     <servers />
   </component>
@@ -204,6 +213,17 @@
     <option name="unityProjectFolder" value="true" />
   </component>
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
@@ -352,19 +372,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharPlayer.cs</url>
-          <line>52</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharPlayer.cs" containingFunctionPresentation="메서드 'Dead'">
-            <startOffsets>
-              <option value="1352" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1411" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
