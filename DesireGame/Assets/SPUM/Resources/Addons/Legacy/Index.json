@@ -881,6 +881,54 @@
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Human_1"
     },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
+    },
      {
       "Name": "Emma",
       "UnitType": "Unit",
@@ -928,6 +976,54 @@
       "SubType": "Foot_L",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Emma"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
+    },
+    {
+      "Name": "A",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/A"
     },
     {
       "Name": "Human_2",
