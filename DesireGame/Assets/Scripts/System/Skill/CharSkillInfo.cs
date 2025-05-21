@@ -27,14 +27,16 @@ namespace Client
         {
             _charBase = charBase;
             _currentAutoAttack = _defaultAutoAttack = charBase.CharData.skill1;
-            _currentSkill = _defaultSkill = charBase.CharData.skill2;
+            if (charBase.CharData.skill2.Count == 0 || charBase.CharData.skill2 == null)
+                return;
+            _currentSkill = _defaultSkill = charBase.CharData.skill2[0];
         }
 
         /// <summary>
         /// Char Start 시점
         /// </summary>
         /// <param name="skillArray"></param>
-        public void Init(List<long> skillArray)
+        public void Init(long aaSkill, List<long> skillArray)
         {
             // 스킬 루트 오브젝트 제작
             string SkillRoot = "SkillRoot";
@@ -44,7 +46,7 @@ namespace Client
                 skillRoot = new GameObject(SkillRoot);
             }
             _SkillRoot = skillRoot.transform;
-
+            
             // 스킬 추가
             for (int i = 0; i < skillArray.Count; i++)
             {

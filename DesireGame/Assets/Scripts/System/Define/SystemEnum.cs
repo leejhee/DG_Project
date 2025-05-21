@@ -64,6 +64,7 @@ namespace Client
 
         public enum eCharTier
         {
+            None,
             NORMAL,
             RARE,
             UNIQUE,

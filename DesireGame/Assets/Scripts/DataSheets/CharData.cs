@@ -28,7 +28,7 @@ public long Index; // charID
 		
 		public SystemEnum.eSynergy synergy3; // 시너지3
 		public long skill1; // 스킬1(평타)
-		public long skill2; // 스킬2(고유 스킬)
+		public List<long> skill2; // 스킬2(고유 스킬)
 		public List<long> func; // 초기 기능(패시브)
 		
 
@@ -105,10 +105,10 @@ public long Index; // charID
 					else
 					    data.skill1 = Convert.ToInt64(values[9]);
 					
-					if(values[10] == "")
-					    data.skill2 = default;
-					else
-					    data.skill2 = Convert.ToInt64(values[10]);
+					ListStr = values[10].Replace('[',' ');
+					ListStr = ListStr.Replace(']', ' ');
+					var skill2Data = ListStr.ToString().Split('.').Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).Select(x => Convert.ToInt64(x)).ToList();
+					data.skill2 = skill2Data;
 					
 					ListStr = values[11].Replace('[',' ');
 					ListStr = ListStr.Replace(']', ' ');

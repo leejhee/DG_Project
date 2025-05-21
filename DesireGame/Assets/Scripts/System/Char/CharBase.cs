@@ -132,8 +132,7 @@ namespace Client
             _charSKillInfo = new CharSKillInfo(this);
             if (_charSKillInfo != null)
             {               
-                _charSKillInfo.Init(new List<long>() 
-                { _charData.skill1, _charData.skill2});
+                _charSKillInfo.Init(_charData.skill1, _charData.skill2);
             }
             #endregion
 

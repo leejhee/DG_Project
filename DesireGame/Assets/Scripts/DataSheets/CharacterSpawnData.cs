@@ -13,7 +13,7 @@ namespace Client
     [Serializable]
     public partial class CharacterSpawnData : SheetData
     {
-public long Index; // 
+public long Index; // SpawnID
 		public long StageID; // StageID
 		public long SceneID; // SceneID
 		public long CharacterID; // CharacterID

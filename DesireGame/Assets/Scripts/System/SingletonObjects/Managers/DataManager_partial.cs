@@ -51,7 +51,7 @@ namespace Client
         {
             if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
-            if (typeof(MonsterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
+            if (typeof(CharacterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
             if (typeof(CharData).ToString().Contains(data)) { SetSynergyCharMap(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
             if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
