@@ -22,7 +22,7 @@ namespace Client
         public override void CharDead()
         {
             base.CharDead();
-            DrawItems();
+            //DrawItems();
         }
 
         /// <summary>
@@ -41,19 +41,19 @@ namespace Client
             return -1;
         }
 
-        void DrawItems()
-        {
-            List<long> dropList = ItemManager.Instance.SetDropTableList(GetEnemyID(Index));
-            #region 테스트용 디버그
-            StringBuilder sb = new();
-            foreach (long id in dropList)
-            {
-                sb.Append($"{id} ");
-            }
-            Debug.Log($"{Index}가 드랍할 건 {dropList.Count}개, {sb.ToString()}");
-            #endregion
-            ItemManager.Instance.DropItemBeads(this.CharTransform.position, dropList);
-        }
+        //void DrawItems()
+        //{
+        //    List<long> dropList = ItemManager.Instance.SetDropTableList(GetEnemyID(Index));
+        //    #region 테스트용 디버그
+        //    StringBuilder sb = new();
+        //    foreach (long id in dropList)
+        //    {
+        //        sb.Append($"{id} ");
+        //    }
+        //    Debug.Log($"{Index}가 드랍할 건 {dropList.Count}개, {sb.ToString()}");
+        //    #endregion
+        //    ItemManager.Instance.DropItemBeads(this.CharTransform.position, dropList);
+        //}
 
     }
 }

@@ -14,6 +14,7 @@ namespace Client
     public partial class StageData : SheetData
     {
 public long Index; // StageID
+		public int requiredCredit; // 정산금
 		public string SceneName; // Scene이름
 		public string SceneStartBGM; // Scene 시작 BGM 이름
 		
@@ -47,14 +48,19 @@ public long Index; // StageID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[2] == "")
-					    data.SceneName = default;
+					    data.requiredCredit = default;
 					else
-					    data.SceneName = Convert.ToString(values[2]);
+					    data.requiredCredit = Convert.ToInt32(values[2]);
 					
 					if(values[3] == "")
+					    data.SceneName = default;
+					else
+					    data.SceneName = Convert.ToString(values[3]);
+					
+					if(values[4] == "")
 					    data.SceneStartBGM = default;
 					else
-					    data.SceneStartBGM = Convert.ToString(values[3]);
+					    data.SceneStartBGM = Convert.ToString(values[4]);
 					
 
                     dataList[data.Index] = data;

@@ -17,8 +17,11 @@ namespace Client
         public Dictionary<string, Dictionary<eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
 
         // 스테이지 데이터 
-        private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
-        public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
+        //private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
+        //public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
+
+        private Dictionary<long, List<CharacterSpawnData>> _characterSpawnStageMap = new();
+        public Dictionary<long, List<CharacterSpawnData>> CharacterSpawnStageMap => _characterSpawnStageMap;
 
         // 시너지 별 캐릭터 분류
         private Dictionary<eSynergy, List<CharData>> _synergyCharacterMap = new();
@@ -114,28 +117,28 @@ namespace Client
             string key = typeof(MonsterSpawnData).Name;
             if (_cache.ContainsKey(key) == false)
                 return;
-            Dictionary<long, SheetData> monsterSpawnMap = _cache[key];
-            if (monsterSpawnMap == null)
+            Dictionary<long, SheetData> charSpawnMap = _cache[key];
+            if (charSpawnMap == null)
             {
                 return;
             }
 
-            _monsterSpawnStageMap.Clear();
+            _characterSpawnStageMap.Clear();
 
-            foreach (var _monsterSpawn in monsterSpawnMap.Values)
+            foreach (var _charSpawn in charSpawnMap.Values)
             {
-                MonsterSpawnData monsterSpawn = _monsterSpawn as MonsterSpawnData;
-                if (_monsterSpawnStageMap.ContainsKey(monsterSpawn.StageNum) == false)
+                CharacterSpawnData charSpawn = _charSpawn as CharacterSpawnData;
+                if (_characterSpawnStageMap.ContainsKey(charSpawn.StageID) == false)
                 {
-                    _monsterSpawnStageMap.Add(monsterSpawn.StageNum, new List<MonsterSpawnInfo>());
+                    _characterSpawnStageMap.Add(charSpawn.StageID, new List<CharacterSpawnData>());
                 }
-                MonsterSpawnInfo monsterSpawnInfo = new MonsterSpawnInfo(
-                    monsterSpawn.StageNum,
-                    monsterSpawn.MonsterID,
-                    monsterSpawn.PositionIndex,
-                    monsterSpawn.Index
-                    );
-                _monsterSpawnStageMap[monsterSpawn.StageNum].Add(monsterSpawnInfo);
+                //CharacterSpawnData monsterSpawnInfo = new CharacterSpawnData(
+                //    charSpawn.StageID,
+                //    charSpawn.CharacterID,
+                //    charSpawn.PositionIndex,
+                //    charSpawn.Index
+                //    );
+                //_characterSpawnStageMap[charSpawn.StageID].Add(monsterSpawnInfo);
             }
         }
 

@@ -37,8 +37,8 @@ namespace Client
             #region 스테이지 정보 도움말
             StringBuilder stringBuilder = new();
             List<StageData> stageDatas = new();
-            List<int> stageList = new();
-            var stageDataKeyList = DataManager.Instance.MonsterSpawnStageMap?.Keys;
+            List<long> stageList = new();
+            var stageDataKeyList = DataManager.Instance.CharacterSpawnStageMap?.Keys;
             if (stageDataKeyList == null)
             {
                 Debug.LogWarning("StageTool : StageDataList 를 찾지 못함");
@@ -76,16 +76,16 @@ namespace Client
         {
             CharManager.Instance.ClearAllChar();
 
-            if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(StageNum) == false)
-            {
-                return;
-            }
-            var stageList =  DataManager.Instance.MonsterSpawnStageMap[StageNum];
-            foreach(var stage in stageList)
-            {
-                CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
-                TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
-            }
+            //if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(StageNum) == false)
+            //{
+            //    return;
+            //}
+            //var stageList =  DataManager.Instance.MonsterSpawnStageMap[StageNum];
+            //foreach(var stage in stageList)
+            //{
+            //    CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
+            //    TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
+            //}
         }
     }
 }

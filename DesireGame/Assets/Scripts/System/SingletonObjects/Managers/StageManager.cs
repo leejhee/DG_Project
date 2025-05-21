@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 namespace Client
 {
@@ -9,10 +10,16 @@ namespace Client
     {
         private StageManager() { }
         
-        // 현재 스테이지
-        public int Stage { get; private set; }
-        // 스테이지 시작 가능 상태
+        
+        public int Stage { get; private set; }   // 현재 스테이지
+        public int Gold { get; private set; }    // 보유 골드
+        public Type MyTeam { get; private set; } // 베팅한 팀
+        public int Stake { get; private set; }   // 베팅 금액
+
+        // 스테이지 새로 시작 가능 상태 ->  true이면 스테이지 새로 배치
         public bool CanStartStage { get; private set; } = true;
+        // 베팅 완료했는지 -> true이면 게임시작 가능
+        public bool IsBetted { get; private set; } = false;
         public bool IsStageFinished { get; private set; } = false;
 
         public Action OnStartStage;
@@ -29,15 +36,17 @@ namespace Client
             if (CanStartStage == false)
                 return;
 
-            if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(stageNum) == false)
-                return;
+            //if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(stageNum) == false)
+            //    return;
 
-            var stageList = DataManager.Instance.MonsterSpawnStageMap[stageNum];
-            foreach (var stage in stageList)
-            {
-                CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
-                TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
-            }
+            SetIsBetted(false);
+
+            //var stageList = DataManager.Instance.MonsterSpawnStageMap[stageNum];
+            //foreach (var stage in stageList)
+            //{
+            //    CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
+            //    TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
+            //}
 
             TileManager.Instance.SwitchTileCombatmode(false);
             Debug.Log($"<color=red>새 스테이지 시작. StageNum = {stageNum}</color>");
@@ -45,6 +54,12 @@ namespace Client
 
         public void StartCombat()
         {
+            if (!IsBetted)
+            {
+                Debug.LogError("<color=red>! 베팅 완료 후 전투 시작이 가능합니다.</color>");
+                return;
+            }
+                
             SetIsFinish(false);
             TileManager.Instance.SwitchTileCombatmode(true);
             CharManager.Instance.WakeAllCharAI();
@@ -56,7 +71,15 @@ namespace Client
         /// </summary>
         public void MoveToNextStage()
         {
-            if(TryGetNextStage(Stage))
+            if (Stage % 5 == 0)
+            {
+                // 5의 배수 라운드때마다 체크
+                // 정산금보다 보유금이 더 많은지 확인
+                // true 넘어감
+                // false 게임 종료
+            }
+
+            if (TryGetNextStage(Stage))
             {
                 ItemManager.Instance.CleanupItems();
                 CharManager.Instance.ReturnToOriginPos();
@@ -79,17 +102,11 @@ namespace Client
 
             Debug.Log($"{charType} 타입의 모든 캐릭터가 제거되었습니다.");
 
-            if (charType == typeof(CharPlayer))
-            {
-                Debug.Log("<color=#00FF22>모든 플레이어가 죽었습니다. 졌당..</color>");
-                // 게임 오버 처리
-            }
-            else if (charType == typeof(CharMonster))
-            {
-                Debug.Log("<color=green>모든 적이 사라졌습니다. 이겼당!!</color>");
-                CharManager.Instance.CopyFieldPlayerID();
-                MoveToNextStage();
-            }
+            // 제거된 타입이 내가 베팅한 팀이 아닌 경우 -> 승리
+            bool isWin = MyTeam != charType;
+
+            GetReward(isWin);
+            MoveToNextStage();
         }
 
         /// <summary>
@@ -101,18 +118,53 @@ namespace Client
             CharManager.Instance.ClearAllChar();
 
             int nextStage = _stage + 1;
-            if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(nextStage) == false)
-            {
-                return false;
-            }
+            //if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(nextStage) == false)
+            //{
+            //    return false;
+            //}
 
             return true;
 
         }
+        /// <summary> 어떤 팀의 승리에 베팅? </summary>
+        public void BetOnTeam(Type type)
+        {
+            MyTeam = type;
+        }
 
+        /// <summary> 베팅 금액 정함 </summary>
+        public void BetStake(int gold)
+        {
+            if (gold > Gold)
+            {
+                Debug.LogError("보유 금액 초과");
+                return;
+            }
+
+            Stake = gold;
+        }
+
+        private void GetReward(bool iswin)
+        {
+            if(iswin)
+            {
+                Debug.Log("<color=green>내가 베팅한 팀이 승리. 이겼당!!</color>");
+                Gold += Stake * 2;
+            }
+            else
+            {
+                Debug.Log("<color=#00FF22>상대팀이 승리. 졌당..</color>");
+                // TODO : 패배 때는 맨날 0원인가? 보상을 얻는 경우가 잇음?
+            }
+        }
+        
         public void SetIsFinish(bool isFinish)
         {
             IsStageFinished = isFinish;
+        }
+        public void SetIsBetted(bool isBetted)
+        {
+            IsBetted = isBetted;
         }
     }
 }

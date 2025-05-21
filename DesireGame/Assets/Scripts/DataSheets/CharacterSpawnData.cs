@@ -63,7 +63,7 @@ public long StageID; // StageID
 					    data.PositionIndex = Convert.ToInt32(values[6]);
 					
 
-                    dataList[data.Index] = data;
+                    //dataList[data.Index] = data;
                 }
 
                 return dataList;
