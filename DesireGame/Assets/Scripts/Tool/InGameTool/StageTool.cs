@@ -10,10 +10,10 @@ namespace Client
     public class StageTool : EditorWindow
     {
         private int StageNum = 1;
-        [MenuItem("DG_InGame/스테이지 몬스터 배치")]
+        [MenuItem("DG_InGame/스테이지 배치")]
         public static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(StageTool), false, "스테이지 몬스터 배치");
+            EditorWindow.GetWindow(typeof(StageTool), false, "스테이지 배치");
         }
 
         void OnGUI()
@@ -30,7 +30,7 @@ namespace Client
 
             if (EditorApplication.isPlaying == false)
             {
-                EditorGUILayout.HelpBox($"Unity플레이 후 사용 바랍니다.", MessageType.Info);
+                EditorGUILayout.HelpBox($"Unity 플레이 후 사용 바랍니다.", MessageType.Info);
                 return;
             }
 
@@ -76,16 +76,16 @@ namespace Client
         {
             CharManager.Instance.ClearAllChar();
 
-            //if (DataManager.Instance.MonsterSpawnStageMap.ContainsKey(StageNum) == false)
-            //{
-            //    return;
-            //}
-            //var stageList =  DataManager.Instance.MonsterSpawnStageMap[StageNum];
-            //foreach(var stage in stageList)
-            //{
-            //    CharBase charMonster = CharManager.Instance.CharGenerate(stage.MonsterID);
-            //    TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
-            //}
+            if (DataManager.Instance.CharacterSpawnStageMap.ContainsKey(StageNum) == false)
+            {
+                return;
+            }
+            var stageList = DataManager.Instance.CharacterSpawnStageMap[StageNum];
+            foreach (var stage in stageList)
+            {
+                CharBase charMonster = CharManager.Instance.CharGenerate(stage.CharacterID);
+                TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿,#스테이지별 몬스터 스폰,StageID,SceneID,CharacterID,#Team종류,PositionIndex,,,,,,
+﻿SpawnID,#스테이지별 몬스터 스폰,StageID,SceneID,CharacterID,#Team종류,PositionIndex,,,,,,
 Index,# ID 에 대한 인덱싱은 차후 기획팀이 수정바람,StageID,SceneID,CharacterID,#Team종류,PositionIndex,,,,,,
 long,현재 Scene은 1개뿐,long,long,long,기획자 인식용,int,,,,,,
 1500100,1스테이지는 a팀은 1번 맵에서 진행되며,1,1,10200,ally,20,,,,,,

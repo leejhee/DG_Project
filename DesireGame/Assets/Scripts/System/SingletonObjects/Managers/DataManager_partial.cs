@@ -17,11 +17,8 @@ namespace Client
         public Dictionary<string, Dictionary<eLocalize, string>> LocalizeStringCodeMap => _localizeStringCodeMap;
 
         // 스테이지 데이터 
-        //private Dictionary<int, List<MonsterSpawnInfo>> _monsterSpawnStageMap = new();
-        //public Dictionary<int, List<MonsterSpawnInfo>> MonsterSpawnStageMap => _monsterSpawnStageMap;
-
-        private Dictionary<long, List<CharacterSpawnData>> _characterSpawnStageMap = new();
-        public Dictionary<long, List<CharacterSpawnData>> CharacterSpawnStageMap => _characterSpawnStageMap;
+        private Dictionary<long, List<CharSpawnInfo>> _characterSpawnStageMap = new();
+        public Dictionary<long, List<CharSpawnInfo>> CharacterSpawnStageMap => _characterSpawnStageMap;
 
         // 시너지 별 캐릭터 분류
         private Dictionary<eSynergy, List<CharData>> _synergyCharacterMap = new();
@@ -130,15 +127,15 @@ namespace Client
                 CharacterSpawnData charSpawn = _charSpawn as CharacterSpawnData;
                 if (_characterSpawnStageMap.ContainsKey(charSpawn.StageID) == false)
                 {
-                    _characterSpawnStageMap.Add(charSpawn.StageID, new List<CharacterSpawnData>());
+                    _characterSpawnStageMap.Add(charSpawn.StageID, new List<CharSpawnInfo>());
                 }
-                //CharacterSpawnData monsterSpawnInfo = new CharacterSpawnData(
-                //    charSpawn.StageID,
-                //    charSpawn.CharacterID,
-                //    charSpawn.PositionIndex,
-                //    charSpawn.Index
-                //    );
-                //_characterSpawnStageMap[charSpawn.StageID].Add(monsterSpawnInfo);
+                CharSpawnInfo charSpawnInfo = new CharSpawnInfo(
+                    charSpawn.StageID,
+                    charSpawn.CharacterID,
+                    charSpawn.PositionIndex,
+                    charSpawn.Index
+                    );
+                _characterSpawnStageMap[charSpawn.StageID].Add(charSpawnInfo);
             }
         }
 
@@ -273,21 +270,21 @@ namespace Client
         #endregion
     }
 
-    public class MonsterSpawnInfo
+    public class CharSpawnInfo
     {
-        public readonly int StageNum;
-        public readonly long MonsterID;
+        public readonly long StageID;
+        public readonly long CharacterID;
         public readonly int PositionIndex;
         public readonly long SpawnID;
-        public MonsterSpawnInfo (
-            int stageNum, 
-            long monsterID,
+        public CharSpawnInfo (
+            long stageID, 
+            long charID,
             int positionIndex,
             long spawnID
             )
         {
-            StageNum = stageNum;
-            MonsterID = monsterID;
+            StageID = stageID;
+            CharacterID = charID;
             PositionIndex = positionIndex;
             SpawnID = spawnID;
         }
