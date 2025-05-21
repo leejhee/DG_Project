@@ -4,8 +4,6 @@ using static Client.SystemEnum;
 
 namespace Client
 {
-    // SynergyManager에서 캐릭터의 중복 여부를 확인하기 위해 작성.
-    // SynergyManager의 내장 클래스로 작성할까...?
     public class CharComparer : IEqualityComparer<CharBase>
     {
         public bool Equals(CharBase x, CharBase y)

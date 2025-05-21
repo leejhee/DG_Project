@@ -30,6 +30,7 @@ namespace Client
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);
                 Nav.speed = Actor.CharStat.GetStat(eStats.NMOVE_SPEED);
+                Actor.Move(true);
             }
             else
             {
@@ -38,11 +39,14 @@ namespace Client
                     Nav.ResetPath();
                 }
                 Nav.isStopped = true;
+                Actor.Move(false);
+
             }
         }
 
         public void CharAttackAction(CharAttackParameter param)
         {
+            Actor.Move(false);
             CharSKillInfo skillInfo = Actor.CharSKillInfo;
             skillInfo.PlayByMode(param.mode, new SkillParameter(param.targetChar, Actor));
             Actor.CharStat.GainMana(param.mode);

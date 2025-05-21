@@ -102,8 +102,12 @@ namespace DataGenerator
                         dataDesc = dataDescRow.ToString();
                         dataName = dataNameRow.ToString();
                         dataType = dataTypeRow.ToString();
-
-                        if (dataDesc[0] == '#' || dataName[0] == '#' || dataType[0] == '#')
+                        
+                        var descSkip = dataDesc.StartsWith("#") || string.IsNullOrEmpty(dataDesc);
+                        var nameSkip = dataName.StartsWith("#") || string.IsNullOrEmpty(dataName);
+                        var typeSkip = dataType.StartsWith("#") || string.IsNullOrEmpty(dataType);
+                        
+                        if (descSkip || nameSkip || typeSkip)
                         {
                             continue;
                         }

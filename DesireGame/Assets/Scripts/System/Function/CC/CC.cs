@@ -1,123 +1,123 @@
 namespace Client
 {
-    public class CCKnockBack : CCBase
+    public class NegativeEffectKnockBack : NegativeEffectBase
     {
-        public CCKnockBack(CCParameter param) : base(param)
+        public NegativeEffectKnockBack(CCParameter param) : base(param)
         {
         }
-        public override void RunCC()
+        public override void RunEffect()
         {
-            base.RunCC();
+            base.RunEffect();
         }
     }
 
-    public class CCStun : CCBase
+    public class NegativeEffectStun : NegativeEffectBase
     {
-        public CCStun(CCParameter param) : base(param)
+        public NegativeEffectStun(CCParameter param) : base(param)
         {
         }
 
-        public override void RunCC()
+        public override void RunEffect()
         {
-            base.RunCC();
+            base.RunEffect();
         }
 
-        public override void EndCC()
+        public override void EndEffect()
         {
-            base.EndCC();
+            base.EndEffect();
         }
     }
 
-    public class CCSunder : CCBase
+    public class NegativeEffectSunder : NegativeEffectBase
     {
         private readonly float delta;
 
-        public CCSunder(CCParameter param) : base(param)
+        public NegativeEffectSunder(CCParameter param) : base(param)
         {
             delta = -0.4f * _Target.CharStat.GetStatRaw(SystemEnum.eStats.ARMOR);
         }
 
-        public override void RunCC()
+        public override void RunEffect()
         {
-            base.RunCC();
+            base.RunEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.ARMOR, (long)delta);
         }
 
-        public override void EndCC()
+        public override void EndEffect()
         {
-            base.EndCC();
+            base.EndEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.ARMOR, -(long)delta);
         }
     }
 
-    public class CCShred : CCBase
+    public class NegativeEffectShred : NegativeEffectBase
     {
         private readonly float delta;
 
-        public CCShred(CCParameter param) : base(param)
+        public NegativeEffectShred(CCParameter param) : base(param)
         {
             delta = -0.4f * _Target.CharStat.GetStatRaw(SystemEnum.eStats.MAGIC_RESIST);
         }
 
-        public override void RunCC()
+        public override void RunEffect()
         {
-            base.RunCC();
+            base.RunEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.MAGIC_RESIST, (long)delta);
         }
 
-        public override void EndCC()
+        public override void EndEffect()
         {
-            base.EndCC();
+            base.EndEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.MAGIC_RESIST, -(long)delta);
         }
     }
     
-    public class CCCripple : CCBase
+    public class NegativeEffectCripple : NegativeEffectBase
     {
         private readonly float delta;
         
-        public CCCripple(CCParameter param) : base(param)
+        public NegativeEffectCripple(CCParameter param) : base(param)
         {
             delta = -0.3f * _Target.CharStat.GetStatRaw(SystemEnum.eStats.MAGIC_RESIST);
         }
         
-        public override void RunCC()
+        public override void RunEffect()
         {
-            base.RunCC();
+            base.RunEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.NAS, (long)delta);
         }
 
-        public override void EndCC()
+        public override void EndEffect()
         {
-            base.EndCC();
+            base.EndEffect();
             _Target.CharStat.ChangeStateByBuff(SystemEnum.eStats.NAS, -(long)delta);
         }
     }
 
-    public class CCCharm : CCBase
+    public class NegativeEffectCharm : NegativeEffectBase
     {
-        public CCCharm(CCParameter param) : base(param)
+        public NegativeEffectCharm(CCParameter param) : base(param)
         {
         }
     }
     
-    public class CCSilence : CCBase
+    public class NegativeEffectSilence : NegativeEffectBase
     {
-        public CCSilence(CCParameter param) : base(param)
+        public NegativeEffectSilence(CCParameter param) : base(param)
         {
         }
     }
     
-    public class CCTaunt : CCBase
+    public class NegativeEffectTaunt : NegativeEffectBase
     {
-        public CCTaunt(CCParameter param) : base(param)
+        public NegativeEffectTaunt(CCParameter param) : base(param)
         {
         }
     }
 
-    public class CCWound : CCBase
+    public class NegativeEffectWound : NegativeEffectBase
     {
-        public CCWound(CCParameter param) : base(param)
+        public NegativeEffectWound(CCParameter param) : base(param)
         {
         }
     }

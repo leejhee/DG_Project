@@ -267,6 +267,11 @@ namespace Client
             _charAnim.PlayAnimation(state);
         }
 
+        public void Move(bool move)
+        {
+            _charAnim.MoveState(move);
+        }
+        
         public Action OnRealDead;
         public virtual void Dead()
         {

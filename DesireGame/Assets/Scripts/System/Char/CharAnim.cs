@@ -26,7 +26,16 @@ namespace Client
         }
         public void PlayAnimation(PlayerState state)
         {
+            AnimatorStateInfo currentStateInfo = _Animator.GetCurrentAnimatorStateInfo(0);
+
+            if (currentStateInfo.IsName(state.ToString()) && currentStateInfo.normalizedTime < 1f)
+                return;
             _Animator.CrossFade($"{state}",1f,-1,0);
+        }
+
+        public void MoveState(bool move)
+        {
+            _Animator.SetBool("1_Move", move);
         }
     } 
 }
