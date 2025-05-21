@@ -103,11 +103,11 @@ namespace DataGenerator
                         dataName = dataNameRow.ToString();
                         dataType = dataTypeRow.ToString();
                         
-                        var descSkip = dataDesc.StartsWith("#") || string.IsNullOrEmpty(dataDesc);
+                        //var descSkip = dataDesc.StartsWith("#") || string.IsNullOrEmpty(dataDesc);
                         var nameSkip = dataName.StartsWith("#") || string.IsNullOrEmpty(dataName);
                         var typeSkip = dataType.StartsWith("#") || string.IsNullOrEmpty(dataType);
                         
-                        if (descSkip || nameSkip || typeSkip)
+                        if (nameSkip || typeSkip)
                         {
                             continue;
                         }
