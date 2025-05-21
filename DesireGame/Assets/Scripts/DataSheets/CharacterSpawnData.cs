@@ -13,7 +13,8 @@ namespace Client
     [Serializable]
     public partial class CharacterSpawnData : SheetData
     {
-public long StageID; // StageID
+public long Index; // 
+		public long StageID; // StageID
 		public long SceneID; // SceneID
 		public long CharacterID; // CharacterID
 		public int PositionIndex; // PositionIndex
@@ -42,6 +43,11 @@ public long StageID; // StageID
                     CharacterSpawnData data = new CharacterSpawnData();
 
                     
+					if(values[0] == "")
+					    data.Index = default;
+					else
+					    data.Index = Convert.ToInt64(values[0]);
+					
 					if(values[2] == "")
 					    data.StageID = default;
 					else
@@ -63,7 +69,7 @@ public long StageID; // StageID
 					    data.PositionIndex = Convert.ToInt32(values[6]);
 					
 
-                    //dataList[data.Index] = data;
+                    dataList[data.Index] = data;
                 }
 
                 return dataList;
