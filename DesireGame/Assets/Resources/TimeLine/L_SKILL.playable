@@ -22,10 +22,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.03333333333333333
+    m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 2021259081444713784}
-    m_Duration: 0.5
+    m_Duration: 0.4
     m_TimeScale: 1
     m_ParentTrack: {fileID: -2924951043765468524}
     m_EaseInDuration: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
-  m_Time: 0.13333333333333333
+  m_Time: 0.1
   functionIndex: 600110
 --- !u!114 &9088168902079215833
 MonoBehaviour:
