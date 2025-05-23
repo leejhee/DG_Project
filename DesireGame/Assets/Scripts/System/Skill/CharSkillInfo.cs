@@ -47,6 +47,7 @@ namespace Client
             }
             _SkillRoot = skillRoot.transform;
             
+            AddSkill(aaSkill);
             // 스킬 추가
             for (int i = 0; i < skillArray.Count; i++)
             {
