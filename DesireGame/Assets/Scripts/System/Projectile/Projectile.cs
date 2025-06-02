@@ -61,6 +61,9 @@ namespace Client
                     Speed = 2f, // 이거어떻게 결정하지
                 });
 
+            rangeStrategy = RangeStrategyFactory.CreateRangeStrategy
+                (new RangeParameter() { RangeType = _projectileData.rangeType });
+            
             _projectileLife = _projectileData.penetrationCount;
         }
 
@@ -84,27 +87,31 @@ namespace Client
 
         // 효과 적용 판정이 된 대상에게 대미지 및 function을 주입
         public void ApplyEffect(CharBase target)
-        {           
-            // 대미지 파트
-            target.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
-            Debug.Log(target.CharStat.GetStat(SystemEnum.eStats.NHP));
+        {
+            var targets = rangeStrategy.GetTargetsInRange(target);
+            foreach (var t in targets)
+            {
+                // 대미지 파트
+                t.CharStat.ReceiveDamage(_caster.CharStat.SendDamage(_projectileDamageInput));
+                Debug.Log(t.CharStat.GetStat(SystemEnum.eStats.NHP));
             
-            // 효과 파트
-            foreach(var data in _functionDataList)
-            {
-                target.FunctionInfo.AddFunction(new BuffParameter()
+                // 효과 파트
+                foreach(var data in _functionDataList)
                 {
-                    eFunctionType = data.function,
-                    CastChar = Caster,
-                    TargetChar = target,
-                    FunctionIndex = data.Index
-                });
-            }
+                    t.FunctionInfo.AddFunction(new BuffParameter()
+                    {
+                        eFunctionType = data.function,
+                        CastChar = Caster,
+                        TargetChar = t,
+                        FunctionIndex = data.Index
+                    });
+                }
 
-            // 경우에 따라 수치 바뀔수도...? 2저지 3저지 그런거 있을수도 있고
-            if(--_projectileLife < 0)
-            {
-                SetDestroyFlag(true);
+                // 경우에 따라 수치 바뀔수도...? 2저지 3저지 그런거 있을수도 있고
+                if(--_projectileLife < 0)
+                {
+                    SetDestroyFlag(true);
+                }
             }
         }
 

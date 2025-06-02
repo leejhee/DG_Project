@@ -21,6 +21,7 @@ namespace Client
         public override void MarkerAction()
         {                      
             // 현재는 그냥 한번에 빵 쏘는거 한다.
+            // 탕 -> 탕 -> 탕은 하고싶으면 말해주십쇼
             for(int idx = 0; idx < SkillParam.skillTargets.Count; idx++)
             {
                 Projectile projectile = GameObject.Instantiate(_projectile, SkillParam.skillCaster.transform.position, Quaternion.identity);

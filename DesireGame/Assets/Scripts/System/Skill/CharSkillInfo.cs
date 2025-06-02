@@ -86,7 +86,7 @@ namespace Client
             }
         }
         
-        private void PlaySkill(long skillIndex, SkillParameter parameter)
+        public void PlaySkill(long skillIndex, SkillParameter parameter)
         {
             if (_dicSkill == null)
                 return;
