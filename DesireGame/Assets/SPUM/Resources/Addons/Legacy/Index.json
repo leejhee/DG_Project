@@ -978,6 +978,102 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Emma"
     },
     {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Nat",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
+      "Name": "Lubi",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Lubi"
+    },
+    {
       "Name": "A",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -2219,6 +2315,14 @@
       "PartSubType": "Sword",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/Sword_1"
     },
+     {
+      "Name": "Bone",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Bone",
+      "PartSubType": "Sword",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/Bone"
+    },
     {
       "Name": "Sword_2",
       "UnitType": "Unit",
@@ -2282,6 +2386,14 @@
       "SubType": "Shield_J",
       "PartSubType": "Shield",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/Shield_J"
+    },
+    {
+      "Name": "Trashcan",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Trashcan",
+      "PartSubType": "Shield",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/Trashcan"
     },
     {
       "Name": "Shield_1",
