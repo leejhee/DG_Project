@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Client
 {
     public struct TargettingStrategyParameter
@@ -29,7 +31,10 @@ namespace Client
                 case SystemEnum.eSkillTargetType.LOW_HP_ALLY:
                 case SystemEnum.eSkillTargetType.SELF:
                     return new SelfTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.NEAR_ALLY_2:
+                    return new NearAlly2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ALLY_3:
+                    return new NearAlly3TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.EVERY_ENEMY:
                     return new EveryEnemyTargetStrategy(param);
                 case SystemEnum.eSkillTargetType.EVERY_ALLY:
@@ -40,4 +45,6 @@ namespace Client
             }
         }
     }
+
+    
 }

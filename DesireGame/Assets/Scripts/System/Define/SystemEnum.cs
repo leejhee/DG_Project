@@ -199,6 +199,11 @@ namespace Client
             SPAWN_ALLY,
             KILL_ENEMY,
             
+            QUANTUM_CC_2,
+            QUANTUM_CC_3,
+            LISA_PASSIVE_AA,
+            KILL_ENEMY_UNDER_HP,
+
             eMax
         }
 
@@ -258,12 +263,12 @@ namespace Client
             LOW_HP_ENEMY,
             LOW_HP_ALLY, 
             LOW_HP_ALLY_2,           
-            NEAR_ALLY_3,
             EVERY_ENEMY,
             EVERY_ALLY,
             CONTACT_ENEMY,
             NEAR_ALLY,
             NEAR_ALLY_2,
+            NEAR_ALLY_3,
             NEAR1_ENEMY,
             RANDOM_ENEMY_3,
             CURRENT_CLOSE_ENEMY_2,

@@ -232,7 +232,7 @@ namespace Client
                 Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {ClientChar.GetID()}");
                 return null;
             }
-            else if (nTH < 0)
+            if (nTH < 0)
             {
                 Debug.Log("0보다 작은 nTH는 안돼요!");
                 return null;
@@ -248,6 +248,34 @@ namespace Client
             return CharUtil.GetNearestInList(ClientChar, enemies, nTH, inverse);                      
         }
 
+        public CharBase GetNearestAlly(CharBase ClientChar, int nTH = 0, bool inverse = false)
+        {
+            eCharType clientType = ClientChar.GetCharType();
+            var allyDict = _cache[eCharTypeToType(clientType)];
+            
+            #region 오류 탐지
+            if (allyDict.Count == 0)
+            {
+                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {ClientChar.GetID()}");
+                return null;
+            }
+            if (nTH < 0)
+            {
+                Debug.Log("0보다 작은 nTH는 안돼요!");
+                return null;
+            }
+            #endregion
+            
+            var allies = new List<CharBase>();
+            foreach (var ally in allyDict.Values)
+            {
+                allies.Add(ally);
+            }
+
+            return CharUtil.GetNearestInList(ClientChar, allies, nTH, inverse);     
+        }
+        
+        
         public List<CharBase> GetOneSide(eCharType charType)
         {
             return _cache[eCharTypeToType(charType)].Values.ToList();

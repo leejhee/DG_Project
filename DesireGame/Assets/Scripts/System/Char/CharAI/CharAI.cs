@@ -152,7 +152,17 @@ namespace Client
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
+            if (cachedTargets == null)
+            {
+                Debug.Log("No targets to Encounter");
+                return;
+            }
             FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
+            if (!FinalTarget)
+            {
+                Debug.Log("No target to Chase");
+                return;
+            }
             OnTargetSet?.Invoke(FinalTarget);
         }
 
@@ -183,6 +193,19 @@ namespace Client
                 charAgent.CharAction.CharMoveAction(new CharMoveParameter(FinalTarget));
             }
         }
-
+        #region ONLY_FOR_TEST
+        #if UNITY_EDITOR
+        
+        /// <summary>
+        /// 런타임 상의 스킬 액션 확인
+        /// 반드시 환경을 데이터를 참고하여 조성 후 테스트할 것.(타겟으로 할 대상들)
+        /// </summary>
+        public void TestSkillAction()
+        {
+            SetAction(eAttackMode.Skill);
+        }
+        
+        #endif
+        #endregion
     }
 }

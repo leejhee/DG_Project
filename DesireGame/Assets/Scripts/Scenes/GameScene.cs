@@ -14,8 +14,11 @@ namespace Client
 
         [Header("Test(shootindex의 경우 편하게 하려고 임의로 이렇게 함)")]
         [SerializeField] private CharBase TestChar;
+        [SerializeField] private long testPlayerIndex;
         [SerializeField] private int testPlayerTile;
+        
         [SerializeField] private CharBase TestEnemy;
+        [SerializeField] private long enemyPlayerIndex;
         [SerializeField] private int testEnemyTile;
         [SerializeField] private long projectileShootIndex;
 
@@ -33,12 +36,12 @@ namespace Client
             TestChar = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                     testPlayerTile,
-                700));
+                    testPlayerIndex));
             
             TestEnemy = CharManager.Instance.CharGenerate
                 (new CharTileParameter(SystemEnum.eScene.GameScene,
                     testEnemyTile,
-                10000));
+                    enemyPlayerIndex));
 
             MessageManager.SubscribeMessage<GameSceneMessageParam>(this, TestMessageSystem);
         }
@@ -61,20 +64,14 @@ namespace Client
         {
             SynergyManager.Instance.ShowCurrentSynergies();
         }
-
-        [ContextMenu("애니메이션 테스트")]
-        public void TestAnimation()
-        {
-            TestChar.CharAnim.PlayAnimation(state: PlayerState.ATTACK);
-            StartCoroutine(playafter10frame());
-        }
-
-        private IEnumerator playafter10frame()
-        {
-            yield return new WaitForEndOfFrame();
-            TestEnemy.CharAnim.PlayAnimation(PlayerState.DAMAGED);
-        }
         
+        [ContextMenu("스킬 연속사용 테스트")]
+        public void TestSkillChain()
+        {
+            //엠마의 스킬이 연쇄된 상태에서 사용해본다.
+            TestChar.CharAI.TestSkillAction();
+        }
+
         public void TestMessageSystem(GameSceneMessageParam param)
         {
             Debug.Log($"GameScene 에서 수신 완료 메시지 내용은 - {param.message} - ");

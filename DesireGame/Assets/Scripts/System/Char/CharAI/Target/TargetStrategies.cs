@@ -81,7 +81,7 @@ namespace Client
             };
         }
     }
-
+    
     public class CurrentEnemyTargetStrategy : TargettingStrategyBase
     {
         public CurrentEnemyTargetStrategy(TargettingStrategyParameter param) : base(param) { }
@@ -103,7 +103,40 @@ namespace Client
             };
         }
     }
+    
+    public class NearAlly2TargetStrategy : TargettingStrategyBase
+    {
+        public NearAlly2TargetStrategy(TargettingStrategyParameter param) : base(param)
+        {}
 
+        public override List<CharBase> GetTargets()
+        {
+            return new List<CharBase>()
+            {
+                CharManager.Instance.GetNearestAlly(Caster, 1), 
+                CharManager.Instance.GetNearestAlly(Caster, 2)
+            };
+        }
+    }
+    
+    public class NearAlly3TargetStrategy : TargettingStrategyBase
+    {
+        public NearAlly3TargetStrategy(TargettingStrategyParameter param) : base(param)
+        {}
+
+        public override List<CharBase> GetTargets()
+        {
+            return new List<CharBase>()
+            {
+                CharManager.Instance.GetNearestAlly(Caster, 1), 
+                CharManager.Instance.GetNearestAlly(Caster, 2),
+                CharManager.Instance.GetNearestAlly(Caster, 3)
+            };
+        }
+    }
+    
+    
+    
     public class EveryAllyTargetStrategy : TargettingStrategyBase
     {
         public EveryAllyTargetStrategy(TargettingStrategyParameter param) : base(param)

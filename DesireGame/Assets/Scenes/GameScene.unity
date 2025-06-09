@@ -1109,9 +1109,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameSceneUIPrefab: {fileID: 5070561358861254874, guid: d0dea910b4611084592117edce3f5d8c, type: 3}
   TestChar: {fileID: 0}
+  testPlayerIndex: 800
   testPlayerTile: 15
   TestEnemy: {fileID: 0}
-  testEnemyTile: 20
+  enemyPlayerIndex: 101
+  testEnemyTile: 30
   projectileShootIndex: 500210
 --- !u!1 &1597500249
 GameObject:

@@ -99,10 +99,16 @@ namespace Client
 
         public void PlayByMode(CharAI.eAttackMode mode, SkillParameter parameter)
         {
-            if(mode == CharAI.eAttackMode.Auto)
+            if (mode == CharAI.eAttackMode.Auto)
+            {
                 PlaySkill(_currentAutoAttack, parameter);
-            else if(mode == CharAI.eAttackMode.Skill)
+            }
+            else if (mode == CharAI.eAttackMode.Skill)
+            {
                 PlaySkill(_currentSkill, parameter);
+                Debug.Log($"{_currentSkill} playing skill");
+            }
+                
         }
         
         public SkillAIInfo GetInfoByMode(CharAI.eAttackMode mode)
