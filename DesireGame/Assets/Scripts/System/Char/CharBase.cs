@@ -50,7 +50,9 @@ namespace Client
         private Coroutine _coroutine; // UpdateAI용,,
         public Vector3 LookAtPos { get; private set; } = Vector3.right; // 현재 방향성
 
-
+        private CharLightWeightInfo lightWeightInfo;
+        private List<eSynergy> _charSynergies = null;
+        
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
         public long Index => _index;
@@ -125,9 +127,13 @@ namespace Client
             FunctionInfo?.UpdateFunctionDic();            
         }
 
+        protected abstract void SetChar(CharBase character);
+        
         // Char의 Start시점에 불림
         protected virtual void CharInit()
         {
+            SetChar(this);
+            
             #region 스킬
             _charSKillInfo = new CharSKillInfo(this);
             if (_charSKillInfo != null)
@@ -149,13 +155,35 @@ namespace Client
                 });
             }
             #endregion
-         
+            
+            #region 시너지 등록
+            
+            _charSynergies = new List<eSynergy>()
+            {
+                _charData.synergy1,
+                _charData.synergy2,
+                _charData.synergy3
+            };
+
+            lightWeightInfo = new CharLightWeightInfo()
+            {
+                Index = Index,
+                Uid = _uid,
+                SynergyList = _charSynergies,
+                Side = CharType
+            };
+
+            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
+            
+            #endregion
+            
+            #region 사망 구독
             _charStat.OnDeath += () =>
             {
                 Debug.Log($"캐릭터 사망 : uid {_uid}, 이름 {_charData.charName}");
                 CharDead();
             };
-
+            #endregion
         }
         
         public bool IsAlive => CharStat.GetStat(eStats.NHP) > 0;
@@ -274,6 +302,7 @@ namespace Client
         public Action OnRealDead;
         public virtual void Dead()
         {
+            SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
             CharDead();
             OnRealDead?.Invoke();
             Destroy(gameObject);

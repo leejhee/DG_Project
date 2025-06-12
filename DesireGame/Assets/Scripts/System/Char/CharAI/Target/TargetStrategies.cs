@@ -145,7 +145,7 @@ namespace Client
 
         public override List<CharBase> GetTargets()
         {
-            return CharManager.Instance.GetOneSide(SystemEnum.eCharType.ALLY);
+            return CharManager.Instance.GetAllySide(Caster.GetCharType());
         }
     }
 
@@ -157,7 +157,7 @@ namespace Client
 
         public override List<CharBase> GetTargets()
         {
-            return CharManager.Instance.GetOneSide(SystemEnum.eCharType.ENEMY);
+            return CharManager.Instance.GetEnemySide(Caster.GetCharType());
         }
     }
 

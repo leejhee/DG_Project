@@ -279,9 +279,19 @@ namespace Client
         public List<CharBase> GetOneSide(eCharType charType)
         {
             return _cache[eCharTypeToType(charType)].Values.ToList();
-        }        
+        }
 
+        public List<CharBase> GetAllySide(eCharType charType)
+        {
+            return GetOneSide(charType);
+        }
 
+        public List<CharBase> GetEnemySide(eCharType charType)
+        {
+            return GetOneSide(CharUtil.GetEnemyType(charType));
+        }
+        
+        
         /// <summary>
         /// _cache 안에 있는 캐릭터 AI 켜기
         /// </summary>

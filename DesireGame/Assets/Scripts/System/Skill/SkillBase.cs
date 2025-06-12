@@ -85,7 +85,7 @@ namespace Client
         {
             if (!_PlayableDirector)
                 return;
-          
+            
             InputParameter = parameter;
             _PlayableDirector.Play();
             _skillPlayCount++;

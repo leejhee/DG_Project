@@ -115,13 +115,13 @@ namespace Client
             if (param is not SynergyConditionInput laplacian)
                 return;
             
-            var members = SynergyManager.Instance.GetInfo(eSynergy.LAPLACIAN);
+            var members = SynergyManager.Instance.GetInfo(laplacian.CharTypeContext, eSynergy.LAPLACIAN);
             if (members == null || members.Count == 0 || laplacian.ChangedSynergy != eSynergy.LAPLACIAN)
             {
                 return;
             }
 
-            var answerIndices = members.Select(member => member.index).Distinct().ToList();
+            var answerIndices = members.Select(member => member.Index).Distinct().ToList();
             _conditionCallback.Invoke(answerIndices.Count == 1 && answerIndices[0] == checkTargetIndex);
         }
 
