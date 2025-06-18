@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/ConditionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/ConditionData.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemConst.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemConst.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/CharManagingTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/CharManagingTool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,15 +140,13 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="47268">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="47268" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -223,7 +224,10 @@
       <workItem from="1749642878241" duration="907000" />
       <workItem from="1749643798586" duration="4851000" />
       <workItem from="1749726371226" duration="13379000" />
-      <workItem from="1750076892492" duration="2093000" />
+      <workItem from="1750076892492" duration="3598000" />
+      <workItem from="1750164633970" duration="2464000" />
+      <workItem from="1750248619123" duration="4302000" />
+      <workItem from="1750253004993" duration="5058000" />
     </task>
     <servers />
   </component>
@@ -449,19 +453,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs</url>
-          <line>131</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Condition\ConditionBase.cs" containingFunctionPresentation="메서드 'CheckInput'">
-            <startOffsets>
-              <option value="3806" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4099" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

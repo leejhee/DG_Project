@@ -124,7 +124,6 @@ namespace Client
                 return;
             }
 
-            var answerIndices = members.Select(member => member.Index).Distinct().ToList();
             var answerInfos = members
                 .Select(member => new { member.Index, member.Side })
                 .Distinct()
@@ -136,20 +135,16 @@ namespace Client
 
     }
 
-    // 있으면 안될 거 같음. 아무리 생각해도요.
-    // public class TrueCondition : ConditionBase
-    // {
-    //     public TrueCondition(ConditionParameter param) : base(param)
-    //     {
-    //     }
-    //
-    //     public override void CheckInput(ConditionCheckInput param)
-    //     {
-    //         base.CheckInput(param);
-    //         _conditionCallback.Invoke(true);
-    //     }
-    // }
-
+    public class TargettedByEnemy : ConditionBase
+    {
+        public TargettedByEnemy(ConditionParameter param) : base(param)
+        {
+        }
+        
+        //얘는 언제 invoke 해야하지?
+        
+    }
+    
     public static class ConditionFactory
     {
         public static ConditionBase CreateCondition(ConditionParameter param)
@@ -158,7 +153,6 @@ namespace Client
             {
                 case eCondition.LAPLACIAN_ONLY: return new LaplacianUnitOnly(param);
                 case eCondition.HP_UNDER_N:     return new HPUnderNPercent(param);
-                //case eCondition.TRUE:           return new TrueCondition(param);
                 default: return null;
             }
         }
