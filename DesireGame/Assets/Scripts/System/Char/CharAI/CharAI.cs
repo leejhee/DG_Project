@@ -204,7 +204,33 @@ namespace Client
         {
             SetAction(eAttackMode.Skill);
         }
-        
+
+        public void TestAction(eAttackMode mode)
+        {
+            SkillAIInfo info = charAgent.CharSKillInfo.GetInfoByMode(mode);
+            SetTarget(info.TargetType);
+            if (!FinalTarget)
+            {
+                Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
+                return;
+            }
+            
+            //데이터 기반 사거리 설정 및 행동 결정
+            int skillRange = info.Range;
+            var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
+            var tolerance = 0.01f;
+
+            // 사거리와 비교 후 이동 결정
+            bool inRange = distance <= skillRange + tolerance || skillRange == 0;
+            if (inRange)
+            {
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, mode));
+            }
+            else
+            {
+                Debug.LogError("스킬 사거리가 충분하지 않아, 스킬 사용이 불가합니다.");
+            }
+        }
         #endif
         #endregion
     }

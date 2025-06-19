@@ -128,6 +128,17 @@ namespace Client
             => _dicSkill[_currentAutoAttack].OnSkillEnd -= onSkillEnd;
         
         
+        #if UNITY_EDITOR
+        public SkillAIInfo GetInfoByIndex(int index)
+        {
+            if (!_dicSkill.ContainsKey(index))
+            {
+                Debug.LogError($"해당 캐릭터 : {_charBase.GetID()}번 캐릭터 {_charBase.name}에 {index}번 스킬은 없습니다.");
+                return default;
+            }
+            return _dicSkill[index].GetAIInfo();
+        }
+        #endif
 
     }
 
