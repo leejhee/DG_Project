@@ -2315,7 +2315,15 @@
       "PartSubType": "Sword",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/Sword_1"
     },
-     {
+    {
+      "Name": "L",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "L",
+      "PartSubType": "Sword",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/L"
+    },
+    {
       "Name": "Bone",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2412,6 +2420,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/4_Spear/Soon_Spear"
     },
     {
+      "Name": "S",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "S",
+      "PartSubType": "Spear",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/4_Spear/S"
+    },
+    {
       "Name": "Spear_1",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2444,6 +2460,14 @@
       "SubType": "F_SR_Hammer",
       "PartSubType": "Hammer",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/6_Hammer/F_SR_Hammer"
+    },
+    {
+      "Name": "Wrench",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Wrench",
+      "PartSubType": "Hammer",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/6_Hammer/Wrench"
     },
     {
       "Name": "Back_1",
