@@ -17,6 +17,7 @@ namespace Client
     public class SynergyConditionInput : ConditionCheckInput
     {
         public SystemEnum.eSynergy ChangedSynergy;
+        public SystemEnum.eCharType CharTypeContext;
         public long RegistrarIndex;
     }
 }

@@ -13,13 +13,12 @@ namespace Client
         private Vector3 offset;
         private Camera mainCamera;
 
-        private CharLightWeightInfo lightWeightInfo;
-        private List<eSynergy> _charSynergies = null;
+        
 
         private CharItemSlot _CharItemSlots = null;
         public CharItemSlot CharItemSlot => _CharItemSlots;
 
-        protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ALLY;
+        protected override eCharType CharType => eCharType.ALLY;
         
         protected override void Start()
         {
@@ -27,37 +26,19 @@ namespace Client
             mainCamera = Camera.main;
         }
 
+        protected override void SetChar(CharBase charBase) => CharManager.Instance.SetChar<CharPlayer>(this);
+        
         protected override void CharInit()
         {
             base.CharInit();
-            CharManager.Instance.SetChar<CharPlayer>(this);
+            //CharManager.Instance.SetChar(this);
 
             _CharItemSlots = new(this);
-
-            #region 시너지
-            _charSynergies = new List<eSynergy>()
-            {
-                _charData.synergy1,
-                _charData.synergy2,
-                _charData.synergy3
-            };
-
-            lightWeightInfo = new CharLightWeightInfo()
-            {
-                index = Index,
-                uid = _uid,
-                synergyList = _charSynergies
-            };
-
-            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
-
-            #endregion
+            
         }
 
         public override void Dead()
         {
-            SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
-            // [TODO] 이선재 : 장착되어있던 아이템 해제하는 것 필요
             base.Dead();
         }
 

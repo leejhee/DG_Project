@@ -18,8 +18,8 @@ namespace Client
             mySynergy = (SystemEnum.eSynergy)_FunctionData.input1;
             myCharLightWeightInfo = new CharLightWeightInfo()
             {
-                index = _CastChar.Index,
-                uid = _CastChar.GetID()
+                Index = _CastChar.Index,
+                Uid = _CastChar.GetID()
             };
         }
 

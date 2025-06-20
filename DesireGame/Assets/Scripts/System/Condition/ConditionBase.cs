@@ -102,11 +102,13 @@ namespace Client
 
     public class LaplacianUnitOnly : SynergyCondition
     {
-        private readonly long checkTargetIndex;
+        private readonly long _allyIndex;
+        private readonly long _enemyIndex;
 
         public LaplacianUnitOnly(ConditionParameter param) : base(param)
         {
-            checkTargetIndex = _conditionData.value1;
+            _allyIndex = _conditionData.value1;
+            _enemyIndex = _conditionData.value2;
         }
 
         public override void CheckInput(ConditionCheckInput param)
@@ -115,32 +117,34 @@ namespace Client
             if (param is not SynergyConditionInput laplacian)
                 return;
             
-            var members = SynergyManager.Instance.GetInfo(eSynergy.LAPLACIAN);
-            if (members == null || members.Count == 0 || laplacian.ChangedSynergy != eSynergy.LAPLACIAN)
+            var members = SynergyManager.Instance.GetInfo(laplacian.CharTypeContext, eSynergy.LAPLACIAN);
+            if (members == null || members.Count == 0 ||
+                laplacian.ChangedSynergy != eSynergy.LAPLACIAN)
             {
                 return;
             }
 
-            var answerIndices = members.Select(member => member.index).Distinct().ToList();
-            _conditionCallback.Invoke(answerIndices.Count == 1 && answerIndices[0] == checkTargetIndex);
+            var answerInfos = members
+                .Select(member => new { member.Index, member.Side })
+                .Distinct()
+                .ToList();
+            _conditionCallback.Invoke(answerInfos.Count == 1 &&
+                                      ((answerInfos[0].Index == _allyIndex && answerInfos[0].Side == eCharType.ALLY) ||
+                                       (answerInfos[0].Index == _enemyIndex && answerInfos[0].Side == eCharType.ENEMY)));
         }
 
     }
 
-    // 있으면 안될 거 같음. 아무리 생각해도요.
-    public class TrueCondition : ConditionBase
+    public class TargettedByEnemy : ConditionBase
     {
-        public TrueCondition(ConditionParameter param) : base(param)
+        public TargettedByEnemy(ConditionParameter param) : base(param)
         {
         }
-
-        public override void CheckInput(ConditionCheckInput param)
-        {
-            base.CheckInput(param);
-            _conditionCallback.Invoke(true);
-        }
+        
+        //얘는 언제 invoke 해야하지?
+        
     }
-
+    
     public static class ConditionFactory
     {
         public static ConditionBase CreateCondition(ConditionParameter param)
@@ -149,7 +153,6 @@ namespace Client
             {
                 case eCondition.LAPLACIAN_ONLY: return new LaplacianUnitOnly(param);
                 case eCondition.HP_UNDER_N:     return new HPUnderNPercent(param);
-                case eCondition.TRUE:           return new TrueCondition(param);
                 default: return null;
             }
         }

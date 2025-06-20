@@ -8,10 +8,11 @@ namespace Client
     public class CharMonster : CharBase
     {
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ENEMY;
+        protected override void SetChar(CharBase character) => CharManager.Instance.SetChar<CharMonster>(this);
         protected override void CharInit()
         {
             base.CharInit();
-            CharManager.Instance.SetChar<CharMonster>(this);
+            //CharManager.Instance.SetChar<CharMonster>(this);
         }
 
         public void Patrol()

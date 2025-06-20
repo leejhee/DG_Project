@@ -77,6 +77,11 @@ namespace Client
             return null;
         }
 
+        public static bool IsRightSide(int tileIndex, SystemEnum.eCharType type)
+        {
+            return (type == SystemEnum.eCharType.ALLY && tileIndex >= 0 && tileIndex < TILE_SIDE_OFFSET) ||
+                   (type == SystemEnum.eCharType.ENEMY && tileIndex >= TILE_SIDE_OFFSET && tileIndex < TILE_MAX);
+        }
     }
 
     /// <summary>

@@ -152,7 +152,17 @@ namespace Client
                 Caster = charAgent
             });
             cachedTargets = targettingGuide.GetTargets();
+            if (cachedTargets == null)
+            {
+                Debug.Log("No targets to Encounter");
+                return;
+            }
             FinalTarget = CharUtil.GetNearestInList(charAgent, cachedTargets); // 무조건 cached 중 최근접 대상
+            if (!FinalTarget)
+            {
+                Debug.Log("No target to Chase");
+                return;
+            }
             OnTargetSet?.Invoke(FinalTarget);
         }
 
@@ -183,6 +193,45 @@ namespace Client
                 charAgent.CharAction.CharMoveAction(new CharMoveParameter(FinalTarget));
             }
         }
+        #region ONLY_FOR_TEST
+        #if UNITY_EDITOR
+        
+        /// <summary>
+        /// 런타임 상의 스킬 액션 확인
+        /// 반드시 환경을 데이터를 참고하여 조성 후 테스트할 것.(타겟으로 할 대상들)
+        /// </summary>
+        public void TestSkillAction()
+        {
+            SetAction(eAttackMode.Skill);
+        }
 
+        public void TestAction(eAttackMode mode)
+        {
+            SkillAIInfo info = charAgent.CharSKillInfo.GetInfoByMode(mode);
+            SetTarget(info.TargetType);
+            if (!FinalTarget)
+            {
+                Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
+                return;
+            }
+            
+            //데이터 기반 사거리 설정 및 행동 결정
+            int skillRange = info.Range;
+            var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
+            var tolerance = 0.01f;
+
+            // 사거리와 비교 후 이동 결정
+            bool inRange = distance <= skillRange + tolerance || skillRange == 0;
+            if (inRange)
+            {
+                charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, mode));
+            }
+            else
+            {
+                Debug.LogError("스킬 사거리가 충분하지 않아, 스킬 사용이 불가합니다.");
+            }
+        }
+        #endif
+        #endregion
     }
 }
