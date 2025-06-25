@@ -127,7 +127,12 @@ namespace Client
             FunctionInfo?.UpdateFunctionDic();            
         }
 
-        protected abstract void SetChar(CharBase character);
+        protected virtual void SetChar(CharBase character)
+        {
+            #if UNITY_EDITOR
+            MessageManager.SendMessage(new OnSetChar());
+            #endif
+        }
         
         // Char의 Start시점에 불림
         protected virtual void CharInit()

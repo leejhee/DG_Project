@@ -14,7 +14,7 @@ namespace Client
     {
         public static int FPS = 60;
 
-        public static float TILE_UNIT_LENGTH = 1f;
+        public static float TILE_UNIT_LENGTH = 1.5f;
 
         // 맵 타일 구조가 불변이라는 전제
         public static int TILE_COL_OFFSET = 5;  // 한 column에 몇개? (다 column 단위로 기획되어 있어서 이렇게 함)
@@ -82,6 +82,8 @@ namespace Client
             return (type == SystemEnum.eCharType.ALLY && tileIndex >= 0 && tileIndex < TILE_SIDE_OFFSET) ||
                    (type == SystemEnum.eCharType.ENEMY && tileIndex >= TILE_SIDE_OFFSET && tileIndex < TILE_MAX);
         }
+
+        public static float GetUnitLength(float worldLength) => worldLength / TILE_UNIT_LENGTH;
     }
 
     /// <summary>

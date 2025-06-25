@@ -217,7 +217,8 @@ namespace Client
             
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = info.Range;
-            var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
+            var distance = SystemConst.GetUnitLength(
+                Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position));
             var tolerance = 0.01f;
 
             // 사거리와 비교 후 이동 결정
@@ -230,6 +231,12 @@ namespace Client
             {
                 Debug.LogError("스킬 사거리가 충분하지 않아, 스킬 사용이 불가합니다.");
             }
+        }
+        
+        // TODO : 스킬 타겟 선택을 할 수 있도록 할 것인지 선택할 것.
+        public void TestSkillOnTarget(CharBase target, eAttackMode mode)
+        {
+            charAgent.CharAction.CharAttackAction(new CharAttackParameter(new List<CharBase> {target}, mode));
         }
         #endif
         #endregion

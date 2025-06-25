@@ -372,11 +372,11 @@ namespace Client
         public List<CharBase> GetCurrentCharacters()
         {
             var charlist = new List<CharBase>();
-            foreach(var dicts in _cache)
+            foreach(Dictionary<long, CharBase> dicts in _cache.Values)
             {
-                foreach(var character in dicts.Value)
+                foreach(CharBase character in dicts.Values)
                 {
-                    charlist.Add(character.Value);
+                    charlist.Add(character);
                 }
             }
             return charlist;
