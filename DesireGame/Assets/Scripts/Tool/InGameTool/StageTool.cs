@@ -9,7 +9,7 @@ namespace Client
 {
     public class StageTool : EditorWindow
     {
-        private int StageNum = 1;
+        private int StageNum = 1600001;
         [MenuItem("DG_InGame/스테이지 배치")]
         public static void ShowWindow()
         {
@@ -68,7 +68,8 @@ namespace Client
             GUILayout.FlexibleSpace();
             if (GUILayout.Button("스테이지 구현", GUILayout.Width(300)))
             {
-                SetStage();
+                StageManager.Instance.StartStage(StageNum);
+                //SetStage();
             }
         }
 

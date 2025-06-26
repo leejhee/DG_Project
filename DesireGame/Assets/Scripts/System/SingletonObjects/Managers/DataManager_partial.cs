@@ -51,7 +51,7 @@ namespace Client
         {
             if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
-            if (typeof(CharacterSpawnData).ToString().Contains(data)) { SetMonsterSpawnData(); return; }
+            if (typeof(CharacterSpawnData).ToString().Contains(data)) { SetCharacterSpawnData(); return; }
             if (typeof(CharData).ToString().Contains(data)) { SetSynergyCharMap(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
             if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
@@ -108,10 +108,10 @@ namespace Client
             }
         }
 
-        // 스테이지 몬스터 데이터 
-        private void SetMonsterSpawnData()
+        // 스테이지 데이터 
+        private void SetCharacterSpawnData()
         {
-            string key = typeof(MonsterSpawnData).Name;
+            string key = typeof(CharacterSpawnData).Name;
             if (_cache.ContainsKey(key) == false)
                 return;
             Dictionary<long, SheetData> charSpawnMap = _cache[key];

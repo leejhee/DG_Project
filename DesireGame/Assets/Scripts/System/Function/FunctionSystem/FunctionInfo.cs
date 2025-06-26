@@ -21,7 +21,7 @@ namespace Client
                 _functionBaseDic[i] = new List<FunctionBase>();
             }
 
-            StageManager.Instance.OnStartStage += AddBattleStartQueueFunction;
+            StageManager.Instance.OnStartCombat += AddBattleStartQueueFunction;
         }
 
         private void AddBattleStartQueueFunction()

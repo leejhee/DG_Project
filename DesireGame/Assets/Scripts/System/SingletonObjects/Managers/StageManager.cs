@@ -10,29 +10,48 @@ namespace Client
     {
         private StageManager() { }
         
-        
-        public int Stage { get; private set; }   // 현재 스테이지
-        public int Gold { get; private set; }    // 보유 골드
-        public Type MyTeam { get; private set; } // 베팅한 팀
-        public int Stake { get; private set; }   // 베팅 금액
+        public int Stage { get; private set; }         // 현재 스테이지
+        public Type MyTeam { get; private set; }       // 베팅한 팀
+        public int Stake { get; private set; }         // 베팅 금액
 
         // 스테이지 새로 시작 가능 상태 ->  true이면 스테이지 새로 배치
         public bool CanStartStage { get; private set; } = true;
+
         // 베팅 완료했는지 -> true이면 게임시작 가능
         public bool IsBetted { get; private set; } = false;
+
+        // 전투가 끝났는지
         public bool IsStageFinished { get; private set; } = false;
 
-        public Action OnStartStage;
+        public Action OnStageChanged;
+        public Action OnStartCombat;
+        public Action OnEndCombat;
+        public Action<int> OnGoldChanged;
+
+        private int gold = 500; // 보유 골드 - 초기값 아무거나
+        public int Gold
+        {
+            get => gold;
+            set
+            {
+                if (gold != value)
+                {
+                    gold = value;
+                    OnGoldChanged?.Invoke(gold);
+                }
+            }
+        }
 
         public override void Init()
         {
             base.Init();
             CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
-            Stage = 1;
         }
 
         public void StartStage(int stageNum)
         {
+            CharManager.Instance.ClearAllChar();
+
             if (CanStartStage == false)
                 return;
 
@@ -48,7 +67,10 @@ namespace Client
                 TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
             }
 
+            Stage = stageNum;
             TileManager.Instance.SwitchTileCombatmode(false);
+            OnEndCombat?.Invoke();
+            OnStageChanged?.Invoke();
             Debug.Log($"<color=red>새 스테이지 시작. StageNum = {stageNum}</color>");
         }
 
@@ -63,7 +85,7 @@ namespace Client
             SetIsFinish(false);
             TileManager.Instance.SwitchTileCombatmode(true);
             CharManager.Instance.WakeAllCharAI();
-            OnStartStage?.Invoke();
+            OnStartCombat?.Invoke();
         }
 
         /// <summary>
@@ -75,14 +97,17 @@ namespace Client
             {
                 // 5의 배수 라운드때마다 체크
                 // 정산금보다 보유금이 더 많은지 확인
-                // true 넘어감
-                // false 게임 종료
+                // true 넘어감 false 게임 종료
+                StageData currentStageData = DataManager.Instance.GetData<StageData>(Stage);
+                bool canPassStage = Gold >= currentStageData.requiredCredit;
+
+                if (!canPassStage) return; // 패배 띄우기
             }
 
             if (TryGetNextStage(Stage))
             {
-                ItemManager.Instance.CleanupItems();
-                CharManager.Instance.ReturnToOriginPos();
+                //ItemManager.Instance.CleanupItems();
+                //CharManager.Instance.ReturnToOriginPos();
                 StartStage(++Stage);
             }
             else
@@ -91,13 +116,11 @@ namespace Client
             }
         }
 
-        /// <summary>
-        /// 승패 판정
-        /// </summary>
+        /// <summary> 승패 판정 </summary>
         public void CheckWinCondition(Type charType)
         {
             // 전투 끝나고 한번만 체크하도록
-            if (!IsStageFinished) IsStageFinished = true;
+            if (!IsStageFinished) SetIsFinish(true);
             else return;
 
             Debug.Log($"{charType} 타입의 모든 캐릭터가 제거되었습니다.");
@@ -154,7 +177,7 @@ namespace Client
             else
             {
                 Debug.Log("<color=#00FF22>상대팀이 승리. 졌당..</color>");
-                // TODO : 패배 때는 맨날 0원인가? 보상을 얻는 경우가 잇음?
+                // 패배 시 0원
             }
         }
         

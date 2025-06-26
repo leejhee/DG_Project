@@ -16,7 +16,7 @@ namespace Client
         // 존재하는 Char (Char Type을 Key1 Char ID를 Key2로 사용)
         private Dictionary<Type, Dictionary<long, CharBase>> _cache = new Dictionary<Type, Dictionary<long, CharBase>>();
         // 플레이어 복사본이 들어갈 캐시, 다음 스테이지로 넘어갈 때 세팅용
-        private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
+        //private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
 
         // 고유 ID 생성 
         private long _nextID = 0;
@@ -343,13 +343,13 @@ namespace Client
         /// </summary>
         public void CopyFieldPlayerID()
         {
-            _playerCache.Clear();
+            //_playerCache.Clear();
 
-            foreach (var kvp in _cache[typeof(CharPlayer)])
-            {
-                _playerCache.Add(kvp.Key, kvp.Value);
-                Debug.Log($"필드에 있는 {kvp.Value.CharData.charName} ( 키 : {kvp.Key} ) 복제");
-            }
+            //foreach (var kvp in _cache[typeof(CharPlayer)])
+            //{
+            //    _playerCache.Add(kvp.Key, kvp.Value);
+            //    Debug.Log($"필드에 있는 {kvp.Value.CharData.charName} ( 키 : {kvp.Key} ) 복제");
+            //}
         }
 
         /// <summary>
@@ -357,15 +357,17 @@ namespace Client
         /// </summary>
         public void ReturnToOriginPos()
         {
-            foreach (var kvp in _playerCache)
-            {
-                CharBase charBase = CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.Index));
-                charBase.CharStat.ResetAfterBattle();
-                TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
+            //foreach (var kvp in _playerCache)
+            //{
+            //    CharBase charBase = CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.Index));
+            //    charBase.CharStat.ResetAfterBattle();
+            //    TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
 
-                Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
-            }
+            //    Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
+            //}
         }
+
+        //public bool IsCharOnField() => _cache[typeof(CharPlayer)].Count > 0 || _cache[typeof(CharMonster)].Count > 0;
 
 #if UNITY_EDITOR
 
