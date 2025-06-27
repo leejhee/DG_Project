@@ -9,12 +9,12 @@ long	string	string	string	#설명
 1000005	SKILL_MELEE_AP	기본 근거리 마법 공격	0																								
 1000100	SKILL_L	처단!	0																								
 1000101	SKILL_K	일방적 통보	0																								
-1000102	SKILL_J																										
-1000103	SKILL_M																										
+1000102	SKILL_J	_	_																								
+1000103	SKILL_M	_	_																								
 1010100	DESC_SKILL_L	다음 두 번의 기본 공격이 60의 추가피해를 입힙니다.	0																								
 1010101	DESC_SKILL_K	가장 멀리있는 적에게 나비를 보냈다가 돌려보냅니다. 나비에 적중한 적은 주문력의 120%의 피해를 입고, 6초간 '통보' 디버프를 가합니다. 통보를 가진 적은 마법저항력이 50% 감소합니다.	0																								
-1010102	DESC_SKILL_J		0																								
-1010103	DESC_SKILL_M		0																								
+1010102	DESC_SKILL_J	_	0																								
+1010103	DESC_SKILL_M	_	0																								
 1010104	DESC_ITEM_DAGGER	단검설명	1																								
 1010105	DESC_ITEM_SHIELD	방패설명	2																								
 1010106	DESC_ITEM_BOW	곡궁설명	3																								
@@ -49,26 +49,26 @@ long	string	string	string	#설명
 1013014	DES_ITEM_SUBSTATS_START_MANA	시작 마나 +{0}	16	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013015	DES_ITEM_SUBSTATS_DAMAGE_REDUCTION	피해량 감소 +{0}%	17	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013016	DES_ITEM_SUBSTATS_SHIELD	보호막 +{0}	18	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009000	LAPLACIAN	라플라시안																									
-1009001	TIMER	타이머																									
-1009002	QUANTUM_WASHER	퀀텀 세탁기																									
-1009003	TIDY	티디																									
-1009004	TEAM3	형사3과																									
-1009005	SWORD	한손검																									
-1009006	RANGED	장총																									
-1009007	ARMOR	방패																									
-1009008	MAGIC_WAND	마법봉																									
-1009009	DUAL_BLADE	쌍칼																									
-1009100	DES_LAPLACIAN	라플설명																									
-1009101	DES_TIMER	타이머설명																									
-1009102	DES_QUANTUM_WASHER	퀀텀설명																									
-1009103	DES_TIDY	티디 설명																									
-1009104	DES_TEAM3	형사3과설명																									
-1009105	DES_SWORD	한손검설명																									
-1009106	DES_RANGED	장총설명																									
-1009107	DES_ARMOR	아머설명																									
-1009108	DES_MAGIC_WAND	마법봉설명																									
-1009109	DES_DUAL_BLADE	쌍검설명																									
+1009000	LAPLACIAN	라플라시안	_																								
+1009001	TIMER	타이머	_																								
+1009002	QUANTUM_WASHER	퀀텀 세탁기	_																								
+1009003	TIDY	티디	_																								
+1009004	TEAM3	형사3과	_																								
+1009005	SWORD	한손검	_																								
+1009006	RANGED	장총	_																								
+1009007	ARMOR	방패	_																								
+1009008	MAGIC_WAND	마법봉	_																								
+1009009	DUAL_BLADE	쌍칼	_																								
+1009100	DES_LAPLACIAN	라플설명	_																								
+1009101	DES_TIMER	타이머설명	_																								
+1009102	DES_QUANTUM_WASHER	퀀텀설명	_																								
+1009103	DES_TIDY	티디 설명	_																								
+1009104	DES_TEAM3	형사3과설명	_																								
+1009105	DES_SWORD	한손검설명	_																								
+1009106	DES_RANGED	장총설명	_																								
+1009107	DES_ARMOR	아머설명	_																								
+1009108	DES_MAGIC_WAND	마법봉설명	_																								
+1009109	DES_DUAL_BLADE	쌍검설명	_																								
 
 
 

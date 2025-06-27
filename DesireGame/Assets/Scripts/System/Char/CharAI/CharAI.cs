@@ -230,7 +230,8 @@ namespace Client
             }
             else
             {
-                Debug.LogError("스킬 사거리가 충분하지 않아, 스킬 사용이 불가합니다.");
+                Debug.LogError("스킬 사거리가 충분하지 않아, 스킬 사용이 불가합니다.\n" +
+                               $"[스킬 사거리] {SystemConst.GetWorldLength(skillRange)} : , [현재 유닛 거리] : {distance}");
             }
         }
         

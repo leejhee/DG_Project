@@ -13,14 +13,15 @@ namespace Client
     public abstract class CharBase : MonoBehaviour
     {
         // SerializeField 
-        [SerializeField] private   long         _index;         // CharData 테이블의 인덱스 
-        [SerializeField] private   Collider     _FightCollider; // 전투 콜라이더
-        [SerializeField] private   Collider     _MoveCollider;  // 이동 콜라이더
-        [SerializeField] private   GameObject   _SkillRoot;     // 스킬 루트
-        [SerializeField] protected NavMeshAgent _NavMeshAgent;  // 네비 메쉬 에이전트
-        [SerializeField] protected GameObject _CharCamaraPos; // 캐릭터 애니메이션 리스트
-        [SerializeField] protected Animator _Animator;       // 애니메이터\
-
+        [SerializeField] private    long            _index;         // CharData 테이블의 인덱스 
+        [SerializeField] private    Collider        _FightCollider; // 전투 콜라이더
+        [SerializeField] private    Collider        _MoveCollider;  // 이동 콜라이더
+        [SerializeField] private    GameObject      _SkillRoot;     // 스킬 루트
+        [SerializeField] protected  NavMeshAgent    _NavMeshAgent;  // 네비 메쉬 에이전트
+        [SerializeField] protected  GameObject      _CharCamaraPos; // 캐릭터 애니메이션 리스트
+        [SerializeField] protected  Animator        _Animator;       // 애니메이터\
+        [SerializeField] private    Transform       _UnitRoot;
+        
         protected FunctionInfo _functionInfo = null; // 기능 정보
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
@@ -200,6 +201,10 @@ namespace Client
             gameObject.SetActive(false);
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
+            
+            #if UNITY_EDITOR
+            MessageManager.SendMessage(new OnDeadChar());
+            #endif
         }
 
         public long GetID() => _uid;

@@ -14,7 +14,7 @@ namespace Client
     public class CharManager : Singleton<CharManager>
     {
         // 존재하는 Char (Char Type을 Key1 Char ID를 Key2로 사용)
-        private Dictionary<Type, Dictionary<long, CharBase>> _cache = new Dictionary<Type, Dictionary<long, CharBase>>();
+        private Dictionary<Type, Dictionary<long, CharBase>> _cache = new();
         // 플레이어 복사본이 들어갈 캐시, 다음 스테이지로 넘어갈 때 세팅용
         //private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
 

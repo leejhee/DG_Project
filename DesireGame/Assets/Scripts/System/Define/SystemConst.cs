@@ -86,6 +86,8 @@ namespace Client
         }
 
         public static float GetUnitLength(float worldLength) => worldLength / TILE_UNIT_LENGTH;
+
+        public static float GetWorldLength(float unitLength) => unitLength * TILE_UNIT_LENGTH;
     }
 
     /// <summary>

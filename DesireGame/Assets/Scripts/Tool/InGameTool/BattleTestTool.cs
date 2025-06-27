@@ -50,13 +50,9 @@ namespace Client
                 {
                     _charDataList.Add(data as CharData);
                 }
-
-                foreach (var character in _characterList)
-                {
-                    character.OnRealDead += OnCharacterDeadByTest;
-                }
                 
                 MessageManager.SubscribeMessage<OnSetChar>(this, UpdateCharacterList);
+                MessageManager.SubscribeMessage<OnDeadChar>(this, OnCharacterDeadByTest);
             }
         }
 
@@ -66,7 +62,7 @@ namespace Client
             Repaint();
         }
 
-        private void OnCharacterDeadByTest()
+        private void OnCharacterDeadByTest(OnDeadChar dummy)
         {
             Debug.Log("캐릭터 사망으로 테스트 윈도우의 캐릭터 목록을 업데이트합니다.");
             UpdateCharacterList(new OnSetChar());
@@ -213,13 +209,16 @@ namespace Client
             
             if (GUILayout.Button("선택한 캐릭터 추가", buttonStyle, GUILayout.ExpandWidth(true)))
             {
-                CharBase inst = CharManager.Instance.CharGenerate(
+                CharManager.Instance.CharGenerate(
                     new CharTileParameter(SystemEnum.eScene.GameScene, _tile, _selectedAddData.Index));
-                inst.OnRealDead += OnCharacterDeadByTest;
-                //UpdateCharacterList(new OnSetChar());
             }
         }
 
+        private bool IsValidIndex<T>(int idx, IEnumerable<T> collection) where T : class
+        {
+            return idx > -1 &&  idx < collection.Count();
+        }
+        
         private void DrawDeleteTab()
         {
             string[] characterNames = _characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
@@ -227,7 +226,7 @@ namespace Client
             EditorGUILayout.LabelField("삭제할 캐릭터 선택", EditorStyles.boldLabel);
             _victimOrder = EditorGUILayout.Popup("캐릭터 선택", _victimOrder, characterNames);
 
-            CharBase victim = _victimOrder == -1 ? null : _characterList[_victimOrder];
+            CharBase victim = IsValidIndex(_victimOrder, _characterList) ? _characterList[_victimOrder] : null;
             string guide = !victim ? "삭제할 캐릭터를 선택해주세요." : $"{victim.GetID()}번 캐릭터 {victim.name}을 삭제합니다.";
             
             GUIStyle buttonStyle = new(GUI.skin.button)
@@ -243,7 +242,6 @@ namespace Client
             {
                 victim.Dead();
                 _victimOrder = -1;
-                //UpdateCharacterList(new OnSetChar());
             }
         }
 
@@ -254,7 +252,7 @@ namespace Client
             EditorGUILayout.LabelField("스킬을 테스트할 캐릭터 선택", EditorStyles.boldLabel);
             _skillTestCasterOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestCasterOrder, characterNames);
             
-            CharBase tester = _skillTestCasterOrder == -1 ? null : _characterList[_skillTestCasterOrder];
+            CharBase tester = IsValidIndex(_skillTestCasterOrder, _characterList) ? _characterList[_skillTestCasterOrder] : null;
             if (!tester)
             {
                 EditorGUILayout.HelpBox("테스트할 캐릭터를 선택해주세요.", MessageType.Error);
@@ -276,7 +274,7 @@ namespace Client
             EditorGUILayout.LabelField("스킬 대상 캐릭터 선택", EditorStyles.boldLabel);
             _skillTestTargetOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestTargetOrder, characterNames);
             
-            CharBase target = _skillTestTargetOrder == -1 ? null : _characterList[_skillTestTargetOrder];
+            CharBase target = IsValidIndex(_skillTestTargetOrder, _characterList) ? _characterList[_skillTestTargetOrder] : null;
             if (!target)
             {
                 EditorGUILayout.HelpBox("해당 부분이 공란일 경우, 캐릭터의 AI에 따라 자동으로 타겟을 설정합니다.\n" +
@@ -308,5 +306,6 @@ namespace Client
     }
     
     public class OnSetChar : MessageSystemParam{}
+    public class OnDeadChar : MessageSystemParam{}
 }
 #endif
