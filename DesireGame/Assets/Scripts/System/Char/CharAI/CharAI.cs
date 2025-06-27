@@ -219,11 +219,12 @@ namespace Client
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = info.Range;
             Vector3 displacement = FinalTarget.CharTransform.position - charAgent.CharTransform.position;
-            charAgent.CharTransform.localScale = displacement.x > 0 ? new Vector3(1, 1, 1) : new Vector3(1, 1, -1);
+            Debug.Log(displacement);
+            charAgent.CharTransform.localScale = displacement.z > 0 ? new Vector3(1, 1, 1) : new Vector3(1, 1, -1);
             var distance = displacement.magnitude;
 
             // 사거리와 비교 후 이동 결정
-            bool inRange = distance <= skillRange + SystemConst.TOLERANCE || skillRange == 0;
+            bool inRange = distance <= SystemConst.GetWorldLength(skillRange) + SystemConst.TOLERANCE || skillRange == 0;
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, mode));
