@@ -13,7 +13,9 @@ namespace Client
     public class SystemConst 
     {
         public static int FPS = 60;
-
+        
+        public static float TOLERANCE = 0.01f;
+        
         public static float TILE_UNIT_LENGTH = 1.5f;
 
         // 맵 타일 구조가 불변이라는 전제

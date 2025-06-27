@@ -216,7 +216,7 @@ namespace Client
                 CharBase inst = CharManager.Instance.CharGenerate(
                     new CharTileParameter(SystemEnum.eScene.GameScene, _tile, _selectedAddData.Index));
                 inst.OnRealDead += OnCharacterDeadByTest;
-                UpdateCharacterList(new OnSetChar());
+                //UpdateCharacterList(new OnSetChar());
             }
         }
 
@@ -243,7 +243,7 @@ namespace Client
             {
                 victim.Dead();
                 _victimOrder = -1;
-                UpdateCharacterList(new OnSetChar());
+                //UpdateCharacterList(new OnSetChar());
             }
         }
 

@@ -178,11 +178,12 @@ namespace Client
             
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = info.Range;
-            var distance = Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position);
-            var tolerance = 0.01f;
+            Vector3 displacement = FinalTarget.CharTransform.position - charAgent.CharTransform.position;
+            charAgent.CharTransform.localScale = displacement.x > 0 ? new Vector3(1, 1, 1) : new Vector3(1, 1, -1);
+            var distance = displacement.magnitude;
 
             // 사거리와 비교 후 이동 결정
-            bool inRange = distance <= skillRange + tolerance || skillRange == 0;
+            bool inRange = distance <= skillRange + SystemConst.TOLERANCE || skillRange == 0;
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, attackMode));
@@ -217,12 +218,12 @@ namespace Client
             
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = info.Range;
-            var distance = SystemConst.GetUnitLength(
-                Vector3.Distance(charAgent.CharTransform.position, FinalTarget.CharTransform.position));
-            var tolerance = 0.01f;
+            Vector3 displacement = FinalTarget.CharTransform.position - charAgent.CharTransform.position;
+            charAgent.CharTransform.localScale = displacement.x > 0 ? new Vector3(1, 1, 1) : new Vector3(1, 1, -1);
+            var distance = displacement.magnitude;
 
             // 사거리와 비교 후 이동 결정
-            bool inRange = distance <= skillRange + tolerance || skillRange == 0;
+            bool inRange = distance <= skillRange + SystemConst.TOLERANCE || skillRange == 0;
             if (inRange)
             {
                 charAgent.CharAction.CharAttackAction(new CharAttackParameter(cachedTargets, mode));
@@ -233,7 +234,6 @@ namespace Client
             }
         }
         
-        // TODO : 스킬 타겟 선택을 할 수 있도록 할 것인지 선택할 것.
         public void TestSkillOnTarget(CharBase target, eAttackMode mode)
         {
             charAgent.CharAction.CharAttackAction(new CharAttackParameter(new List<CharBase> {target}, mode));

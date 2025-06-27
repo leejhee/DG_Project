@@ -52,6 +52,8 @@ namespace Client
 
         private CharLightWeightInfo lightWeightInfo;
         private List<eSynergy> _charSynergies = null;
+
+        private Camera _mainCamera;
         
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
 
@@ -100,7 +102,7 @@ namespace Client
             {
                 Debug.LogError($"캐릭터 ID : {_index} Data 데이터 Get 실패");
             }
-            
+            _mainCamera = Camera.main;
         }
 
         protected virtual void Start()
@@ -263,7 +265,7 @@ namespace Client
         //        return;
         //    CharMoveTo(charBase);
         //}
-
+        
         /// <summary>
         /// 캐릭터 AI on & off 기능
         /// </summary>
@@ -313,5 +315,44 @@ namespace Client
             Destroy(gameObject);
         }
 
+        #if UNITY_EDITOR
+        void OnMouseDown()
+        {
+            // 캐릭터 AI 플래이 중 조작 금지
+            if (_charAI?.isAIRun ?? true)
+                return;
+            
+            if (_mainCamera == null) return;
+            SetNavMeshAgent(false);
+            //// 마우스 클릭 위치와 캐릭터 위치의 차이 계산
+            //offset = transform.position - GetMouseWorldPosition();
+        }
+        private void OnMouseDrag()
+        {
+            // 캐릭터 AI 플래이 중 조작 금지
+            if (_charAI?.isAIRun ?? true)
+                return;
+            if (_mainCamera == null) return;
+
+            // 마우스 위치에 오프셋을 더해서 캐릭터 이동
+            transform.position = GetMouseWorldPosition(); //+ offset;
+
+        }
+        private void OnMouseUp()
+        {
+            PlayerMove msg = new();
+            msg.beforeTileIndex = TileIndex;
+            msg.moveChar = this;
+            MessageManager.SendMessage<PlayerMove>(msg);
+            SetNavMeshAgent(true);
+        }
+
+        private Vector3 GetMouseWorldPosition()
+        {
+            Vector3 mouseScreenPos = Input.mousePosition;
+            mouseScreenPos.z = _mainCamera.WorldToScreenPoint(transform.position).z; // 현재 Z 값 유지
+            return _mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        }
+        #endif
     }
 }

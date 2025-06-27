@@ -8,11 +8,15 @@ namespace Client
     public class CharMonster : CharBase
     {
         protected override SystemEnum.eCharType CharType => SystemEnum.eCharType.ENEMY;
-        protected override void SetChar(CharBase character) => CharManager.Instance.SetChar<CharMonster>(this);
+        protected override void SetChar(CharBase character)
+        {
+            CharManager.Instance.SetChar<CharMonster>(this);
+            base.SetChar(character);
+        }
         protected override void CharInit()
         {
             base.CharInit();
-            //CharManager.Instance.SetChar<CharMonster>(this);
+            CharTransform.localScale = new Vector3(1, 1, -1);
         }
 
         public void Patrol()
