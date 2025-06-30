@@ -2308,6 +2308,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/Sword_L"
     },
     {
+      "Name": "Lisa",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Lisa",
+      "PartSubType": "Sword",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/Lisa"
+    },
+    {
       "Name": "Sword_1",
       "UnitType": "Unit",
       "PartType": "Weapons",
