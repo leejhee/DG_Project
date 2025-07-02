@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 2.3480259398619334
-  _statName: 3
+  _statName: 1
   percent: 30
 --- !u!114 &-2775160119440113926
 MonoBehaviour:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 1.0980259696642558
-  _statName: 3
+  _statName: 1
   percent: 30
 --- !u!114 &-2249820902084543938
 MonoBehaviour:
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 1.9313592831293742
-  _statName: 3
+  _statName: 1
   percent: 30
 --- !u!114 &-19908517016012645
 MonoBehaviour:
@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 0.6813593129316966
-  _statName: 3
+  _statName: 1
   percent: 30
 --- !u!114 &2655366724099056434
 MonoBehaviour:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 0.2646926561991374
-  _statName: 3
+  _statName: 1
   percent: 30
 --- !u!114 &4461371019181887110
 MonoBehaviour:
@@ -750,5 +750,5 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 1.514692626396815
-  _statName: 3
+  _statName: 1
   percent: 30

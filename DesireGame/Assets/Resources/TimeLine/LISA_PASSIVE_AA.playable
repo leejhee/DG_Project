@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
   m_Time: 0.2833333333333333
-  functionIndex: 601010
+  functionIndex: 501010
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
