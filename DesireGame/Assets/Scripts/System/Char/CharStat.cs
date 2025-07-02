@@ -9,20 +9,39 @@ namespace Client
     public struct DamageParameter
     {
         public CharBase Attacker;       // 공격자 신상
-        public float rawDamage;         // 공격자 측에서 계산된 대미지
-        public eDamageType damageType;  // 공격자 측의 대미지 타입
-        public float penetration;       // 대미지 타입에 따른 관통
+        public float RawDamage;         // 공격자 측에서 계산된 대미지
+        public eDamageType DamageType;  // 공격자 측의 대미지 타입
+        public float Penetration;       // 대미지 타입에 따른 관통
     }
+    
+    [Serializable]
+    public class StatModifier
+    {
+        public eStats targetStat;
+        public eOpCode opCode;
+        public eModifierRoot root;
+        public long value;
 
+        public StatModifier(eStats targetStat, eOpCode opCode, eModifierRoot root, long value)
+        {
+            this.targetStat = targetStat;
+            this.opCode = opCode;
+            this.root = root;
+            this.value = value;
+        }
+    }
+    
+    
     /// <summary>
-    /// char 스테이트
+    /// CharBase의 스탯 관리 역할을 담당한다.
     /// </summary>
     public class CharStat
     {
         private CharBase StatOwner;
 
-        private long[] _charStat = new long[(int)eStats.eMax];
-
+        private long[]                                                      _charStat = new long[(int)eStats.eMax];
+        private Dictionary<eStats, Dictionary<eOpCode, List<StatModifier>>> _statModifiers = new();
+        
         public eDamageType DamageType { get
             {
                 if (_charStat[(int)eStats.AD] > 0 && _charStat[(int)eStats.AP] == 0)
@@ -86,8 +105,19 @@ namespace Client
             _charStat[(int)eStats.FINAL_DAMAGE] = 0;
 
             #endregion
+            
+            #region Init Modifiers
 
+            for (int i = 1; i < (int)eStats.eMax; i++)
+            {
+                _statModifiers.Add((eStats)i, new Dictionary<eOpCode, List<StatModifier>>());
+                _statModifiers[(eStats)i].Add(eOpCode.Add, new List<StatModifier>());
+                _statModifiers[(eStats)i].Add(eOpCode.Mul, new List<StatModifier>());
+            }
+            #endregion
         }
+        
+        #region Stat Getter
         
         public float GetStat(eStats eStats)
         {
@@ -112,48 +142,14 @@ namespace Client
             }
         }
 
-        public long GetStatRaw(eStats eState)
+        public long GetStatRaw(eStats stat)
         {
-            return _charStat[(int)eState];
+            return _charStat[(int)stat];
         }
-
-        public void ChangeStateByBuff(eStats stat, long delta)
-        {
-            eStats properTargetStat = CurrentStatByBaseStat(stat);
-            long tempStat = GetStatRaw(properTargetStat);
-            long afterStat = GetStatRaw(properTargetStat) + delta;
-
-            switch (properTargetStat)
-            {
-                case eStats.NHP:
-                    _charStat[(int)eStats.NHP] = (long)Mathf.Clamp(afterStat, 0, _charStat[(int)eStats.NMHP]);
-                    break;
-                default:
-                    _charStat[(int)properTargetStat] = afterStat;
-                    break;
-            }
-
-            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {tempStat} -> {afterStat}");
-            
-            #region 스탯에 따른 조건 Trigging
-            {
-                // TODO : Queue 써야 할지 판단 
-                Queue<ConditionCheckInput> triggers = new();
-                
-                triggers.Enqueue(new StatConditionInput()
-                {
-                    ChangedStat = properTargetStat,
-                    Input = (long)(GetStat(eStats.NHP) / GetStat(eStats.NMHP))
-                });
-                
-                while (triggers.Count > 0)
-                {
-                    StatOwner.FunctionInfo.EvaluateCondition(triggers.Dequeue());
-                }
-            }
-            #endregion
-        }
-
+        
+        #endregion
+        
+        #region Stat Helper
         // 스탯의 초기값이 같은 곳에 있기 때문에 이렇게 한다.
         private static eStats CurrentStatByBaseStat(eStats baseStat)
         {
@@ -173,8 +169,102 @@ namespace Client
                     return baseStat;
             }
         }
+        
+        /// <summary>
+        /// 스탯 값에 제한이 필요한 경우 클램핑해줌. 제한 필요한 스탯을 여기에 작성해줄 것.
+        /// </summary>
+        private long ClampStat(eStats changedStat, long value)
+        {
+            return changedStat switch
+            {
+                eStats.NHP => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.NMHP]),
+                eStats.N_MANA => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.MAX_MANA]),
+                _ => value
+            };
+        }
+        #endregion
+        
+        #region Stat Setter & Event
+        public void ChangeStateByBuff(eStats stat, long delta)
+        {
+            eStats properTargetStat = CurrentStatByBaseStat(stat);
+            long tempStat = GetStatRaw(properTargetStat);
+            long afterStat = GetStatRaw(properTargetStat) + delta;
 
+            _charStat[(int)properTargetStat] = ClampStat(stat, afterStat);
 
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {tempStat} -> {_charStat[(int)properTargetStat]}");
+
+            TriggerCondition(properTargetStat);
+        }
+
+        public void ChangeStat(eStats stat, long newStat)
+        {
+            eStats properTargetStat = CurrentStatByBaseStat(stat);
+            _charStat[(int)properTargetStat] = ClampStat(properTargetStat, newStat);
+
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {GetStat(stat)} -> {_charStat[(int)properTargetStat]}");
+
+            TriggerCondition(properTargetStat);
+        }
+        
+        public void AddStatModifcation(StatModifier modifier)
+        {
+            _statModifiers[modifier.targetStat][modifier.opCode].Add(modifier);
+            ModifyStat(modifier.targetStat);
+        }
+
+        public void RemoveStatModifcation(StatModifier modifier)
+        {
+            _statModifiers[modifier.targetStat][modifier.opCode].Remove(modifier);
+            ModifyStat(modifier.targetStat);
+        }
+
+        public void ModifyStat(eStats changingStat)
+        {
+            var addList = _statModifiers[changingStat][eOpCode.Add];
+            var mulList = _statModifiers[changingStat][eOpCode.Mul];
+            float origin = GetStat(changingStat);
+            float newStat = origin;
+            
+            float addPercent = 0f;
+            foreach (var add in addList)
+            {
+                addPercent += add.value;
+            }
+            addPercent /= SystemConst.PER_TEN_THOUSAND;
+            newStat += addPercent * origin;
+            
+            foreach (var mul in mulList)
+            {
+                newStat *= (1 + mul.value / SystemConst.PER_TEN_THOUSAND);
+            }
+            ChangeStat(changingStat, (long)newStat);
+        }
+
+        private void TriggerCondition(eStats conditionStat)
+        {
+            #region 스탯에 따른 조건 Trigging
+            {
+                // TODO : Queue 써야 할지 판단 
+                Queue<ConditionCheckInput> triggers = new();
+                
+                triggers.Enqueue(new StatConditionInput()
+                {
+                    ChangedStat = conditionStat,
+                    Input = (long)(GetStat(eStats.NHP) / GetStat(eStats.NMHP))
+                });
+                
+                while (triggers.Count > 0)
+                {
+                    StatOwner.FunctionInfo.EvaluateCondition(triggers.Dequeue());
+                }
+            }
+            #endregion
+        }
+        
+        #endregion
+        
         #region Damage Method
 
         // UI에 사용하면 될듯...?
@@ -208,9 +298,9 @@ namespace Client
             return new DamageParameter()
             {
                 Attacker = StatOwner,
-                rawDamage = rawDamage,
-                damageType = damageType,
-                penetration = penetration
+                RawDamage = rawDamage,
+                DamageType = damageType,
+                Penetration = penetration
             };
         }
 
@@ -233,18 +323,18 @@ namespace Client
 
             // 최종대미지 계산 파트(내구력 반영)
             float finalDamage = 0;
-            if(damage.damageType == eDamageType.TRUE)
+            if(damage.DamageType == eDamageType.TRUE)
             {
-                finalDamage = damage.rawDamage;
+                finalDamage = damage.RawDamage;
             }
             else
             {
-                float defender = damage.damageType == eDamageType.PHYSICS ?
+                float defender = damage.DamageType == eDamageType.PHYSICS ?
                     GetStat(eStats.NARMOR) : GetStat(eStats.NMAGIC_RESIST);
 
                 finalDamage =
-                    damage.rawDamage *
-                    100f / (100 + defender - damage.penetration) *
+                    damage.RawDamage *
+                    100f / (100 + defender - damage.Penetration) *
                     (1 - GetStat(eStats.DAMAGE_REDUCTION));
 
             }
@@ -264,6 +354,10 @@ namespace Client
                 Debug.Log("으엑 죽었다");
                 신상공개?.Invoke(damage.Attacker);
                 OnDeath?.Invoke();
+            }
+            else
+            {
+                GainMana(SystemConst.MANA_RESTORE_DAMAGED, true);
             }
         }
 
@@ -296,12 +390,14 @@ namespace Client
         
         #region Mana Exchanging Function
 
+        public bool Silenced = false;
+        
         public void GainMana(eAttackMode mode)
         {
             if (mode == eAttackMode.Auto)
             {
                 if (GetStat(eStats.MAX_MANA) != 0)
-                    GainMana(SystemConst.DEFAULT_MANA_RESTORE, true);
+                    GainMana(SystemConst.MANA_RESTORE_ATTACK, true);
             }
             else if (mode == eAttackMode.Skill)
             {
@@ -311,6 +407,8 @@ namespace Client
 
         public void GainMana(int amount, bool isGain, bool isAdditional=false)
         {
+            if (Silenced) return;
+            
             var increaseRatio = GetStat(eStats.MANA_RESTORE_INCREASE);
             if (isGain && !isAdditional)
             {

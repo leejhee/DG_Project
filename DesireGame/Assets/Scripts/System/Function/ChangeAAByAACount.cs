@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Client
 {
     /// <summary>
@@ -28,7 +30,7 @@ namespace Client
             }
         }
 
-        private void CountAA(CharAI.eAttackMode mode)
+        private void CountAA(CharAI.eAttackMode mode, List<CharBase> dummy)
         {
             if (mode != CharAI.eAttackMode.Auto) return;
             _runtimeCount--;

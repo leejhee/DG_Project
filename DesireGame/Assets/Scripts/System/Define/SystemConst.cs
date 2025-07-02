@@ -27,8 +27,9 @@ namespace Client
         private static Dictionary<SystemEnum.eRowType, ReadOnlyCollection<int>> TileRows;
         public static Dictionary<int, SystemEnum.eRowType> TileIndexToRowType; // 💡 역매핑 캐시
         
-        public static int DEFAULT_MANA_RESTORE = 5;
-
+        public static int MANA_RESTORE_ATTACK = 10;
+        public static int MANA_RESTORE_DAMAGED = 5;
+        
         public static long NO_CONTENT = 0;              // 빈 인덱스용
 
         public static float PER_TEN_THOUSAND = 10000.0f;

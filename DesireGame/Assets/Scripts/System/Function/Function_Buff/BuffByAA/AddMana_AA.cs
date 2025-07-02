@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Client
 {
     public class AddMana_AA : FunctionBase
@@ -19,7 +21,7 @@ namespace Client
             }
         }
 
-        public void AddManaOnAA(CharAI.eAttackMode mode)
+        public void AddManaOnAA(CharAI.eAttackMode mode, List<CharBase> dummy)
         {
             if(mode == CharAI.eAttackMode.Auto)
             {

@@ -112,6 +112,7 @@ namespace Client
     {
         public NegativeEffectTaunt(CCParameter param) : base(param)
         {
+            
         }
     }
 
@@ -119,6 +120,7 @@ namespace Client
     {
         public NegativeEffectWound(CCParameter param) : base(param)
         {
+            
         }
     }
 }

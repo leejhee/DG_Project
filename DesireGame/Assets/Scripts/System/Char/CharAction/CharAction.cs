@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static Client.CharAI;
@@ -13,8 +14,9 @@ namespace Client
         private NavMeshAgent Nav;
 
         // 평타인지 스킬인지까지 따져서 발동하는 액션
-        public Action<eAttackMode> OnAttackAction;
+        public Action<eAttackMode, List<CharBase>> OnAttackAction;
 
+        
         public CharAction(CharBase actor)
         {
             Actor = actor;
@@ -50,7 +52,7 @@ namespace Client
             CharSKillInfo skillInfo = Actor.CharSKillInfo;
             skillInfo.PlayByMode(param.mode, new SkillParameter(param.targetChar, Actor));
             Actor.CharStat.GainMana(param.mode);
-            OnAttackAction?.Invoke(param.mode);
+            OnAttackAction?.Invoke(param.mode, param.targetChar);
         }
 
     }

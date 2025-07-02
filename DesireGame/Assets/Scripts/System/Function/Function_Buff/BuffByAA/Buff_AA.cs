@@ -33,15 +33,14 @@ namespace Client
         {
             if(_count > 0)
             {
-                Debug.Log(@$"{_CastChar.GetID()}의 스킬 발동으로 평타뎀 {_buffAmount}만큼 증가.
-count : {_count}");
+                Debug.Log($"{_CastChar.GetID()}의 스킬 발동으로 평타뎀 {_buffAmount}만큼 증가.\ncount : {_count}");
                 _count--;
                 
                 _TargetChar.CharStat.ReceiveDamage(new DamageParameter()
                 {
-                    rawDamage = _buffAmount,
-                    damageType = SystemEnum.eDamageType.TRUE,
-                    penetration = 0
+                    RawDamage = _buffAmount,
+                    DamageType = SystemEnum.eDamageType.TRUE,
+                    Penetration = 0
                 });
             }           
             else if (_count == 0)

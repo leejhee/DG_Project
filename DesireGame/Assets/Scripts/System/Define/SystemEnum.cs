@@ -155,6 +155,26 @@ namespace Client
             eMax,
         }
 
+        public enum eOpCode
+        {
+            None,
+            Add,
+            Mul,
+            
+            eMax
+        }
+
+        public enum eModifierRoot
+        {
+            None,
+            
+            Buff,
+            Debuff,
+            CC,
+            
+            eMax
+        }
+        
         public enum eFunction
         {
             None,
@@ -321,12 +341,6 @@ namespace Client
             ENG,
 
             MaxCount
-        }
-
-        public enum eTrackOrder
-        {
-            ANIM_TRACK,
-
         }
 
         public enum eMonsterType
