@@ -15,12 +15,23 @@ namespace Client
         public override void ComputeDelta()
         {
             base.ComputeDelta();
-            delta = _TargetChar.CharStat.GetStatRaw(targetStat)
-                * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
+            //delta = _TargetChar.CharStat.GetStatRaw(targetStat)
+            //    * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
+            delta = _FunctionData.input1 / SystemConst.PER_TEN_THOUSAND;
+        }
+
+        public override void RunFunction(bool StartFunction)
+        {
+            base.RunFunction(StartFunction);
+            if (StartFunction)
+            {
+                CachedModifier = new StatModifier
+                    (targetStat, SystemEnum.eOpCode.Mul, SystemEnum.eModifierRoot.Buff, delta);
+                _TargetChar.CharStat.AddStatModification(CachedModifier);
+            }
         }
     }
 
-    // 둘이 연관을 짓는게 맞을까...?
 
     /// <summary>
     /// BUFF_ONCE_BY_AD : 시전자의 현재 공격력의 {1}%만큼 {statsType}가 한 번 변화
@@ -38,7 +49,7 @@ namespace Client
             delta = _CastChar.CharStat.GetStatRaw(SystemEnum.eStats.NAD)
                 * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
         }
-
+        
     }
 
     public class BuffOnceByAP : StatBuffBase
@@ -54,6 +65,7 @@ namespace Client
             delta = _CastChar.CharStat.GetStatRaw(SystemEnum.eStats.NAP)
                 * (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND);
         }
+        
     }
 
     public class BuffOncePlus : StatBuffBase

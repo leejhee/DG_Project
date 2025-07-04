@@ -20,9 +20,9 @@ namespace Client
         public eStats targetStat;
         public eOpCode opCode;
         public eModifierRoot root;
-        public long value;
+        public float value;
 
-        public StatModifier(eStats targetStat, eOpCode opCode, eModifierRoot root, long value)
+        public StatModifier(eStats targetStat, eOpCode opCode, eModifierRoot root, float value)
         {
             this.targetStat = targetStat;
             this.opCode = opCode;
@@ -113,6 +113,7 @@ namespace Client
                 _statModifiers.Add((eStats)i, new Dictionary<eOpCode, List<StatModifier>>());
                 _statModifiers[(eStats)i].Add(eOpCode.Add, new List<StatModifier>());
                 _statModifiers[(eStats)i].Add(eOpCode.Mul, new List<StatModifier>());
+                _statModifiers[(eStats)i].Add(eOpCode.ExtraAdd, new List<StatModifier>());
             }
             #endregion
         }
@@ -197,48 +198,65 @@ namespace Client
 
             TriggerCondition(properTargetStat);
         }
-
+        
         public void ChangeStat(eStats stat, long newStat)
         {
             eStats properTargetStat = CurrentStatByBaseStat(stat);
+            long originStat = _charStat[(int)properTargetStat];
             _charStat[(int)properTargetStat] = ClampStat(properTargetStat, newStat);
 
-            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {GetStat(stat)} -> {_charStat[(int)properTargetStat]}");
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {originStat} -> {_charStat[(int)properTargetStat]}");
 
             TriggerCondition(properTargetStat);
         }
         
-        public void AddStatModifcation(StatModifier modifier)
+        public void AddStatModification(StatModifier modifier)
         {
             _statModifiers[modifier.targetStat][modifier.opCode].Add(modifier);
             ModifyStat(modifier.targetStat);
         }
 
-        public void RemoveStatModifcation(StatModifier modifier)
+        public void RemoveStatModification(StatModifier modifier)
         {
             _statModifiers[modifier.targetStat][modifier.opCode].Remove(modifier);
             ModifyStat(modifier.targetStat);
         }
-
+        
+        /// <summary>
+        /// 수정자에 의거해서 합, 곱연산 적용 이후 추가치를 더해 최종 적용 스탯을 계산한다.
+        /// </summary>
+        /// <param name="changingStat">바꿀 스탯</param>
         public void ModifyStat(eStats changingStat)
         {
             var addList = _statModifiers[changingStat][eOpCode.Add];
             var mulList = _statModifiers[changingStat][eOpCode.Mul];
-            float origin = GetStat(changingStat);
+            var extraList = _statModifiers[changingStat][eOpCode.ExtraAdd];
+            float origin = GetStatRaw(changingStat);
             float newStat = origin;
             
+            #region 합연산
             float addPercent = 0f;
             foreach (var add in addList)
             {
                 addPercent += add.value;
             }
-            addPercent /= SystemConst.PER_TEN_THOUSAND;
             newStat += addPercent * origin;
+            #endregion
             
+            #region 곱연산
             foreach (var mul in mulList)
             {
-                newStat *= (1 + mul.value / SystemConst.PER_TEN_THOUSAND);
+                newStat *= 1 + mul.value;
             }
+            #endregion
+            
+            #region 추가 가산치
+            foreach (var extra in extraList)
+            {
+                newStat += extra.value;
+            }
+            #endregion
+            
             ChangeStat(changingStat, (long)newStat);
         }
 

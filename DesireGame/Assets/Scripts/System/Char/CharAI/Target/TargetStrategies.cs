@@ -90,8 +90,8 @@ namespace Client
         {
             if (!Caster.CharAI.isAIRun)
             {
-                Debug.LogWarning("현재는 AI가 작동하지 않으므로 타겟을 반환하지 않습니다.");
-                return new List<CharBase>();
+                //Debug.LogWarning("현재는 AI가 작동하지 않으므로 타겟을 반환하지 않습니다.");
+                //return new List<CharBase>();
             }
 
             var current = Caster.CharAI.FinalTarget;

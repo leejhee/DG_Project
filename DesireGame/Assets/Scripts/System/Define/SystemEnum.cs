@@ -160,7 +160,7 @@ namespace Client
             None,
             Add,
             Mul,
-            
+            ExtraAdd,
             eMax
         }
 
