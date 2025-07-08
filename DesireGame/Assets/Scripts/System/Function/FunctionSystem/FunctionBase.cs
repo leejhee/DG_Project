@@ -23,8 +23,8 @@ namespace Client
         public string _CasterName => _CastChar.name;
         public long DebugIndex => _FunctionData.Index;
         #endregion
-
-
+        
+        
         // 버프 생성자
         public FunctionBase(BuffParameter buffParam)
         {
@@ -44,7 +44,7 @@ namespace Client
         }
 
         public virtual void InitFunction() => _StartTime = Time.time;
-
+        
 
         /// <summary>
         /// 버프 시작과 종료
@@ -55,6 +55,8 @@ namespace Client
             if (StartFunction)
             {
                 Debug.Log($"Function 시작 : " +
+                    $"시전자 {_CastChar?.name} & {_CastChar?.Index} & {_CastChar?.GetID()}" +
+                    $"타겟 {_TargetChar?.name} & {_TargetChar?.Index} & {_TargetChar?.GetID()}" +
                     $"인덱스 {_FunctionData.Index} " +
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
@@ -64,9 +66,11 @@ namespace Client
             else
             {
                 Debug.Log($"Function 종료 : " +
-                    $"인덱스 {_FunctionData.Index} " +
-                    $"타입 {_FunctionData.function} " +
-                    $"시간 : {_FunctionData.time}");
+                          $"시전자 {_CastChar?.name} & {_CastChar?.Index} & {_CastChar?.GetID()}" +
+                          $"타겟 {_TargetChar?.name} & {_TargetChar?.Index} & {_TargetChar?.GetID()}" +
+                          $"인덱스 {_FunctionData.Index} " +
+                          $"타입 {_FunctionData.function} " +
+                          $"시간 : {_FunctionData.time}");
 
                 if (_condition != null)
                     _TargetChar.FunctionInfo.KillCondition(_condition);

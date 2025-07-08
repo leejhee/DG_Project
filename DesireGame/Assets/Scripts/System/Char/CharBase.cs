@@ -12,6 +12,7 @@ namespace Client
     /// </summary>
     public abstract class CharBase : MonoBehaviour
     {
+        #region Serialized Fields
         // SerializeField 
         [SerializeField] private    long            _index;         // CharData 테이블의 인덱스 
         [SerializeField] private    Collider        _FightCollider; // 전투 콜라이더
@@ -21,7 +22,9 @@ namespace Client
         [SerializeField] protected  GameObject      _CharCamaraPos; // 캐릭터 애니메이션 리스트
         [SerializeField] protected  Animator        _Animator;       // 애니메이터\
         [SerializeField] private    Transform       _UnitRoot;
+        #endregion
         
+        #region Fields
         protected FunctionInfo _functionInfo = null; // 기능 정보
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
@@ -57,7 +60,9 @@ namespace Client
         private Camera _mainCamera;
         
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
-
+        #endregion
+        
+        #region Properties
         public long Index => _index;
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
@@ -75,7 +80,7 @@ namespace Client
         public PlayerState PlayerState => _currentState;
 
         public int TileIndex { get; set; } = default;
-
+        #endregion
         protected CharBase() { }
 
         private void Awake()
@@ -166,22 +171,7 @@ namespace Client
             
             #region 시너지 등록
             
-            _charSynergies = new List<eSynergy>()
-            {
-                _charData.synergy1,
-                _charData.synergy2,
-                _charData.synergy3
-            };
-
-            lightWeightInfo = new CharLightWeightInfo()
-            {
-                Index = Index,
-                Uid = _uid,
-                SynergyList = _charSynergies,
-                Side = CharType
-            };
-
-            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
+            SynergyManager.Instance.RegisterCharSynergy(GetCharSynergyInfo());
             
             #endregion
             
@@ -192,6 +182,24 @@ namespace Client
                 CharDead();
             };
             #endregion
+        }
+
+        public CharLightWeightInfo GetCharSynergyInfo()
+        {
+            _charSynergies = new List<eSynergy>()
+            {
+                _charData.synergy1,
+                _charData.synergy2,
+                _charData.synergy3
+            };
+
+            return new CharLightWeightInfo()
+            {
+                Index = Index,
+                Uid = _uid,
+                SynergyList = _charSynergies,
+                Side = CharType
+            };
         }
         
         public bool IsAlive => CharStat.GetStat(eStats.NHP) > 0;
@@ -319,7 +327,8 @@ namespace Client
             OnRealDead?.Invoke();
             Destroy(gameObject);
         }
-
+        
+        #region On Editor
         #if UNITY_EDITOR
         void OnMouseDown()
         {
@@ -359,5 +368,6 @@ namespace Client
             return _mainCamera.ScreenToWorldPoint(mouseScreenPos);
         }
         #endif
+        #endregion
     }
 }

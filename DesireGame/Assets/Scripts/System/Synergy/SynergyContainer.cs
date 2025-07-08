@@ -47,7 +47,6 @@ namespace Client
                 SetCurrentSynergy();
             else
                 GetCurrentSynergyBuff(registrar);
-
         }
 
         public void GuestRegister(CharLightWeightInfo guest)
@@ -61,7 +60,7 @@ namespace Client
         {
             if (_synergyMembers.Contains(leaver))
                 _synergyMembers.Remove(leaver);
-
+    
             if (_synergyMembers.Count == 0)
             {
                 ClearSynergyBuff();
@@ -81,35 +80,7 @@ namespace Client
             KillLeaverBuff(guestLeaver);
         }
 
-        private void OnNewBuffDistributed(CharBase specifiedMember)
-        {
-            if (specifiedMember == false) return;
-            specifiedMember.StartCoroutine(DelayedEvaluateCondition(
-                new SynergyConditionInput()
-                {
-                    ChangedSynergy = _mySynergy, 
-                    CharTypeContext = _myCharType,
-                    RegistrarIndex = specifiedMember.Index
-                },
-                specifiedMember));
-        }
-
-        private void ScanAllMembers()
-        {
-            foreach(var member in _synergyMembers)
-                OnNewBuffDistributed(member.SpecifyCharBase());
-            foreach(var guest in _guestMemberSet)
-                OnNewBuffDistributed(guest.SpecifyCharBase());
-        }
         
-        private IEnumerator DelayedEvaluateCondition(ConditionCheckInput param, CharBase target)
-        {
-            Debug.Log($"{target.GetID()}번 캐릭터에서 시너지 변경으로 인한 조건 검사");
-
-            yield return null;
-            
-            target.FunctionInfo.EvaluateCondition(param);
-        }
         #endregion
 
         #region Synergy Data Getter
@@ -195,9 +166,7 @@ namespace Client
             while (count-- > 0)
             {
                 var record = synergyBuffRecords.Dequeue();
-                if (record.Caster == caster)
-                    continue;
-                else
+                if (record.Caster != caster)
                     synergyBuffRecords.Enqueue(record);               
             }
         }
@@ -316,9 +285,39 @@ namespace Client
 
             ScanAllMembers();
         }
+        
+        private void ScanAllMembers()
+        {
+            foreach(var member in _synergyMembers)
+                OnNewBuffDistributed(member.SpecifyCharBase());
+            foreach(var guest in _guestMemberSet)
+                OnNewBuffDistributed(guest.SpecifyCharBase());
+        }
+        
+        private void OnNewBuffDistributed(CharBase specifiedMember)
+        {
+            if (specifiedMember == false) return;
+            specifiedMember.StartCoroutine(DelayedEvaluateCondition(
+                new SynergyConditionInput()
+                {
+                    ChangedSynergy = _mySynergy, 
+                    CharTypeContext = _myCharType,
+                    RegistrarIndex = specifiedMember.Index
+                },
+                specifiedMember));
+        }
+      
+        private IEnumerator DelayedEvaluateCondition(ConditionCheckInput param, CharBase target)
+        {
+            Debug.Log($"{target.GetID()}번 캐릭터에서 시너지 변경으로 인한 조건 검사");
 
+            yield return null;
+            
+            target.FunctionInfo.EvaluateCondition(param);
+        }
         #endregion
-
+        
+        
     }
 
 }

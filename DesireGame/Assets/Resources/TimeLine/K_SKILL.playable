@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: Skill Marker Shot Projectal
   m_EditorClassIdentifier: 
   m_Time: 0.25
-  _projectile: {fileID: 0}
+  _projectile: {fileID: 8707682887207861293, guid: 6eba046ed3c2f6045a765073c3e706f0, type: 3}
   _offSet: {x: 0, y: 0, z: 0}
   _statName: 3
   percent: 120
