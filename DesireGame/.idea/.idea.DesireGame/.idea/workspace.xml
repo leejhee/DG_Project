@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/K_SKILL.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/K_SKILL.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/NATSUKI_SKILL.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/NATSUKI_SKILL.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/J_SKILL.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/J_SKILL.playable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/MECHATIDY_AA.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/MECHATIDY_AA.playable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/Parameter/SkillParameter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/Parameter/SkillParameter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +25,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/02b90f1c0dfb49a1adfd6da071d5b611178400/b0/bc7402b1/IMGUIContainer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/d7/7774827e/SetupCoroutine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharParameter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -123,15 +122,13 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="21416">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="21416" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -227,7 +224,8 @@
       <workItem from="1751635632286" duration="606000" />
       <workItem from="1751637886392" duration="1128000" />
       <workItem from="1751890754239" duration="5618000" />
-      <workItem from="1751966304998" duration="11844000" />
+      <workItem from="1751966304998" duration="25013000" />
+      <workItem from="1752062635373" duration="6934000" />
     </task>
     <servers />
   </component>
@@ -395,43 +393,69 @@
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs</url>
-          <line>173</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharBase.cs" containingFunctionPresentation="메서드 'CharInit'">
-            <startOffsets>
-              <option value="6613" />
-            </startOffsets>
-            <endOffsets>
-              <option value="6679" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="102" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs</url>
           <line>112</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Function\FunctionSystem\FunctionBase.cs" containingFunctionPresentation="메서드 'CheckFollowingCondition'">
             <startOffsets>
-              <option value="3788" />
+              <option value="3797" />
             </startOffsets>
             <endOffsets>
-              <option value="3838" />
+              <option value="3847" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs</url>
-          <line>130</line>
+          <line>131</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Condition\ConditionBase.cs" containingFunctionPresentation="메서드 'CheckInput'">
             <startOffsets>
-              <option value="3714" />
+              <option value="3825" />
             </startOffsets>
             <endOffsets>
-              <option value="4007" />
+              <option value="4118" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
+          <line>41</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'Register'">
+            <startOffsets>
+              <option value="1293" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1327" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
+          <line>311</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'DelayedEvaluateCondition'">
+            <startOffsets>
+              <option value="10529" />
+            </startOffsets>
+            <endOffsets>
+              <option value="10585" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
+          <line>285</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'SetCurrentSynergy'">
+            <startOffsets>
+              <option value="9588" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9605" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />
