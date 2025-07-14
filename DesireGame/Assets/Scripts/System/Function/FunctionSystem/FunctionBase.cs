@@ -93,7 +93,21 @@ namespace Client
             }
 
         }
-
+        
+        /// <summary> Function 본인 킬 스위치 </summary>
+        /// <remarks> Caster 및 Target에 주의할 것. </remarks>
+        public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
+        {
+            if(inCaster)            
+                _CastChar.FunctionInfo.KillFunction(this);             
+            else           
+                _TargetChar.FunctionInfo.KillFunction(this);
+           
+            if (killChildren)
+                KillChildFunctionToTarget(true);
+        }
+        
+        #region Condition Control
         private ConditionBase _condition = null;
 
         public void CheckFollowingCondition()
@@ -130,8 +144,10 @@ namespace Client
                 Debug.Log("컨디션 만족하지 못하여 발동 안함");
             }
         }
-
-
+        #endregion
+        
+        #region Children Function Control
+        
         private List<FunctionBase> _children = new();
         protected void AddChildFunctionToTarget(FunctionData childData)
         {
@@ -158,18 +174,8 @@ namespace Client
                 child?.KillSelfFunction(killAfterChildren, inCaster: false);
             }                              
         }
+        #endregion
 
-        /// <summary> Function 본인 킬 스위치 </summary>
-        /// <remarks> Caster 및 Target에 주의할 것. </remarks>
-        public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
-        {
-            if(inCaster)            
-                _CastChar.FunctionInfo.KillFunction(this);             
-            else           
-                _TargetChar.FunctionInfo.KillFunction(this);
-           
-            if (killChildren)
-                KillChildFunctionToTarget(true);
-        }
+        
     }
 }

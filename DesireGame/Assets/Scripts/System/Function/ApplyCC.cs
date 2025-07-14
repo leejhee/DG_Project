@@ -2,8 +2,6 @@ namespace Client
 {
     public class ApplyCC : FunctionBase
     {
-        private NegativeEffectBase _negativeEffect = null;
-
         public ApplyCC(BuffParameter buffParam) : base(buffParam)
         {
         }
@@ -13,19 +11,14 @@ namespace Client
             base.RunFunction(StartFunction);
             if (StartFunction)
             {
-                _negativeEffect = CCFactory.CCGenerate(new CCParameter()
+                _TargetChar.EffectInfo.AddEffect(new EffectParameter()
                 {
                     Caster = _CastChar,
                     Target = _TargetChar,
-                    ccType = _FunctionData.CCType
+                    ccType = _FunctionData.CCType,
+                    Time = _FunctionData.time,
                 });
-                _negativeEffect?.RunEffect();
             }
-            else
-            {
-                _negativeEffect?.EndEffect();
-            }
-
         }
 
     }

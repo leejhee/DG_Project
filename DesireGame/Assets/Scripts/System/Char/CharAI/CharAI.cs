@@ -9,19 +9,37 @@ namespace Client
     public class CharAI
     {
         public enum eAttackMode { None, Auto, Skill };
-
+        #region Fields - target & states
+        // 현재 이 AI 인스턴스를 가지고 있는 캐릭터
         private CharBase charAgent;
-
+        
+        // 현재 공격 모드에 대해 지정된 전체 타겟들
         private List<CharBase> cachedTargets;
-
+        
+        // 현재 캐릭터의 행동 결정 상태
         private PlayerState currentState; // 새로운 모드 변경 여부
-
+        
+        // 현재 캐릭터의 공격 모드
+        private eAttackMode _attackMode;
+        
+        // AI 내부 타이머의 리셋 필요 여부
         private bool resetTimer = false;
-
+        
+        // 현재 스킬 타임라인 재생중 여부
         public bool isSkillPlaying = false;
         
+        // 타겟 지정 시 이벤트
         public Action<CharBase> OnTargetSet;    
         
+        #endregion
+        
+        #region Fields - cc related
+
+        public bool Targetable = true;
+        public bool Attackable = true;
+        public bool Movable = true;
+
+        #endregion
         public CharBase FinalTarget { get; private set; }// 우선 순위 계산의 최종 결과
         public bool isAIRun { get; set; } = false; // 이 캐릭터는 현재 AI가 작동중입니다.
 
@@ -60,10 +78,9 @@ namespace Client
                     continue;
                 }
                 
-                eAttackMode attackMode = SetAttackMode();
-
-                SetStateByAttackMode(attackMode);
-                SetAction(attackMode);
+                _attackMode = SetAttackMode();
+                SetStateByAttackMode(_attackMode);
+                SetAction(_attackMode);
 
                 yield return waitTime;
             }
@@ -193,6 +210,45 @@ namespace Client
                 charAgent.Nav.stoppingDistance = skillRange;
                 charAgent.CharAction.CharMoveAction(new CharMoveParameter(FinalTarget));
             }
+        }
+
+        private void ComputeRestriction()
+        {
+            #region Default
+            Targetable = true;
+            Attackable = true;
+            Movable = true;
+            #endregion
+            
+            
+        }
+        
+        public void Charm(CharBase target)
+        {
+            TargetForcedFix(target);
+            Attackable = false;
+            Targetable = false;
+        }
+
+        public void Stun(CharBase target)
+        {
+            Attackable = false;
+            Targetable = false;
+            Movable = false;
+        }
+
+        public void Taunt(CharBase target)
+        {
+            TargetForcedFix(target);
+            Targetable = false;
+            
+        }
+        
+        public void TargetForcedFix(CharBase fixedTarget)
+        {
+            if (!fixedTarget) return;
+            cachedTargets.Clear();
+            cachedTargets.Add(fixedTarget);
         }
         #region ONLY_FOR_TEST
         #if UNITY_EDITOR

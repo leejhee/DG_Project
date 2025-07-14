@@ -5,13 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/Debuff.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/Debuff.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectInfo.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/J_SKILL.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/J_SKILL.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/MECHATIDY_AA.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/MECHATIDY_AA.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/Parameter/SkillParameter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/Parameter/SkillParameter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/ApplyCC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/ApplyCC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CC.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CC.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCFactory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCFactory.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectFactory.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCParameter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectParameter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/CCParameter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectParameter.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/NegativeEffectBase.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/CC/NegativeEffectBase.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectBase.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/BuffOnce.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/BuffOnce.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/StatBuffBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/StatBuffBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/MagicSynergyManaBuff.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/SynergyFunction/MagicSynergyManaBuff.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +65,7 @@
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -225,7 +245,9 @@
       <workItem from="1751637886392" duration="1128000" />
       <workItem from="1751890754239" duration="5618000" />
       <workItem from="1751966304998" duration="25013000" />
-      <workItem from="1752062635373" duration="6934000" />
+      <workItem from="1752062635373" duration="7959000" />
+      <workItem from="1752231681802" duration="8287000" />
+      <workItem from="1752463504893" duration="37485000" />
     </task>
     <servers />
   </component>
@@ -391,19 +413,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs</url>
-          <line>112</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Function\FunctionSystem\FunctionBase.cs" containingFunctionPresentation="메서드 'CheckFollowingCondition'">
-            <startOffsets>
-              <option value="3797" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3847" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Condition/ConditionBase.cs</url>

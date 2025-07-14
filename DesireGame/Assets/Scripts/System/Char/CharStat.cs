@@ -14,6 +14,10 @@ namespace Client
         public float Penetration;       // 대미지 타입에 따른 관통
     }
     
+    /// <summary>
+    /// 스탯 변경자
+    /// <remarks>생성 시 value는 몇 %의 수치인지가 필요함에 주의바람.</remarks>
+    /// </summary>
     [Serializable]
     public class StatModifier
     {
@@ -59,53 +63,64 @@ namespace Client
 
             #region Init Stats
 
-            _charStat[(int)eStats.AD] = charStat.AD;    // 공격력
-            _charStat[(int)eStats.NAD] = charStat.AD;   // 현재 공격력
+            _charStat[(int)eStats.AD] = charStat.AD; // 공격력
+            _charStat[(int)eStats.NAD] = charStat.AD; // 현재 공격력
 
-            _charStat[(int)eStats.AP] = charStat.AP;    // 주문력
-            _charStat[(int)eStats.NAP] = charStat.AP;   // 현재 주문력
+            _charStat[(int)eStats.AP] = charStat.AP; // 주문력
+            _charStat[(int)eStats.NAP] = charStat.AP; // 현재 주문력
 
-            _charStat[(int)eStats.HP] = charStat.HP;    // 체력
-            _charStat[(int)eStats.NHP] = charStat.HP;   // 현재 체력
-            _charStat[(int)eStats.NMHP] = charStat.HP;  // 현재 최대 체력
+            _charStat[(int)eStats.HP] = charStat.HP; // 체력
+            _charStat[(int)eStats.NHP] = charStat.HP; // 현재 체력
+            _charStat[(int)eStats.NMHP] = charStat.HP; // 현재 최대 체력
 
-            _charStat[(int)eStats.AS] = charStat.attackSpeed;   // 공격 속도(천분율)
-            _charStat[(int)eStats.NAS] = charStat.attackSpeed;  // 현재 공격 속도(천분율)
+            _charStat[(int)eStats.AS] = charStat.attackSpeed; // 공격 속도(천분율)
+            _charStat[(int)eStats.NAS] = charStat.attackSpeed; // 현재 공격 속도(천분율)
 
-            _charStat[(int)eStats.CRIT_CHANCE] = charStat.critChance;       // 치명타 확률(만분율)
-            _charStat[(int)eStats.NCRIT_CHANCE] = charStat.critChance;      // 현재 치명타 확률(만분율)
+            _charStat[(int)eStats.CRIT_CHANCE] = charStat.critChance; // 치명타 확률(만분율)
+            _charStat[(int)eStats.NCRIT_CHANCE] = charStat.critChance; // 현재 치명타 확률(만분율)
 
-            _charStat[(int)eStats.CRIT_DAMAGE] = charStat.cirtDamage;       // 치명타 대미지(만분율)
-            _charStat[(int)eStats.NCRIT_DAMAGE] = charStat.cirtDamage;      // 현재 치명타 대미지(만분율)
+            _charStat[(int)eStats.CRIT_DAMAGE] = charStat.cirtDamage; // 치명타 대미지(만분율)
+            _charStat[(int)eStats.NCRIT_DAMAGE] = charStat.cirtDamage; // 현재 치명타 대미지(만분율)
 
-            _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease;   // 피해량 증가(만분율)
-            _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage;         // 추가 피해
+            _charStat[(int)eStats.DAMAGE_INCREASE] = charStat.damageIncrease; // 피해량 증가(만분율)
+            _charStat[(int)eStats.BONUS_DAMAGE] = charStat.bonusDamage; // 추가 피해
 
-            _charStat[(int)eStats.ARMOR] = charStat.armor;    // 방어력
-            _charStat[(int)eStats.NARMOR] = charStat.armor;   // 현재 방어력
+            _charStat[(int)eStats.ARMOR] = charStat.armor; // 방어력
+            _charStat[(int)eStats.NARMOR] = charStat.armor; // 현재 방어력
 
-            _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist;     // 마법 방어력
-            _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist;    // 현재 마법 방어력
+            _charStat[(int)eStats.MAGIC_RESIST] = charStat.magicResist; // 마법 방어력
+            _charStat[(int)eStats.NMAGIC_RESIST] = charStat.magicResist; // 현재 마법 방어력
 
-            _charStat[(int)eStats.ARMOR_PENETRATION] = 0;   // 물리 방어력 관통
-            _charStat[(int)eStats.MAGIC_PENETRATION] = 0;   // 마법 방어력 관통
+            _charStat[(int)eStats.ARMOR_PENETRATION] = 0; // 물리 방어력 관통
+            _charStat[(int)eStats.MAGIC_PENETRATION] = 0; // 마법 방어력 관통
 
-            _charStat[(int)eStats.RANGE] = charStat.range;  // 공격 사거리
+            _charStat[(int)eStats.RANGE] = charStat.range; // 공격 사거리
             _charStat[(int)eStats.NRANGE] = charStat.range; // 현재 공격 사거리
 
-            _charStat[(int)eStats.MOVE_SPEED] = (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND);    // 이동 속도(천분율 처리함)
-            _charStat[(int)eStats.NMOVE_SPEED] = (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND);   // 현재 이동 속도(천분율 처리함)
+            _charStat[(int)eStats.MOVE_SPEED] =
+                (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND); // 이동 속도(천분율 처리함)
+            _charStat[(int)eStats.NMOVE_SPEED] =
+                (int)(charStat.movementSpeed * SystemConst.PER_THOUSAND); // 현재 이동 속도(천분율 처리함)
 
             _charStat[(int)eStats.START_MANA] = charStat.startMana; // 마나
-            _charStat[(int)eStats.N_MANA] = charStat.startMana;     // 현재 마나
-            _charStat[(int)eStats.MAX_MANA] = charStat.maxMana;     // 현재 최대 마나
+            _charStat[(int)eStats.N_MANA] = charStat.startMana; // 현재 마나
+            _charStat[(int)eStats.MAX_MANA] = charStat.maxMana; // 현재 최대 마나
 
-            _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;       // 마나 회복량 추가 퍼센트(만분율)
-            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;            // 내구력 (최종 피해량 퍼센트 경감)
+            _charStat[(int)eStats.MANA_RESTORE_INCREASE] = 0;
+            _charStat[(int)eStats.N_MANA_RESTORE_INCREASE] = 0; // 마나 회복량 추가 퍼센트(만분율)
+            
+            _charStat[(int)eStats.DAMAGE_REDUCTION] = 0;
+            _charStat[(int)eStats.N_DAMAGE_REDUCTION] = 0; // 내구력 (최종 피해량 퍼센트 경감)
+            
             _charStat[(int)eStats.FINAL_DAMAGE] = 0;
+            _charStat[(int)eStats.N_FINAL_DAMAGE] = 0;
+            
+            _charStat[(int)eStats.HP_RESTORE_INCREASE] = 0;
+            _charStat[(int)eStats.N_HP_RESTORE_INCREASE] = 0;
+
 
             #endregion
-            
+
             #region Init Modifiers
 
             for (int i = 1; i < (int)eStats.eMax; i++)
@@ -124,19 +139,20 @@ namespace Client
         {
             switch (eStats)
             {
-                case (eStats.AS):
-                case (eStats.NAS):
-                case (eStats.MOVE_SPEED):
-                case (eStats.NMOVE_SPEED):
+                case eStats.AS:
+                case eStats.NAS:
+                case eStats.MOVE_SPEED:
+                case eStats.NMOVE_SPEED:
                     return _charStat[(int)eStats] / SystemConst.PER_THOUSAND;
-                case (eStats.CRIT_CHANCE):
-                case (eStats.NCRIT_CHANCE):
-                case (eStats.CRIT_DAMAGE):
-                case (eStats.NCRIT_DAMAGE):
-                case (eStats.DAMAGE_INCREASE):
-                case (eStats.DAMAGE_REDUCTION):
-                case (eStats.MANA_RESTORE_INCREASE):
-                case (eStats.FINAL_DAMAGE):
+                case eStats.CRIT_CHANCE:
+                case eStats.NCRIT_CHANCE:
+                case eStats.CRIT_DAMAGE:
+                case eStats.NCRIT_DAMAGE:
+                case eStats.DAMAGE_INCREASE:
+                case eStats.N_DAMAGE_REDUCTION:
+                case eStats.N_MANA_RESTORE_INCREASE:
+                case eStats.N_FINAL_DAMAGE:
+                case eStats.N_HP_RESTORE_INCREASE:
                     return _charStat[(int)eStats] / SystemConst.PER_TEN_THOUSAND;
                 default:
                     return _charStat[(int)eStats];
@@ -156,16 +172,20 @@ namespace Client
         {
             switch (baseStat)
             {
-                case eStats.AD:             return eStats.NAD; 
-                case eStats.AP:             return eStats.NAP; 
-                case eStats.HP:             return eStats.NHP;
-                case eStats.AS:             return eStats.NAS;
-                case eStats.CRIT_CHANCE:    return eStats.NCRIT_CHANCE;
-                case eStats.CRIT_DAMAGE:    return eStats.NCRIT_CHANCE;
-                case eStats.ARMOR:          return eStats.NARMOR;
-                case eStats.MAGIC_RESIST:   return eStats.NMAGIC_RESIST;
-                case eStats.RANGE:          return eStats.NRANGE;
-                case eStats.MOVE_SPEED:     return eStats.NMOVE_SPEED;
+                case eStats.AD:                     return eStats.NAD; 
+                case eStats.AP:                     return eStats.NAP; 
+                case eStats.HP:                     return eStats.NHP;
+                case eStats.AS:                     return eStats.NAS;
+                case eStats.CRIT_CHANCE:            return eStats.NCRIT_CHANCE;
+                case eStats.CRIT_DAMAGE:            return eStats.NCRIT_CHANCE;
+                case eStats.ARMOR:                  return eStats.NARMOR;
+                case eStats.MAGIC_RESIST:           return eStats.NMAGIC_RESIST;
+                case eStats.RANGE:                  return eStats.NRANGE;
+                case eStats.MOVE_SPEED:             return eStats.NMOVE_SPEED;
+                case eStats.HP_RESTORE_INCREASE:    return eStats.N_HP_RESTORE_INCREASE;
+                case eStats.MANA_RESTORE_INCREASE:  return eStats.N_MANA_RESTORE_INCREASE;
+                case eStats.DAMAGE_REDUCTION:       return eStats.N_DAMAGE_REDUCTION;
+                case eStats.FINAL_DAMAGE:           return eStats.N_FINAL_DAMAGE;
                 default:
                     return baseStat;
             }
@@ -224,6 +244,7 @@ namespace Client
         
         /// <summary>
         /// 수정자에 의거해서 합, 곱연산 적용 이후 추가치를 더해 최종 적용 스탯을 계산한다.
+        /// <remarks>반드시 계산이 값이 아닌 비율로 되도록 할 것.</remarks>
         /// </summary>
         /// <param name="changingStat">바꿀 스탯</param>
         public void ModifyStat(eStats changingStat)
@@ -283,7 +304,7 @@ namespace Client
         
         #endregion
         
-        #region Damage Method
+        #region HP Related Method - Damage & Heal
 
         // UI에 사용하면 될듯...?
         public Action OnDamaged;
@@ -305,7 +326,7 @@ namespace Client
                     (1 + GetStat(eStats.NCRIT_DAMAGE)) : 1)                 // 치명타 확률 및 피해 계산
                 + GetStat(eStats.BONUS_DAMAGE)) *                           // 추가 대미지  
                 (1 + GetStat(eStats.DAMAGE_INCREASE)) *                     // 피해량 증가
-                (1 + GetStat(eStats.FINAL_DAMAGE));                         // 최종 대미지 증가                                       
+                (1 + GetStat(eStats.N_FINAL_DAMAGE));                         // 최종 대미지 증가                                       
             
             eDamageType damageType = type == eDamageType.None ? DamageType : type;
 
@@ -333,7 +354,6 @@ namespace Client
             return damageType == eDamageType.PHYSICS ?
                 GetStat(eStats.ARMOR_PENETRATION) : GetStat(eStats.MAGIC_PENETRATION);
         }
-
         
         public void ReceiveDamage(DamageParameter damage)
         {
@@ -353,7 +373,7 @@ namespace Client
                 finalDamage =
                     damage.RawDamage *
                     100f / (100 + defender - damage.Penetration) *
-                    (1 - GetStat(eStats.DAMAGE_REDUCTION));
+                    (1 - GetStat(eStats.N_DAMAGE_REDUCTION));
 
             }
 
@@ -379,6 +399,12 @@ namespace Client
             }
         }
 
+        public void Heal(float amount)
+        {
+            float healAmount = amount * (1 + GetStat(eStats.N_HP_RESTORE_INCREASE));
+            ChangeStateByBuff(eStats.HP, (long)healAmount);
+            Debug.Log($"버프에 의해 힐을 {healAmount}만큼 받습니다.");
+        }
         #endregion
 
         #region Shield Managing
@@ -425,9 +451,13 @@ namespace Client
 
         public void GainMana(int amount, bool isGain, bool isAdditional=false)
         {
-            if (Silenced) return;
+            if (Silenced)
+            {
+                Debug.Log("침묵 상태이므로 마나를 회복하지 않습니다.");
+                return;
+            }
             
-            var increaseRatio = GetStat(eStats.MANA_RESTORE_INCREASE);
+            var increaseRatio = GetStat(eStats.N_MANA_RESTORE_INCREASE);
             if (isGain && !isAdditional)
             {
                 _charStat[(int)eStats.N_MANA] += (int)((1 + increaseRatio) * amount);

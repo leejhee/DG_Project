@@ -26,6 +26,7 @@ namespace Client
         
         #region Fields
         protected FunctionInfo _functionInfo = null; // 기능 정보
+        protected EffectInfo _effectInfo = null;
         //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
         private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
@@ -68,6 +69,7 @@ namespace Client
         public Collider MoveCollider  => _MoveCollider;
         public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
         public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
+        public EffectInfo EffectInfo => _effectInfo;
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
         public GameObject CharCamaraPos => _CharCamaraPos; // 카메라 위치
@@ -89,6 +91,7 @@ namespace Client
             _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
             _uid = CharManager.Instance.GetNextID();
             _functionInfo = new FunctionInfo();
+            _effectInfo = new EffectInfo();
             _functionInfo.Init();
             _charData = DataManager.Instance.GetData<CharData>(_index);
             _NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -132,7 +135,8 @@ namespace Client
 
         void Update()
         {
-            FunctionInfo?.UpdateFunctionDic();            
+            _functionInfo?.UpdateFunctionDic(); 
+            _effectInfo?.UpdateEffect();
         }
 
         protected virtual void SetChar(CharBase character)

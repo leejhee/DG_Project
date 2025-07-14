@@ -147,10 +147,18 @@ namespace Client
             MAX_MANA,
             
             MANA_RESTORE_INCREASE,
+            N_MANA_RESTORE_INCREASE,
+            
             DAMAGE_REDUCTION,
+            N_DAMAGE_REDUCTION,
+            
             BARRIER,
             
             FINAL_DAMAGE,
+            N_FINAL_DAMAGE,
+            
+            HP_RESTORE_INCREASE,
+            N_HP_RESTORE_INCREASE,
             
             eMax,
         }

@@ -1,9 +1,10 @@
 namespace Client
 {
-    public struct CCParameter
+    public struct EffectParameter
     {
         public CharBase Caster;
         public CharBase Target;
         public SystemEnum.eCCType ccType;
+        public float Time;
     }
 }

@@ -10,9 +10,9 @@ namespace Client
     public class CharAction
     {
         private CharBase Actor;
-
         private NavMeshAgent Nav;
-
+        private float _speed;
+        
         // 평타인지 스킬인지까지 따져서 발동하는 액션
         public Action<eAttackMode, List<CharBase>> OnAttackAction;
 
@@ -21,6 +21,7 @@ namespace Client
         {
             Actor = actor;
             Nav = actor.Nav;
+            _speed = Actor.CharStat.GetStat(eStats.NMOVE_SPEED);;
         }
 
         public void CharMoveAction(CharMoveParameter param)
@@ -31,7 +32,7 @@ namespace Client
             {
                 Nav.isStopped = false;
                 Nav.SetDestination(param.Destination);
-                Nav.speed = Actor.CharStat.GetStat(eStats.NMOVE_SPEED);
+                Nav.speed = _speed;
                 Actor.Move(true);
             }
             else
