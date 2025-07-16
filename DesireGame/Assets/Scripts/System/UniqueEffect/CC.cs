@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Client
 {
     public class EffectKnockBack : EffectBase
@@ -5,9 +7,18 @@ namespace Client
         public EffectKnockBack(EffectParameter param) : base(param)
         {
         }
+        
         public override void RunEffect()
         {
             base.RunEffect();
+            // 코루틴 쓰자.
+            // 넉백하는동안, 인수만 집어서 코루틴 작동하게 한다. 이때 원래 AI clear하고 정지.
+        }
+
+        public override void EndEffect()
+        {
+            base.EndEffect();
+            Target.CharAI.RestoreState();
         }
     }
 
@@ -21,18 +32,13 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            
+            Target.CharAI.Stun();
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            
-        }
-        
-        public void Update()
-        {
-            throw new System.NotImplementedException();
+            Target.CharAI.RestoreState();
         }
         
     }
@@ -49,19 +55,13 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.TargetForcedFix(Caster);
-            
+            Target.CharAI.Charm(Caster);
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            
-        }
-
-        public override void Update()
-        {
-            throw new System.NotImplementedException();
+            Target.CharAI.RestoreState();
         }
     }
     
@@ -98,17 +98,14 @@ namespace Client
 
         public override void RunEffect()
         {
-            Target.CharAI.TargetForcedFix(Caster);
-        }
-        
-        public override void Update()
-        {
+            base.RunEffect();
             Target.CharAI.Taunt(Caster);
         }
         
         public override void EndEffect()
         {
-            
+            base.EndEffect();
+            Target.CharAI.RestoreState();
         }
 
         

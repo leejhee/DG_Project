@@ -27,15 +27,14 @@ namespace Client
         #region Fields
         protected FunctionInfo _functionInfo = null; // 기능 정보
         protected EffectInfo _effectInfo = null;
-        //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
 
-        private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
-        private CharStat     _charStat = null;      // Stat 정보
-        private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
-        private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
-        protected CharData _charData = null;      // 캐릭터 데이터
-        protected CharAI      _charAI = null;
-
+        private CharSKillInfo   _charSKillInfo;       // 캐릭터 스킬
+        private CharStat        _charStat = null;      // Stat 정보
+        private CharAnim        _charAnim = null;      // 캐릭터 애니메이션 리스트
+        private CharAction      _charAction = null;     // 캐릭터 동작 명령 클래스
+        protected CharData      _charData = null;      // 캐릭터 데이터
+        protected CharAI        _charAI = null;
+    
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
 
@@ -47,7 +46,7 @@ namespace Client
         protected long _uid;  // 캐릭터 고유 ID
 
         private Vector3 _rightRotation = new Vector3(0, 180,0); // 오른쪽 로테이션
-        private Vector2 _lefRotationtion = Vector3.zero;        // 왼쪽 로테이션
+        private Vector2 _lefRotation = Vector3.zero;        // 왼쪽 로테이션
 
         private Vector3 _rightPos = new Vector3(1, 0, 0); // 오른쪽 방향
         private Vector2 _leftPos = new Vector3(-1, 0, 0); // 왼쪽 방향
@@ -55,7 +54,7 @@ namespace Client
         private Coroutine _coroutine; // UpdateAI용,,
         public Vector3 LookAtPos { get; private set; } = Vector3.right; // 현재 방향성
 
-        private CharLightWeightInfo lightWeightInfo;
+        private CharLightWeightInfo _lightWeightInfo;
         private List<eSynergy> _charSynergies = null;
 
         private Camera _mainCamera;
@@ -112,7 +111,7 @@ namespace Client
             _charAnim =     new();
             _charAction =   new(this);
             _charAI =       new(this);
-            _mainCamera = Camera.main;
+            _mainCamera =   Camera.main;
         }
 
         protected virtual void Start()
@@ -127,11 +126,6 @@ namespace Client
                 _indexPair[state] = 0;
             }
             CharInit();
-            // TODO : on off 기능
-            // turnonandoff 이런식으로 해서 껐다 켰다를 할 수 있게 해야하기 때문에
-            // 따로 뭔가를 해야 한다고 한다
-            // CharBase에 함수를 선언하여 CharManager에서 _cache 내 모든 CharBase를 대상으로 
-            // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
         }
 
         void Update()
@@ -176,8 +170,8 @@ namespace Client
             
             #region 시너지 등록
 
-            lightWeightInfo = GetCharSynergyInfo();
-            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
+            _lightWeightInfo = GetCharSynergyInfo();
+            SynergyManager.Instance.RegisterCharSynergy(_lightWeightInfo);
             
             #endregion
             
@@ -188,6 +182,8 @@ namespace Client
                 CharDead();
             };
             #endregion
+            
+            
         }
 
         public CharLightWeightInfo GetCharSynergyInfo()
@@ -328,7 +324,7 @@ namespace Client
         public Action OnRealDead;
         public virtual void Dead()
         {
-            SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
+            SynergyManager.Instance.DeleteCharSynergy(_lightWeightInfo);
             CharDead();
             OnRealDead?.Invoke();
             Destroy(gameObject);

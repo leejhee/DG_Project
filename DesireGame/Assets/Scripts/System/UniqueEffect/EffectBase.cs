@@ -9,7 +9,7 @@ namespace Client
         protected float LifeTime;
         protected float StartTime;
         
-        public SystemEnum.eCCType EffectType { get; }
+        public SystemEnum.eCCType EffectType { get; private set; }
         
 
         public EffectBase(EffectParameter param)

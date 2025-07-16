@@ -3,8 +3,7 @@ namespace Client
     public class ApplyCC : FunctionBase
     {
         public ApplyCC(BuffParameter buffParam) : base(buffParam)
-        {
-        }
+        { }
 
         public override void RunFunction(bool StartFunction = true)
         {
