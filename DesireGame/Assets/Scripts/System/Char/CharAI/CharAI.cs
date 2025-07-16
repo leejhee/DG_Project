@@ -34,7 +34,7 @@ namespace Client
         #endregion
         
         #region Fields - cc related
-
+        
         public bool Targetable = true;
         public bool Attackable = true;
         public bool Movable = true;

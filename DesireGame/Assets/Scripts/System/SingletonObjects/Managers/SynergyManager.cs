@@ -68,7 +68,7 @@ namespace Client
             var side = leaver.Side;
             var mySynergies = leaver.SynergyList;
 
-            foreach (var synergy in leaver.SynergyList)
+            foreach (eSynergy synergy in leaver.SynergyList)
             {
                 DeleteSynergy(leaver, synergy);
             }

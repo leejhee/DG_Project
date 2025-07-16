@@ -87,17 +87,7 @@ namespace Client
 
         private void Awake()
         {
-            _CharTransform = transform;
-            _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
-            _uid = CharManager.Instance.GetNextID();
-            _functionInfo = new FunctionInfo();
-            _effectInfo = new EffectInfo();
-            _functionInfo.Init();
             _charData = DataManager.Instance.GetData<CharData>(_index);
-            _NavMeshAgent = GetComponent<NavMeshAgent>();
-            _charAnim =     new();
-            _charAction =   new(this);
-            _charAI =       new(this);
             if (_charData != null)
             {
                 StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
@@ -111,6 +101,17 @@ namespace Client
             {
                 Debug.LogError($"캐릭터 ID : {_index} Data 데이터 Get 실패");
             }
+            
+            _CharTransform = transform;
+            _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
+            _uid = CharManager.Instance.GetNextID();
+            _functionInfo = new FunctionInfo();
+            _effectInfo = new EffectInfo();
+            _functionInfo.Init();
+            _NavMeshAgent = GetComponent<NavMeshAgent>();
+            _charAnim =     new();
+            _charAction =   new(this);
+            _charAI =       new(this);
             _mainCamera = Camera.main;
         }
 
@@ -174,8 +175,9 @@ namespace Client
             #endregion
             
             #region 시너지 등록
-            
-            SynergyManager.Instance.RegisterCharSynergy(GetCharSynergyInfo());
+
+            lightWeightInfo = GetCharSynergyInfo();
+            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
             
             #endregion
             

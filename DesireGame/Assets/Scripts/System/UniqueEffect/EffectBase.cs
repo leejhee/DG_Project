@@ -41,18 +41,5 @@ namespace Client
                 Target.EffectInfo.KillEffect(this);
             }
         }
-        
-        public void ReplaceCrowdControl(EffectBase cc)
-        {
-            Caster = cc.Caster;
-            ReplaceTime(cc.LifeTime);
-        }
-        
-        private void ReplaceTime(float runTime)
-        {
-            LifeTime = runTime;
-            StartTime = Time.time;
-            Debug.Log($"{Target.name}이 CC 중복으로 {EffectType}이 {LifeTime}초로 갱신");
-        }
     }
 }
