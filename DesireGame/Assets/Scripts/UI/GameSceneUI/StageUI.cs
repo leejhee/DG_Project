@@ -10,6 +10,8 @@ namespace Client
         [SerializeField] List<RoundIcon> roundIconList;
         [SerializeField] TextMeshProUGUI requiredGold;
 
+        private readonly int STAGE_INDEX = 1600000;
+
         int currentIndex;
         private void Start()
         {
@@ -23,8 +25,8 @@ namespace Client
 
             roundIconList[currentIndex]?.RevertIcon();
 
-            int realStage = StageManager.Instance.Stage % 1600000;
-            if (realStage == 0) realStage = 1600000;
+            int realStage = StageManager.Instance.Stage % STAGE_INDEX;
+            if (realStage == 0) realStage = STAGE_INDEX;
 
             currentIndex = (realStage - 1) % 5;
             roundIconList[currentIndex].HighlightIcon();
@@ -32,7 +34,7 @@ namespace Client
         public void RenewStageUI()
         {
             // 실제 스테이지 번호 계산
-            int realStage = StageManager.Instance.Stage % 1600000;  // 예: 1600001 -> 1
+            int realStage = StageManager.Instance.Stage % STAGE_INDEX;  // 예: 1600001 -> 1
 
             // 현재 라운드 세트의 시작 번호 계산 (5개씩 묶음)
             int startStageNumber = ((realStage - 1) / 5) * 5 + 1;
@@ -49,7 +51,7 @@ namespace Client
 
         public void OnStageChanged()
         {
-            int realStage = StageManager.Instance.Stage % 1000000;
+            int realStage = StageManager.Instance.Stage % STAGE_INDEX;
 
             // 새로운 라운드 세트로 넘어가는 경우
             if ((realStage - 1) % 5 == 0)

@@ -24,30 +24,43 @@ namespace Client
         [SerializeField] TextMeshProUGUI TMP_RewardLose; // 패배 시 보상
 
         [SerializeField] Slider slider;
+        [SerializeField] ToastMessageUI toastMessege;
 
         Color selectedColor;
         Color teamAColor;
         Color teamBColor;
 
+        string temp_start = "Start";
+        string temp_end = "Finish";
+        string temp_next = "Next!";
+
         void Start()
         {
             SetButtonColor();
+
             BTN_TeamA.onClick.AddListener(() => SelectTeam(typeof(CharPlayer)));
             BTN_TeamB.onClick.AddListener(() => SelectTeam(typeof(CharMonster)));
 
             slider.onValueChanged.AddListener(UpdateBetAmount);
             BTN_GameStart.onClick.AddListener(GameStart);
 
+            StageManager.Instance.OnStageChanged += () => StartCoroutine(ToastMessage(temp_next));
+
             StageManager.Instance.OnStartCombat += SetInteractableFalse;
+            StageManager.Instance.OnStartCombat += () => StartCoroutine(ToastMessage(temp_start));
+
             StageManager.Instance.OnEndCombat += SetInteractableTrue;
+            StageManager.Instance.OnEndCombat += () => StartCoroutine(ToastMessage(temp_end));
             StageManager.Instance.OnGoldChanged += UpdateGoldText;
 
             UpdateTeamButtonVisuals();
             UpdateStartGameButton();
             UpdateGoldText(StageManager.Instance.Gold);
+
+            toastMessege.gameObject.SetActive(false);
         }
 
-        /// <summary> 미리 헥사코드에 맞는 색상 지정해서 설정해두기 </summary>
+        #region 준비단계
         void SetButtonColor()
         {
             selectedColor = Util.GetHexColor(selectedColorCode);
@@ -106,6 +119,60 @@ namespace Client
             TMP_GameStart.text = (isTeamSelected && isBetValid)? "Start" : "X";
             StageManager.Instance.SetIsBetted(isTeamSelected && isBetValid);
         }
+        #endregion
+
+        #region 전투단계 UI 흐름
+
+        // 전투 시작
+        // 화면 채도 낮춤 →‘ 전투 시작’ 토스트 메세지 애니메이션 →  화면 원상 복귀 → 전투 시작
+
+        public void PlayStartCombatFlow()
+        {
+            StartCoroutine(StartCombatFlow());
+        }
+
+        private IEnumerator StartCombatFlow()
+        {
+            yield return null;
+        }
+
+
+
+        // 전투 종료
+        // 화면 채도 낮춤 →‘ 전투 종료’ 토스트 메세지 애니메이션 →  화면 원상 복귀 → 전투 종료
+
+        public void PlayFinishCombatFlow()
+        {
+            StartCoroutine(FinishCombatFlow());
+        }
+
+        private IEnumerator FinishCombatFlow()
+        {
+            yield return null;
+        }
+
+        #endregion
+
+        #region 정산단계 UI 흐름
+
+        // 화면 채도 낮춤 → ‘다음 라운드’ 토스트 메시지 애니메이션 →  필드 위의 기물 및 관련 UI가 모두 사라짐 → 화면 상단의 라운드 색 이동 → 토스트 애니메이션 사라짐 → 화면 원상 복귀 및 다음 라운드 기물 배치
+
+        public void PlayNextStageFlow()
+        {
+            StartCoroutine(NextStageFlow());
+        }
+
+        private IEnumerator NextStageFlow()
+        {
+            yield return toastMessege.ShowMessageCoroutine(temp_next, () =>
+            {
+                // 중간 시점에 기물 제거
+                CharManager.Instance.ClearAllChar();
+            });
+
+            StageManager.Instance.MoveToNextStage();
+        }
+        #endregion
         // 너무 구려
         void SetInteractableFalse()
         {
@@ -129,6 +196,15 @@ namespace Client
         void GameStart()
         {
             StageManager.Instance.StartCombat();
+        }
+
+        IEnumerator ToastMessage(string txt)
+        {
+            toastMessege.gameObject.SetActive(true);
+
+            yield return toastMessege.ShowMessageCoroutine(txt);
+
+            toastMessege.gameObject.SetActive(false);
         }
     }
 }

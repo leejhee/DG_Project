@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using TMPro;
 
 namespace Client
 {
     public class StageManager : Singleton<StageManager>
     {
         private StageManager() { }
-        
+
+        private GameSceneETC gameSceneETC;
+
         public int Stage { get; private set; }         // 현재 스테이지
         public Type MyTeam { get; private set; }       // 베팅한 팀
         public int Stake { get; private set; }         // 베팅 금액
@@ -45,9 +48,11 @@ namespace Client
         public override void Init()
         {
             base.Init();
+            gameSceneETC = UnityEngine.Object.FindObjectOfType<GameSceneETC>();
             CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
         }
 
+        /// <summary> 새로운 스테이지 배치 </summary>
         public void StartStage(int stageNum)
         {
             CharManager.Instance.ClearAllChar();
@@ -59,6 +64,7 @@ namespace Client
                 return;
 
             SetIsBetted(false);
+            OnStageChanged?.Invoke();
 
             var stageList = DataManager.Instance.CharacterSpawnStageMap[stageNum];
             foreach (var stage in stageList)
@@ -70,7 +76,6 @@ namespace Client
             Stage = stageNum;
             TileManager.Instance.SwitchTileCombatmode(false);
             OnEndCombat?.Invoke();
-            OnStageChanged?.Invoke();
             Debug.Log($"<color=red>새 스테이지 시작. StageNum = {stageNum}</color>");
         }
 
@@ -85,7 +90,7 @@ namespace Client
             SetIsFinish(false);
             TileManager.Instance.SwitchTileCombatmode(true);
             CharManager.Instance.WakeAllCharAI();
-            OnStartCombat?.Invoke();
+            OnStartCombat?.Invoke(); 
         }
 
         /// <summary>
@@ -113,6 +118,7 @@ namespace Client
             else
             {
                 Debug.LogError("다음 스테이지 없음");
+                return;
             }
         }
 
