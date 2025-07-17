@@ -10,7 +10,7 @@ namespace Client
         
         public EffectSunder(EffectParameter param) : base(param)
         {
-            delta = -0.4f * Target.CharStat.GetStatRaw(SystemEnum.eStats.ARMOR);
+            delta = -0.4f;
             modifier = new StatModifier(
                 SystemEnum.eStats.ARMOR,
                 SystemEnum.eOpCode.Add,
@@ -44,7 +44,7 @@ namespace Client
 
         public EffectShred(EffectParameter param) : base(param)
         {
-            delta = -0.4f * Target.CharStat.GetStatRaw(SystemEnum.eStats.MAGIC_RESIST);
+            delta = -0.4f;
             modifier = new StatModifier(
                 SystemEnum.eStats.MAGIC_RESIST,
                 SystemEnum.eOpCode.Add,
@@ -78,7 +78,7 @@ namespace Client
 
         public EffectCripple(EffectParameter param) : base(param)
         {
-            delta = -0.3f * Target.CharStat.GetStatRaw(SystemEnum.eStats.AS);
+            delta = -0.3f;
             modifier = new StatModifier(
                 SystemEnum.eStats.AS,
                 SystemEnum.eOpCode.Add,
@@ -109,7 +109,7 @@ namespace Client
         private StatModifier modifier;
         public EffectWound(EffectParameter param) : base(param)
         {
-            delta = -0.33f * SystemConst.PER_TEN_THOUSAND;
+            delta = -0.33f;
             modifier = new StatModifier(
                 SystemEnum.eStats.HP_RESTORE_INCREASE,
                 SystemEnum.eOpCode.Add,
