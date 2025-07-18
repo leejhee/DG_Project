@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Markers:
     m_Objects:
     - {fileID: 6264738298413699524}
-    - {fileID: 4607220089638630468}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,20 +150,6 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 6fb0d327821de4ca19ea0fcf940b27ee, type: 2}
---- !u!114 &4607220089638630468
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
-  m_Name: Skill Marker Function Injector
-  m_EditorClassIdentifier: 
-  m_Time: 0.4166666666666667
-  functionIndex: 600210
 --- !u!114 &6264738298413699524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,4 +167,4 @@ MonoBehaviour:
   _offSet: {x: 0, y: 0, z: 0}
   _statName: 3
   percent: 120
-  indices: 
+  indices: 9228090000000000

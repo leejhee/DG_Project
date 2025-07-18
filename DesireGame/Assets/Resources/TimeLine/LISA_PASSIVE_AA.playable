@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 6fb0d327821de4ca19ea0fcf940b27ee, type: 2}
---- !u!114 &-6807224421783220377
+--- !u!114 &-199401829516037742
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26,7 +26,8 @@ MonoBehaviour:
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
   m_Time: 0.2833333333333333
-  functionIndex: 501010
+  functionIndex: 601010
+  targetType: 20
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -6807224421783220377}
+    - {fileID: -199401829516037742}
 --- !u!114 &3261209821709353676
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Time: 0.26666666666666666
   functionIndex: 600510
+  targetType: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

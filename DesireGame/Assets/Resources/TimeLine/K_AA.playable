@@ -105,24 +105,6 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: c66e5eb2778574f1abbd40dcb05e1df7, type: 2}
---- !u!114 &-1445425317657149599
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
-  m_Name: Skill Marker Shot Projectal
-  m_EditorClassIdentifier: 
-  m_Time: 0
-  _projectile: {fileID: 0}
-  _offSet: {x: 0, y: 0, z: 0}
-  _statName: 3
-  percent: 100
-  indices: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,4 +149,22 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -1445425317657149599}
+    - {fileID: 7695624408295272745}
+--- !u!114 &7695624408295272745
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
+  m_EditorClassIdentifier: 
+  m_Time: 0.25
+  _projectile: {fileID: 1496515457595730074, guid: eafb68756b4bdb24589fa45028165a54, type: 3}
+  _offSet: {x: 0, y: 0, z: 0}
+  _statName: 3
+  percent: 100
+  indices: 
