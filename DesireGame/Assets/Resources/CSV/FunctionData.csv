@@ -88,7 +88,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 600813,500811,엠마 Skill 2) 본인 버프: AP 60% 증가,BUFF_ONCE,AP,,,4000,6000,,,,,,,
 600910,500910,유나 Skill 2) 주변 1칸 내의 적에게 2초간 SILENCE 부여,APPLY_CC,,,SILENCE,2000,,,,,,,,
 601010,501010,리사 Skill: 3타 (대상 및 대상과 가까운 적 2명에게 AD의 20%에 해당하는 피해),LISA_PASSIVE_AA,,,,,,,,,,,,
-601020,501020,리사 Passive: 3타가 바뀜,CHANGE_AA_BY_AA_COUNT,,,,,3,501010,,,,,,
+601020,501020,리사 Passive: 3타가 바뀜,CHANGE_AA_BY_AA_COUNT,,,,-1,3,501010,,,,,,
 601210,501210,아메 Skill 1) 가장 체력이 낮은 아군 2명을 AP의 30%만큼 회복,BUFF_ONCE_BY_AP,HP,,,,3000,,,,,,,
 601211,501211,아메 Skill 2) 아군 버프 Multicasting:,MULTICASTING,,,,,601212,601213,,,,,,
 601212,,1) AP 50% 증가,BUFF_ONCE,AD,,,4000,5000,,,,,,,
