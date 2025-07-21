@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/SkillData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/SkillData.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Scenes/BattleTestScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Scenes/BattleTestScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/LISA_PASSIVE_AA.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/LISA_PASSIVE_AA.playable" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategyFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategyFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/ChangeAAByAACount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/ChangeAAByAACount.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerShotProjectal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerShotProjectal.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,13 +123,15 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="37056">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="37056" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list />
+        <list>
+          <MonoRuntime />
+        </list>
       </option>
       <option name="selectedOptions">
         <list />
@@ -238,7 +237,7 @@
       <workItem from="1752827514899" duration="3322000" />
       <workItem from="1752912677917" duration="698000" />
       <workItem from="1752913976800" duration="8612000" />
-      <workItem from="1753086396327" duration="2037000" />
+      <workItem from="1753086396327" duration="9428000" />
     </task>
     <servers />
   </component>
@@ -406,30 +405,17 @@
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs</url>
-          <line>280</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharStat.cs" containingFunctionPresentation="메서드 'ModifyStat'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs</url>
+          <line>30</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\TimeLine\Marker\SkillMarkerFunctionInjector.cs" containingFunctionPresentation="메서드 'MarkerAction'">
             <startOffsets>
-              <option value="10898" />
+              <option value="928" />
             </startOffsets>
             <endOffsets>
-              <option value="10938" />
+              <option value="1136" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="112" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs</url>
-          <line>227</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharStat.cs" containingFunctionPresentation="메서드 'ChangeStat'">
-            <startOffsets>
-              <option value="9082" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9196" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="113" />
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

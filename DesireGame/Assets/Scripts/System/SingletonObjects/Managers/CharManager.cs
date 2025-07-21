@@ -248,15 +248,15 @@ namespace Client
             return CharUtil.GetNearestInList(ClientChar, enemies, nTH, inverse);                      
         }
 
-        public CharBase GetNearestAlly(CharBase ClientChar, int nTH = 0, bool inverse = false)
+        public CharBase GetNearestAlly(CharBase clientChar, int nTH = 0, bool inverse = false)
         {
-            eCharType clientType = ClientChar.GetCharType();
+            eCharType clientType = clientChar.GetCharType();
             var allyDict = _cache[eCharTypeToType(clientType)];
             
             #region 오류 탐지
             if (allyDict.Count == 0)
             {
-                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {ClientChar.GetID()}");
+                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {clientChar.GetID()}");
                 return null;
             }
             if (nTH < 0)
@@ -272,7 +272,7 @@ namespace Client
                 allies.Add(ally);
             }
 
-            return CharUtil.GetNearestInList(ClientChar, allies, nTH, inverse);     
+            return CharUtil.GetNearestInList(clientChar, allies, nTH, inverse);     
         }
         
         

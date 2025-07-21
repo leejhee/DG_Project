@@ -24,6 +24,7 @@ namespace Client
             // 탕 -> 탕 -> 탕은 하고싶으면 말해주십쇼
             for(int idx = 0; idx < SkillParam.skillTargets.Count; idx++)
             {
+                if (!SkillParam.skillTargets[idx]) continue;
                 Projectile projectile = GameObject.Instantiate(_projectile, SkillParam.skillCaster.transform.position, Quaternion.identity);
                 projectile.InitProjectile(SkillParam.ToStatPack(_statName, percent, idx));
                 projectile.InjectProjectileFunction(indices);            

@@ -50,7 +50,6 @@ namespace Client
                 distances.Add((targetList[i], distSqr));
             }
 
-            distances.Sort((a, b) => a.dist.CompareTo(b.dist));
             if (inverse)
                 distances.Sort((a, b) => b.dist.CompareTo(a.dist));
             else
