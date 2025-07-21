@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -46,7 +47,7 @@ namespace Client
 
             }
         }
-
+        
         public void CharAttackAction(CharAttackParameter param)
         {
             Actor.Move(false);
@@ -56,6 +57,33 @@ namespace Client
             OnAttackAction?.Invoke(param.mode, param.targetChar);
         }
 
+        
+        public void Knockback(Vector3 direction, float distance, float duration)
+        {
+            Actor.AISwitch(false);
+            Actor.StartCoroutine(KnockbackRoutine(direction, distance, duration));
+        }
+
+        private IEnumerator KnockbackRoutine(Vector3 dir, float dist, float time)
+        {
+            Nav.isStopped = true;
+            Nav.updateRotation = false;
+
+            Vector3 start = Actor.transform.position;
+            Vector3 end = start + dir.normalized * dist;
+            float elapsed = 0;
+
+            while (elapsed < time)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / time;
+                Actor.transform.position = Vector3.Lerp(start, end, t);
+                yield return null;
+            }
+
+            Nav.isStopped = false;
+            Actor.CharAI.RestoreState(); // 끝나면 다시 AI 정상화
+        }
     }
 
 }

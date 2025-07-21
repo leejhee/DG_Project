@@ -14,7 +14,7 @@ namespace Client
         private CharBase _charAgent;
         
         // 현재 공격 모드에 대해 지정된 전체 타겟들
-        private List<CharBase> _cachedTargets;
+        private List<CharBase> _cachedTargets = new();
         
         // 현재 캐릭터의 행동 결정 상태
         private PlayerState _currentState; // 새로운 모드 변경 여부

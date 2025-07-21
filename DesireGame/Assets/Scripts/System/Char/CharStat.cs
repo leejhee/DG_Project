@@ -475,6 +475,42 @@ namespace Client
 
         #endregion
         
+        #region CC Related Method - Debugging Current
+
+        private StatModifier _ccRelated;
+        public void RestoreState()
+        {
+            RemoveStatModification(_ccRelated);
+        }
+
+        public void TauntStatModify()
+        {
+            _ccRelated = new StatModifier
+            (
+                eStats.AS,
+                eOpCode.Add,
+                eModifierRoot.CC,
+                -0.9f
+            );
+            AddStatModification(_ccRelated);
+        }
+
+        public void CharmStatModify()
+        {
+            _ccRelated = new StatModifier
+            (
+                eStats.MOVE_SPEED,
+                eOpCode.Add,
+                eModifierRoot.CC,
+                -0.9f
+            );
+            AddStatModification(_ccRelated);
+        }
+        
+        
+        #endregion
+        
+        
         public void ResetAfterBattle()
         {
             // 전투 이후 체력과 마나 초기화
@@ -483,6 +519,6 @@ namespace Client
             _charStat[(int)eStats.N_MANA] = (long)GetStat(eStats.START_MANA);
             Debug.Log($"리셋 : 체력 {GetStat(eStats.NHP)}/{GetStat(eStats.NMHP)} 마나 {GetStat(eStats.N_MANA)}/{GetStat(eStats.START_MANA)}");
         }
-
+        
     }
 }

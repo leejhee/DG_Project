@@ -55,7 +55,7 @@ namespace Client
                 distances.Sort((a, b) => b.dist.CompareTo(a.dist));
             else
                 distances.Sort((a, b) => a.dist.CompareTo(b.dist));
-
+            
             return distances[nTH].target;
         }
 

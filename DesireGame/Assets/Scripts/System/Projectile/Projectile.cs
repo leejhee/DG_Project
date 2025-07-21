@@ -14,10 +14,10 @@ namespace Client
         private CharBase        _caster;
         private CharBase        _target;
 
-        protected ProjectileData _projectileData;
-        protected float _projectileDamageInput;
-        protected List<FunctionData> _functionDataList;
-        protected int _projectileLife; // 투사체의 관통 허용 수치
+        private ProjectileData _projectileData;
+        private float _projectileDamageInput;
+        private List<FunctionData> _functionDataList;
+        private int _projectileLife; // 투사체의 관통 허용 수치
         
         // 뭔가뭔가다.
         private bool destroyFlag = false;
@@ -41,7 +41,7 @@ namespace Client
         }
 
         #region Initiallize Projectile(Call from Outside)
-        public virtual void InitProjectile(StatPackedSkillParameter param)
+        public void InitProjectile(StatPackedSkillParameter param)
         {
             _caster = param.skillCaster;
             _target = param.skillTargets[param.TargetIndex];
@@ -80,7 +80,10 @@ namespace Client
         private void FixedUpdate()
         {
             if (_caster == false || _target == false || destroyFlag == true)
+            {
                 Destroy(gameObject);
+                return;
+            }
             pathStrategy.UpdatePosition(this);
         }
 

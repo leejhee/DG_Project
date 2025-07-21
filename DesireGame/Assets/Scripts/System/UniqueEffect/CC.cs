@@ -19,6 +19,7 @@ namespace Client
         {
             base.EndEffect();
             Target.CharAI.RestoreState();
+            
         }
     }
 
@@ -78,17 +79,13 @@ namespace Client
         {
             base.RunEffect();
             Target.CharStat.Silenced = true;
+            
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
             Target.CharStat.Silenced = false;
-        }
-
-        public override void Update()
-        {
-            Target.CharStat.Silenced = true;
         }
     }
     
@@ -100,12 +97,14 @@ namespace Client
         {
             base.RunEffect();
             Target.CharAI.Taunt(Caster);
+            Target.CharStat.TauntStatModify();
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
             Target.CharAI.RestoreState();
+            Target.CharStat.RestoreState();
         }
 
         
