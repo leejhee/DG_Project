@@ -177,7 +177,7 @@ namespace Client
                 case eStats.HP:                     return eStats.NHP;
                 case eStats.AS:                     return eStats.NAS;
                 case eStats.CRIT_CHANCE:            return eStats.NCRIT_CHANCE;
-                case eStats.CRIT_DAMAGE:            return eStats.NCRIT_CHANCE;
+                case eStats.CRIT_DAMAGE:            return eStats.NCRIT_DAMAGE;
                 case eStats.ARMOR:                  return eStats.NARMOR;
                 case eStats.MAGIC_RESIST:           return eStats.NMAGIC_RESIST;
                 case eStats.RANGE:                  return eStats.NRANGE;
