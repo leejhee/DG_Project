@@ -55,7 +55,8 @@ namespace Client
         /// <summary> 새로운 스테이지 배치 </summary>
         public void StartStage(int stageNum)
         {
-            CharManager.Instance.ClearAllChar();
+            //CharManager.Instance.ClearAllChar();
+            CharManager.Instance.HardClearAll();
 
             if (CanStartStage == false)
                 return;

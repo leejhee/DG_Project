@@ -15,8 +15,9 @@ namespace Client
             switch (param.type)
             {
                 case SystemEnum.eSkillTargetType.CURRENT_ENEMY:
-                case SystemEnum.eSkillTargetType.CURRENT_NEAR1_ENEMY:
                     return new CurrentEnemyTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.CURRENT_NEAR1_ENEMY:
+                    return new CurrentEnemyNear1TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.CURRENT_CLOSE_ENEMY_2:
                     return new CurrentCloseEnemy2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ENEMY:
@@ -30,9 +31,15 @@ namespace Client
                 case SystemEnum.eSkillTargetType.FARTHEST_ENEMY_2:
                     return new FarthestEnemy2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.LOW_HP_ENEMY:
+                    return new LowHPEnemyTargetStrategy(param);
                 case SystemEnum.eSkillTargetType.LOW_HP_ALLY:
+                    return new LowHPAllyTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.LOW_HP_ALLY_2:
+                    return new LowHPAlly2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.SELF:
                     return new SelfTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.NEAR_ALLY:
+                    return new NearAllyTargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ALLY_2:
                     return new NearAlly2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ALLY_3:
@@ -41,7 +48,12 @@ namespace Client
                     return new EveryEnemyTargetStrategy(param);
                 case SystemEnum.eSkillTargetType.EVERY_ALLY:
                     return new EveryAllyTargetStrategy(param);
-                case SystemEnum.eSkillTargetType.CONTACT_ENEMY:                    
+                case SystemEnum.eSkillTargetType.NEAR1_ENEMY:
+                    return new Near1UnitEnemyTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.RANDOM_ENEMY_3:
+                    return new RandomEnemy3TargetStrategy(param);
+                case SystemEnum.eSkillTargetType.ROW1_ALLY:
+                    return new Row1AllyTargetStrategy(param);
                 default:
                     return null;
             }

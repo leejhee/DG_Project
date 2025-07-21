@@ -274,7 +274,28 @@ namespace Client
 
             return CharUtil.GetNearestInList(clientChar, allies, nTH, inverse);     
         }
-        
+
+        public List<CharBase> GetBunches(CharBase clientChar, float range, bool isAlly = true)
+        {
+            if (!clientChar) return new();
+            Vector3 center = clientChar.CharTransform.position;
+            eCharType type = clientChar.GetCharType();
+            List<CharBase> rawBunches = isAlly ? GetAllySide(type) : GetEnemySide(type);
+            List<CharBase> bunches = new();
+            foreach (var character in rawBunches)
+            {
+                if (!character || character == clientChar) continue;
+                float dist = Vector3.Distance(center, character.CharTransform.position);
+                if(dist > range) bunches.Add(character);
+            }
+            bunches.Sort((a, b) =>
+            {
+                float da = Vector3.SqrMagnitude(center - a.CharTransform.position);
+                float db = Vector3.SqrMagnitude(center - b.CharTransform.position);
+                return da.CompareTo(db);
+            });
+            return bunches;
+        }
         
         public List<CharBase> GetOneSide(eCharType charType)
         {
@@ -328,7 +349,12 @@ namespace Client
             }
         }
 
-
+        public void HardClearAll()
+        {
+            SynergyManager.Instance.Reset();
+            _cache.Clear();
+        }
+        
         private void CheckTypeEmpty(Type type)
         {
             if (_cache.ContainsKey(type) && _cache[type].Count == 0)
@@ -337,7 +363,8 @@ namespace Client
                 OnCharTypeEmpty?.Invoke(type);
             }
         }
-
+        
+        
         /// <summary>
         /// 스테이지 종료 후 필드에 남아있는 플레이어의 ID를 복사
         /// </summary>

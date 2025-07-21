@@ -25,7 +25,7 @@ namespace Client
         public static int TILE_SIDE_ROW_UNIT = TILE_SIDE_OFFSET / 2;
         public static int TILE_MAX = TILE_SIDE_OFFSET * 2; // 전체 타일 수
         private static Dictionary<SystemEnum.eRowType, ReadOnlyCollection<int>> TileRows;
-        public static Dictionary<int, SystemEnum.eRowType> TileIndexToRowType; // 💡 역매핑 캐시
+        public static Dictionary<int, SystemEnum.eRowType> TileIndexToRowType;
         
         public static int MANA_RESTORE_ATTACK = 10;
         public static int MANA_RESTORE_DAMAGED = 5;
