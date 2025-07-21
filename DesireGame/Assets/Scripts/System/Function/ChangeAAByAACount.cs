@@ -39,7 +39,15 @@ namespace Client
                 _TargetChar.CharSKillInfo.ChangeSkill(
                     changingIndex: (int)_FunctionData.input2, changingMode: CharAI.eAttackMode.Auto);
                 _runtimeCount = _defaultCount;
+                _TargetChar.CharAction.OnAttackAction += RevertAfterOneUse;
             }
+        }
+        
+        private void RevertAfterOneUse(CharAI.eAttackMode mode, List<CharBase> _)
+        {
+            if (mode != CharAI.eAttackMode.Auto) return;
+            _TargetChar.CharSKillInfo.ResetSkill();
+            _TargetChar.CharAction.OnAttackAction -= RevertAfterOneUse;
         }
         
     }

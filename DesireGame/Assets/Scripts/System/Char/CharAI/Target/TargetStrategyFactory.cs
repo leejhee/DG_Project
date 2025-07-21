@@ -17,6 +17,8 @@ namespace Client
                 case SystemEnum.eSkillTargetType.CURRENT_ENEMY:
                 case SystemEnum.eSkillTargetType.CURRENT_NEAR1_ENEMY:
                     return new CurrentEnemyTargetStrategy(param);
+                case SystemEnum.eSkillTargetType.CURRENT_CLOSE_ENEMY_2:
+                    return new CurrentCloseEnemy2TargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ENEMY:
                     return new NearEnemyTargetStrategy(param);
                 case SystemEnum.eSkillTargetType.NEAR_ENEMY_2:

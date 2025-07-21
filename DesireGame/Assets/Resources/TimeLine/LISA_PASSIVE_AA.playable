@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 6fb0d327821de4ca19ea0fcf940b27ee, type: 2}
---- !u!114 &-199401829516037742
+--- !u!114 &-2090814974795361542
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,12 +22,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
-  m_Name: Skill Marker Function Injector
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
   m_EditorClassIdentifier: 
   m_Time: 0.2833333333333333
-  functionIndex: 601010
-  targetType: 20
+  _projectile: {fileID: 1496515457595730074, guid: 59124d413fb5f3c43824bc6749e16976, type: 3}
+  _offSet: {x: 0, y: 0, z: 0}
+  _statName: 1
+  percent: 20
+  indices: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +75,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -199401829516037742}
+    - {fileID: -2090814974795361542}
 --- !u!114 &3261209821709353676
 MonoBehaviour:
   m_ObjectHideFlags: 1

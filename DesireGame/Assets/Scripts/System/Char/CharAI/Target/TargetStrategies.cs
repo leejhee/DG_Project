@@ -94,13 +94,34 @@ namespace Client
                 //return new List<CharBase>();
             }
 
-            var current = Caster.CharAI.FinalTarget;
+            CharBase current = Caster.CharAI.FinalTarget;
             if (current == false)
                 current = CharManager.Instance.GetNearestEnemy(Caster);
             return new List<CharBase>()
             {
                 current
             };
+        }
+    }
+
+    public class CurrentCloseEnemy2TargetStrategy : TargettingStrategyBase
+    {
+        public CurrentCloseEnemy2TargetStrategy(TargettingStrategyParameter param) : base(param)
+        {
+        }
+        
+        public override List<CharBase> GetTargets()
+        {
+            CharBase current = Caster.CharAI.FinalTarget;
+            if (current == false)
+                current = CharManager.Instance.GetNearestEnemy(Caster);
+            List<CharBase> targets = new()
+            {
+                CharManager.Instance.GetNearestAlly(current, 1),
+                CharManager.Instance.GetNearestAlly(current, 2),
+                current
+            };
+            return targets;
         }
     }
     
