@@ -77,7 +77,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 600510,500510,비비안 Skill MultiCasting:,MULTICASTING,,,,,600511,600512,,,,,,
 600511,,1) 아군 진영의 후방으로 순간이동,TELEPORT_TO_ALLY_REAR,,,,,,,,,,,,
 600512,,2) AD의 100%만큼 HP 회복,BUFF_ONCE_BY_AD,HP,,,,10000,,,,,,,
-600611,500611,그레이스 Skill: 대상과 범위 내 적에게 스플래시 데미지 (다른 평타로 대체),CHANGE_AA,,,,,500611,,,,,,,
+600610,500610,그레이스 Skill: 대상과 범위 내 적에게 스플래시 데미지,DOT_BY_AD,,,,6000,15000,,,,,,,
 600710,500710,샤나 Skill MultiCasting:,MULTICASTING,,,,,600711,600712,600713,,,,,
 600711,,1) AS 50% 증가,BUFF_ONCE,AS,,,4000,5000,,,,,,,
 600712,,2) CRIT_CHANCE 25% 증가,BUFF_ONCE,CRIT_CHANCE,,,4000,2500,,,,,,,
