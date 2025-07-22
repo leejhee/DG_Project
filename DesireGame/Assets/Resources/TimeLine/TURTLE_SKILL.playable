@@ -162,5 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
-  m_Time: 0.05
+  m_Time: 0.08333333333333333
   functionIndex: 601710
+  targetType: 1

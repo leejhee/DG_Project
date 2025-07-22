@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7843844145288623606
+--- !u!114 &-8353979184265845769
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a097e7893c65683439be5eeeedc3da1f, type: 3}
-  m_Name: Skill Marker Pinpoint Damage
+  m_Script: {fileID: 11500000, guid: 5fde95613c1f71f4393610de9f1ca6e8, type: 3}
+  m_Name: Skill Marker Shot Projectal
   m_EditorClassIdentifier: 
-  m_Time: 0.16666666666666666
+  m_Time: 0
+  _projectile: {fileID: 1496515457595730074, guid: eafb68756b4bdb24589fa45028165a54, type: 3}
+  _offSet: {x: 0, y: 0, z: 0}
   _statName: 3
   percent: 200
+  indices: d22e090000000000
 --- !u!114 &-4929421599805985865
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,20 +110,6 @@ MonoBehaviour:
     m_DisplayName: 0_Attack_Magic
   m_Markers:
     m_Objects: []
---- !u!114 &-2051010024946714189
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
-  m_Name: Skill Marker Function Injector
-  m_EditorClassIdentifier: 
-  m_Time: 0.4166666567325592
-  functionIndex: 601810
 --- !u!114 &-922151757859350577
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,8 +146,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects:
-    - {fileID: -2051010024946714189}
-    - {fileID: -7843844145288623606}
+    - {fileID: -8353979184265845769}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
