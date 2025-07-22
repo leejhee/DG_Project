@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2598051929746308259}
   - component: {fileID: 8356623961205011232}
   m_Layer: 0
-  m_Name: TURTLE_SKILL
+  m_Name: TURTLE_PASSIVE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
