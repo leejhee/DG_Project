@@ -29,7 +29,7 @@ MonoBehaviour:
   _projectile: {fileID: 1496515457595730074, guid: 59124d413fb5f3c43824bc6749e16976, type: 3}
   _offSet: {x: 0, y: 0, z: 0}
   _statName: 1
-  percent: 20
+  percent: 120
   indices: 
 --- !u!114 &11400000
 MonoBehaviour:
