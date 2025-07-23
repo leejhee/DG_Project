@@ -22,8 +22,9 @@ namespace Client
 
     public class CharInfo : MessageSystemParam
     {
-        public CharData CharData = default;
-        public CharStat CharStat = default;
+        public CharBase charBase = default;
+        //public CharData CharData = default;
+        //public CharStat CharStat = default;
     }
 
     #endregion

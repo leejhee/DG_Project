@@ -13,7 +13,7 @@ namespace Client
         public void DisplayCharInfo(CharInfo charInfo)
         {
             // 호출은 캐릭터 클릭 시에만 하면 됨
-            TMP_Name.text = charInfo.CharData.charName;
+            TMP_Name.text = charInfo.charBase.CharData.charName;
         }
 
         /// <summary> 전투 중에 계속 변경되는 스탯들 업데이트 </summary>
