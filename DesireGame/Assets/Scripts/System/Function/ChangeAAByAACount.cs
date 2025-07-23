@@ -4,15 +4,19 @@ namespace Client
 {
     /// <summary>
     /// {1}번의 공격마다 AA가 {2}의 스킬 인덱스로 변경. 한번 쓰면 원래의 AA 인덱스로 돌아옵니다.
+    /// 3타면, 2타만 카운팅해야한다. -> 스킬까지 2타 남음 -> 스킬까지 1타 남음 -> 스킬 써야함.
     /// </summary>
     public class ChangeAAByAACount : FunctionBase
     {
+        /// <summary>
+        /// _runtimeCount = 스킬을 쓸 때까지 이정도 평타를 써야합니다.
+        /// </summary>
         private int _runtimeCount;
         private readonly int _defaultCount;
         
         public ChangeAAByAACount(BuffParameter buffParam) : base(buffParam)
         {
-            _runtimeCount = _defaultCount = (int)_FunctionData.input1;
+            _runtimeCount = _defaultCount = (int)_FunctionData.input1 - 1;
         }
 
         public override void RunFunction(bool StartFunction = true)
@@ -33,12 +37,11 @@ namespace Client
         private void CountAA(CharAI.eAttackMode mode, List<CharBase> dummy)
         {
             if (mode != CharAI.eAttackMode.Auto) return;
-            _runtimeCount--;
-            if (_runtimeCount == 0)
+            if (_runtimeCount == 0) return;
+            if (--_runtimeCount == 0)
             {
                 _TargetChar.CharSKillInfo.ChangeSkill(
                     changingIndex: (int)_FunctionData.input2, changingMode: CharAI.eAttackMode.Auto);
-                _runtimeCount = _defaultCount;
                 _TargetChar.CharAction.OnAttackAction += RevertAfterOneUse;
             }
         }
@@ -47,6 +50,7 @@ namespace Client
         {
             if (mode != CharAI.eAttackMode.Auto) return;
             _TargetChar.CharSKillInfo.ResetSkill();
+            _runtimeCount = _defaultCount;
             _TargetChar.CharAction.OnAttackAction -= RevertAfterOneUse;
         }
         

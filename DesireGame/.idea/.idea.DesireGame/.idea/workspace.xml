@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/ChangeAAByAACount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/ChangeAAByAACount.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,15 +118,13 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="37056">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="37056" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -231,7 +230,9 @@
       <workItem from="1752827514899" duration="3322000" />
       <workItem from="1752912677917" duration="698000" />
       <workItem from="1752913976800" duration="8612000" />
-      <workItem from="1753086396327" duration="19885000" />
+      <workItem from="1753086396327" duration="20274000" />
+      <workItem from="1753189499886" duration="1617000" />
+      <workItem from="1753271813205" duration="1903000" />
     </task>
     <servers />
   </component>

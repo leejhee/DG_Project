@@ -34,7 +34,7 @@ namespace Client
                 Debug.LogError("Client is null.");
                 return null;
             }
-            if(nTH > targetList.Count || nTH < 0)
+            if(nTH >= targetList.Count || nTH < 0)
             {
                 Debug.LogError("Wrong Input");
                 return null;
