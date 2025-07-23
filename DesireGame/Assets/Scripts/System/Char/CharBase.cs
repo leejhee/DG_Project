@@ -361,6 +361,12 @@ namespace Client
             msg.moveChar = this;
             MessageManager.SendMessage<PlayerMove>(msg);
             SetNavMeshAgent(true);
+
+            // UI에 클릭한 캐릭터 정보 전달
+            CharInfo charInfoMsg = new();
+            charInfoMsg.CharData = _charData;
+            charInfoMsg.CharStat = _charStat;
+            MessageManager.SendMessage(charInfoMsg);
         }
 
         private Vector3 GetMouseWorldPosition()
