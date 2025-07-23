@@ -40,7 +40,7 @@ namespace Client
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);
                 case eFunction.CHANGE_AA:               return new ChangeAA(buffParam);
                 case eFunction.CHANGE_AA_BY_AA_COUNT:   return new ChangeAAByAACount(buffParam);
-                case eFunction.KILL_ENEMY:              return new KillEnemyByDamage(buffParam);       
+                case eFunction.KILL_ENEMY_UNDER_HP:     return new KillEnemyByDamage(buffParam);       
             }
             return null;            
         }

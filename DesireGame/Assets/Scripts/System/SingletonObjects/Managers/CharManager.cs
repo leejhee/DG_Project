@@ -286,7 +286,7 @@ namespace Client
             {
                 if (!character || character == clientChar) continue;
                 float dist = Vector3.Distance(center, character.CharTransform.position);
-                if(dist > range) bunches.Add(character);
+                if(dist < range) bunches.Add(character);
             }
             bunches.Sort((a, b) =>
             {

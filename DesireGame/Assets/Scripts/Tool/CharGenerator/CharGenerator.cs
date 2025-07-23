@@ -112,7 +112,7 @@ namespace Client
 
             #region COPY SELECTED SPUM ASSET
             string assetPath = AssetDatabase.GetAssetPath(SPUM_Object);
-            string savePath = targetPath + targetData.charPrefab + ".prefab";
+            string savePath = targetPath + targetData.charPrefab.Replace(":", "_") + ".prefab";
             if (string.IsNullOrEmpty(assetPath))
             {
                 Debug.LogError("에셋이 아니래요!");               
@@ -162,7 +162,6 @@ namespace Client
 
             CharFactory.CharacterizeBase(CharPrefab);            
             CharPrefab.name = targetData.charPrefab;
-
             PrefabUtility.SaveAsPrefabAsset(CharPrefab, savePath);
             #endregion
             Debug.Log($"성공적으로 {CharPrefab.name} 저장했습니다");
@@ -215,26 +214,6 @@ namespace Client
             Animator anim = Descendant.GetComponentInChildren<Animator>();
             SerializedProperty animator = obj.FindProperty("_Animator");
             animator.objectReferenceValue = anim;
-
-            //////////FightCollider//////////////
-            //Descendant = new GameObject("FightCollider");
-            //Descendant.transform.SetParent(go.transform, false);
-            //CapsuleCollider col = Descendant.AddComponent<CapsuleCollider>();
-            //col.radius = 0.25f;
-            //col.center = new Vector3(-0.5f, 0, 0);
-            //
-            //SerializedProperty FightCollider = obj.FindProperty("_FightCollider");
-            //FightCollider.objectReferenceValue = col;
-
-            //////////MoveCollider//////////////
-            //Descendant = new GameObject("MoveCollider");
-            //Descendant.transform.SetParent(go.transform, false);
-            //col = Descendant.AddComponent<CapsuleCollider>();
-            //col.radius = 0.25f;
-            //col.center = new Vector3(-0.5f, 0, 0);
-            //
-            //SerializedProperty MoveCollider = obj.FindProperty("_MoveCollider");
-            //MoveCollider.objectReferenceValue = col;
 
             //////////SkillRoot//////////////
             Descendant = new GameObject("SkillRoot");

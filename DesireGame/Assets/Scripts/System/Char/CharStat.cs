@@ -426,6 +426,7 @@ namespace Client
             {
                 Shield shield = Shields[i];
                 remainingDamage = shield.AbsorbDamage(remainingDamage);
+                ChangeStateByBuff(eStats.BARRIER, -damage);
             }
 
             return remainingDamage;

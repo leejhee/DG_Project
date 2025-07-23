@@ -225,7 +225,6 @@ namespace Client
             LAPLACIAN_ENTRYPOINT,
             GET_FUNCTION_AFTER_WAIT,
             SPAWN_ALLY,
-            KILL_ENEMY,
             
             QUANTUM_CC_2,
             QUANTUM_CC_3,
