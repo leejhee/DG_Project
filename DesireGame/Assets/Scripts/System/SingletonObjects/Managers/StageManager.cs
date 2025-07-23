@@ -11,7 +11,6 @@ namespace Client
     {
         private StageManager() { }
 
-        private GameSceneETC gameSceneETC;
 
         public int Stage { get; private set; }         // 현재 스테이지
         public Type MyTeam { get; private set; }       // 베팅한 팀
@@ -48,7 +47,6 @@ namespace Client
         public override void Init()
         {
             base.Init();
-            gameSceneETC = UnityEngine.Object.FindObjectOfType<GameSceneETC>();
             CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
         }
 
@@ -105,6 +103,8 @@ namespace Client
                 // 정산금보다 보유금이 더 많은지 확인
                 // true 넘어감 false 게임 종료
                 StageData currentStageData = DataManager.Instance.GetData<StageData>(Stage);
+                if(currentStageData== null) return;
+
                 bool canPassStage = Gold >= currentStageData.requiredCredit;
 
                 if (!canPassStage) return; // 패배 띄우기

@@ -1,9 +1,9 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using TMPro;
-using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client
 {
@@ -47,10 +47,11 @@ namespace Client
             StageManager.Instance.OnStageChanged += () => StartCoroutine(ToastMessage(temp_next));
 
             StageManager.Instance.OnStartCombat += SetInteractableFalse;
-            StageManager.Instance.OnStartCombat += () => StartCoroutine(ToastMessage(temp_start));
+            //StageManager.Instance.OnStartCombat += () => StartCoroutine(ToastMessage(temp_start));
 
             StageManager.Instance.OnEndCombat += SetInteractableTrue;
-            StageManager.Instance.OnEndCombat += () => StartCoroutine(ToastMessage(temp_end));
+            StageManager.Instance.OnEndCombat += PlayFinishCombatFlow;
+
             StageManager.Instance.OnGoldChanged += UpdateGoldText;
 
             UpdateTeamButtonVisuals();
@@ -133,7 +134,9 @@ namespace Client
 
         private IEnumerator StartCombatFlow()
         {
-            yield return null;
+            yield return StartCoroutine(ToastMessage(temp_start));
+
+            StageManager.Instance.StartCombat();
         }
 
 
@@ -148,7 +151,9 @@ namespace Client
 
         private IEnumerator FinishCombatFlow()
         {
-            yield return null;
+            yield return StartCoroutine(ToastMessage(temp_end));
+
+            yield return StartCoroutine(AnimateCoinIncrease(StageManager.Instance.Stake * 2));
         }
 
         #endregion
@@ -168,11 +173,14 @@ namespace Client
             {
                 // 중간 시점에 기물 제거
                 CharManager.Instance.ClearAllChar();
+
+                // TODO: UI 제거
             });
 
             StageManager.Instance.MoveToNextStage();
         }
         #endregion
+
         // 너무 구려
         void SetInteractableFalse()
         {
@@ -195,7 +203,7 @@ namespace Client
 
         void GameStart()
         {
-            StageManager.Instance.StartCombat();
+            PlayStartCombatFlow();
         }
 
         IEnumerator ToastMessage(string txt)
@@ -205,6 +213,29 @@ namespace Client
             yield return toastMessege.ShowMessageCoroutine(txt);
 
             toastMessege.gameObject.SetActive(false);
+        }
+
+        IEnumerator AnimateCoinIncrease(int amount)
+        {
+            if (amount <= 0) yield break;
+
+            int startValue = StageManager.Instance.Gold;
+            int endValue = StageManager.Instance.Gold + amount;
+            float duration = 0.5f; // 애니메이션 시간 (초)
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                int displayValue = Mathf.FloorToInt(Mathf.Lerp(startValue, endValue, t));
+                TMP_TotalGold.text = displayValue.ToString();
+                yield return null;
+            }
+
+            // 보정
+            StageManager.Instance.Gold = endValue;
+            TMP_TotalGold.text = StageManager.Instance.Gold.ToString();
         }
     }
 }

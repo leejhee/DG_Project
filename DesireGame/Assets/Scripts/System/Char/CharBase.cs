@@ -132,6 +132,23 @@ namespace Client
         {
             _functionInfo?.UpdateFunctionDic(); 
             _effectInfo?.UpdateEffect();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity))
+                {
+                    // 클릭된 오브젝트가 나 자신인지 확인
+                    if (hitInfo.transform == transform)
+                    {
+                        Debug.Log("<color=green>우클릭</color> - " + name);
+                        CharInfo charInfoMsg = new CharInfo();
+                        charInfoMsg.charBase = this;
+                        MessageManager.SendMessage(charInfoMsg);
+                    }
+                }
+            }
+
         }
 
         protected virtual void SetChar(CharBase character)
@@ -361,6 +378,7 @@ namespace Client
             msg.moveChar = this;
             MessageManager.SendMessage<PlayerMove>(msg);
             SetNavMeshAgent(true);
+
         }
 
         private Vector3 GetMouseWorldPosition()
