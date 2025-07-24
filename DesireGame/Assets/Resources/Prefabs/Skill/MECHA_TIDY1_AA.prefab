@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2598051929746308259}
   - component: {fileID: 8356623961205011232}
   m_Layer: 0
-  m_Name: MECHATIDY1_AA
+  m_Name: MECHA_TIDY1_AA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

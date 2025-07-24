@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2598051929746308259}
   - component: {fileID: 8356623961205011232}
   m_Layer: 0
-  m_Name: MECHATIDY3_AA
+  m_Name: MECHA_TIDY2_AA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ PlayableDirector:
   m_GameObject: {fileID: 7695055053980202930}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 366251a6bd834da4e9effd52b725d207, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: ce2cb07bf18340149849b07a2e11f8e3, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
