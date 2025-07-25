@@ -6,13 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/CreateShield.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/CreateShield.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/KillEnemyByDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Damage/KillEnemyByDamage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/CharGenerator/CharGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/CharGenerator/CharGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/BattleTestMap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/BattleTestMap.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/Map.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/Map.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BattleTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BattleTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Object/TileObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,6 +237,7 @@
       <workItem from="1753086396327" duration="20274000" />
       <workItem from="1753189499886" duration="1617000" />
       <workItem from="1753271813205" duration="6700000" />
+      <workItem from="1753437608380" duration="2204000" />
     </task>
     <servers />
   </component>
@@ -271,26 +271,26 @@
       <breakpoints>
         <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs</url>
-          <line>194</line>
+          <line>195</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\TileManager.cs" containingFunctionPresentation="메서드 'GetDemandingRowPositions'">
             <startOffsets>
-              <option value="6052" />
+              <option value="6065" />
             </startOffsets>
             <endOffsets>
-              <option value="6053" />
+              <option value="6066" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/TileManager.cs</url>
-          <line>300</line>
+          <line>301</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\TileManager.cs" containingFunctionPresentation="메서드 'ReserveTeleportEnemyRear'">
             <startOffsets>
-              <option value="9766" />
+              <option value="9779" />
             </startOffsets>
             <endOffsets>
-              <option value="9829" />
+              <option value="9842" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />
@@ -354,12 +354,6 @@
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs</url>
-          <line>63</line>
-          <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\Tool\InGameTool\BattleTestTool.cs" containingFunctionPresentation="메서드 'OnCharacterDeadByTest'" />
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs</url>
           <line>105</line>
           <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\CharManager.cs" containingFunctionPresentation="메서드 'Clear'">
@@ -371,12 +365,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs</url>
-          <line>58</line>
-          <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\Tool\InGameTool\BattleTestTool.cs" containingFunctionPresentation="메서드 'UpdateCharacterList'" />
-          <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>

@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 using static Client.SystemEnum;
 
 namespace Client
 {
     public class TileObj : MonoBehaviour
     {
-        [SerializeField] private int _tileIndex;
+        [SerializeField] private Tilemap tilemap;
+        [SerializeField] private int tileIndex;
         [SerializeField] private eCharType _teamTile = eCharType.None;
         [SerializeField] private TileCombatBehaviour _tileCombat;
 
         private CharBase _charBase = null;
         
-        public int TileIndex => _tileIndex;
+        public int TileIndex => tileIndex;
         public eCharType TeamTile => _teamTile;
         
         public bool Reserved = false;
@@ -25,7 +28,10 @@ namespace Client
 
         private void Start()
         {
-            TileManager.Instance.SetTile(_tileIndex, this);
+            Vector3Int cell = tilemap.WorldToCell(transform.position);
+            Vector3 center = tilemap.GetCellCenterWorld(cell);
+            transform.position = new Vector3(center.x, center.y, center.z);
+            TileManager.Instance.SetTile(tileIndex, this);
         }
 
         // 캐릭터 세팅
@@ -37,7 +43,7 @@ namespace Client
                 return null;
             }
             _charBase = charBase;
-            _charBase.TileIndex = _tileIndex;
+            _charBase.TileIndex = tileIndex;
             _charBase.transform.position = this.transform.position;
 
             return _charBase;

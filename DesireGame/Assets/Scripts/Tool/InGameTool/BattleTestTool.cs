@@ -216,7 +216,7 @@ namespace Client
 
         private bool IsValidIndex<T>(int idx, IEnumerable<T> collection) where T : class
         {
-            return idx > -1 &&  idx < collection.Count();
+            return idx > 0 &&  idx < collection.Count();
         }
         
         private void DrawDeleteTab()
@@ -247,7 +247,9 @@ namespace Client
 
         private void DrawTestSkill()
         {
-            string[] characterNames = _characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
+            string[] characterNames = new[] { "선택 안함" }
+                .Concat(_characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}"))
+                .ToArray();
             #region Caster Selection
             EditorGUILayout.LabelField("스킬을 테스트할 캐릭터 선택", EditorStyles.boldLabel);
             _skillTestCasterOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestCasterOrder, characterNames);

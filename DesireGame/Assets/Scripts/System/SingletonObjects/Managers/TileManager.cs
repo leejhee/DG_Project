@@ -41,6 +41,7 @@ namespace Client
             }
 
             TileMap.Add(index, tile);
+            
         }
 
         public TileObj GetTile(int index)
