@@ -30,7 +30,7 @@ namespace Client
                 ShieldInstance = new Shield(shieldAmount, this);
 
                 _TargetChar.CharStat.AddShield(ShieldInstance);
-                Debug.Log($"실드 추가: {_CastChar.GetID()}번이 {_TargetChar.GetID()}번에게 실드 부여");
+                Debug.Log($"실드 추가: {_CastChar.GetID()}번이 {_TargetChar.GetID()}번에게 {shieldAmount}만큼의 실드 부여");
             }
             else
             {
@@ -63,6 +63,7 @@ namespace Client
             if (Amount >= damage)
             {
                 Amount -= damage;
+                Debug.Log($"실드 감소. 남은 실드량 : {Amount}");
                 return 0;
             }
             else

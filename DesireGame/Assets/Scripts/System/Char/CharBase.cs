@@ -12,25 +12,29 @@ namespace Client
     /// </summary>
     public abstract class CharBase : MonoBehaviour
     {
+        #region Serialized Fields
         // SerializeField 
-        [SerializeField] private   long         _index;         // CharData 테이블의 인덱스 
-        [SerializeField] private   Collider     _FightCollider; // 전투 콜라이더
-        [SerializeField] private   Collider     _MoveCollider;  // 이동 콜라이더
-        [SerializeField] private   GameObject   _SkillRoot;     // 스킬 루트
-        [SerializeField] protected NavMeshAgent _NavMeshAgent;  // 네비 메쉬 에이전트
-        [SerializeField] protected GameObject _CharCamaraPos; // 캐릭터 애니메이션 리스트
-        [SerializeField] protected Animator _Animator;       // 애니메이터\
-
+        [SerializeField] private    long            _index;         // CharData 테이블의 인덱스 
+        [SerializeField] private    Collider        _FightCollider; // 전투 콜라이더
+        [SerializeField] private    Collider        _MoveCollider;  // 이동 콜라이더
+        [SerializeField] private    GameObject      _SkillRoot;     // 스킬 루트
+        [SerializeField] protected  NavMeshAgent    _NavMeshAgent;  // 네비 메쉬 에이전트
+        [SerializeField] protected  GameObject      _CharCamaraPos; // 캐릭터 애니메이션 리스트
+        [SerializeField] protected  Animator        _Animator;       // 애니메이터\
+        [SerializeField] private    Transform       _UnitRoot;
+        #endregion
+        
+        #region Fields
         protected FunctionInfo _functionInfo = null; // 기능 정보
-        //private CharItemInfo  _charItemInfo;         // 캐릭터 보유/장비 아이템
+        protected EffectInfo _effectInfo = null;
 
-        private CharSKillInfo _charSKillInfo;       // 캐릭터 스킬
-        private CharStat     _charStat = null;      // Stat 정보
-        private CharAnim     _charAnim = null;      // 캐릭터 애니메이션 리스트
-        private CharAction  _charAction = null;     // 캐릭터 동작 명령 클래스
-        protected CharData _charData = null;      // 캐릭터 데이터
-        protected CharAI      _charAI = null;
-
+        private CharSKillInfo   _charSKillInfo;       // 캐릭터 스킬
+        private CharStat        _charStat = null;      // Stat 정보
+        private CharAnim        _charAnim = null;      // 캐릭터 애니메이션 리스트
+        private CharAction      _charAction = null;     // 캐릭터 동작 명령 클래스
+        protected CharData      _charData = null;      // 캐릭터 데이터
+        protected CharAI        _charAI = null;
+    
         private Transform  _CharTransform = null; // 캐릭터 트렌스폼
         private Transform  _CharUnitRoot = null;  // 캐릭터 유닛 루트 트렌스폼
 
@@ -42,7 +46,7 @@ namespace Client
         protected long _uid;  // 캐릭터 고유 ID
 
         private Vector3 _rightRotation = new Vector3(0, 180,0); // 오른쪽 로테이션
-        private Vector2 _lefRotationtion = Vector3.zero;        // 왼쪽 로테이션
+        private Vector2 _lefRotation = Vector3.zero;        // 왼쪽 로테이션
 
         private Vector3 _rightPos = new Vector3(1, 0, 0); // 오른쪽 방향
         private Vector2 _leftPos = new Vector3(-1, 0, 0); // 왼쪽 방향
@@ -50,16 +54,21 @@ namespace Client
         private Coroutine _coroutine; // UpdateAI용,,
         public Vector3 LookAtPos { get; private set; } = Vector3.right; // 현재 방향성
 
-        private CharLightWeightInfo lightWeightInfo;
+        private CharLightWeightInfo _lightWeightInfo;
         private List<eSynergy> _charSynergies = null;
+
+        private Camera _mainCamera;
         
         protected virtual SystemEnum.eCharType CharType => SystemEnum.eCharType.None; // 캐릭터 타입
-
+        #endregion
+        
+        #region Properties
         public long Index => _index;
         public Collider FightCollider => _FightCollider; // 
         public Collider MoveCollider  => _MoveCollider;
         public FunctionInfo FunctionInfo => _functionInfo;  // 기능 정보
         public CharSKillInfo CharSKillInfo => _charSKillInfo; // 캐릭터 스킬
+        public EffectInfo EffectInfo => _effectInfo;
         public Transform CharTransform => _CharTransform;
         private Transform CharUnitRoot => _CharUnitRoot; // 캐릭터 유닛 루트 트렌스폼
         public GameObject CharCamaraPos => _CharCamaraPos; // 카메라 위치
@@ -72,21 +81,12 @@ namespace Client
         public PlayerState PlayerState => _currentState;
 
         public int TileIndex { get; set; } = default;
-
+        #endregion
         protected CharBase() { }
 
         private void Awake()
         {
-            _CharTransform = transform;
-            _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
-            _uid = CharManager.Instance.GetNextID();
-            _functionInfo = new FunctionInfo();
-            _functionInfo.Init();
             _charData = DataManager.Instance.GetData<CharData>(_index);
-            _NavMeshAgent = GetComponent<NavMeshAgent>();
-            _charAnim =     new();
-            _charAction =   new(this);
-            _charAI =       new(this);
             if (_charData != null)
             {
                 StatsData charStat = DataManager.Instance.GetData<StatsData>(_charData.statsIndex);
@@ -101,6 +101,17 @@ namespace Client
                 Debug.LogError($"캐릭터 ID : {_index} Data 데이터 Get 실패");
             }
             
+            _CharTransform = transform;
+            _CharUnitRoot = Util.FindChild<Transform>(gameObject,"UnitRoot");
+            _uid = CharManager.Instance.GetNextID();
+            _functionInfo = new FunctionInfo();
+            _effectInfo = new EffectInfo();
+            _functionInfo.Init();
+            _NavMeshAgent = GetComponent<NavMeshAgent>();
+            _charAnim =     new();
+            _charAction =   new(this);
+            _charAI =       new(this);
+            _mainCamera =   Camera.main;
         }
 
         protected virtual void Start()
@@ -115,19 +126,37 @@ namespace Client
                 _indexPair[state] = 0;
             }
             CharInit();
-            // TODO : on off 기능
-            // turnonandoff 이런식으로 해서 껐다 켰다를 할 수 있게 해야하기 때문에
-            // 따로 뭔가를 해야 한다고 한다
-            // CharBase에 함수를 선언하여 CharManager에서 _cache 내 모든 CharBase를 대상으로 
-            // 해당 함수를 호출하게 하면 AI를 키고 끌 수 있다.
         }
 
         void Update()
         {
-            FunctionInfo?.UpdateFunctionDic();            
+            _functionInfo?.UpdateFunctionDic(); 
+            _effectInfo?.UpdateEffect();
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity))
+                {
+                    // 클릭된 오브젝트가 나 자신인지 확인
+                    if (hitInfo.transform == transform)
+                    {
+                        Debug.Log("<color=green>우클릭</color> - " + name);
+                        CharInfo charInfoMsg = new CharInfo();
+                        charInfoMsg.charBase = this;
+                        MessageManager.SendMessage(charInfoMsg);
+                    }
+                }
+            }
+
         }
 
-        protected abstract void SetChar(CharBase character);
+        protected virtual void SetChar(CharBase character)
+        {
+            #if UNITY_EDITOR
+            MessageManager.SendMessage(new OnSetChar());
+            #endif
+        }
         
         // Char의 Start시점에 불림
         protected virtual void CharInit()
@@ -157,23 +186,9 @@ namespace Client
             #endregion
             
             #region 시너지 등록
-            
-            _charSynergies = new List<eSynergy>()
-            {
-                _charData.synergy1,
-                _charData.synergy2,
-                _charData.synergy3
-            };
 
-            lightWeightInfo = new CharLightWeightInfo()
-            {
-                Index = Index,
-                Uid = _uid,
-                SynergyList = _charSynergies,
-                Side = CharType
-            };
-
-            SynergyManager.Instance.RegisterCharSynergy(lightWeightInfo);
+            _lightWeightInfo = GetCharSynergyInfo();
+            SynergyManager.Instance.RegisterCharSynergy(_lightWeightInfo);
             
             #endregion
             
@@ -184,6 +199,26 @@ namespace Client
                 CharDead();
             };
             #endregion
+            
+            
+        }
+
+        public CharLightWeightInfo GetCharSynergyInfo()
+        {
+            _charSynergies = new List<eSynergy>()
+            {
+                _charData.synergy1,
+                _charData.synergy2,
+                _charData.synergy3
+            };
+
+            return new CharLightWeightInfo()
+            {
+                Index = Index,
+                Uid = _uid,
+                SynergyList = _charSynergies,
+                Side = CharType
+            };
         }
         
         public bool IsAlive => CharStat.GetStat(eStats.NHP) > 0;
@@ -193,6 +228,10 @@ namespace Client
             gameObject.SetActive(false);
             Type myType = this.GetType();
             CharManager.Instance.Clear(myType, _uid);
+            
+            #if UNITY_EDITOR
+            MessageManager.SendMessage(new OnDeadChar());
+            #endif
         }
 
         public long GetID() => _uid;
@@ -258,7 +297,7 @@ namespace Client
         //        return;
         //    CharMoveTo(charBase);
         //}
-
+        
         /// <summary>
         /// 캐릭터 AI on & off 기능
         /// </summary>
@@ -302,11 +341,53 @@ namespace Client
         public Action OnRealDead;
         public virtual void Dead()
         {
-            SynergyManager.Instance.DeleteCharSynergy(lightWeightInfo);
+            SynergyManager.Instance.DeleteCharSynergy(_lightWeightInfo);
             CharDead();
             OnRealDead?.Invoke();
             Destroy(gameObject);
         }
+        
+        #region On Editor
+        #if UNITY_EDITOR
+        void OnMouseDown()
+        {
+            // 캐릭터 AI 플래이 중 조작 금지
+            if (_charAI?.isAIRun ?? true)
+                return;
+            
+            if (_mainCamera == null) return;
+            SetNavMeshAgent(false);
+            //// 마우스 클릭 위치와 캐릭터 위치의 차이 계산
+            //offset = transform.position - GetMouseWorldPosition();
+        }
+        private void OnMouseDrag()
+        {
+            // 캐릭터 AI 플래이 중 조작 금지
+            if (_charAI?.isAIRun ?? true)
+                return;
+            if (_mainCamera == null) return;
 
+            // 마우스 위치에 오프셋을 더해서 캐릭터 이동
+            transform.position = GetMouseWorldPosition(); //+ offset;
+
+        }
+        private void OnMouseUp()
+        {
+            PlayerMove msg = new();
+            msg.beforeTileIndex = TileIndex;
+            msg.moveChar = this;
+            MessageManager.SendMessage<PlayerMove>(msg);
+            SetNavMeshAgent(true);
+
+        }
+
+        private Vector3 GetMouseWorldPosition()
+        {
+            Vector3 mouseScreenPos = Input.mousePosition;
+            mouseScreenPos.z = _mainCamera.WorldToScreenPoint(transform.position).z; // 현재 Z 값 유지
+            return _mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        }
+        #endif
+        #endregion
     }
 }

@@ -147,14 +147,42 @@ namespace Client
             MAX_MANA,
             
             MANA_RESTORE_INCREASE,
+            N_MANA_RESTORE_INCREASE,
+            
             DAMAGE_REDUCTION,
+            N_DAMAGE_REDUCTION,
+            
             BARRIER,
             
             FINAL_DAMAGE,
+            N_FINAL_DAMAGE,
+            
+            HP_RESTORE_INCREASE,
+            N_HP_RESTORE_INCREASE,
             
             eMax,
         }
 
+        public enum eOpCode
+        {
+            None,
+            Add,
+            Mul,
+            ExtraAdd,
+            eMax
+        }
+
+        public enum eModifierRoot
+        {
+            None,
+            
+            Buff,
+            Debuff,
+            CC,
+            
+            eMax
+        }
+        
         public enum eFunction
         {
             None,
@@ -197,7 +225,6 @@ namespace Client
             LAPLACIAN_ENTRYPOINT,
             GET_FUNCTION_AFTER_WAIT,
             SPAWN_ALLY,
-            KILL_ENEMY,
             
             QUANTUM_CC_2,
             QUANTUM_CC_3,
@@ -321,12 +348,6 @@ namespace Client
             ENG,
 
             MaxCount
-        }
-
-        public enum eTrackOrder
-        {
-            ANIM_TRACK,
-
         }
 
         public enum eMonsterType

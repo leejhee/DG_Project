@@ -41,6 +41,7 @@ namespace Client
             }
 
             TileMap.Add(index, tile);
+            
         }
 
         public TileObj GetTile(int index)
@@ -142,6 +143,7 @@ namespace Client
         /// <summary> 캐릭터 타입 기준 아군 및 적군 특정 열의 인덱스들을 반환 </summary>
         /// <param name="type"> 내가 무슨 캐릭터 타입? </param>
         /// <param name="sameSide"> true일 경우 내 타입 기준 아군, false일 경우 적군</param>
+        /// <param name="offset">몇 번째 걸 가져올 건지?</param>
         public List<int> GetDemandingColPositions(eCharType type, bool sameSide, int offset)
         {
             List<int> results = new();
@@ -270,7 +272,6 @@ namespace Client
         } 
 
         
-        // TODO : ENEMY도 해당 기능을 사용할 수 있어야 하는지 알아볼 것
         public void TeleportAllyFarthest(CharBase client)
         {
             var targetPositions = new List<int>();
@@ -329,5 +330,22 @@ namespace Client
         }
         
         #endregion
+        
+        /// <summary>
+        /// Column에 해당하는 타일의 캐릭터들을 가져온다.
+        /// </summary>
+        public List<CharBase> GetColCharacters(CharBase client, bool sameSide, int row)
+        {
+            List<CharBase> results = new();
+            List<int> indices = GetDemandingColPositions(client.GetCharType(), sameSide, row);
+            foreach (int idx in indices)
+            {
+                CharBase charBase = TileMap[idx].GetChar();
+                if (!charBase) continue;
+                results.Add(charBase);
+            }
+
+            return results;
+        }
     }
 }

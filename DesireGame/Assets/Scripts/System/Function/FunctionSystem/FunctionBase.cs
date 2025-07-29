@@ -23,8 +23,8 @@ namespace Client
         public string _CasterName => _CastChar.name;
         public long DebugIndex => _FunctionData.Index;
         #endregion
-
-
+        
+        
         // 버프 생성자
         public FunctionBase(BuffParameter buffParam)
         {
@@ -44,7 +44,7 @@ namespace Client
         }
 
         public virtual void InitFunction() => _StartTime = Time.time;
-
+        
 
         /// <summary>
         /// 버프 시작과 종료
@@ -55,6 +55,8 @@ namespace Client
             if (StartFunction)
             {
                 Debug.Log($"Function 시작 : " +
+                    $"시전자 {_CastChar?.name} & {_CastChar?.Index} & {_CastChar?.GetID()}\n" +
+                    $"타겟 {_TargetChar?.name} & {_TargetChar?.Index} & {_TargetChar?.GetID()}\n" +
                     $"인덱스 {_FunctionData.Index} " +
                     $"타입 {_FunctionData.function} " +
                     $"시간 : {_FunctionData.time}");
@@ -64,12 +66,14 @@ namespace Client
             else
             {
                 Debug.Log($"Function 종료 : " +
-                    $"인덱스 {_FunctionData.Index} " +
-                    $"타입 {_FunctionData.function} " +
-                    $"시간 : {_FunctionData.time}");
+                          $"시전자 {_CastChar?.name} & {_CastChar?.Index} & {_CastChar?.GetID()}\n" +
+                          $"타겟 {_TargetChar?.name} & {_TargetChar?.Index} & {_TargetChar?.GetID()}\n" +
+                          $"인덱스 {_FunctionData.Index} " +
+                          $"타입 {_FunctionData.function} " +
+                          $"시간 : {_FunctionData.time}");
 
                 if (_condition != null)
-                    _TargetChar.FunctionInfo.KillCondition(_condition);
+                    _TargetChar?.FunctionInfo.KillCondition(_condition);
             }
         }
 
@@ -89,7 +93,21 @@ namespace Client
             }
 
         }
-
+        
+        /// <summary> Function 본인 킬 스위치 </summary>
+        /// <remarks> Caster 및 Target에 주의할 것. </remarks>
+        public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
+        {
+            if(inCaster)            
+                _CastChar.FunctionInfo.KillFunction(this);             
+            else           
+                _TargetChar.FunctionInfo.KillFunction(this);
+           
+            if (killChildren)
+                KillChildFunctionToTarget(true);
+        }
+        
+        #region Condition Control
         private ConditionBase _condition = null;
 
         public void CheckFollowingCondition()
@@ -114,9 +132,10 @@ namespace Client
         {
             if(result)
             {
-                foreach (var followingfunction in _FunctionData.ConditionFuncList)
+                foreach (long followingFunction in _FunctionData.ConditionFuncList)
                 {
-                    var func = DataManager.Instance.GetData<FunctionData>(followingfunction);
+                    var func = DataManager.Instance.GetData<FunctionData>(followingFunction);
+                    Debug.Log($"{_condition.ConditionIndex}번의 컨디션 만족하여, {followingFunction}번 function을 가집니다.");
                     AddChildFunctionToTarget(func);
                 }
             }
@@ -125,8 +144,10 @@ namespace Client
                 Debug.Log("컨디션 만족하지 못하여 발동 안함");
             }
         }
-
-
+        #endregion
+        
+        #region Children Function Control
+        
         private List<FunctionBase> _children = new();
         protected void AddChildFunctionToTarget(FunctionData childData)
         {
@@ -153,18 +174,8 @@ namespace Client
                 child?.KillSelfFunction(killAfterChildren, inCaster: false);
             }                              
         }
+        #endregion
 
-        /// <summary> Function 본인 킬 스위치 </summary>
-        /// <remarks> Caster 및 Target에 주의할 것. </remarks>
-        public void KillSelfFunction(bool killChildren = false, bool inCaster=false)
-        {
-            if(inCaster)            
-                _CastChar.FunctionInfo.KillFunction(this);             
-            else           
-                _TargetChar.FunctionInfo.KillFunction(this);
-           
-            if (killChildren)
-                KillChildFunctionToTarget(true);
-        }
+        
     }
 }

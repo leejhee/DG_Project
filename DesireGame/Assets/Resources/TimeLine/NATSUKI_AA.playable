@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
   m_Time: 0.18333333333333332
-  _statName: 3
+  _statName: 1
   percent: 100
 --- !u!114 &7912219012394827328
 MonoBehaviour:

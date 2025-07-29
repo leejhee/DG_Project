@@ -32,13 +32,15 @@ namespace Client
                 case eFunction.RANGED_SYNERGY_ADBUFF:   return new RangedSynergyADBUFF(buffParam);
                 case eFunction.MAGIC_SYNERGY_MANABUFF:  return new MagicSynergyManaBuff(buffParam);
                 case eFunction.DUALBLADE_SYNERGY_JUMP:  return new DualBladeSynergyJump(buffParam);
+                case eFunction.QUANTUM_CC_2:            return new QUANTUM_WASHER_SKILL_CC_2(buffParam);
+                case eFunction.QUANTUM_CC_3:            return new QUANTUM_WASHER_SKILL_CC_3(buffParam);
                 case eFunction.SPAWN_ALLY:              return new SpawnAlly(buffParam);
                 case eFunction.CHECK_CONDITION:         return new ConditionCheck(buffParam);
                 case eFunction.INCREASE_MAX_HP:         return new IncreaseMaxHP(buffParam);
                 case eFunction.GET_FUNCTION_AFTER_WAIT: return new GetFunctionAfterWait(buffParam);
                 case eFunction.CHANGE_AA:               return new ChangeAA(buffParam);
                 case eFunction.CHANGE_AA_BY_AA_COUNT:   return new ChangeAAByAACount(buffParam);
-                case eFunction.KILL_ENEMY:    return new KillEnemyByDamage(buffParam);       
+                case eFunction.KILL_ENEMY_UNDER_HP:     return new KillEnemyByDamage(buffParam);       
             }
             return null;            
         }

@@ -47,8 +47,8 @@ namespace Client
             _targetType = data.skillTarget;
             _skillPlayCount = 0;
 
-            _PlayableDirector.played += _ => _caster.CharAI.isSkillPlaying = true;
-            _PlayableDirector.stopped += _ =>  _caster.CharAI.isSkillPlaying = false;
+            _PlayableDirector.played += _ => _caster.CharAI.IsSkillPlaying = true;
+            _PlayableDirector.stopped += _ =>  _caster.CharAI.IsSkillPlaying = false;
             
             _PlayableDirector.stopped += OnSkillTimelineEnd;
         }

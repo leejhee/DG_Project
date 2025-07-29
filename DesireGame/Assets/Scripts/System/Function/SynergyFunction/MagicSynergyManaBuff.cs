@@ -14,11 +14,11 @@ namespace Client
             base.RunFunction(StartFunction);
             if (StartFunction)
             {
-                _TargetChar.CharStat.ChangeStateByBuff(SystemEnum.eStats.MANA_RESTORE_INCREASE, _FunctionData.input1);
+                _TargetChar.CharStat.ChangeStateByBuff(SystemEnum.eStats.N_MANA_RESTORE_INCREASE, _FunctionData.input1);
             }
             else
             {
-                _TargetChar.CharStat.ChangeStateByBuff(SystemEnum.eStats.MANA_RESTORE_INCREASE, -_FunctionData.input1);
+                _TargetChar.CharStat.ChangeStateByBuff(SystemEnum.eStats.N_MANA_RESTORE_INCREASE, -_FunctionData.input1);
             }
         }
     }

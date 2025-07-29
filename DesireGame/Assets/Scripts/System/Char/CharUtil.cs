@@ -34,7 +34,7 @@ namespace Client
                 Debug.LogError("Client is null.");
                 return null;
             }
-            if(nTH > targetList.Count || nTH < 0)
+            if(nTH >= targetList.Count || nTH < 0)
             {
                 Debug.LogError("Wrong Input");
                 return null;
@@ -50,12 +50,11 @@ namespace Client
                 distances.Add((targetList[i], distSqr));
             }
 
-            distances.Sort((a, b) => a.dist.CompareTo(b.dist));
             if (inverse)
                 distances.Sort((a, b) => b.dist.CompareTo(a.dist));
             else
                 distances.Sort((a, b) => a.dist.CompareTo(b.dist));
-
+            
             return distances[nTH].target;
         }
 

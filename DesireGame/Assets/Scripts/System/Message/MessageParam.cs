@@ -20,5 +20,12 @@ namespace Client
         public CharBase moveChar = default;
     }
 
+    public class CharInfo : MessageSystemParam
+    {
+        public CharBase charBase = default;
+        //public CharData CharData = default;
+        //public CharStat CharStat = default;
+    }
+
     #endregion
 }

@@ -18,8 +18,9 @@ namespace Client
                 _TargetChar.CharStat.ReceiveDamage(damage);
                 if (_TargetChar.IsAlive)
                 {
-                    float healthRatio = _CastChar.CharStat.GetStat(eStats.NHP) / _CastChar.CharStat.GetStat(eStats.NMHP);
-                    if (healthRatio < _FunctionData.input2 / SystemConst.PER_TEN_THOUSAND)
+                    float healthRatio = _TargetChar.CharStat.GetStat(eStats.NHP) / _TargetChar.CharStat.GetStat(eStats.NMHP);
+                    Debug.Log($"{_TargetChar.GetID()}번 캐릭터 비율 {healthRatio}");
+                    if (healthRatio < _FunctionData.input1 / SystemConst.PER_TEN_THOUSAND)
                     {
                         Debug.Log($"{_TargetChar.GetID()}번 캐릭터 처형");
                         _TargetChar.CharDead();

@@ -30,6 +30,13 @@ namespace Client
             this.skillTargets = new List<CharBase>() { skillTarget };
             this.skillCaster = skillCaster;
         }
+
+        public SkillParameter(SkillParameter skillParameter)
+        {
+            skillTargets = skillParameter.skillTargets;
+            skillCaster = skillParameter.skillCaster;
+            SkillUseCount = skillParameter.SkillUseCount;
+        }
     }
 
     // 스탯과 적용비율을 설정하는 부분에서 다시 패킹하기 위해 사용

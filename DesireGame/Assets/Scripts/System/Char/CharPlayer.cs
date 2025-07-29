@@ -11,7 +11,7 @@ namespace Client
         [SerializeField] public Collider clickAbleCollider = null;
 
         private Vector3 offset;
-        private Camera mainCamera;
+        // private Camera mainCamera;
 
         
 
@@ -23,10 +23,14 @@ namespace Client
         protected override void Start()
         {
             base.Start();
-            mainCamera = Camera.main;
+            //mainCamera = Camera.main;
         }
 
-        protected override void SetChar(CharBase charBase) => CharManager.Instance.SetChar<CharPlayer>(this);
+        protected override void SetChar(CharBase charBase)
+        {
+            CharManager.Instance.SetChar<CharPlayer>(this);
+            base.SetChar(charBase);
+        }
         
         protected override void CharInit()
         {
@@ -34,7 +38,7 @@ namespace Client
             //CharManager.Instance.SetChar(this);
 
             _CharItemSlots = new(this);
-            
+            CharTransform.localScale = new Vector3(1, 1, 1);
         }
 
         public override void Dead()
@@ -42,43 +46,43 @@ namespace Client
             base.Dead();
         }
 
-        void OnMouseDown()
-        {
-            // 캐릭터 AI 플래이 중 조작 금지
-            if (_charAI?.isAIRun ?? true)
-                return;
-            
-            if (mainCamera == null) return;
-            SetNavMeshAgent(false);
-            //// 마우스 클릭 위치와 캐릭터 위치의 차이 계산
-            //offset = transform.position - GetMouseWorldPosition();
-        }
-        private void OnMouseDrag()
-        {
-            // 캐릭터 AI 플래이 중 조작 금지
-            if (_charAI?.isAIRun ?? true)
-                return;
-            if (mainCamera == null) return;
-
-            // 마우스 위치에 오프셋을 더해서 캐릭터 이동
-            transform.position = GetMouseWorldPosition(); //+ offset;
-
-        }
-        private void OnMouseUp()
-        {
-            PlayerMove msg = new();
-            msg.beforeTileIndex = TileIndex;
-            msg.moveChar = this;
-            MessageManager.SendMessage<PlayerMove>(msg);
-            SetNavMeshAgent(true);
-        }
-
-        private Vector3 GetMouseWorldPosition()
-        {
-            Vector3 mouseScreenPos = Input.mousePosition;
-            mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z; // 현재 Z 값 유지
-            return mainCamera.ScreenToWorldPoint(mouseScreenPos);
-        }
+        // void OnMouseDown()
+        // {
+        //     // 캐릭터 AI 플래이 중 조작 금지
+        //     if (_charAI?.isAIRun ?? true)
+        //         return;
+        //     
+        //     if (mainCamera == null) return;
+        //     SetNavMeshAgent(false);
+        //     //// 마우스 클릭 위치와 캐릭터 위치의 차이 계산
+        //     //offset = transform.position - GetMouseWorldPosition();
+        // }
+        // private void OnMouseDrag()
+        // {
+        //     // 캐릭터 AI 플래이 중 조작 금지
+        //     if (_charAI?.isAIRun ?? true)
+        //         return;
+        //     if (mainCamera == null) return;
+        //
+        //     // 마우스 위치에 오프셋을 더해서 캐릭터 이동
+        //     transform.position = GetMouseWorldPosition(); //+ offset;
+        //
+        // }
+        // private void OnMouseUp()
+        // {
+        //     PlayerMove msg = new();
+        //     msg.beforeTileIndex = TileIndex;
+        //     msg.moveChar = this;
+        //     MessageManager.SendMessage<PlayerMove>(msg);
+        //     SetNavMeshAgent(true);
+        // }
+        //
+        // private Vector3 GetMouseWorldPosition()
+        // {
+        //     Vector3 mouseScreenPos = Input.mousePosition;
+        //     mouseScreenPos.z = mainCamera.WorldToScreenPoint(transform.position).z; // 현재 Z 값 유지
+        //     return mainCamera.ScreenToWorldPoint(mouseScreenPos);
+        // }
 
         //public void OnDrop(PointerEventData eventData)
         //{

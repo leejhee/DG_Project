@@ -13,14 +13,9 @@ namespace Client
     /// </summary>
     public class SynergyManager : Singleton<SynergyManager>
     {
-        // new! 타입별로 시너지가 나와야 한다.
         private Dictionary<eCharType, Dictionary<eSynergy, SynergyContainer>> _synergyMembers;
         
         private Dictionary<eSynergy, SynergyContainer> _synergyActivator;
-        //public ReadOnlyCollection<CharLightWeightInfo> GetInfo(eSynergy synergy)
-        //{
-        //    return _synergyActivator.ContainsKey(synergy) ? _synergyActivator[synergy].SynergyMembers : null;
-        //}
 
         public ReadOnlyCollection<CharLightWeightInfo> GetInfo(eCharType side, eSynergy synergy)
         {
@@ -37,14 +32,11 @@ namespace Client
         public override void Init()
         {
             base.Init();
-            //_synergyActivator = new();
-            
             _synergyMembers = new();
         }
 
         public void Reset()
         {
-            //_synergyActivator.Clear();
             _synergyMembers.Clear();
         }
         
@@ -54,21 +46,14 @@ namespace Client
         {
             var side = registrar.Side;
             var mySynergies = registrar.SynergyList;
-            
-            if(!_synergyMembers.ContainsKey(side))
+
+            if (!_synergyMembers.ContainsKey(side)) 
                 _synergyMembers.Add(side, new Dictionary<eSynergy, SynergyContainer>());
-            //var otherSynergies = _synergyActivator.Keys.Except(mySynergies).ToList();
-            /////////////////////////////
+            
             foreach (var synergy in registrar.SynergyList)
             {
                 RegisterSynergy(registrar, synergy);
             }
-
-            //foreach(var other in otherSynergies)
-            //{
-            //    _synergyActivator[other].GuestRegister(registrar);
-            //}
-            /////////////////////////////
             
             var others = _synergyMembers[side].Keys.Except(mySynergies).ToList();
             foreach (var other in others)
@@ -82,18 +67,11 @@ namespace Client
         {
             var side = leaver.Side;
             var mySynergies = leaver.SynergyList;
-            //var otherSynergies = _synergyActivator.Keys.Except(mySynergies).ToList();
 
-            foreach (var synergy in leaver.SynergyList)
+            foreach (eSynergy synergy in leaver.SynergyList)
             {
                 DeleteSynergy(leaver, synergy);
             }
-
-            //foreach (var other in otherSynergies)
-            //{
-            //    _synergyActivator[other].GuestDelete(leaver);
-            //}
-            ////////////////////////////
             
             var others = _synergyMembers[side].Keys.Except(mySynergies).ToList();
             foreach (var other in others)
@@ -112,19 +90,17 @@ namespace Client
             var side = registrar.Side;
             if (synergy == eSynergy.None) return;
             
-            /////////////////////////////////////
-            //
-            //if (!_synergyActivator.ContainsKey(synergy))
-            //{
-            //    _synergyActivator.Add(synergy, new SynergyContainer(synergy, registrar.Side));
-            //}
-            //_synergyActivator[synergy].Register(registrar);
-            //
-            /////////////////////////////////////
             var synergyActivator = _synergyMembers[side];
             if (!synergyActivator.ContainsKey(synergy))
             {
                 _synergyMembers[side].Add(synergy, new SynergyContainer(synergy, side));
+                var allChars = CharManager.Instance.GetOneSide(side);
+                foreach (var charBase in allChars)
+                {
+                    CharLightWeightInfo info = charBase.GetCharSynergyInfo(); // 있으면 생성자, 없으면 직접 구성
+                    if (!info.SynergyList.Contains(synergy))
+                        synergyActivator[synergy].GuestRegister(info);
+                }
             }
             _synergyMembers[side][synergy].Register(registrar);
             
@@ -135,18 +111,6 @@ namespace Client
             var side = leaver.Side;
             if (synergy == eSynergy.None) return;
             
-            /////////////
-            //if (_synergyActivator.ContainsKey(synergy))
-            //{
-            //    _synergyActivator[synergy].Delete(leaver);
-            //}
-            //
-            //if (_synergyActivator[synergy].MemberCount == 0)
-            //{
-            //    _synergyActivator.Remove(synergy);
-            //}
-            /////////////
-
             if (_synergyMembers[side].ContainsKey(synergy))
             {
                 _synergyMembers[side][synergy].Delete(leaver);
@@ -163,12 +127,6 @@ namespace Client
         public void ShowCurrentSynergies()
         {
             StringBuilder view = new("현재 시너지\n");
-            //foreach(var value in _synergyActivator.Values)
-            //{
-            //    view.AppendLine(value.ToString());
-            //}
-            //Debug.Log(view.ToString());
-
             foreach (var value in _synergyMembers)
             {
                 view.AppendLine($"{value.Key} 사이드 시너지 :");

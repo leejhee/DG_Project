@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
-  m_Time: 0.21666666666666667
+  m_Time: 0
   functionIndex: 600813
+  targetType: 1
 --- !u!114 &-1145587104097215441
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,8 +40,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
-  m_Time: 0.21666666666666667
+  m_Time: 0
   functionIndex: 600810
+  targetType: 16
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +89,6 @@ MonoBehaviour:
     m_Objects:
     - {fileID: -1078494421783440356}
     - {fileID: -7318383662769778212}
-    - {fileID: 7817956377834115496}
 --- !u!114 &7342902113605127741
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,17 +181,3 @@ MonoBehaviour:
     m_DisplayName: 0_Buff
   m_Markers:
     m_Objects: []
---- !u!114 &7817956377834115496
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08227ca2f0e44f3ab19830cb4731d7d9, type: 3}
-  m_Name: Skill Marker Play Next Skill
-  m_EditorClassIdentifier: 
-  m_Time: 0.5
-  nextSkillIndex: 500820

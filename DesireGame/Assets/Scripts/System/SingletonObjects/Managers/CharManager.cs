@@ -14,9 +14,9 @@ namespace Client
     public class CharManager : Singleton<CharManager>
     {
         // 존재하는 Char (Char Type을 Key1 Char ID를 Key2로 사용)
-        private Dictionary<Type, Dictionary<long, CharBase>> _cache = new Dictionary<Type, Dictionary<long, CharBase>>();
+        private Dictionary<Type, Dictionary<long, CharBase>> _cache = new();
         // 플레이어 복사본이 들어갈 캐시, 다음 스테이지로 넘어갈 때 세팅용
-        private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
+        //private Dictionary<long, CharBase> _playerCache = new Dictionary<long, CharBase>();
 
         // 고유 ID 생성 
         private long _nextID = 0;
@@ -248,15 +248,15 @@ namespace Client
             return CharUtil.GetNearestInList(ClientChar, enemies, nTH, inverse);                      
         }
 
-        public CharBase GetNearestAlly(CharBase ClientChar, int nTH = 0, bool inverse = false)
+        public CharBase GetNearestAlly(CharBase clientChar, int nTH = 0, bool inverse = false)
         {
-            eCharType clientType = ClientChar.GetCharType();
+            eCharType clientType = clientChar.GetCharType();
             var allyDict = _cache[eCharTypeToType(clientType)];
             
             #region 오류 탐지
             if (allyDict.Count == 0)
             {
-                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {ClientChar.GetID()}");
+                Debug.Log($"{clientType}의 적이 섬멸되어 적 찾기를 중단합니다. 출처 {clientChar.GetID()}");
                 return null;
             }
             if (nTH < 0)
@@ -272,9 +272,30 @@ namespace Client
                 allies.Add(ally);
             }
 
-            return CharUtil.GetNearestInList(ClientChar, allies, nTH, inverse);     
+            return CharUtil.GetNearestInList(clientChar, allies, nTH, inverse);     
         }
-        
+
+        public List<CharBase> GetBunches(CharBase clientChar, float range, bool isAlly = true)
+        {
+            if (!clientChar) return new();
+            Vector3 center = clientChar.CharTransform.position;
+            eCharType type = clientChar.GetCharType();
+            List<CharBase> rawBunches = isAlly ? GetAllySide(type) : GetEnemySide(type);
+            List<CharBase> bunches = new();
+            foreach (var character in rawBunches)
+            {
+                if (!character || character == clientChar) continue;
+                float dist = Vector3.Distance(center, character.CharTransform.position);
+                if(dist < range) bunches.Add(character);
+            }
+            bunches.Sort((a, b) =>
+            {
+                float da = Vector3.SqrMagnitude(center - a.CharTransform.position);
+                float db = Vector3.SqrMagnitude(center - b.CharTransform.position);
+                return da.CompareTo(db);
+            });
+            return bunches;
+        }
         
         public List<CharBase> GetOneSide(eCharType charType)
         {
@@ -328,7 +349,12 @@ namespace Client
             }
         }
 
-
+        public void HardClearAll()
+        {
+            SynergyManager.Instance.Reset();
+            _cache.Clear();
+        }
+        
         private void CheckTypeEmpty(Type type)
         {
             if (_cache.ContainsKey(type) && _cache[type].Count == 0)
@@ -337,19 +363,20 @@ namespace Client
                 OnCharTypeEmpty?.Invoke(type);
             }
         }
-
+        
+        
         /// <summary>
         /// 스테이지 종료 후 필드에 남아있는 플레이어의 ID를 복사
         /// </summary>
         public void CopyFieldPlayerID()
         {
-            _playerCache.Clear();
+            //_playerCache.Clear();
 
-            foreach (var kvp in _cache[typeof(CharPlayer)])
-            {
-                _playerCache.Add(kvp.Key, kvp.Value);
-                Debug.Log($"필드에 있는 {kvp.Value.CharData.charName} ( 키 : {kvp.Key} ) 복제");
-            }
+            //foreach (var kvp in _cache[typeof(CharPlayer)])
+            //{
+            //    _playerCache.Add(kvp.Key, kvp.Value);
+            //    Debug.Log($"필드에 있는 {kvp.Value.CharData.charName} ( 키 : {kvp.Key} ) 복제");
+            //}
         }
 
         /// <summary>
@@ -357,26 +384,28 @@ namespace Client
         /// </summary>
         public void ReturnToOriginPos()
         {
-            foreach (var kvp in _playerCache)
-            {
-                CharBase charBase = CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.Index));
-                charBase.CharStat.ResetAfterBattle();
-                TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
+            //foreach (var kvp in _playerCache)
+            //{
+            //    CharBase charBase = CharGenerate(new CharTileParameter(eScene.GameScene, kvp.Value.TileIndex, kvp.Value.Index));
+            //    charBase.CharStat.ResetAfterBattle();
+            //    TileManager.Instance.SetChar(kvp.Value.TileIndex, charBase);
 
-                Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
-            }
+            //    Debug.Log($"복사된 {kvp.Value.CharData.charName} {kvp.Value.GetID()} 기존 위치로");
+            //}
         }
+
+        //public bool IsCharOnField() => _cache[typeof(CharPlayer)].Count > 0 || _cache[typeof(CharMonster)].Count > 0;
 
 #if UNITY_EDITOR
 
         public List<CharBase> GetCurrentCharacters()
         {
             var charlist = new List<CharBase>();
-            foreach(var dicts in _cache)
+            foreach(Dictionary<long, CharBase> dicts in _cache.Values)
             {
-                foreach(var character in dicts.Value)
+                foreach(CharBase character in dicts.Values)
                 {
-                    charlist.Add(character.Value);
+                    charlist.Add(character);
                 }
             }
             return charlist;

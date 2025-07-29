@@ -21,6 +21,7 @@ namespace Client
     {
         protected ConditionData _conditionData;
         protected Action<bool> _conditionCallback;
+        public long ConditionIndex =>  _conditionData.Index;
 
         protected ConditionBase(ConditionParameter param)
         {
@@ -104,7 +105,7 @@ namespace Client
     {
         private readonly long _allyIndex;
         private readonly long _enemyIndex;
-
+        private bool _invokedOnce;
         public LaplacianUnitOnly(ConditionParameter param) : base(param)
         {
             _allyIndex = _conditionData.value1;
@@ -118,7 +119,7 @@ namespace Client
                 return;
             
             var members = SynergyManager.Instance.GetInfo(laplacian.CharTypeContext, eSynergy.LAPLACIAN);
-            if (members == null || members.Count == 0 ||
+            if (members == null || members.Count == 0 || _invokedOnce ||
                 laplacian.ChangedSynergy != eSynergy.LAPLACIAN)
             {
                 return;
@@ -131,6 +132,7 @@ namespace Client
             _conditionCallback.Invoke(answerInfos.Count == 1 &&
                                       ((answerInfos[0].Index == _allyIndex && answerInfos[0].Side == eCharType.ALLY) ||
                                        (answerInfos[0].Index == _enemyIndex && answerInfos[0].Side == eCharType.ENEMY)));
+            _invokedOnce = true;
         }
 
     }

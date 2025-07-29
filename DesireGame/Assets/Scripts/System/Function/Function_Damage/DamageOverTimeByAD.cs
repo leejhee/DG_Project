@@ -21,10 +21,10 @@ namespace Client
                 SecondTimer = 0;
                 _TargetChar.CharStat.ReceiveDamage(new DamageParameter()
                 {
-                    rawDamage = _CastChar.CharStat.GetStat(SystemEnum.eStats.NAD) *
+                    RawDamage = _CastChar.CharStat.GetStat(SystemEnum.eStats.NAD) *
                                 (_FunctionData.input1 / SystemConst.PER_TEN_THOUSAND),
-                    damageType = _FunctionData.damageType,
-                    penetration = _CastChar.CharStat.GetPenetration(_FunctionData.damageType)
+                    DamageType = _FunctionData.damageType,
+                    Penetration = _CastChar.CharStat.GetPenetration(_FunctionData.damageType)
                 });
             }
             else

@@ -19,7 +19,8 @@ namespace Client
         private string _searchTerm = "";
         
         private int _victimOrder = -1;
-        private int _skillTestCharOrder = -1;
+        private int _skillTestCasterOrder = -1;
+        private int _skillTestTargetOrder = -1;
         private CharAI.eAttackMode _mode;
         
         private int _tile = 0;
@@ -43,21 +44,30 @@ namespace Client
         {
             if (EditorApplication.isPlaying)
             {
-                UpdateCharacterList();
+                UpdateCharacterList(new OnSetChar());
                 var dataList = DataManager.Instance.GetDataList<CharData>();
                 foreach (var data in dataList)
                 {
                     _charDataList.Add(data as CharData);
                 }
+                
+                MessageManager.SubscribeMessage<OnSetChar>(this, UpdateCharacterList);
+                MessageManager.SubscribeMessage<OnDeadChar>(this, OnCharacterDeadByTest);
             }
         }
 
-        private void UpdateCharacterList()
+        private void UpdateCharacterList(OnSetChar dummy)
         {
             _characterList = CharManager.Instance.GetCurrentCharacters();
             Repaint();
         }
 
+        private void OnCharacterDeadByTest(OnDeadChar dummy)
+        {
+            Debug.Log("캐릭터 사망으로 테스트 윈도우의 캐릭터 목록을 업데이트합니다.");
+            UpdateCharacterList(new OnSetChar());
+        }
+        
         private void OnGUI()
         {
             globalScrollPos = EditorGUILayout.BeginScrollView(globalScrollPos);
@@ -201,10 +211,14 @@ namespace Client
             {
                 CharManager.Instance.CharGenerate(
                     new CharTileParameter(SystemEnum.eScene.GameScene, _tile, _selectedAddData.Index));
-                UpdateCharacterList();
             }
         }
 
+        private bool IsValidIndex<T>(int idx, IEnumerable<T> collection) where T : class
+        {
+            return idx > 0 &&  idx <= collection.Count();
+        }
+        
         private void DrawDeleteTab()
         {
             string[] characterNames = _characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
@@ -212,7 +226,7 @@ namespace Client
             EditorGUILayout.LabelField("삭제할 캐릭터 선택", EditorStyles.boldLabel);
             _victimOrder = EditorGUILayout.Popup("캐릭터 선택", _victimOrder, characterNames);
 
-            CharBase victim = _victimOrder == -1 ? null : _characterList[_victimOrder];
+            CharBase victim = IsValidIndex(_victimOrder, _characterList) ? _characterList[_victimOrder] : null;
             string guide = !victim ? "삭제할 캐릭터를 선택해주세요." : $"{victim.GetID()}번 캐릭터 {victim.name}을 삭제합니다.";
             
             GUIStyle buttonStyle = new(GUI.skin.button)
@@ -228,25 +242,27 @@ namespace Client
             {
                 victim.Dead();
                 _victimOrder = -1;
-                UpdateCharacterList();
             }
         }
 
         private void DrawTestSkill()
         {
-            string[] characterNames = _characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
-            
+            string[] characterNames = new[] { "선택 안함" }
+                .Concat(_characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}"))
+                .ToArray();
+            #region Caster Selection
             EditorGUILayout.LabelField("스킬을 테스트할 캐릭터 선택", EditorStyles.boldLabel);
-            _skillTestCharOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestCharOrder, characterNames);
+            _skillTestCasterOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestCasterOrder, characterNames);
             
-            CharBase tester = _skillTestCharOrder == -1 ? null : _characterList[_skillTestCharOrder];
+            CharBase tester = IsValidIndex(_skillTestCasterOrder, _characterList) ? _characterList[_skillTestCasterOrder-1] : null;
             if (!tester)
             {
                 EditorGUILayout.HelpBox("테스트할 캐릭터를 선택해주세요.", MessageType.Error);
                 return;
             }
-            // 캐릭터의 모드 - 거기에 딸린 스킬 - 선택 버튼 순으로 하는게 낫겠다.
+            #endregion
             
+            #region Skill Selection
             _mode = (CharAI.eAttackMode)GUILayout.Toolbar((int)_mode, 
                 new[] { "Not Testing", "AA Test Mode", "Skill Test Mode" });
             if (_mode == CharAI.eAttackMode.None)
@@ -254,13 +270,44 @@ namespace Client
                 EditorGUILayout.HelpBox("테스트할 모드를 선택해주세요.", MessageType.Error);
                 return;
             }
-
+            #endregion
+            
+            #region Target Selection
+            EditorGUILayout.LabelField("스킬 대상 캐릭터 선택", EditorStyles.boldLabel);
+            _skillTestTargetOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestTargetOrder, characterNames);
+            
+            CharBase target = IsValidIndex(_skillTestTargetOrder, _characterList) ? _characterList[_skillTestTargetOrder-1] : null;
+            if (!target)
+            {
+                EditorGUILayout.HelpBox("해당 부분이 공란일 경우, 캐릭터의 AI에 따라 자동으로 타겟을 설정합니다.\n" +
+                                        "사거리에 유의해주세요.", MessageType.Info);
+            }
+            else
+            {
+                EditorGUILayout.HelpBox(
+                    $"현재 타겟까지의 거리 : {SystemConst.GetUnitLength(Vector3.Distance(tester.CharTransform.position, target.CharTransform.position))}\n" +
+                    "사거리에 유의해주세요.", MessageType.Info);
+            }
+            
+            #endregion
             if (GUILayout.Button("모드에 따른 스킬 사용"))
             {
-                tester.CharAI.TestAction(_mode);
+                if (!target)
+                {
+                    tester.CharAI.TestAction(_mode);
+                    Debug.Log("타겟 미지정으로, 타겟을 자동으로 판단해 사용합니다.");
+                }
+                else
+                {
+                    tester.CharAI.TestSkillOnTarget(target, _mode);
+                    Debug.Log($"[스킬 사용] : {target}을 타겟으로 스킬을 사용합니다. 사거리는 무시됩니다.");
+                }
             }
         }
         
     }
+    
+    public class OnSetChar : MessageSystemParam{}
+    public class OnDeadChar : MessageSystemParam{}
 }
 #endif

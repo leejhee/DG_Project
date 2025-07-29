@@ -6,9 +6,9 @@ namespace Client
 {
     public class SkillMarkerFunctionInjector : SkillTimeLineMarker
     {
-        [SerializeField] 
-        private long functionIndex;
-
+        [SerializeField] private long functionIndex;
+        [SerializeField] private SystemEnum.eSkillTargetType targetType;
+        
         public override void MarkerAction()
         {
             if(functionIndex == default)
@@ -24,7 +24,15 @@ namespace Client
                 return;
             }
 
-            var targets = SkillParam.skillTargets;
+            List<CharBase> targets;
+            if (targetType == default)
+                targets = SkillParam.skillTargets;
+            else
+                targets = TargetStrategyFactory.CreateTargetStrategy(new TargettingStrategyParameter()
+                {
+                    Caster = SkillParam.skillCaster, type = targetType
+                }).GetTargets();
+            
             for(int i = 0; i< targets.Count; i++)
             {
                 targets[i].FunctionInfo.AddFunction(new BuffParameter()

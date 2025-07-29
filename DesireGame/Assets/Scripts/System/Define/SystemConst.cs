@@ -13,8 +13,10 @@ namespace Client
     public class SystemConst 
     {
         public static int FPS = 60;
-
-        public static float TILE_UNIT_LENGTH = 1f;
+        
+        public static float TOLERANCE = 0.01f;
+        
+        public static float TILE_UNIT_LENGTH = 1.5f;
 
         // 맵 타일 구조가 불변이라는 전제
         public static int TILE_COL_OFFSET = 5;  // 한 column에 몇개? (다 column 단위로 기획되어 있어서 이렇게 함)
@@ -23,10 +25,11 @@ namespace Client
         public static int TILE_SIDE_ROW_UNIT = TILE_SIDE_OFFSET / 2;
         public static int TILE_MAX = TILE_SIDE_OFFSET * 2; // 전체 타일 수
         private static Dictionary<SystemEnum.eRowType, ReadOnlyCollection<int>> TileRows;
-        public static Dictionary<int, SystemEnum.eRowType> TileIndexToRowType; // 💡 역매핑 캐시
+        public static Dictionary<int, SystemEnum.eRowType> TileIndexToRowType;
         
-        public static int DEFAULT_MANA_RESTORE = 5;
-
+        public static int MANA_RESTORE_ATTACK = 10;
+        public static int MANA_RESTORE_DAMAGED = 5;
+        
         public static long NO_CONTENT = 0;              // 빈 인덱스용
 
         public static float PER_TEN_THOUSAND = 10000.0f;
@@ -82,6 +85,10 @@ namespace Client
             return (type == SystemEnum.eCharType.ALLY && tileIndex >= 0 && tileIndex < TILE_SIDE_OFFSET) ||
                    (type == SystemEnum.eCharType.ENEMY && tileIndex >= TILE_SIDE_OFFSET && tileIndex < TILE_MAX);
         }
+
+        public static float GetUnitLength(float worldLength) => worldLength / TILE_UNIT_LENGTH;
+
+        public static float GetWorldLength(float unitLength) => unitLength * TILE_UNIT_LENGTH;
     }
 
     /// <summary>

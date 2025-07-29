@@ -22,9 +22,9 @@ namespace Client
                     var stat = _TargetChar.CharStat;
                     stat.ReceiveDamage(new DamageParameter()
                     {
-                        damageType = _FunctionData.damageType,
-                        rawDamage = stat.GetStat(SystemEnum.eStats.NMHP) * ratio,
-                        penetration = _CastChar.CharStat.GetPenetration(_FunctionData.damageType)
+                        DamageType = _FunctionData.damageType,
+                        RawDamage = stat.GetStat(SystemEnum.eStats.NMHP) * ratio,
+                        Penetration = _CastChar.CharStat.GetPenetration(_FunctionData.damageType)
                     });
                     Debug.Log($"최대HP {ratio * 100} 비례뎀 발동.");
                 }                
