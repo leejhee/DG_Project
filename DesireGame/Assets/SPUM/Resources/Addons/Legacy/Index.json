@@ -881,6 +881,7 @@
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Human_1"
     },
+    
     {
       "Name": "L",
       "UnitType": "Unit",
@@ -929,7 +930,103 @@
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/L"
     },
-     {
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Sa",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Fo"
+    },
+    {
       "Name": "Emma",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -978,6 +1075,102 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Emma"
     },
     {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Rab"
+    },
+      {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/gal"
+    },
+    {
       "Name": "Nat",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -1024,6 +1217,54 @@
       "SubType": "Foot_L",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Nat"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
+    },
+    {
+      "Name": "M",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/M"
     },
     {
       "Name": "Lubi",
@@ -2332,6 +2573,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/L"
     },
     {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "gal",
+      "PartSubType": "Sword",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/0_Sword/gal"
+    },
+    {
       "Name": "Bone",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2462,6 +2711,22 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/5_Wand/Ward_1"
     },
     {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "Fo",
+      "PartSubType": "Wand",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/5_Wand/Fo"
+    },
+    {
+      "Name": "3",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "3",
+      "PartSubType": "Wand",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/5_Wand/3"
+    },
+    {
       "Name": "F_SR_Hammer",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2484,6 +2749,38 @@
       "SubType": "Back_1",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/Back_1"
+    },
+    {
+      "Name": "M_hair",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "M_hair",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/M_hair"
+    },
+    {
+      "Name": "Rab",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "Rab",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/Rab"
+    },
+    {
+      "Name": "Fo",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "Fo",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/Fo"
+    },
+    {
+      "Name": "gal",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "gal",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/gal"
     },
     {
       "Name": "Back_2",
