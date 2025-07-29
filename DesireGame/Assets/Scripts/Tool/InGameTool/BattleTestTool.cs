@@ -216,7 +216,7 @@ namespace Client
 
         private bool IsValidIndex<T>(int idx, IEnumerable<T> collection) where T : class
         {
-            return idx > 0 &&  idx < collection.Count();
+            return idx > 0 &&  idx <= collection.Count();
         }
         
         private void DrawDeleteTab()
@@ -254,7 +254,7 @@ namespace Client
             EditorGUILayout.LabelField("스킬을 테스트할 캐릭터 선택", EditorStyles.boldLabel);
             _skillTestCasterOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestCasterOrder, characterNames);
             
-            CharBase tester = IsValidIndex(_skillTestCasterOrder, _characterList) ? _characterList[_skillTestCasterOrder] : null;
+            CharBase tester = IsValidIndex(_skillTestCasterOrder, _characterList) ? _characterList[_skillTestCasterOrder-1] : null;
             if (!tester)
             {
                 EditorGUILayout.HelpBox("테스트할 캐릭터를 선택해주세요.", MessageType.Error);
@@ -276,7 +276,7 @@ namespace Client
             EditorGUILayout.LabelField("스킬 대상 캐릭터 선택", EditorStyles.boldLabel);
             _skillTestTargetOrder = EditorGUILayout.Popup("캐릭터 선택", _skillTestTargetOrder, characterNames);
             
-            CharBase target = IsValidIndex(_skillTestTargetOrder, _characterList) ? _characterList[_skillTestTargetOrder] : null;
+            CharBase target = IsValidIndex(_skillTestTargetOrder, _characterList) ? _characterList[_skillTestTargetOrder-1] : null;
             if (!target)
             {
                 EditorGUILayout.HelpBox("해당 부분이 공란일 경우, 캐릭터의 AI에 따라 자동으로 타겟을 설정합니다.\n" +

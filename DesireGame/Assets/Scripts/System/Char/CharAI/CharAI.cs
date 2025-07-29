@@ -52,7 +52,6 @@ namespace Client
         /// <summary>
         /// 캐릭터 AI 행동 결정 타이머
         /// </summary>
-        /// <param name="newState"></param>
         public IEnumerator UpdateAI(PlayerState initialState)
         {
             // 스킬 사용하는 동안에는 타이머 작동 중단
@@ -92,7 +91,6 @@ namespace Client
         /// 현재 상태에 따른 호출 간격 리턴
         /// </summary>
         /// <param name="newState"></param>
-        /// <returns></returns>
         private float GetActionInterval(PlayerState newState)
         {
             float interval = 0;
