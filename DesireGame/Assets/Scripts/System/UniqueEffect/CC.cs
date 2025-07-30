@@ -33,7 +33,8 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Stun();
+            //Target.CharAI.Stun();
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.STUN, null, _lifeTime);
         }
         
         public override void EndEffect()
@@ -56,7 +57,8 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Charm(Caster);
+            //Target.CharAI.Charm(Caster);
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.CHARM, Caster, _lifeTime);
         }
         
         public override void EndEffect()
@@ -96,7 +98,8 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Taunt(Caster);
+            //Target.CharAI.Taunt(Caster);
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.TAUNT, Caster, _lifeTime);
             Target.CharStat.TauntStatModify();
         }
         

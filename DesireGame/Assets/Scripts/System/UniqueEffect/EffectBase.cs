@@ -6,7 +6,7 @@ namespace Client
     {
         protected CharBase Caster;
         protected CharBase Target;
-        private float _lifeTime;
+        protected float _lifeTime;
         private float _startTime;
         
         public SystemEnum.eCCType EffectType { get; private set; }

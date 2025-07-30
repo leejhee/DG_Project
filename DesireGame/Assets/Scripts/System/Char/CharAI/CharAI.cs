@@ -35,6 +35,10 @@ namespace Client
         
         #region Fields - cc related
 
+        private Coroutine _ccCoroutine = null;
+        private bool _isCC = false;
+        private eCCType _currentCCType;
+        
         private bool _targetable = true;
         private bool _attackable = true;
         private bool _movable = true;
@@ -216,6 +220,131 @@ namespace Client
         }
         
         #region CC Control
+        
+        private IEnumerator StunBehavior(float duration)
+        {
+            // 현재 행동 중단
+            _charAgent.Nav.isStopped = true;
+            _charAgent.Move(false);
+            
+            if (duration > 0)
+            {
+                yield return new WaitForSeconds(duration);
+                EndCCBehavior();
+            }
+        }
+
+        // 매혹: 느린 속도로 시전자에게 접근
+        private IEnumerator CharmBehavior(CharBase charmer, float duration)
+        {
+            float startTime = Time.time;
+            float originalSpeed = _charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
+            
+            _charAgent.CharStat.AddStatModification(new StatModifier(
+                eStats.MOVE_SPEED, eOpCode.Mul, eModifierRoot.CC, -0.5f));
+            
+            while (duration < 0 || Time.time - startTime < duration)
+            {
+                if (charmer && charmer.IsAlive)
+                {
+                    _charAgent.Nav.isStopped = false;
+                    _charAgent.Nav.SetDestination(charmer.CharTransform.position);
+                    _charAgent.Nav.speed = _charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
+                    _charAgent.Move(true);
+                }
+                
+                yield return new WaitForSeconds(0.1f); // 자주 업데이트
+            }
+            
+            if (duration > 0)
+                EndCCBehavior();
+        }
+
+        // 도발: 도발자만 공격, 평타만 사용
+        private IEnumerator TauntBehavior(CharBase taunter, float duration)
+        {
+            float startTime = Time.time;
+            
+            // 공격속도 감소 적용
+            _charAgent.CharStat.AddStatModification(new StatModifier(
+                eStats.AS, eOpCode.Mul, eModifierRoot.CC, -0.5f));
+            
+            while (duration < 0 || Time.time - startTime < duration)
+            {
+                if (taunter && taunter.IsAlive)
+                {
+                    // 강제로 도발자를 타겟으로 설정
+                    FinalTarget = taunter;
+                    _cachedTargets.Clear();
+                    _cachedTargets.Add(taunter);
+                    
+                    // 평타 공격만 사용 (eAttackMode.Auto 강제)
+                    SkillAIInfo info = _charAgent.CharSKillInfo.GetInfoByMode(eAttackMode.Auto);
+                    int skillRange = info.Range;
+                    Vector3 displacement = taunter.CharTransform.position - _charAgent.CharTransform.position;
+                    var distance = displacement.magnitude;
+                    
+                    bool inRange = distance <= skillRange + SystemConst.TOLERANCE || skillRange == 0;
+                    if (inRange)
+                    {
+                        _charAgent.CharAction.CharAttackAction(new CharAttackParameter(_cachedTargets, eAttackMode.Auto));
+                        yield return new WaitForSeconds(1f / _charAgent.CharStat.GetStat(eStats.NAS));
+                    }
+                    else
+                    {
+                        _charAgent.Nav.stoppingDistance = skillRange;
+                        _charAgent.CharAction.CharMoveAction(new CharMoveParameter(taunter));
+                        yield return new WaitForSeconds(0.1f);
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+            if (duration > 0)
+                EndCCBehavior();
+        }
+        
+        public IEnumerator StartCCBehavior(eCCType ccType, CharBase target, float duration = -1f)
+        {
+            // 기존 CC 효과가 있다면 중단
+            if (_ccCoroutine != null)
+            {
+                _charAgent.StopCoroutine(_ccCoroutine);
+            }
+        
+            _isCC = true;
+            _currentCCType = ccType;
+        
+            // CC 타입별 전용 코루틴 시작
+            switch (ccType)
+            {
+                case SystemEnum.eCCType.STUN:
+                    _ccCoroutine = _charAgent.StartCoroutine(StunBehavior(duration));
+                    yield break;
+                case SystemEnum.eCCType.CHARM:
+                    _ccCoroutine = _charAgent.StartCoroutine(CharmBehavior(target, duration));
+                    yield break;
+                case SystemEnum.eCCType.TAUNT:
+                    _ccCoroutine = _charAgent.StartCoroutine(TauntBehavior(target, duration));
+                    yield break;
+            }
+        }
+        
+        public void EndCCBehavior()
+        {
+            if (_ccCoroutine != null)
+            {
+                _charAgent.StopCoroutine(_ccCoroutine);
+                _ccCoroutine = null;
+            }
+        
+            _isCC = false;
+            _charAgent.AISwitch();
+        }
+        
         public void Charm(CharBase target)
         {
             TargetForcedFix(target);

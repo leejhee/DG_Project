@@ -225,7 +225,8 @@ namespace Client
             long originStat = _charStat[(int)properTargetStat];
             _charStat[(int)properTargetStat] = ClampStat(properTargetStat, newStat);
 
-            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {originStat} -> {_charStat[(int)properTargetStat]}");
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {originStat} -> {_charStat[(int)properTargetStat]} " +
+                      $"({newStat} Clamped)");
 
             TriggerCondition(properTargetStat);
         }

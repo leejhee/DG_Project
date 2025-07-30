@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Client
 {
@@ -29,6 +30,14 @@ namespace Client
                 {
                     if (target.GetCharType() != CharUtil.GetEnemyType(_CastChar.GetCharType()))
                         continue;
+                    Debug.Log($"[시너지 효과] : 캐릭터 {_CastChar}의 공격에 의해 {_TargetChar}에 CC발생. ");
+                    _TargetChar.EffectInfo.AddEffect(new EffectParameter()
+                    {
+                        Caster = _CastChar,
+                        Target = _TargetChar,
+                        ccType = SystemEnum.eCCType.SHRED,
+                        Time = _FunctionData.input1
+                    });
                 }
                 // 상대에게 CC를 넣자.
                 
