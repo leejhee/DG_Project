@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/SynergyData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/SynergyData.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/SynergyData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/SynergyData.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/BuffOnce.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/Function_Buff/BuffStat/BuffOnce.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/QUANTUM_WASHER_SKILL_CC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/QUANTUM_WASHER_SKILL_CC.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/EffectBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +244,7 @@
       <workItem from="1753790976640" duration="3285000" />
       <workItem from="1753796777313" duration="971000" />
       <workItem from="1753797770974" duration="195000" />
-      <workItem from="1753847764893" duration="7233000" />
+      <workItem from="1753847764893" duration="8686000" />
     </task>
     <servers />
   </component>
@@ -367,19 +361,6 @@
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs</url>
-          <line>105</line>
-          <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\CharManager.cs" containingFunctionPresentation="메서드 'Clear'">
-            <startOffsets>
-              <option value="3263" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3275" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
           <line>41</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'Register'">
@@ -406,17 +387,43 @@
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs</url>
-          <line>30</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\TimeLine\Marker\SkillMarkerFunctionInjector.cs" containingFunctionPresentation="메서드 'MarkerAction'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs</url>
+          <line>68</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharUtil.cs" containingFunctionPresentation="메서드 'GetNearestInList'">
             <startOffsets>
-              <option value="928" />
+              <option value="2400" />
             </startOffsets>
             <endOffsets>
-              <option value="1136" />
+              <option value="2429" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="115" />
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs</url>
+          <line>120</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharAI\Target\TargetStrategies.cs" containingFunctionPresentation="메서드 'GetTargets'">
+            <startOffsets>
+              <option value="3859" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3874" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs</url>
+          <line>301</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\CharManager.cs" containingFunctionPresentation="메서드 'GetOneSide'">
+            <startOffsets>
+              <option value="9833" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9890" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

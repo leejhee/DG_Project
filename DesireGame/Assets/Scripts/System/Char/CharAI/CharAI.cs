@@ -176,18 +176,20 @@ namespace Client
             _cachedTargets = targettingGuide.GetTargets();
             if (_cachedTargets == null)
             {
-                Debug.Log("No targets to Encounter");
+                Debug.LogWarning("No targets to Encounter");
                 return;
             }
             FinalTarget = CharUtil.GetNearestInList(_charAgent, _cachedTargets); // 무조건 cached 중 최근접 대상
             if (!FinalTarget)
             {
-                Debug.Log("No target to Chase");
+                Debug.LogWarning("No target to Chase");
                 return;
             }
             OnTargetSet?.Invoke(FinalTarget);
         }
-
+        
+        
+        
         private void SetAction(eAttackMode attackMode)
         {
             SkillAIInfo info = _charAgent.CharSKillInfo.GetInfoByMode(attackMode);
@@ -223,7 +225,6 @@ namespace Client
         
         private IEnumerator StunBehavior(float duration)
         {
-            // 현재 행동 중단
             _charAgent.Nav.isStopped = true;
             _charAgent.Move(false);
             
@@ -273,12 +274,10 @@ namespace Client
             {
                 if (taunter && taunter.IsAlive)
                 {
-                    // 강제로 도발자를 타겟으로 설정
                     FinalTarget = taunter;
                     _cachedTargets.Clear();
                     _cachedTargets.Add(taunter);
                     
-                    // 평타 공격만 사용 (eAttackMode.Auto 강제)
                     SkillAIInfo info = _charAgent.CharSKillInfo.GetInfoByMode(eAttackMode.Auto);
                     int skillRange = info.Range;
                     Vector3 displacement = taunter.CharTransform.position - _charAgent.CharTransform.position;
@@ -309,7 +308,6 @@ namespace Client
         
         public IEnumerator StartCCBehavior(eCCType ccType, CharBase target, float duration = -1f)
         {
-            // 기존 CC 효과가 있다면 중단
             if (_ccCoroutine != null)
             {
                 _charAgent.StopCoroutine(_ccCoroutine);
@@ -318,16 +316,15 @@ namespace Client
             _isCC = true;
             _currentCCType = ccType;
         
-            // CC 타입별 전용 코루틴 시작
             switch (ccType)
             {
-                case SystemEnum.eCCType.STUN:
+                case eCCType.STUN:
                     _ccCoroutine = _charAgent.StartCoroutine(StunBehavior(duration));
                     yield break;
-                case SystemEnum.eCCType.CHARM:
+                case eCCType.CHARM:
                     _ccCoroutine = _charAgent.StartCoroutine(CharmBehavior(target, duration));
                     yield break;
-                case SystemEnum.eCCType.TAUNT:
+                case eCCType.TAUNT:
                     _ccCoroutine = _charAgent.StartCoroutine(TauntBehavior(target, duration));
                     yield break;
             }

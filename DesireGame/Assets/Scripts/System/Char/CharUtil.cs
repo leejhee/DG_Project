@@ -34,19 +34,30 @@ namespace Client
                 Debug.LogError("Client is null.");
                 return null;
             }
+            Vector3 clientPosition = clientChar.CharTransform.position;
+            return GetNearestInList(clientPosition, targetList, nTH, inverse);
+        }
+
+        public static CharBase GetNearestInList(Vector3 abstractPos, eCharType type, int nTH = 0, bool inverse = false)
+        {
+            List<CharBase> list = CharManager.Instance.GetOneSide(type);
+            return GetNearestInList(abstractPos, list, nTH, inverse);
+        }
+
+        private static CharBase GetNearestInList(Vector3 abstractPos, List<CharBase> targetList, int nTH = 0, bool inverse = false)
+        {
             if(nTH >= targetList.Count || nTH < 0)
             {
                 Debug.LogError("Wrong Input");
                 return null;
             }
-
+            
             var distances = new List<(CharBase target, float dist)>(targetList.Count);
-            Vector3 clientPosition = clientChar.CharTransform.position;
 
             for (int i = 0; i< targetList.Count; i++)
             {
                 if (!targetList[i]) continue;
-                float distSqr = (clientPosition - targetList[i].CharTransform.position).sqrMagnitude;
+                float distSqr = (abstractPos - targetList[i].CharTransform.position).sqrMagnitude;
                 distances.Add((targetList[i], distSqr));
             }
 
@@ -57,7 +68,8 @@ namespace Client
             
             return distances[nTH].target;
         }
-
+        
+        
         public static eCharType GetEnemyType(eCharType clientType)
         {
             return clientType switch
