@@ -159,7 +159,7 @@ namespace Client
             // 상태 변경 감지 시 
             if (_currentState != newState)
             {
-                Debug.Log($"{_charAgent.CharData.charName}{_charAgent.GetID()} : {_currentState}에서 {newState}으로 상태 변경");
+                Debug.Log($"{_charAgent.CharData.charKorName}{_charAgent.GetID()} : {_currentState}에서 {newState}으로 상태 변경");
                 _currentState = newState;
                 _resetTimer = true; // 타이머 리셋 플래그 설정
             }

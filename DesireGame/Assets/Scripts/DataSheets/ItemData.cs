@@ -19,7 +19,7 @@ public long Index; // itemID
 		public SystemEnum.eItemType itemType; // 아이템타입
 		public string iconImagePath; // 아이템 아이콘
 		
-		public SystemEnum.eItemTier itemTier; // 아이템 티어
+		public SystemEnum.eTier itemTier; // 아이템 티어
 		
 		public SystemEnum.eStats mainStats; // 메인스탯이름
 		public int mainStatsIncrease; // 메인 스탯증가량(만분율)
@@ -76,7 +76,7 @@ public long Index; // itemID
 					if(values[5] == "")
 					    data.itemTier = default;
 					else
-					    data.itemTier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[5]);
+					    data.itemTier = (SystemEnum.eTier)Enum.Parse(typeof(SystemEnum.eTier), values[5]);
 					
 					if(values[6] == "")
 					    data.mainStats = default;

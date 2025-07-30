@@ -62,7 +62,7 @@ namespace Client
             eMax
         }
 
-        public enum eCharTier
+        public enum eTier
         {
             None,
             NORMAL,

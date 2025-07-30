@@ -14,12 +14,12 @@ namespace Client
     public partial class CharData : SheetData
     {
 public long Index; // charID
-		public string charName; // 캐릭터 이름
+		public string charKorName; // 캐릭터 한글 이름
 		public string charPrefab; // 캐릭터 프리팹
 		
 		public SystemEnum.eCharType charType; // 캐릭터 타입
 		
-		public SystemEnum.eCharTier charTier; // 캐릭터 등급
+		public SystemEnum.eTier charTier; // 캐릭터 등급
 		public long statsIndex; // 기본스텟
 		
 		public SystemEnum.eSynergy synergy1; // 시너지1
@@ -61,9 +61,9 @@ public long Index; // charID
 					    data.Index = Convert.ToInt64(values[0]);
 					
 					if(values[1] == "")
-					    data.charName = default;
+					    data.charKorName = default;
 					else
-					    data.charName = Convert.ToString(values[1]);
+					    data.charKorName = Convert.ToString(values[1]);
 					
 					if(values[2] == "")
 					    data.charPrefab = default;
@@ -78,7 +78,7 @@ public long Index; // charID
 					if(values[4] == "")
 					    data.charTier = default;
 					else
-					    data.charTier = (SystemEnum.eCharTier)Enum.Parse(typeof(SystemEnum.eCharTier), values[4]);
+					    data.charTier = (SystemEnum.eTier)Enum.Parse(typeof(SystemEnum.eTier), values[4]);
 					
 					if(values[5] == "")
 					    data.statsIndex = default;

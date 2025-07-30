@@ -35,7 +35,7 @@ namespace Client
             foreach(var value in CharDict.Values)
             {
                 CharData data = value as CharData;
-                options.Add($"charName : {data.charName} - index : {data.Index}");
+                options.Add($"charName : {data.charKorName} - index : {data.Index}");
             }
             Options = options.ToArray();
         }

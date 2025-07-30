@@ -55,7 +55,7 @@ namespace Client
                 if (charData == null)
                     continue;
 
-                stringBuilder.Append($" {charData.Index} 의 캐릭터 명은 {charData.charName} 입니다. \n");
+                stringBuilder.Append($" {charData.Index} 의 캐릭터 명은 {charData.charKorName} 입니다. \n");
             }
 
             EditorGUILayout.HelpBox($"사용 가능 캐릭터 명단 \n {stringBuilder.ToString()}", MessageType.Info);

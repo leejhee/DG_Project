@@ -33,12 +33,12 @@ namespace Client
         public Dictionary<eSynergy, FunctionData> SynergyTriggerMap => _synergyTriggerMap;
         
         // 아이템 데이터
-        private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
-        public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
+        private Dictionary<eTier, List<ItemData>> _itemDataMap = new();
+        public Dictionary<eTier, List<ItemData>> ItemDataMap => _itemDataMap;
 
         // 아이템 티어별 UI 색상 헥사 코드
-        private Dictionary<eItemTier, string> _tierColorDataMap = new();
-        public Dictionary<eItemTier, string> TierColorDataMap => _tierColorDataMap;
+        private Dictionary<eTier, string> _tierColorDataMap = new();
+        public Dictionary<eTier, string> TierColorDataMap => _tierColorDataMap;
 
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
