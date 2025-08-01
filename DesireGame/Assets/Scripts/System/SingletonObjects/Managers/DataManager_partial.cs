@@ -59,6 +59,7 @@ namespace Client
             if (typeof(TierColorData).ToString().Contains(data)) { SetTierColorData(); }
 
         }
+        
         // 플레이어 위치정보
         private void SetCharPositionData()
         {
