@@ -200,6 +200,7 @@ namespace Client
             {
                 eStats.NHP => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.NMHP]),
                 eStats.N_MANA => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.MAX_MANA]),
+                eStats.NCRIT_CHANCE => (long)Mathf.Clamp(value, 0, 10000),
                 _ => value
             };
         }

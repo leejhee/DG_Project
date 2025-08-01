@@ -7,10 +7,11 @@
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,15 +123,13 @@
       <option name="PTY_MODE" value="Auto" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1200">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1200" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -245,6 +244,9 @@
       <workItem from="1753796777313" duration="971000" />
       <workItem from="1753797770974" duration="195000" />
       <workItem from="1753847764893" duration="8686000" />
+      <workItem from="1753964562937" duration="1478000" />
+      <workItem from="1753966392054" duration="1047000" />
+      <workItem from="1754040074463" duration="3019000" />
     </task>
     <servers />
   </component>
@@ -352,10 +354,10 @@
           <line>127</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\DataManager_partial.cs" containingFunctionPresentation="메서드 'SetCharacterSpawnData'">
             <startOffsets>
-              <option value="5195" />
+              <option value="5173" />
             </startOffsets>
             <endOffsets>
-              <option value="5263" />
+              <option value="5241" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="78" />

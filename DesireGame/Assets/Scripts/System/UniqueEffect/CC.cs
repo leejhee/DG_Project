@@ -18,7 +18,7 @@ namespace Client
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
             
         }
     }
@@ -40,7 +40,7 @@ namespace Client
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
         }
         
     }
@@ -64,7 +64,7 @@ namespace Client
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
         }
     }
     
@@ -106,7 +106,7 @@ namespace Client
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
             Target.CharStat.RestoreState();
         }
 

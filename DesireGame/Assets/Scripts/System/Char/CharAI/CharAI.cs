@@ -238,8 +238,8 @@ namespace Client
         // 매혹: 느린 속도로 시전자에게 접근
         private IEnumerator CharmBehavior(CharBase charmer, float duration)
         {
+            WaitForSeconds wait = new(0.1f);
             float startTime = Time.time;
-            float originalSpeed = _charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
             
             _charAgent.CharStat.AddStatModification(new StatModifier(
                 eStats.MOVE_SPEED, eOpCode.Mul, eModifierRoot.CC, -0.5f));
@@ -254,7 +254,7 @@ namespace Client
                     _charAgent.Move(true);
                 }
                 
-                yield return new WaitForSeconds(0.1f); // 자주 업데이트
+                yield return wait;
             }
             
             if (duration > 0)
@@ -306,13 +306,13 @@ namespace Client
                 EndCCBehavior();
         }
         
-        public IEnumerator StartCCBehavior(eCCType ccType, CharBase target, float duration = -1f)
+        public void StartCCBehavior(eCCType ccType, CharBase target, float duration = -1f)
         {
             if (_ccCoroutine != null)
             {
                 _charAgent.StopCoroutine(_ccCoroutine);
             }
-        
+            
             _isCC = true;
             _currentCCType = ccType;
         
@@ -320,13 +320,13 @@ namespace Client
             {
                 case eCCType.STUN:
                     _ccCoroutine = _charAgent.StartCoroutine(StunBehavior(duration));
-                    yield break;
+                    break;
                 case eCCType.CHARM:
                     _ccCoroutine = _charAgent.StartCoroutine(CharmBehavior(target, duration));
-                    yield break;
+                    break;
                 case eCCType.TAUNT:
                     _ccCoroutine = _charAgent.StartCoroutine(TauntBehavior(target, duration));
-                    yield break;
+                    break;
             }
         }
         
@@ -342,47 +342,47 @@ namespace Client
             _charAgent.AISwitch();
         }
         
-        public void Charm(CharBase target)
-        {
-            TargetForcedFix(target);
-            _attackable = false;
-            _targetable = false;
-        }
+        // public void Charm(CharBase target)
+        // {
+        //     TargetForcedFix(target);
+        //     _attackable = false;
+        //     _targetable = false;
+        // }
+        //
+        // public void Stun()
+        // {
+        //     _attackable = false;
+        //     _targetable = false;
+        //     _movable = false;
+        // }
+        //
+        // public void Taunt(CharBase target)
+        // {
+        //     TargetForcedFix(target);
+        //     _targetable = false;
+        //     AttackModeForcedFix(eAttackMode.Auto);
+        // }
 
-        public void Stun()
-        {
-            _attackable = false;
-            _targetable = false;
-            _movable = false;
-        }
-        
-        public void Taunt(CharBase target)
-        {
-            TargetForcedFix(target);
-            _targetable = false;
-            AttackModeForcedFix(eAttackMode.Auto);
-        }
-
-        private void AttackModeForcedFix(eAttackMode mode)
-        {
-            if(mode == eAttackMode.Auto) _skillable = false;
-            else if (mode == eAttackMode.Skill) _attackable = false;
-        }
-        
-        private void TargetForcedFix(CharBase fixedTarget)
-        {
-            if (!fixedTarget) return;
-            _cachedTargets.Clear();
-            _cachedTargets.Add(fixedTarget);
-        }
-
-        public void RestoreState()
-        {
-            _attackable = true;
-            _targetable = true;
-            _movable = true;
-            _skillable = true;
-        }
+        // private void AttackModeForcedFix(eAttackMode mode)
+        // {
+        //     if(mode == eAttackMode.Auto) _skillable = false;
+        //     else if (mode == eAttackMode.Skill) _attackable = false;
+        // }
+        //
+        // private void TargetForcedFix(CharBase fixedTarget)
+        // {
+        //     if (!fixedTarget) return;
+        //     _cachedTargets.Clear();
+        //     _cachedTargets.Add(fixedTarget);
+        // }
+        //
+        // public void RestoreState()
+        // {
+        //     _attackable = true;
+        //     _targetable = true;
+        //     _movable = true;
+        //     _skillable = true;
+        // }
         #endregion
         #region ONLY_FOR_TEST
         #if UNITY_EDITOR
