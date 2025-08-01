@@ -23,7 +23,8 @@ namespace Client
                 Debug.LogError("Data가 null이다. Index와 데이터를 다시 한번 확인하세요.");
                 return;
             }
-
+            
+            #region Target Change
             List<CharBase> targets;
             if (targetType == default)
                 targets = SkillParam.skillTargets;
@@ -32,7 +33,7 @@ namespace Client
                 {
                     Caster = SkillParam.skillCaster, type = targetType
                 }).GetTargets();
-            
+            #endregion
             for(int i = 0; i< targets.Count; i++)
             {
                 targets[i].FunctionInfo.AddFunction(new BuffParameter()

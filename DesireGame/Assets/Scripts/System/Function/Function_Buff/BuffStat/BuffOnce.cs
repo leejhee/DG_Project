@@ -58,7 +58,7 @@ namespace Client
             base.RunFunction(StartFunction);
             if (StartFunction)
             {
-                if (targetStat == eStats.NHP && _LifeTime == 0)
+                if (targetStat == eStats.HP && _LifeTime == 0)
                 {
                     _TargetChar.CharStat.Heal(delta);
                 }

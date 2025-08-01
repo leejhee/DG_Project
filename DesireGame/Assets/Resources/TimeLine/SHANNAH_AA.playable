@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a097e7893c65683439be5eeeedc3da1f, type: 3}
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
-  m_Time: 0.16666666666666666
+  m_Time: 0
   _statName: 1
   percent: 100
 --- !u!114 &6632214233769137324

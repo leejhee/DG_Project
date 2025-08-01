@@ -322,7 +322,7 @@ namespace Client
             {
                 foreach(var unit in kvp.Value)
                 {
-                    Debug.Log($"AI - uid: {unit.Value.GetID()} 캐릭터 이름: {unit.Value.CharData.charName}");
+                    Debug.Log($"AI - uid: {unit.Value.GetID()} 캐릭터 이름: {unit.Value.CharData.charKorName}");
                     unit.Value.AISwitch(true);
                 }
             }

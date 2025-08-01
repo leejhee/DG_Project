@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/BattleTestMap.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Map/BattleTestMap.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/BattleTestTool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/GameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +23,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/d7/7774827e/SetupCoroutine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharParameter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -237,7 +236,13 @@
       <workItem from="1753271813205" duration="6700000" />
       <workItem from="1753437608380" duration="2831000" />
       <workItem from="1753706904109" duration="11229000" />
-      <workItem from="1753790976640" duration="1721000" />
+      <workItem from="1753790976640" duration="3285000" />
+      <workItem from="1753796777313" duration="971000" />
+      <workItem from="1753797770974" duration="195000" />
+      <workItem from="1753847764893" duration="8686000" />
+      <workItem from="1753964562937" duration="1478000" />
+      <workItem from="1753966392054" duration="1047000" />
+      <workItem from="1754040074463" duration="3891000" />
     </task>
     <servers />
   </component>
@@ -342,29 +347,16 @@
         </line-breakpoint>
         <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs</url>
-          <line>127</line>
+          <line>128</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\DataManager_partial.cs" containingFunctionPresentation="메서드 'SetCharacterSpawnData'">
             <startOffsets>
-              <option value="5195" />
+              <option value="5182" />
             </startOffsets>
             <endOffsets>
-              <option value="5263" />
+              <option value="5250" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="78" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs</url>
-          <line>105</line>
-          <properties documentPath="C:\Users\user\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\CharManager.cs" containingFunctionPresentation="메서드 'Clear'">
-            <startOffsets>
-              <option value="3263" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3275" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
@@ -393,17 +385,43 @@
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerFunctionInjector.cs</url>
-          <line>30</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\TimeLine\Marker\SkillMarkerFunctionInjector.cs" containingFunctionPresentation="메서드 'MarkerAction'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs</url>
+          <line>68</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharUtil.cs" containingFunctionPresentation="메서드 'GetNearestInList'">
             <startOffsets>
-              <option value="928" />
+              <option value="2400" />
             </startOffsets>
             <endOffsets>
-              <option value="1136" />
+              <option value="2429" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="115" />
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargetStrategies.cs</url>
+          <line>120</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Char\CharAI\Target\TargetStrategies.cs" containingFunctionPresentation="메서드 'GetTargets'">
+            <startOffsets>
+              <option value="3859" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3874" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs</url>
+          <line>301</line>
+          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\CharManager.cs" containingFunctionPresentation="메서드 'GetOneSide'">
+            <startOffsets>
+              <option value="9833" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9890" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
         <breakpoint enabled="true" type="DotNet_Exception_Breakpoints">
           <properties exception="System.OperationCanceledException" breakIfHandledByOtherCode="false" displayValue="System.OperationCanceledException" />

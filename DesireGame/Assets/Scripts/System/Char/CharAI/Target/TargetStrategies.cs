@@ -111,12 +111,14 @@ namespace Client
         public override List<CharBase> GetTargets()
         {
             var current = Caster.CharAI.FinalTarget;
+            if (!current)
+            {
+                current = CharManager.Instance.GetNearestEnemy(Caster);
+            }
             var targets = CharManager.Instance.GetBunches(current, SystemConst.TILE_UNIT_LENGTH);
-            List<CharBase> result = new();
-            if(targets.Count >= 2)
-                result.Add(targets[1]);
-            result.Add(current);
-            return result;
+
+            targets.Add(current);
+            return targets;
         }
     }
 

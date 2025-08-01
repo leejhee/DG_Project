@@ -18,7 +18,7 @@ namespace Client
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
             
         }
     }
@@ -33,13 +33,14 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Stun();
+            //Target.CharAI.Stun();
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.STUN, null, _lifeTime);
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
         }
         
     }
@@ -56,13 +57,14 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Charm(Caster);
+            //Target.CharAI.Charm(Caster);
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.CHARM, Caster, _lifeTime);
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
         }
     }
     
@@ -96,14 +98,15 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            Target.CharAI.Taunt(Caster);
+            //Target.CharAI.Taunt(Caster);
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.TAUNT, Caster, _lifeTime);
             Target.CharStat.TauntStatModify();
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            Target.CharAI.RestoreState();
+            //Target.CharAI.RestoreState();
             Target.CharStat.RestoreState();
         }
 

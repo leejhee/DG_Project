@@ -200,6 +200,7 @@ namespace Client
             {
                 eStats.NHP => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.NMHP]),
                 eStats.N_MANA => (long)Mathf.Clamp(value, 0, _charStat[(int)eStats.MAX_MANA]),
+                eStats.NCRIT_CHANCE => (long)Mathf.Clamp(value, 0, 10000),
                 _ => value
             };
         }
@@ -225,7 +226,8 @@ namespace Client
             long originStat = _charStat[(int)properTargetStat];
             _charStat[(int)properTargetStat] = ClampStat(properTargetStat, newStat);
 
-            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {originStat} -> {_charStat[(int)properTargetStat]}");
+            Debug.Log($"{StatOwner.GetID()}번 캐릭터에서 {properTargetStat} 스탯 {originStat} -> {_charStat[(int)properTargetStat]} " +
+                      $"({newStat} Clamped)");
 
             TriggerCondition(properTargetStat);
         }

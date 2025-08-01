@@ -69,7 +69,7 @@ namespace Client
                 Close();
             }
 
-            string[] characterNames = characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
+            string[] characterNames = characterList.Select(c => $"{c.GetID()} - {c.CharData.charKorName}").ToArray();
 
             EditorGUILayout.LabelField("Function을 주는 캐릭터 선택", EditorStyles.boldLabel);
             CasterOrder = EditorGUILayout.Popup("캐릭터 선택", CasterOrder, characterNames);

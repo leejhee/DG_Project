@@ -195,7 +195,7 @@ namespace Client
             #region 사망 구독
             _charStat.OnDeath += () =>
             {
-                Debug.Log($"캐릭터 사망 : uid {_uid}, 이름 {_charData.charName}");
+                Debug.Log($"캐릭터 사망 : uid {_uid}, 이름 {_charData.charKorName}");
                 CharDead();
             };
             #endregion

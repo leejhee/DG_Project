@@ -24,7 +24,7 @@ namespace Client
 
         private void Start()
         {
-            Init();
+            //Init();
             //TestManager.Instance.TestDebug();
 
         }

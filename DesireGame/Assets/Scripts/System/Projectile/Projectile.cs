@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static Client.SystemEnum;
 
 namespace Client
 {
@@ -13,7 +14,8 @@ namespace Client
         private Transform       _projectileTransform;
         private CharBase        _caster;
         private CharBase        _target;
-
+        private eCharType       _targetType;
+        
         private ProjectileData _projectileData;
         private float _projectileDamageInput;
         private List<FunctionData> _functionDataList;
@@ -29,7 +31,15 @@ namespace Client
         public Collider Collider => _projectileCollider;
         public Transform ProjectileTransform => _projectileTransform;
         public CharBase Caster => _caster;
-        public CharBase Target => _target;
+        public CharBase Target {
+            get => _target;
+            set
+            {
+                _target = value;
+                if(_target)
+                    _targetType = _target.GetCharType();
+            }
+        }
         public IPathStrategy PathGuide => pathStrategy;
         public IRangeStrategy RangeGuide => rangeStrategy;
 
@@ -45,6 +55,7 @@ namespace Client
         {
             _caster = param.skillCaster;
             _target = param.skillTargets[param.TargetIndex];
+            _targetType = _target.GetCharType();
             if(_projectileData == null)
             {
                 Debug.LogError("이 데이터 없는거라는데요? 인덱스 제대로 확인바람");
@@ -79,11 +90,28 @@ namespace Client
         
         private void FixedUpdate()
         {
-            if (_caster == false || _target == false || destroyFlag == true)
+            if (_caster == false || destroyFlag)
             {
                 Destroy(gameObject);
                 return;
             }
+            if (!_target || !_target.gameObject.activeSelf)
+            {
+                Target = CharUtil.GetNearestInList(transform.position, _targetType);
+                if (!_target)
+                {
+                    destroyFlag = true;
+                    return;
+                }
+                pathStrategy = PathStrategyFactory.CreatePathStrategy
+                (new PathStrategyParameter()
+                {
+                    target = _target,
+                    type = _projectileData.path,
+                    Speed = 2f,
+                });
+            }
+            
             pathStrategy.UpdatePosition(this);
         }
 

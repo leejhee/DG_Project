@@ -108,7 +108,7 @@ namespace Client
 
             var filteredCharacters = _charDataList
             .Where(c => string.IsNullOrEmpty(_searchTerm) ||
-                        c.charName.ToString().Contains(_searchTerm) ||
+                        c.charKorName.ToString().Contains(_searchTerm) ||
                         c.charType.ToString().Contains(_searchTerm) ||
                         c.Index.ToString().Contains(_searchTerm))
             .ToList();
@@ -142,7 +142,7 @@ namespace Client
 
                     EditorGUILayout.BeginHorizontal(GUI.skin.box);
 
-                    EditorGUILayout.LabelField(character.charName, rowStyle, GUILayout.Width(80));
+                    EditorGUILayout.LabelField(character.charKorName, rowStyle, GUILayout.Width(80));
                     EditorGUILayout.LabelField(character.charType.ToString(), rowStyle, GUILayout.Width(200));
                     EditorGUILayout.LabelField(character.Index.ToString(), rowStyle, GUILayout.Width(80));
 
@@ -221,12 +221,14 @@ namespace Client
         
         private void DrawDeleteTab()
         {
-            string[] characterNames = _characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}").ToArray();
-
+            string[] characterNames = new[] { "선택 안함" }
+                .Concat(_characterList.Select(c => $"{c.GetID()} - {c.CharData.charKorName}"))
+                .ToArray();
+            
             EditorGUILayout.LabelField("삭제할 캐릭터 선택", EditorStyles.boldLabel);
             _victimOrder = EditorGUILayout.Popup("캐릭터 선택", _victimOrder, characterNames);
 
-            CharBase victim = IsValidIndex(_victimOrder, _characterList) ? _characterList[_victimOrder] : null;
+            CharBase victim = IsValidIndex(_victimOrder, _characterList) ? _characterList[_victimOrder-1] : null;
             string guide = !victim ? "삭제할 캐릭터를 선택해주세요." : $"{victim.GetID()}번 캐릭터 {victim.name}을 삭제합니다.";
             
             GUIStyle buttonStyle = new(GUI.skin.button)
@@ -237,8 +239,7 @@ namespace Client
                 alignment = TextAnchor.MiddleCenter
             };
 
-            if (GUILayout.Button(guide, buttonStyle, GUILayout.ExpandWidth(true)) &&
-                victim == true && _victimOrder > -1)
+            if (GUILayout.Button(guide, buttonStyle, GUILayout.ExpandWidth(true)) && victim == true)
             {
                 victim.Dead();
                 _victimOrder = -1;
@@ -248,7 +249,7 @@ namespace Client
         private void DrawTestSkill()
         {
             string[] characterNames = new[] { "선택 안함" }
-                .Concat(_characterList.Select(c => $"{c.GetID()} - {c.CharData.charName}"))
+                .Concat(_characterList.Select(c => $"{c.GetID()} - {c.CharData.charKorName}"))
                 .ToArray();
             #region Caster Selection
             EditorGUILayout.LabelField("스킬을 테스트할 캐릭터 선택", EditorStyles.boldLabel);

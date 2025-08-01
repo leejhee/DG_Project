@@ -82,7 +82,7 @@ namespace Client
             }
 
             Nav.isStopped = false;
-            Actor.CharAI.RestoreState(); // 끝나면 다시 AI 정상화
+            //Actor.CharAI.RestoreState(); // 끝나면 다시 AI 정상화
         }
     }
 

@@ -154,7 +154,7 @@ namespace Client
         public void EvaluateCondition(ConditionCheckInput param)
         {
             foreach(var condition in _conditions)
-                condition.CheckInput(param);
+                condition?.CheckInput(param);
         }
         #endregion
     }

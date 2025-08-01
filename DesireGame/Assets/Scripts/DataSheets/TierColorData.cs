@@ -15,7 +15,7 @@ namespace Client
     {
 public long Index; // ID
 		
-		public SystemEnum.eItemTier tier; // 등급
+		public SystemEnum.eTier tier; // 등급
 		public string hexColorForItemDes; // 아이템창 설명용 색상
 		
 
@@ -50,7 +50,7 @@ public long Index; // ID
 					if(values[1] == "")
 					    data.tier = default;
 					else
-					    data.tier = (SystemEnum.eItemTier)Enum.Parse(typeof(SystemEnum.eItemTier), values[1]);
+					    data.tier = (SystemEnum.eTier)Enum.Parse(typeof(SystemEnum.eTier), values[1]);
 					
 					if(values[2] == "")
 					    data.hexColorForItemDes = default;

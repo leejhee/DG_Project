@@ -33,12 +33,12 @@ namespace Client
         public Dictionary<eSynergy, FunctionData> SynergyTriggerMap => _synergyTriggerMap;
         
         // 아이템 데이터
-        private Dictionary<eItemTier, List<ItemData>> _itemDataMap = new();
-        public Dictionary<eItemTier, List<ItemData>> ItemDataMap => _itemDataMap;
+        private Dictionary<eTier, List<ItemData>> _itemDataMap = new();
+        public Dictionary<eTier, List<ItemData>> ItemDataMap => _itemDataMap;
 
         // 아이템 티어별 UI 색상 헥사 코드
-        private Dictionary<eItemTier, string> _tierColorDataMap = new();
-        public Dictionary<eItemTier, string> TierColorDataMap => _tierColorDataMap;
+        private Dictionary<eTier, string> _tierColorDataMap = new();
+        public Dictionary<eTier, string> TierColorDataMap => _tierColorDataMap;
 
         public eLocalize Localize { get; set; } = eLocalize.KOR;
 
@@ -49,16 +49,17 @@ namespace Client
         // 개별 데이터 가공
         private void SetTypeData(string data)
         {
-            if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
+            //if (typeof(CharPositionData).ToString().Contains(data)) { SetCharPositionData(); return; }
             if (typeof(StringCodeData).ToString().Contains(data)) { SetStringCodeData(); return; }
             if (typeof(CharacterSpawnData).ToString().Contains(data)) { SetCharacterSpawnData(); return; }
             if (typeof(CharData).ToString().Contains(data)) { SetSynergyCharMap(); return; }
             if (typeof(SynergyData).ToString().Contains(data)) { SetSynergyMappingData(); return; }
             if (typeof(FunctionData).ToString().Contains(data)) { SetSynergyTriggerMap(); return; }
             if (typeof(ItemData).ToString().Contains(data)) { SetItemDataMap(); return; }
-            if (typeof(TierColorData).ToString().Contains(data)) { SetTierColorData(); return; }
+            if (typeof(TierColorData).ToString().Contains(data)) { SetTierColorData(); }
 
         }
+        
         // 플레이어 위치정보
         private void SetCharPositionData()
         {
