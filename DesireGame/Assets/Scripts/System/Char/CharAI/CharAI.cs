@@ -248,8 +248,8 @@ namespace Client
             {
                 if (charmer && charmer.IsAlive)
                 {
-                    _charAgent.Nav.isStopped = false;
-                    _charAgent.Nav.SetDestination(charmer.CharTransform.position);
+                    _charAgent.CharAction.CharMoveAction(new CharMoveParameter(charmer));
+                    
                     _charAgent.Nav.speed = _charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
                     _charAgent.Move(true);
                 }

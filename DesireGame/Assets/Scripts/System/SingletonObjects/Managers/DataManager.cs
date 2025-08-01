@@ -29,6 +29,7 @@ namespace Client
 
         public override void Init()
         {
+            ClearCache();
             DataLoad();
             ObjectManager.Instance.ObjectDataLoad();
             DoAfterDataLoad();
@@ -38,8 +39,6 @@ namespace Client
             // 현재 어셈블리 내에서 SheetData를 상속받는 모든 타입을 찾음
             var sheetDataTypes = Assembly.GetExecutingAssembly().GetTypes()
                                          .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(SheetData)));
-
-            List<SheetData> instances = new List<SheetData>();
 
             foreach (var type in sheetDataTypes)
             {
@@ -60,6 +59,7 @@ namespace Client
                 SetTypeData(type.Name);
             }
             EndLoad = true;
+            
         }
         public void DoAfterDataLoad()
         {
@@ -148,8 +148,14 @@ namespace Client
         public void ClearCache()
         {
             _cache.Clear();
+            
             _positionMap.Clear();
             _localizeStringCodeMap.Clear();
+            _characterSpawnStageMap.Clear();
+            _synergyCharacterMap.Clear();
+            _synergyDataMap.Clear();
+            _synergyTriggerMap.Clear();
+            _tierColorDataMap.Clear();
         }
 #endif
          
