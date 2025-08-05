@@ -979,6 +979,54 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
     },
     {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/turt"
+    },
+    {
       "Name": "K",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -2765,6 +2813,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/Trashcan"
     },
     {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "turt",
+      "PartSubType": "Shield",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/turt"
+    },
+    {
       "Name": "Shield_1",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2877,6 +2933,14 @@
       "SubType": "Rab",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/Rab"
+    },
+    {
+      "Name": "turt",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "turt",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/turt"
     },
     {
       "Name": "K",
