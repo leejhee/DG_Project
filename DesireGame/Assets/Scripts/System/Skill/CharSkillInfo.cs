@@ -22,6 +22,8 @@ namespace Client
         
         public Dictionary<long, SkillBase> DicSkill => _dicSkill; // 스킬 리스트
 
+        public long AutoAttack => _currentAutoAttack;
+        public long Skill => _currentSkill;
         
         public CharSKillInfo(CharBase charBase)
         {
@@ -108,17 +110,35 @@ namespace Client
                 PlaySkill(_currentSkill, parameter);
                 Debug.Log($"{_currentSkill} playing skill");
             }
-                
+        }
+        
+        // 시전자 의존성 없앨 거면 여기 참고할 것
+        public void PlayByModeOnly(CharAI.eAttackMode mode)
+        {
+            long playing = mode switch
+            {
+                CharAI.eAttackMode.Skill => _currentSkill,
+                CharAI.eAttackMode.Auto => _currentAutoAttack,
+                _ => 0
+            };
+            if (!_dicSkill.ContainsKey(playing)) return;
+            var info = _dicSkill[playing].GetAIInfo();
+            var targets = TargetStrategyFactory.CreateTargetStrategy(new TargettingStrategyParameter()
+            {
+                Caster = _charBase, type = info.TargetType
+            }).GetTargets();
+            PlaySkill(playing, new SkillParameter(targets, _charBase));
         }
         
         public SkillAIInfo GetInfoByMode(CharAI.eAttackMode mode)
         {
-            if (mode == CharAI.eAttackMode.Auto)
-                return _dicSkill[_currentAutoAttack].GetAIInfo();
-            else if (mode == CharAI.eAttackMode.Skill)
-                return _dicSkill[_currentSkill].GetAIInfo();
-
-            return default;
+            long playing = mode switch
+            {
+                CharAI.eAttackMode.Skill => _currentSkill,
+                CharAI.eAttackMode.Auto => _currentAutoAttack,
+                _ => 0
+            };
+            return playing == 0 ? default : _dicSkill[playing].GetAIInfo();
         }
 
 		public void SubscribeSkillEnd(CharAI.eAttackMode attackMode, Action onSkillEnd) 
@@ -139,7 +159,9 @@ namespace Client
             return _dicSkill[index].GetAIInfo();
         }
         #endif
-
+        
+        
+        
     }
 
     public struct SkillAIInfo

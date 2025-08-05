@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Client.SystemEnum;
@@ -65,8 +66,18 @@ namespace Client
                 distances.Sort((a, b) => b.dist.CompareTo(a.dist));
             else
                 distances.Sort((a, b) => a.dist.CompareTo(b.dist));
-            
-            return distances[nTH].target;
+
+            CharBase result;
+            try
+            {
+                result = distances[nTH].target;
+            }
+            catch (ArgumentOutOfRangeException ae)
+            {
+                result = null;
+                Debug.LogError(ae.Message + $"\nSize of Collection : {targetList.Count} / Tried to Access : {nTH}");
+            }
+            return result;
         }
         
         

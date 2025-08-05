@@ -299,7 +299,7 @@ namespace Client
         
         public List<CharBase> GetOneSide(eCharType charType)
         {
-            return _cache[eCharTypeToType(charType)].Values.ToList();
+            return !_cache.ContainsKey(eCharTypeToType(charType)) ? null : _cache[eCharTypeToType(charType)].Values.ToList();
         }
 
         public List<CharBase> GetAllySide(eCharType charType)

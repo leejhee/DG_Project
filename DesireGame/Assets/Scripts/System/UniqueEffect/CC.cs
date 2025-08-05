@@ -11,8 +11,7 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            // 코루틴 쓰자.
-            // 넉백하는동안, 인수만 집어서 코루틴 작동하게 한다. 이때 원래 AI clear하고 정지.
+            Target.CharAI.StartCCBehavior(SystemEnum.eCCType.KNOCKBACK, Caster, _lifeTime);
         }
 
         public override void EndEffect()
@@ -33,7 +32,6 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            //Target.CharAI.Stun();
             Target.CharAI.StartCCBehavior(SystemEnum.eCCType.STUN, null, _lifeTime);
         }
         
@@ -57,7 +55,6 @@ namespace Client
         public override void RunEffect()
         {
             base.RunEffect();
-            //Target.CharAI.Charm(Caster);
             Target.CharAI.StartCCBehavior(SystemEnum.eCCType.CHARM, Caster, _lifeTime);
         }
         
@@ -100,14 +97,11 @@ namespace Client
             base.RunEffect();
             //Target.CharAI.Taunt(Caster);
             Target.CharAI.StartCCBehavior(SystemEnum.eCCType.TAUNT, Caster, _lifeTime);
-            Target.CharStat.TauntStatModify();
         }
         
         public override void EndEffect()
         {
             base.EndEffect();
-            //Target.CharAI.RestoreState();
-            Target.CharStat.RestoreState();
         }
 
         

@@ -478,41 +478,6 @@ namespace Client
 
         #endregion
         
-        #region CC Related Method - Debugging Current
-
-        private StatModifier _ccRelated;
-        public void RestoreState()
-        {
-            RemoveStatModification(_ccRelated);
-        }
-
-        public void TauntStatModify()
-        {
-            _ccRelated = new StatModifier
-            (
-                eStats.AS,
-                eOpCode.Add,
-                eModifierRoot.CC,
-                -0.9f
-            );
-            AddStatModification(_ccRelated);
-        }
-
-        public void CharmStatModify()
-        {
-            _ccRelated = new StatModifier
-            (
-                eStats.MOVE_SPEED,
-                eOpCode.Add,
-                eModifierRoot.CC,
-                -0.9f
-            );
-            AddStatModification(_ccRelated);
-        }
-        
-        
-        #endregion
-        
         
         public void ResetAfterBattle()
         {

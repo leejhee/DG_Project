@@ -127,13 +127,16 @@ namespace Client
             // 스킬 사용 조건
             // 1: 최대 마나가 0보다 크다
             // 2: 현재 마나 >= 최대 마나
+            // 3: 평타가 없고 패시브로만 스킬이 발동
             bool condition1 = _charAgent.CharStat.GetStat(eStats.MAX_MANA) > 0;
             bool condition2 = _charAgent.CharStat.GetStat(eStats.N_MANA) >= _charAgent.CharStat.GetStat(eStats.MAX_MANA);
-
+            bool condition3 = _charAgent.CharSKillInfo.AutoAttack == 0;
             if (condition1 && condition2)
                 return eAttackMode.Skill;
-            else
-                return eAttackMode.Auto;
+            if (condition3)
+                return eAttackMode.None;
+
+            return eAttackMode.Auto;
         }
         
         /// <summary>
@@ -192,13 +195,16 @@ namespace Client
         
         private void SetAction(eAttackMode attackMode)
         {
+            if (attackMode == eAttackMode.None) return;
             SkillAIInfo info = _charAgent.CharSKillInfo.GetInfoByMode(attackMode);
+
             SetTarget(info.TargetType);
             if (!FinalTarget)
             {
                 Debug.LogWarning("타겟 도중 섬멸. 무효화되어 다음 주기에 타겟 할당합니다.");
                 return;
             }
+            
             
             //데이터 기반 사거리 설정 및 행동 결정
             int skillRange = info.Range;
@@ -210,12 +216,10 @@ namespace Client
             bool inRange = distance <= skillRange + SystemConst.TOLERANCE || skillRange == 0;
             if (inRange)
             {
-                if (!_attackable) return;
                 _charAgent.CharAction.CharAttackAction(new CharAttackParameter(_cachedTargets, attackMode));
             }
             else
             {
-                if (!_movable) return;
                 _charAgent.Nav.stoppingDistance = skillRange;
                 _charAgent.CharAction.CharMoveAction(new CharMoveParameter(FinalTarget));
             }
@@ -249,7 +253,6 @@ namespace Client
                 if (charmer && charmer.IsAlive)
                 {
                     _charAgent.CharAction.CharMoveAction(new CharMoveParameter(charmer));
-                    
                     _charAgent.Nav.speed = _charAgent.CharStat.GetStat(eStats.NMOVE_SPEED);
                     _charAgent.Move(true);
                 }
@@ -268,7 +271,7 @@ namespace Client
             
             // 공격속도 감소 적용
             _charAgent.CharStat.AddStatModification(new StatModifier(
-                eStats.AS, eOpCode.Mul, eModifierRoot.CC, -0.5f));
+                eStats.AS, eOpCode.Mul, eModifierRoot.CC, -0.8f));
             
             while (duration < 0 || Time.time - startTime < duration)
             {
@@ -342,50 +345,10 @@ namespace Client
             _charAgent.AISwitch();
         }
         
-        // public void Charm(CharBase target)
-        // {
-        //     TargetForcedFix(target);
-        //     _attackable = false;
-        //     _targetable = false;
-        // }
-        //
-        // public void Stun()
-        // {
-        //     _attackable = false;
-        //     _targetable = false;
-        //     _movable = false;
-        // }
-        //
-        // public void Taunt(CharBase target)
-        // {
-        //     TargetForcedFix(target);
-        //     _targetable = false;
-        //     AttackModeForcedFix(eAttackMode.Auto);
-        // }
-
-        // private void AttackModeForcedFix(eAttackMode mode)
-        // {
-        //     if(mode == eAttackMode.Auto) _skillable = false;
-        //     else if (mode == eAttackMode.Skill) _attackable = false;
-        // }
-        //
-        // private void TargetForcedFix(CharBase fixedTarget)
-        // {
-        //     if (!fixedTarget) return;
-        //     _cachedTargets.Clear();
-        //     _cachedTargets.Add(fixedTarget);
-        // }
-        //
-        // public void RestoreState()
-        // {
-        //     _attackable = true;
-        //     _targetable = true;
-        //     _movable = true;
-        //     _skillable = true;
-        // }
         #endregion
+        
         #region ONLY_FOR_TEST
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         
         /// <summary>
         /// 런타임 상의 스킬 액션 확인
@@ -430,7 +393,7 @@ namespace Client
         {
             _charAgent.CharAction.CharAttackAction(new CharAttackParameter(new List<CharBase> {target}, mode));
         }
-        #endif
+#endif
         #endregion
     }
 }

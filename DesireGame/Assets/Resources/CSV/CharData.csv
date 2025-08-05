@@ -19,7 +19,7 @@ long,string,string,eCharType,eTier,long,eSynergy,eSynergy,eSynergy,long,long[],l
 1600,메카:티디(1),MECHA:TIDY1_Prefab,ALLY,,101600,,,,501600,,,,,MECHA:TIDY
 1610,메카:티디(2),MECHA:TIDY2_Prefab,ALLY,,101610,,,,501601,,,,,MECHA:TIDY
 1620,메카:티디(3),MECHA:TIDY3_Prefab,ALLY,,101620,,,,501602,,,,,MECHA:TIDY
-1700,터틀,Turtle_Prefab,ALLY,,101700,TEAM3,SHIELD,,501700,[],[0601710],,,Turtle
+1700,터틀,Turtle_Prefab,ALLY,,101700,TEAM3,SHIELD,,,[501710],[0601710],,,Turtle
 1800,래빗,Rabbit_Prefab,ALLY,,101800,TEAM3,DUAL_BLADE,,501800,[0501810],,,,Rabbit
 1900,갤럭시,Galaxy_Prefab,ALLY,,101900,TEAM3,SWORD,,501900,[0501910],,,,Galaxy
 2000,포시티아,Forsythia_Prefab,ALLY,,102000,TEAM3,MAGIC_WAND,,502000,[0502010],,,,Forsythia
@@ -41,7 +41,7 @@ long,string,string,eCharType,eTier,long,eSynergy,eSynergy,eSynergy,long,long[],l
 1601,메카:티디(1),MECHA:TIDY1_Enemy_Prefab,ENEMY,,101600,,,,501600,,,,,MECHA:TIDY
 1611,메카:티디(2),MECHA:TIDY2_Enemy_Prefab,ENEMY,,101610,,,,501601,,,,,MECHA:TIDY
 1621,메카:티디(3),MECHA:TIDY3_Enemy_Prefab,ENEMY,,101620,,,,501602,,,,,MECHA:TIDY
-1701,터틀,Turtle_Enemy_Prefab,ENEMY,,101700,TEAM3,SHIELD,,,[],[0601710],,,Turtle
+1701,터틀,Turtle_Enemy_Prefab,ENEMY,,101700,TEAM3,SHIELD,,,[501710],[0601710],,,Turtle
 1801,래빗,Rabbit_Enemy_Prefab,ENEMY,,101800,TEAM3,DUAL_BLADE,,501800,[0501810],,,,Rabbit
 1901,갤럭시,Galaxy_Enemy_Prefab,ENEMY,,101900,TEAM3,SWORD,,501900,[0501910],,,,Galaxy
 2001,포시티아,Forsythia_Enemy_Prefab,ENEMY,,102000,TEAM3,MAGIC_WAND,,502000,[0502010],,,,Forsythia

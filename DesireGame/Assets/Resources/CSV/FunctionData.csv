@@ -96,7 +96,7 @@ long,,#주석,eFunction,eStats,eDamageType,eCCType,long,long,long,long,long,long
 601311,501311,루비카 Skill 2) 무작위 적 3명에게 TAUNT 3초간 부여,APPLY_CC,,,TAUNT,3000,,,,,,,,
 601410,501410,아델 Skill 1) 대상에게 CHARM 3초간 부여.,APPLY_CC,,,CHARM,3000,,,,,,,,
 601510,501511,이시스 Skill: 가장 가까운 아군 1명의 AS를 3초간 100% 증가.,BUFF_ONCE,AS,,,3000,10000,,,,,,,
-601710,501710,터틀 Passive: 5초마다 인접한 적에게 주문력의 100%에 해당하는 마법 피해를 가합니다.,,,,,,,,,,,,,
+601710,501710,터틀 Passive: 5초마다 인접한 적에게 주문력의 100%에 해당하는 마법 피해를 가합니다.,TURTLE_PASSIVE,,,,-1,,,,,,,,
 601810,501810,"래빗 Skill: 주문력의 200%에 해당하는 마법 피해를 가하고, 적의 체력이 10% 이하라면 즉시 처형합니다.",KILL_ENEMY_UNDER_HP,,,,,1000,,,,,,,
 601910,501910,갤럭시 Skill Multicasting:,MULTICASTING,,,,,601911,601912,,,,,,
 601912,,2) 주변 1칸 내의 적에게 1.5초간 침묵을 부여함.,APPLY_CC,,,SILENCE,1500,,,,,,,,

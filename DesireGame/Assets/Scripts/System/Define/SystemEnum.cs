@@ -230,7 +230,7 @@ namespace Client
             QUANTUM_CC_3,
             LISA_PASSIVE_AA,
             KILL_ENEMY_UNDER_HP,
-
+            TURTLE_PASSIVE,
             eMax
         }
 
