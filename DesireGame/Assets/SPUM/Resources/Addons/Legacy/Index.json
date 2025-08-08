@@ -979,6 +979,54 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
     },
     {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/i"
+    },
+    {
       "Name": "vi",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -2853,6 +2901,14 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/J"
     },
     {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "i",
+      "PartSubType": "Shield",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/3_Shield/i"
+    },
+    {
       "Name": "vi",
       "UnitType": "Unit",
       "PartType": "Weapons",
@@ -2981,6 +3037,14 @@
       "SubType": "J",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/J"
+    },
+    {
+      "Name": "i",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "i",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/i"
     },
     {
       "Name": "vi",
