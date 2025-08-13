@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228aa9e44789164fb95cac594baada8, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 6fb0d327821de4ca19ea0fcf940b27ee, type: 2}
+  animationClip: {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
 --- !u!114 &-2062542541785117962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,6 +162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a097e7893c65683439be5eeeedc3da1f, type: 3}
   m_Name: Skill Marker Pinpoint Damage
   m_EditorClassIdentifier: 
-  m_Time: 0.3
+  m_Time: 0
   _statName: 4
   percent: 100
