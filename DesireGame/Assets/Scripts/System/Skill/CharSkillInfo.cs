@@ -127,6 +127,7 @@ namespace Client
             {
                 Caster = _charBase, type = info.TargetType
             }).GetTargets();
+            Debug.Log($"{targets.Count} targets remaining");
             PlaySkill(playing, new SkillParameter(targets, _charBase));
         }
         

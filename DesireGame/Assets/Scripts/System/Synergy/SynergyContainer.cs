@@ -1,3 +1,4 @@
+using System;
 using static Client.SystemEnum;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,35 @@ namespace Client
 {
     public class SynergyContainer
     {
+        #region Fields
         private readonly eSynergy _mySynergy;
         private readonly eCharType _myCharType;
 
-        private List<CharLightWeightInfo> _synergyMembers;
-        public ReadOnlyCollection<CharLightWeightInfo> SynergyMembers => _synergyMembers.AsReadOnly();
+        private readonly List<CharLightWeightInfo> _synergyMembers;
+        private readonly HashSet<CharLightWeightInfo> _guestMemberSet;
+        #endregion
         
-        private HashSet<CharLightWeightInfo> _guestMemberSet;
-
+        #region Properties
+        public eSynergy Synergy => _mySynergy;
+        public eCharType Side => _myCharType;
+        public ReadOnlyCollection<CharLightWeightInfo> SynergyMembers => _synergyMembers.AsReadOnly();
+        public int MemberCount => _synergyMembers.Count;
+        #endregion
+        
+        #region Container Events
+        public event Action<SynergyContainer> OnLevelChanged;
+        public event Action<CharLightWeightInfo> OnMemberJoined;
+        public event Action<CharLightWeightInfo> OnMemberLeft;
+        
+        public event Action<CharLightWeightInfo> OnGuestJoined;
+        public event Action<CharLightWeightInfo> OnGuestLeft;
+        #endregion
+        
         #region 생성자
         public SynergyContainer(eSynergy synergy, eCharType myCharType)
         {
-            _synergyMembers = new();
-            _guestMemberSet = new();
+            _synergyMembers = new List<CharLightWeightInfo>();
+            _guestMemberSet = new HashSet<CharLightWeightInfo>();
             _mySynergy = synergy;
             _myCharType = myCharType;
         }
@@ -33,27 +50,25 @@ namespace Client
         
         #region Synergy Member Control
 
-        public int MemberCount => _synergyMembers.Count;
-
         // 해당 시너지에 포함되는 멤버가 등록될 때 호출된다.
         public void Register(CharLightWeightInfo registrar)
         {
-            if(_guestMemberSet.Contains(registrar))
-                _guestMemberSet.Remove(registrar);
-            if(!_synergyMembers.Contains(registrar))
+            _guestMemberSet.Remove(registrar);
+            if (!_synergyMembers.Contains(registrar))
+            {
                 _synergyMembers.Add(registrar);
-
+                OnMemberJoined?.Invoke(registrar);
+            }
+            
             if (CheckSynergyChange())
-                SetCurrentSynergy();
-            else
-                GetCurrentSynergyBuff(registrar);
+                OnLevelChanged?.Invoke(this);
         }
 
-        public void GuestRegister(CharLightWeightInfo guest)
-        {
-            _guestMemberSet.Add(guest);
-            GetCurrentSynergyBuff(guest);
-        }
+        //public void GuestRegister(CharLightWeightInfo guest)
+        //{
+        //    _guestMemberSet.Add(guest);
+        //    GetCurrentSynergyBuff(guest);
+        //}
         
         // 해당 시너지에 포함되는 멤버가 탈퇴할 때 호출된다.
         public void Delete(CharLightWeightInfo leaver)
@@ -74,10 +89,21 @@ namespace Client
 
         }
 
-        public void GuestDelete(CharLightWeightInfo guestLeaver)
+        //public void GuestDelete(CharLightWeightInfo guestLeaver)
+        //{
+        //    _guestMemberSet.Remove(guestLeaver);
+        //    KillLeaverBuff(guestLeaver);
+        //}
+        public void GuestRegister(CharLightWeightInfo guest, bool silent = false)
         {
-            _guestMemberSet.Remove(guestLeaver);
-            KillLeaverBuff(guestLeaver);
+            if (_guestMemberSet.Add(guest) && !silent)
+                OnGuestJoined?.Invoke(guest);
+        }
+
+        public void GuestDelete(CharLightWeightInfo guestLeaver, bool silent = false)
+        {
+            if (_guestMemberSet.Remove(guestLeaver) && !silent)
+                OnGuestLeft?.Invoke(guestLeaver);
         }
 
         
@@ -97,7 +123,7 @@ namespace Client
             }
         }
 
-        private List<SynergyData> GetSynergyByLevel()
+        public List<SynergyData> GetSynergyByLevel()
         {
             var synergyInfo = DataManager.Instance.SynergyDataMap[_mySynergy];
             var sortedKeys = new List<int>(synergyInfo.Keys);
@@ -115,22 +141,20 @@ namespace Client
                 }
                 levelThreshold = threshold;
             }
-
-            if (!synergyInfo.ContainsKey(levelThreshold)) 
-                return new List<SynergyData>();
-            return synergyInfo[levelThreshold];
+            
+            return synergyInfo.TryGetValue(levelThreshold, out var list) ? list : new List<SynergyData>();
         }
         #endregion
 
-        #region Synergy Buff Managing
+        #region Synergy Buff Managing(Will be deprecated)
 
         private Queue<SynergyBuffRecord> synergyBuffRecords = new();
         
         // 시너지가 갱신되어야 하는지에 대한 체크 함수
         private bool CheckSynergyChange()
         {
-            var newSynergy = GetSynergyByLevel();
-            if (_currentSynergyBuff == newSynergy)
+            List<SynergyData> newSynergy = GetSynergyByLevel();
+            if (ReferenceEquals(_currentSynergyBuff, newSynergy))
             {
                 return false;
             }

@@ -76,7 +76,7 @@ namespace Client
             EnqueueImmediateFunction(func);
         }
                
-        public void AddFunction(BuffParameter target, eBuffTriggerTime triggerTime)
+        public FunctionBase AddFunction(BuffParameter target, eBuffTriggerTime triggerTime)
         {
             FunctionBase func = FunctionFactory.FunctionGenerate(target);
             if(triggerTime == eBuffTriggerTime.BORN)
@@ -87,6 +87,8 @@ namespace Client
             {
                 EnqueueInitialFunction(func);
             }
+
+            return func;
         }
 
         public void AddFunction(FunctionBase target, eBuffTriggerTime triggerTime=eBuffTriggerTime.BORN)

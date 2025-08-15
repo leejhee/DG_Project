@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/TurtlePassive.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/TurtlePassive.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/CharData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/XLSXS/FunctionData.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyAnchor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyAnchor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/CharData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/FunctionData.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/TURTLE_PASSIVE.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/TURTLE_PASSIVE.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharUtil.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Define/SystemEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/CSV/StatsData.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/CSV/StatsData.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Skill/CharSkillInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Skill/CharSkillInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/UniqueEffect/CC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +31,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2d8783c7af0442318483a199a473c55b175e00/d7/7774827e/SetupCoroutine.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargettingStrategyBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharParameter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -261,7 +256,11 @@
       <workItem from="1754278456079" duration="8426000" />
       <workItem from="1754396659154" duration="7381000" />
       <workItem from="1754404618179" duration="237000" />
-      <workItem from="1754404868631" duration="1858000" />
+      <workItem from="1754404868631" duration="2461000" />
+      <workItem from="1754483083277" duration="1017000" />
+      <workItem from="1754914527537" duration="4276000" />
+      <workItem from="1755089527676" duration="1177000" />
+      <workItem from="1755236635861" duration="14603000" />
     </task>
     <servers />
   </component>
@@ -321,7 +320,7 @@
         </line-breakpoint>
         <line-breakpoint type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
-          <line>274</line>
+          <line>298</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'SetCurrentSynergy'" />
           <option name="timeStamp" value="61" />
         </line-breakpoint>
@@ -378,27 +377,14 @@
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyContainer.cs</url>
-          <line>41</line>
-          <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\Synergy\SynergyContainer.cs" containingFunctionPresentation="메서드 'Register'">
-            <startOffsets>
-              <option value="1293" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1327" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="105" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs</url>
-          <line>70</line>
+          <line>71</line>
           <properties documentPath="C:\Users\jehee\Documents\GitHub\DG_Project\DesireGame\Assets\Scripts\System\SingletonObjects\Managers\SynergyManager.cs" containingFunctionPresentation="메서드 'DeleteCharSynergy'">
             <startOffsets>
-              <option value="2135" />
+              <option value="2213" />
             </startOffsets>
             <endOffsets>
-              <option value="2183" />
+              <option value="2261" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="110" />
