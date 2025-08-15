@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9228aa9e44789164fb95cac594baada8, type: 3}
   m_Name: AnimationPlayableAsset
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 4e665e74bfc27d04e8d5a0f4a71567e4, type: 2}
+  animationClip: {fileID: 7400000, guid: b2c5fb441f4ac42c2a2e051601eea60a, type: 2}
 --- !u!114 &-3509404056857895811
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: -7525935385764767440}
-    m_Duration: 0.3333333432674408
+    m_Duration: 0.5
     m_TimeScale: 1
     m_ParentTrack: {fileID: -3509404056857895811}
     m_EaseInDuration: 0
@@ -66,6 +66,39 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: 3_damaged
+  - m_Version: 1
+    m_Start: 0.5
+    m_ClipIn: 0
+    m_Asset: {fileID: 7861411990337505840}
+    m_Duration: 0.5
+    m_TimeScale: 1
+    m_ParentTrack: {fileID: -3509404056857895811}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -102,7 +135,7 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: 3_damaged
+    m_DisplayName: 0_Buff
   m_Markers:
     m_Objects: []
 --- !u!114 &11400000
@@ -138,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca700d285bbe89408fbbb6ffe83bf71, type: 3}
   m_Name: Skill Marker Function Injector
   m_EditorClassIdentifier: 
-  m_Time: 0.3333333432674408
+  m_Time: 0.5
   functionIndex: 600311
   targetType: 1
 --- !u!114 &6816863231159629286
@@ -181,3 +214,16 @@ MonoBehaviour:
     m_Objects:
     - {fileID: 6816863231159629286}
     - {fileID: 2807705490730344940}
+--- !u!114 &7861411990337505840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9228aa9e44789164fb95cac594baada8, type: 3}
+  m_Name: AnimationPlayableAsset
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
