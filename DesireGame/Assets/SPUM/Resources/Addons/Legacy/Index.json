@@ -979,6 +979,54 @@
       "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/Sa"
     },
     {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_R",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Head",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Body",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Arm_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Body",
+      "SubType": "Foot_L",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/1_Body/yu"
+    },
+    {
       "Name": "i",
       "UnitType": "Unit",
       "PartType": "Body",
@@ -2876,6 +2924,14 @@
       "PartSubType": "Axe",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/1_Axe/Axe_1"
     },
+     {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Weapons",
+      "SubType": "yu",
+      "PartSubType": "Axe",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/6_Weapons/1_Axe/yu"
+    },
     {
       "Name": "Bow_1",
       "UnitType": "Unit",
@@ -3045,6 +3101,14 @@
       "SubType": "i",
       "PartSubType": "",
       "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/i"
+    },
+    {
+      "Name": "yu",
+      "UnitType": "Unit",
+      "PartType": "Back",
+      "SubType": "yu",
+      "PartSubType": "",
+      "Path": "Addons/Legacy/0_Unit/0_Sprite/7_Back/yu"
     },
     {
       "Name": "vi",
