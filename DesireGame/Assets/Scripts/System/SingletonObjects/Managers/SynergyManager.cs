@@ -26,7 +26,8 @@ namespace Client
         public override void Init()
         {
             base.Init();
-            _router = new SynergyRouter(this);
+            _router = new SynergyRouter(this);          //라우터(분배기) 초기화
+            GameManager.Instance.AddOnUpdate(Update);   //시너지 관련 업데이트 필요
         }
 
         public void Reset()
@@ -153,8 +154,8 @@ namespace Client
         
         private void Update()
         {
-            foreach (var bySyn in _anchors.Values)
-                foreach (var a in bySyn.Values)
+            foreach (Dictionary<eSynergy, SynergyAnchor> bySyn in _anchors.Values)
+                foreach (SynergyAnchor a in bySyn.Values)
                     a.Tick();
         }
         

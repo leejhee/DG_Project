@@ -83,13 +83,13 @@ namespace Client
             try
 			{{            
                 string csvContent = csvFile.text;
-                var lines = Regex.Split(csvContent, @""\r?\n"");
+                var lines = DSV.SplitRecords(csvContent);
                 for (int i = 3; i < lines.Length; i++)
                 {{
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = CSVParser.Parse(lines[i].Trim());
+                    string[] values = DSV.ParseCsv(lines[i]);
 
                     line = i;
 
@@ -139,13 +139,13 @@ namespace Client
             try
 			{{            
                 string csvContent = csvFile.text;
-                var lines = Regex.Split(csvContent, @""(?<!""""[^""""]*)\r?\n"");
+                var lines = DSV.SplitRecords(csvContent);
                 for (int i = 3; i < lines.Length; i++)
                 {{
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = lines[i].Trim().Split('\t');
+                    string[] values = DSV.ParseTsv(lines[i]);
                     line = i;
 
                     {0} data = new {0}();

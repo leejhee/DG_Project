@@ -49,7 +49,7 @@ namespace Client
                 _instance = gm.GetComponent<GameManager>();
                 DontDestroyOnLoad(gm);
                 DataManager.Instance.Init();
-                SynergyManager.Instance.Init();
+                //SynergyManager.Instance.Init();
                 //_instance._networkManager.Init();
 
                 //GoogleSheet googleSheet = _instance._networkManager.data;

@@ -100,7 +100,7 @@ namespace Client
 
             foreach (var _stringCode in stringCodeMap.Values)
             {
-                StringCodeData stringCode = _stringCode as StringCodeData;
+                if (_stringCode is not StringCodeData stringCode) continue;
                 Dictionary<SystemEnum.eLocalize, string> keyValuePairs = new();
                 keyValuePairs.Add(SystemEnum.eLocalize.KOR, stringCode.KOR);
                 keyValuePairs.Add(SystemEnum.eLocalize.ENG, stringCode.ENG);

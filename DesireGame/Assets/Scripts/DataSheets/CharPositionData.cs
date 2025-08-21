@@ -32,13 +32,13 @@ public long Index; // Index
             try
 			{            
                 string csvContent = csvFile.text;
-                var lines = Regex.Split(csvContent, @"\r?\n");
+                var lines = DSV.SplitRecords(csvContent);
                 for (int i = 3; i < lines.Length; i++)
                 {
                     if (string.IsNullOrWhiteSpace(lines[i]))
                         continue;
 
-                    string[] values = CSVParser.Parse(lines[i].Trim());
+                    string[] values = DSV.ParseCsv(lines[i]);
 
                     line = i;
 

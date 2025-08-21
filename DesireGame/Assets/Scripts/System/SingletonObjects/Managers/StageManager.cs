@@ -48,12 +48,12 @@ namespace Client
         {
             base.Init();
             CharManager.Instance.OnCharTypeEmpty += CheckWinCondition;
+            SynergyManager.Instance.Init(); // 이제 시너지는 스테이지 배치 로직에 의존하는 시스템이다.
         }
 
         /// <summary> 새로운 스테이지 배치 </summary>
         public void StartStage(int stageNum)
         {
-            //CharManager.Instance.ClearAllChar();
             CharManager.Instance.HardClearAll();
 
             if (CanStartStage == false)
@@ -71,7 +71,9 @@ namespace Client
                 CharBase charMonster = CharManager.Instance.CharGenerate(stage.CharacterID);
                 TileManager.Instance.SetChar(stage.PositionIndex, charMonster);
             }
-
+            //캐릭터 배치 후 시너지 분배
+            SynergyManager.Instance.RebuildFromFieldAndDistribute();
+            
             Stage = stageNum;
             TileManager.Instance.SwitchTileCombatmode(false);
             OnEndCombat?.Invoke();
