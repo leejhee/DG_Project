@@ -53,7 +53,7 @@ namespace Client
                 Debug.LogWarning($"{typeof(T).ToString()} 타입을 찾을 수 없음");
                 return null;
             }
-            if (_cache[key].ContainsKey(ID))
+            if (!_cache[key].ContainsKey(ID))
             {
                 Debug.LogWarning($"{key} 타입의 ID: {ID}을 찾을 수 없음");
                 return null;

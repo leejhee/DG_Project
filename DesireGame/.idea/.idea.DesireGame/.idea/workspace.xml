@@ -5,35 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/DSV.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/DSV.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/DataFormat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/DataFormat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/bin/Debug/DataGenerator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/bin/Debug/DataGenerator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/obj/Debug/DataGenerator.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/AndroidProjectSystem.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DataGenerator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DataGenerator/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharPositionData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharPositionData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharacterSpawnData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/CharacterSpawnData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ConditionData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ConditionData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/FunctionData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/FunctionData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ItemData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ItemData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ItemSubStatData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ItemSubStatData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/MonsterSpawnData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/MonsterSpawnData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ProjectileData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/ProjectileData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/SkillData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/SkillData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StageData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StageData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StatsData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StatsData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StringCodeData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/StringCodeData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/SynergyData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/SynergyData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DataSheets/TierColorData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DataSheets/TierColorData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/DataManager_partial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/StageManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,24 +62,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Unity 에디터에 연결.Unity 에디터에 연결.executor&quot;: &quot;Debug&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.2748268&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.smartKeys_rider&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Unity 에디터에 연결.Unity 에디터에 연결.executor": "Debug",
+    "XThreadsFramesViewSplitterKey": "0.2748268",
+    "git-widget-placeholder": "Recovery",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Unity 에디터에 연결.Unity 에디터에 연결">
     <configuration name="유닛 테스트(배치 모드)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity 2022.3.37f1\Editor\Unity.exe" />
@@ -151,15 +129,13 @@
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="21276">
+    <configuration name="Unity 에디터에 연결" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="21276" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />

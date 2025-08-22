@@ -56,7 +56,7 @@ namespace Client
         {
             CharManager.Instance.HardClearAll();
 
-            if (CanStartStage == false)
+            if (!CanStartStage)
                 return;
 
             if (DataManager.Instance.CharacterSpawnStageMap.ContainsKey(stageNum) == false)

@@ -92,6 +92,7 @@ namespace Client
             if (synergy == eSynergy.None) return;
             var side = registrar.Side;
             
+            
             if (!_synergyMembers.ContainsKey(side))
                 _synergyMembers.Add(side, new Dictionary<eSynergy, SynergyContainer>());
             
@@ -159,6 +160,9 @@ namespace Client
                     a.Tick();
         }
         
+        /// <summary>
+        /// 스테이지 초기화시 캐릭터들에 시너지 분배
+        /// </summary>
         public void RebuildFromFieldAndDistribute()
         {
             _rebuilding = true;

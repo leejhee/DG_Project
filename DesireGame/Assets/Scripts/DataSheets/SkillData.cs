@@ -19,13 +19,9 @@ public long Index; // ID
 		public int skillRange; // 스킬 사거리
 		
 		public SystemEnum.eSkillTargetType skillTarget; // 스킬 대상
-		public long skillProjectile; // 투사체
 		public string animPath; // 애니메이션 경로
 		public string fxPath; // 이펙트 경로
 		public string sfxPath; // SFX 경로
-		public long childSkillCondition; // #자식 스킬 사용 조건
-		public long childSkill; // 자식 스킬
-		public string imagePath; // 이미지 경로
 		
 
         public override Dictionary<long, SheetData> LoadData()
@@ -76,11 +72,6 @@ public long Index; // ID
 					else
 					    data.skillTarget = (SystemEnum.eSkillTargetType)Enum.Parse(typeof(SystemEnum.eSkillTargetType), values[5]);
 					
-					if(values[6] == "")
-					    data.skillProjectile = default;
-					else
-					    data.skillProjectile = Convert.ToInt64(values[6]);
-					
 					if(values[7] == "")
 					    data.animPath = default;
 					else
@@ -95,21 +86,6 @@ public long Index; // ID
 					    data.sfxPath = default;
 					else
 					    data.sfxPath = Convert.ToString(values[9]);
-					
-					if(values[10] == "")
-					    data.childSkillCondition = default;
-					else
-					    data.childSkillCondition = Convert.ToInt64(values[10]);
-					
-					if(values[11] == "")
-					    data.childSkill = default;
-					else
-					    data.childSkill = Convert.ToInt64(values[11]);
-					
-					if(values[12] == "")
-					    data.imagePath = default;
-					else
-					    data.imagePath = Convert.ToString(values[12]);
 					
 
                     dataList[data.Index] = data;
