@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
+using System.Text;
 namespace Client
 {
     public class GameSceneCharInfo : MonoBehaviour
@@ -16,6 +17,15 @@ namespace Client
 
             teamA_InfoUI.gameObject.SetActive(false);
             teamB_InfoUI.gameObject.SetActive(false);
+            //showKeymapp();
+        }
+        void showKeymapp()
+        {
+            foreach(var key in DataManager.Instance.LocalizeStringCodeMap.Keys)
+            {
+                Debug.Log($"LocalizeStringCodeMap 키: {key}");
+            }
+
         }
         private void OnDisable()
         {

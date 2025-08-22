@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Client.SystemEnum;
 
@@ -14,12 +15,15 @@ namespace Client
         [SerializeField] Image IMG_NameTag;
         [SerializeField] Image IMG_CharPortrait;
         [SerializeField] Button BTN_SkillIcon;
+        [SerializeField] SkillInfoUI skillInfoUI;
 
         [SerializeField] TextMeshProUGUI TMP_HP;
         [SerializeField] TextMeshProUGUI TMP_MANA;
         [SerializeField] TextMeshProUGUI TMP_Synergy;
 
         [SerializeField] List<TextMeshProUGUI> TMP_CharStatsList = new();
+        
+        SkillData currentSkill;
 
         readonly SystemEnum.eStats[][] statGroups = new SystemEnum.eStats[][]
         {
@@ -39,6 +43,7 @@ namespace Client
         /// <summary> 캐릭터 기본 정보 띄우기 </summary>
         public void DisplayCharInfo(CharInfo charInfo)
         {
+            skillInfoUI.gameObject.SetActive(false);
             DisplayCharData(charInfo.charBase.CharData);
             DisplayCharStat(charInfo.charBase.CharStat);
         }
@@ -94,8 +99,12 @@ namespace Client
             TMP_Name.text = charData.charKorName;
 
             // TODO : 캐릭터 초상화 설정
+            //IMG_CharPortrait.sprite = ObjectManager.Instance.LoadSprite(charData.imagePath);
 
-            // TODO : 스킬 데이터 참조 어케 함
+            // TODO : 스킬 이미지 설정
+            currentSkill = DataManager.Instance.GetData<SkillData>(charData.skill2[0]);
+            //BTN_SkillIcon.image.sprite = ObjectManager.Instance.LoadSprite(currentSkill.imagePath);
+            SetupSkillButton();
 
 
             // 티어 확인 -> TierColorData -> hexColorForItemDes
@@ -107,6 +116,31 @@ namespace Client
             IMG_NameTag.color = Util.GetHexColor(tierColorCode);
 
             TMP_Synergy.text = $"{charData.synergy1} {charData.synergy2} {charData.synergy3}";
+        }
+
+        void SetupSkillButton()
+        {
+            EventTrigger trigger = BTN_SkillIcon.gameObject.GetComponent<EventTrigger>();
+            if (trigger == null)
+                trigger = BTN_SkillIcon.gameObject.AddComponent<EventTrigger>();
+
+            trigger.triggers.Clear();
+
+            EventTrigger.Entry rightClick = new EventTrigger.Entry
+            {
+                eventID = EventTriggerType.PointerClick
+            };
+            rightClick.callback.AddListener((data) =>
+            {
+                if (((PointerEventData)data).button == PointerEventData.InputButton.Right)
+                {
+                    Debug.Log("스킬 아이콘 우클릭 누름");
+                    skillInfoUI.gameObject.SetActive(true);
+                    skillInfoUI.DisplaySkillInfoUI(currentSkill);
+                }
+            });
+
+            trigger.triggers.Add(rightClick);
         }
     }
 }
