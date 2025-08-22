@@ -3,7 +3,7 @@ Index	StringCode	KOR	ENG	#설명
 long	string	string	string	#설명																							
 1000000	UI_OK	확인	OK																								
 1000001	UI_CANCEL	취소	CANCEL																								
-1000006	UI_TEAM_LV	팀 LV : {0}	1																								
+1000006	UI_TEAM_LV	팀 LV : {0}	1	{0} : 현재 팀 레벨																							
 1000007	UI_BATTLE_START	전투 시작	1																								
 1000002	SKILL_MELEE_AD	기본 근거리 물리 공격	1																								
 1000003	SKILL_RANGED_AP	기본 원거리 마법 공격	1																								
@@ -21,17 +21,17 @@ long	string	string	string	#설명
 1008103	DES_ITEM_MAGIC_SCROLL	주문서 설명	4																								
 1008104	DES_ITEM_CLOAK	망토설명	5																								
 1008105	DES_ITEM_CREDIT	크레딧 설명	6																								
-1008200	DES_ITEM_DAGGER_MAINOPTION	공격력 +{0}	AD +{0}																								
-1008201	DES_ITEM_BARRIER_MAINOPTION	체력 +{0}	HP +{0}																								
-1008202	DES_ITEM_BOW_MAINOPTION	공격속도 +{0}	AS +{0}																								
-1008203	DES_ITEM_MAGIC_SCROLL_MAINOPTION	주문력 +{0}	AP +{0}																								
-1008204	DES_ITEM_CLOAK_MAINOPTION	치명타 확률 +{0}	Crit Chance +{0}																								
-1013000	DES_ITEM_SUBSTATS_AD	공격력 +{0}	AD +{0}																								
-1013001	DES_ITEM_SUBSTATS_AP	주문력 +{0}	AP +{0}	{0} itemData-> mainStatsIncrease																							
-1013002	DES_ITEM_SUBSTATS_HP	체력 +{0}	HP +{0}	{0} itemData-> mainStatsIncrease																							
-1013003	DES_ITEM_SUBSTATS_AS	공격속도 +{0}	AS +{0}	{0} itemData-> mainStatsIncrease																							
-1013004	DES_ITEM_SUBSTATS_CRIT_CHANCE	치명타 확률 +{0}	Crit Chance +{0}	{0} itemData-> mainStatsIncrease																							
-1013005	DES_ITEM_SUBSTATS_CRIT_DAMAGE	치명타 피해 +{0}	Crit Damage +{0}	{0} itemData-> mainStatsIncrease																							
+1008200	DES_ITEM_DAGGER_MAINOPTION	공격력 +{0}	AD +{0}	{0} itemData-> mainStatsIncrease																							
+1008201	DES_ITEM_BARRIER_MAINOPTION	체력 +{0}	HP +{0}	{0} itemData-> mainStatsIncrease																							
+1008202	DES_ITEM_BOW_MAINOPTION	공격속도 +{0}	AS +{0}	{0} itemData-> mainStatsIncrease																							
+1008203	DES_ITEM_MAGIC_SCROLL_MAINOPTION	주문력 +{0}	AP +{0}	{0} itemData-> mainStatsIncrease																							
+1008204	DES_ITEM_CLOAK_MAINOPTION	치명타 확률 +{0}	Crit Chance +{0}	{0} itemData-> mainStatsIncrease																							
+1013000	DES_ITEM_SUBSTATS_AD	공격력 +{0}	AD +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1013001	DES_ITEM_SUBSTATS_AP	주문력 +{0}	AP +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1013002	DES_ITEM_SUBSTATS_HP	체력 +{0}	HP +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1013003	DES_ITEM_SUBSTATS_AS	공격속도 +{0}	AS +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1013004	DES_ITEM_SUBSTATS_CRIT_CHANCE	치명타 확률 +{0}	Crit Chance +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1013005	DES_ITEM_SUBSTATS_CRIT_DAMAGE	치명타 피해 +{0}	Crit Damage +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013006	DES_ITEM_SUBSTATS_DAMAGE_INCREASE	피해 증폭 +{0}%	Damage Increase +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013007	DES_ITEM_SUBSTATS_BONUS_DAMAGE	추가 피해 +{0}	Bonus Damage +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013008	DES_ITEM_SUBSTATS_ARMOR	방어력 +{0}	Armor +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
@@ -43,12 +43,12 @@ long	string	string	string	#설명
 1013014	DES_ITEM_SUBSTATS_START_MANA	시작 마나 +{0}	Start Mana +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013015	DES_ITEM_SUBSTATS_DAMAGE_REDUCTION	피해량 감소 +{0}%	Damage Reduction +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
 1013016	DES_ITEM_SUBSTATS_BARRIER	보호막 +{0}	Barrier +{0}	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009000	LAPLACIAN	라플라시안	Laplacian	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009001	TIMER	타이머	Timer	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009002	QUANTUM_WASHER	퀀텀 세탁기	Quantum Washer	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009003	TIDY	티디	Tidy	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009004	TEAM3	형사3과	Team 3	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
-1009005	SWORD	한손검	Sword	{0} : 최대 최소로 정해진 값 (itemSubStatsData -> min, max값.																							
+1009000	LAPLACIAN	라플라시안	Laplacian																								
+1009001	TIMER	타이머	Timer																								
+1009002	QUANTUM_WASHER	퀀텀 세탁기	Quantum Washer																								
+1009003	TIDY	티디	Tidy																								
+1009004	TEAM3	형사3과	Team 3																								
+1009005	SWORD	한손검	Sword																								
 1009006	RANGED	장총	Ranged																								
 1009007	SHIELD	방패	Shield																								
 1009008	MAGIC_WAND	마법봉	Magic Wand																								
@@ -63,48 +63,48 @@ long	string	string	string	#설명
 1009107	DES_SHIELD	쉴드설명	8																								
 1009108	DES_MAGIC_WAND	마법봉설명	9																								
 1009109	DES_DUAL_BLADE	쌍검설명	10																								
-1005001	SKILL_L	처단!	11																								
-1005002	SKILL_K	일방적 통보	12																								
-1005003	SKILL_J	제가 해야 되나요...	13																								
-1005004	SKILL_M	6분의 1	14																								
-1005101	DES_SKILL_L	다음 두 번의 기본 공격이 60의 추가피해를 입힙니다.	15																								
-1005102	DES_SKILL_K	"가장 멀리 있는 적에게 날아갔다가 K에게 돌아오는 나비를 던집니다. 나비에 닿은 적은 K의 주문력의 120%에 해당하는 마법 피해를 입고, 6초간 '통보'를 얻습니다. 
+1005001	L_SKILL	처단!	11																								
+1005002	K_SKILL	일방적 통보	12																								
+1005003	J_SKILL	제가 해야 되나요...	13																								
+1005004	M_SKILL	6분의 1	14																								
+1005101	DES_L_SKILL	다음 두 번의 기본 공격이 60의 추가피해를 입힙니다.	15																								
+1005102	DES_K_SKILL	"가장 멀리 있는 적에게 날아갔다가 K에게 돌아오는 나비를 던집니다. 나비에 닿은 적은 K의 주문력의 120%에 해당하는 마법 피해를 입고, 6초간 '통보'를 얻습니다. 
 (통보: 마법 방어력 -50%)"	16																								
-1005103	DES_SKILL_J	"현재 공격 중인 대상에게 J의 최대 체력의 15%에 해당하는 물리 피해를 가합니다. 
+1005103	DES_J_SKILL	"현재 공격 중인 대상에게 J의 최대 체력의 15%에 해당하는 물리 피해를 가합니다. 
 J는 공격력의 200%만큼 체력을 회복합니다."	17																								
-1005104	DES_SKILL_M	현재 공격 중인 대상에게 M의 공격력의 200%에 해당하는 물리 피해를 가합니다. 이 공격은 반드시 치명타로 적중합니다.	18																								
-1005005	SKILL_VIVIAN	자..잘못했어요!	19																								
-1005006	SKILL_GRACE	우아한 한 발	20																								
-1005007	SKILL_SHANNAH	약점 찌르기	21																								
-1005008	SKILL_EMMA	이상 무!	22																								
-1005105	DES_SKILL_VIVIAN	비비안이 아군 진영의 후방으로 순간이동합니다. 이후, 공격력의 100%만큼 체력을 회복합니다.	23																								
-1005106	DES_SKILL_GRACE	"6초 동안 그레이스의 최대 사거리가 10이 됩니다.
+1005104	DES_M_SKILL	현재 공격 중인 대상에게 M의 공격력의 200%에 해당하는 물리 피해를 가합니다. 이 공격은 반드시 치명타로 적중합니다.	18																								
+1005005	VIVIAN_SKILL	자..잘못했어요!	19																								
+1005006	GRACE_SKILL	우아한 한 발	20																								
+1005007	SHANNAH_SKILL	약점 찌르기	21																								
+1005008	EMMA_SKILL	이상 무!	22																								
+1005105	DES_VIVIAN_SKILL	비비안이 아군 진영의 후방으로 순간이동합니다. 이후, 공격력의 100%만큼 체력을 회복합니다.	23																								
+1005106	DES_GRACES_KILL	"6초 동안 그레이스의 최대 사거리가 10이 됩니다.
 0.5초마다 공격 중인 대상과 대상 주변 1칸에 있는 적에게 그레이스의 공격력의 50%에 해당하는 물리 피해를 가합니다."	24																								
-1005107	DES_SKILL_SHANNAH	4초간 샤나의 공격 속도가 50%, 치명타 확률이 25%, 치명타 피해량이 50% 상승합니다.	25																								
-1005108	DES_SKILL_EMMA	엠마가 가장 가까운 2명의 아군과 자기 자신에게 '정비' 버프를 4초간 제공합니다. (정비: 주문력 및 공격력 +60%)	26																								
-1005009	SKILL_YUNA	무음지대	27																								
-1005010	SKILL_LISA	셋, 둘, 하나!	28																								
-1005011	SKILL_NATSUKI	인디안 밥!	29																								
-1005012	SKILL_AME	앵콜~	30																								
-1005109	DES_SKILL_YUNA	유나가 기타를 연주하여 주변 1칸 내의 적에게 공격력의 50%에 해당하는 물리 피해를 가하고 2초간 침묵을 부여합니다.	31																								
-1005110	DES_SKILL_LISA	리사가 3번째 기본 공격마다 공격 중인 대상 및 대상과 가장 가까운 적 2명에게 공격력의 20%에 해당하는 물리 피해를 가합니다.	32																								
-1005111	DES_SKILL_NATSUKI	"현재 공격 중인 대상을 드럼 스틱으로 6번 내려칩니다. 각 공격은 주문력의 30%에 해당하는 마법 피해를 가합니다.
+1005107	DES_SHANNAH_SKILL	4초간 샤나의 공격 속도가 50%, 치명타 확률이 25%, 치명타 피해량이 50% 상승합니다.	25																								
+1005108	DES_EMMA_SKILL	엠마가 가장 가까운 2명의 아군과 자기 자신에게 '정비' 버프를 4초간 제공합니다. (정비: 주문력 및 공격력 +60%)	26																								
+1005009	YUNA_SKILL	무음지대	27																								
+1005010	LISA_SKILL	셋, 둘, 하나!	28																								
+1005011	NATSUKI_SKILL	인디안 밥!	29																								
+1005012	AME_SKILL	앵콜~	30																								
+1005109	DES_YUNA_SKILL	유나가 기타를 연주하여 주변 1칸 내의 적에게 공격력의 50%에 해당하는 물리 피해를 가하고 2초간 침묵을 부여합니다.	31																								
+1005110	DES_LISA_SKILL	리사가 3번째 기본 공격마다 공격 중인 대상 및 대상과 가장 가까운 적 2명에게 공격력의 20%에 해당하는 물리 피해를 가합니다.	32																								
+1005111	DES_NATSUKI_SKILL	"현재 공격 중인 대상을 드럼 스틱으로 6번 내려칩니다. 각 공격은 주문력의 30%에 해당하는 마법 피해를 가합니다.
 이번 전투에서 나츠키가 스킬을 사용한 횟수만큼 추가로 내려칩니다."	33																								
-1005112	DES_SKILL_AME	아메가 아군에게 비를 내려 체력이 가장 낮은 아군 2명의 체력을 주문력의 30%에 해당하는 만큼 회복시키고, 4초간 공격력 및 주문력을 50% 증가시킵니다.	34																								
-1005013	SKILL_RUBIKA	돼지우리	35																								
-1005014	SKILL_ADELE	쭈와아압	36																								
-1005015	SKILL_ISYS	하이. ㅇI시스	37																								
-1005113	DES_SKILL_RUBIKA	루비카의 최대 체력의 20%에 해당하는 방어막을 획득하고 무작위 적 3명을 도발합니다.	38																								
-1005114	DES_SKILL_ADELE	아델이 청소기로 현재 공격 중인 대상을 3초간 빨아들입니다. 이때, 대상은 3초간 매혹되며 공격력의 150%의 물리 피해를 입습니다.	39																								
-1005115	DES_SKILL_ISYS	이시스가 맛있는 요리를 가장 가까운 아군에게 던져 공격 속도를 3초간 100% 증가시킵니다.	40																								
+1005112	DES_AME_SKILL	아메가 아군에게 비를 내려 체력이 가장 낮은 아군 2명의 체력을 주문력의 30%에 해당하는 만큼 회복시키고, 4초간 공격력 및 주문력을 50% 증가시킵니다.	34																								
+1005013	SKILL_RUBIKA_SKILL	돼지우리	35																								
+1005014	SKILL_ADELE_SKILL	쭈와아압	36																								
+1005015	SKILL_ISYS_SKILL	하이. ㅇI시스	37																								
+1005113	DES_RUBIKA_SKILL	루비카의 최대 체력의 20%에 해당하는 방어막을 획득하고 무작위 적 3명을 도발합니다.	38																								
+1005114	DES_ADELE_SKILL	아델이 청소기로 현재 공격 중인 대상을 3초간 빨아들입니다. 이때, 대상은 3초간 매혹되며 공격력의 150%의 물리 피해를 입습니다.	39																								
+1005115	DES_ISYS_SKILL	이시스가 맛있는 요리를 가장 가까운 아군에게 던져 공격 속도를 3초간 100% 증가시킵니다.	40																								
 1005017	TURTLE_PASSIVE	정지!	41																								
 1005018	RABBIT_SKILL	집중펀치!	42																								
 1005019	GALAXY_SKILL	진압하겠습니다	43																								
 1005020	FORSYTHIA_SKILL	꼼짝마!	44																								
-1005117	DES_SKILL_TURTLE	5초마다 인접한 적에게 주문력의 100%에 해당하는 마법피해를 가합니다.	45																								
-1005118	DES_SKILL_RABBIT	주문력의 200%에 해당하는 마법피해를 가하고, 적의 체력이 최대 체력의 10% 미만이 되었다면 처형합니다.	46																								
-1005119	DES_SKILL_GALAXY	주변 1칸 내에 적에게 주면력의 50%에 해당하는 마법피해를 부여하고, 1.5초간 침묵을 부여합니다.	47																								
-1005120	DES_SKILL_FORSYTHIA	1열에 있는 아군들에게 주문력의 100%에 비례하는 보호막을 생성합니다.	48																								
+1005117	DES_TURTLE_SKILL	5초마다 인접한 적에게 주문력의 100%에 해당하는 마법피해를 가합니다.	45																								
+1005118	DES_RABBIT_SKILL	주문력의 200%에 해당하는 마법피해를 가하고, 적의 체력이 최대 체력의 10% 미만이 되었다면 처형합니다.	46																								
+1005119	DES_GALAXY_SKILL	주변 1칸 내에 적에게 주면력의 50%에 해당하는 마법피해를 부여하고, 1.5초간 침묵을 부여합니다.	47																								
+1005120	DES_FORSYTHIA_SKILL	1열에 있는 아군들에게 주문력의 100%에 비례하는 보호막을 생성합니다.	48																								
 1005200	TOAST_NOMONEY	배팅 금액이 모자랍니다.	2																								
 1005201	TOAST_NOTEAM	팀을 선택해주세요!	1																								
 1005202	BTN_BATTLE	전투 중...	battle...																								
