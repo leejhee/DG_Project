@@ -18,12 +18,12 @@ namespace Client
             if (Caster)
             {
                 BuffFunction.KillSelfFunction(true, true);
-                Debug.Log($"{Caster.name}의 버프 삭제 : {BuffFunction.functionType}");
+                Debug.Log($"{Caster.GetID()}번 캐릭 {Caster.name}의 버프 삭제 : {BuffFunction.functionType} | {BuffFunction.DebugIndex}");
             }
             else
             {
                 BuffFunction.RunFunction(false);
-                Debug.Log($"시너지 버프 삭제 : {BuffFunction.functionType}");
+                Debug.Log($"{Caster.GetID()}번 캐릭 {Caster.name}의 시너지 버프 삭제 : {BuffFunction.functionType} | {BuffFunction.DebugIndex}");
             }
         }
     }

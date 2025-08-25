@@ -307,10 +307,10 @@ namespace Client
                 }
             }
 
-            ScanAllMembers();
+            //ScanAllMembers();
         }
         
-        private void ScanAllMembers()
+        public void NotifyBuffDistribution()
         {
             foreach(var member in _synergyMembers)
                 OnNewBuffDistributed(member.SpecifyCharBase());

@@ -8,6 +8,7 @@ namespace Client
         private void Start()
         {
             GameManager instance = GameManager.Instance;
+            StageManager.Instance.Init();
         }
 
         [ContextMenu("베팅 없이 전투 시작")]

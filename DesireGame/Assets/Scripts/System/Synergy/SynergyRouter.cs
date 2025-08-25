@@ -68,6 +68,9 @@ namespace Client
                 
                 ApplyToMembers(ct, e);
             }
+            
+            ct.NotifyBuffDistribution();
+            Debug.Log($"{ct.Side}의 {ct.Synergy}가 {ct.DistinctMembers}명 구성으로 {ct.MemberCount}에 적용");
         }
         
         private void ApplyAuraForAll(SynergyContainer ct, SynergyData data)
@@ -107,9 +110,13 @@ namespace Client
             
             if(!_auraRecords.TryGetValue(key, out var charRecords))
                 _auraRecords[key] = charRecords = new Dictionary<CharBase, Dictionary<long, SynergyBuffRecord>>();
-            if(!charRecords.TryGetValue(target, out var rec))
-                charRecords[target] = new Dictionary<long, SynergyBuffRecord>();
-            if (rec != null && rec.ContainsKey(funcData.Index)) return; // 중복 허용 X
+            if (!charRecords.TryGetValue(target, out var rec))
+            {
+                rec = new Dictionary<long, SynergyBuffRecord>();
+                charRecords[target] = rec;
+            }
+                
+            if (rec.ContainsKey(funcData.Index)) return; // 중복 허용 X
 
             var sf = target.FunctionInfo.AddFunction(
                 new BuffParameter()
@@ -119,6 +126,11 @@ namespace Client
                     eFunctionType = funcData.function,
                     FunctionIndex = funcData.Index
                 }, data.buffTriggerTime);
+            
+            if (sf == null) {
+                Debug.LogWarning($"[SynergyRouter] AddFunction returned null: fn={funcData.function}, idx={funcData.Index}, target={target.name}");
+                return;
+            }
             
             rec[funcData.Index] = new SynergyBuffRecord(caster, sf);
         }
@@ -158,7 +170,7 @@ namespace Client
                 FunctionIndex = data.functionIndex
             };
             var fb = FunctionFactory.FunctionGenerate(fp);
-            anchor.FunctionInfo.AddFunction(fp, data.buffTriggerTime);
+            anchor.FunctionInfo.AddFunction(fb, data.buffTriggerTime);
             anchor.EnsureSingle($"{fp.eFunctionType}:{fp.FunctionIndex}", new SynergyBuffRecord(caster, fb));
         }
         
@@ -170,6 +182,8 @@ namespace Client
                 return CharManager.Instance.GetOneSide(CharUtil.GetEnemyType(cont.Side)) ?? Enumerable.Empty<CharBase>();
             return Enumerable.Empty<CharBase>();
         }
+        
+        
     }
 
     

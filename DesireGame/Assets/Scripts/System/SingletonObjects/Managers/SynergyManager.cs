@@ -97,11 +97,12 @@ namespace Client
                 _synergyMembers.Add(side, new Dictionary<eSynergy, SynergyContainer>());
             
             var synergyActivator = _synergyMembers[side];
+            //시너지 원래 없었어서 새로 만들어지면
             if (!synergyActivator.TryGetValue(synergy, out var ct))
             {
                 ct = new SynergyContainer(synergy, side);
                 synergyActivator.TryAdd(synergy, ct);
-                _router.Wire(ct);
+                //_router.Wire(ct);
 
                 var fams = CharManager.Instance.GetOneSide(side);
                 if (fams != null)
@@ -168,7 +169,9 @@ namespace Client
             _rebuilding = true;
             _synergyMembers.Clear();
             _anchors.Clear();
-
+            
+            Debug.Log("시너지 시스템 초기화 완료");
+            
             foreach (var side in new[] { eCharType.ALLY, eCharType.ENEMY })
             {
                 var list = CharManager.Instance.GetOneSide(side);
@@ -180,12 +183,14 @@ namespace Client
                     RegisterCharSynergy(info);
                 }
             }
-
+            Debug.Log("시너지 등록 완료");
             _rebuilding = false;
 
             foreach (var bySyn in _synergyMembers.Values)
                 foreach (var cont in bySyn.Values)
                     _router.ApplyAll(cont);
+            Debug.Log("시너지 분배 완료");
+            
         }
         
         #region Test_Method

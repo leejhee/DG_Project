@@ -112,6 +112,8 @@ namespace Client
             _charAction =   new(this);
             _charAI =       new(this);
             _mainCamera =   Camera.main;
+            
+            CharInit();
         }
 
         protected virtual void Start()
@@ -125,7 +127,7 @@ namespace Client
             {
                 _indexPair[state] = 0;
             }
-            CharInit();
+            //CharInit();
         }
 
         void Update()
