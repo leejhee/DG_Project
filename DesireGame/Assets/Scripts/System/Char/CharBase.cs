@@ -188,7 +188,7 @@ namespace Client
             #region 시너지 등록
 
             _lightWeightInfo = GetCharSynergyInfo();
-            SynergyManager.Instance.RegisterCharSynergy(_lightWeightInfo);
+            //SynergyManager.Instance.RegisterCharSynergy(_lightWeightInfo);
             
             #endregion
             

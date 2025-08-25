@@ -24,13 +24,12 @@ namespace Client
             ct.OnMemberJoined += _ => ApplyAll(ct);
             ct.OnMemberLeft += _ => ApplyAll(ct);
             
-            
+            //guest는?
         }
         
         public void ApplyAll(SynergyContainer ct)
         {
             (eCharType Side, eSynergy Synergy) key = (ct.Side, ct.Synergy);
-            // 멤버용, 전체용 레코드 리스트 청소
             if (_records.TryGetValue(key, out var memRecords))
             {
                 foreach(var r in memRecords) r?.KillSynergyBuff();
