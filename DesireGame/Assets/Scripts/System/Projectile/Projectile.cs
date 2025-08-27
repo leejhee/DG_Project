@@ -7,8 +7,8 @@ namespace Client
 {
     public class Projectile : MonoBehaviour
     {
-        [SerializeField]
-        private long            _index;
+        [SerializeField] 
+        private long _index;
         
         private Collider        _projectileCollider;
         private Transform       _projectileTransform;
@@ -21,7 +21,10 @@ namespace Client
         private List<FunctionData> _functionDataList;
         private int _projectileLife; // 투사체의 관통 허용 수치
         
-        // 뭔가뭔가다.
+        private GameObject _effectPrefab;
+
+
+        private bool _shouldSpawnEffect = false;
         private bool destroyFlag = false;
         public void SetDestroyFlag(bool flag) => destroyFlag = flag;
 
@@ -86,6 +89,11 @@ namespace Client
                 _functionDataList.Add(DataManager.Instance.GetData<FunctionData>(index));
             }
         }
+
+        public void InjectProjectileEffect(GameObject effect)
+        {
+            _effectPrefab = effect;
+        }
         #endregion
         
         private void FixedUpdate()
@@ -141,9 +149,17 @@ namespace Client
                 // 경우에 따라 수치 바뀔수도...? 2저지 3저지 그런거 있을수도 있고
                 if(--_projectileLife < 0)
                 {
+                    _shouldSpawnEffect = true;
                     SetDestroyFlag(true);
                 }
             }
+
+            if (_shouldSpawnEffect)
+            {
+                GameObject eff = Instantiate(_effectPrefab, transform.position, Quaternion.Euler(-90f, 90f, 0f));
+                eff.AddComponent<EffectBehaviour>();
+            }
+            
         }
 
         // path type의 종류로 인해 선택함

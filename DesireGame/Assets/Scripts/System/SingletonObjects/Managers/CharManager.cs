@@ -352,6 +352,13 @@ namespace Client
         public void HardClearAll()
         {
             SynergyManager.Instance.Reset();
+            foreach (var charDict in _cache.Values)
+            {
+                foreach (var character in charDict.Values)
+                {
+                    character?.Dead();
+                }
+            }
             _cache.Clear();
         }
         

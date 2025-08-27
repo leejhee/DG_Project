@@ -15,6 +15,8 @@ MonoBehaviour:
   m_Time: 0.16666666666666666
   _statName: 1
   percent: 100
+  effect: {fileID: 2979152097692260937, guid: 47037256e55e8244cb3494f96f4217cb, type: 3}
+  offset: {x: 0, y: 0}
 --- !u!114 &-7870775780236659855
 MonoBehaviour:
   m_ObjectHideFlags: 1

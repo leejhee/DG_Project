@@ -12,10 +12,13 @@ namespace Client
     public class SkillMarkerPinpointDamage : SkillTimeLineMarker
     {
 
-        [Header("투사체에 반영할 시전자의 스탯과 비율")]
+        [Header("대미지에 반영할 시전자의 스탯과 비율")]
         [SerializeField] protected SystemEnum.eStats _statName;
         [SerializeField] protected float percent;
-
+        
+        [Header("타격 이펙트")]
+        [SerializeField] protected GameObject effect;
+        [SerializeField] protected Vector2 offset;
         public override void MarkerAction()
         {
             if(_statName == default || percent == default)
@@ -35,6 +38,12 @@ namespace Client
 
                 DamageParameter param = casterStat.SendDamage(calculated, casterStat.DamageType);
                 target.CharStat.ReceiveDamage(param);
+                Vector3 targetPos = target.transform.position;
+                Instantiate(
+                    effect,
+                    new Vector3(targetPos.x - offset.y, targetPos.y, targetPos.z + offset.x),
+                    Quaternion.Euler(-90f, 90f, 0),
+                    target.transform);
             }
         }
 

@@ -10,6 +10,9 @@ namespace Client
         [Header("발사할 투사체")]
         [SerializeField] protected Projectile _projectile;
         [SerializeField] protected Vector3 _offSet;
+
+        [Header("투사체 적중 이펙트")] [SerializeField]
+        protected GameObject effect;
         
         //만약 이걸 쓴다면 이 데이터들을 전송해줄 게 따로 필요하다.
         [Header("투사체에 반영할 시전자의 스탯과 비율")]
@@ -27,7 +30,9 @@ namespace Client
                 if (!SkillParam.skillTargets[idx]) continue;
                 Projectile projectile = GameObject.Instantiate(_projectile, SkillParam.skillCaster.transform.position, Quaternion.identity);
                 projectile.InitProjectile(SkillParam.ToStatPack(_statName, percent, idx));
-                projectile.InjectProjectileFunction(indices);            
+                projectile.InjectProjectileFunction(indices);
+                if (!effect) continue;
+                projectile.InjectProjectileEffect(effect);
             }
         }
     }

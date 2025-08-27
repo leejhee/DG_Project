@@ -71,6 +71,11 @@ namespace Client
                 StageManager.Instance.StartStage(StageNum);
                 //SetStage();
             }
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button("해당 스테이지 전투 시작", GUILayout.Width(300)))
+            {
+                CharManager.Instance.WakeAllCharAI();
+            }
         }
 
         private void SetStage()

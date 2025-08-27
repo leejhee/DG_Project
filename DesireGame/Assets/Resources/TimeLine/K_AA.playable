@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Time: 0.25
   _projectile: {fileID: 1496515457595730074, guid: eafb68756b4bdb24589fa45028165a54, type: 3}
   _offSet: {x: 0, y: 0, z: 0}
+  effect: {fileID: 3919445155170265295, guid: c10304a0e12f8a3469d68f9e247c5e2e, type: 3}
   _statName: 3
   percent: 100
   indices: 
