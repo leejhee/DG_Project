@@ -24,7 +24,10 @@ namespace Client
 
         // 전투가 끝났는지
         public bool IsStageFinished { get; private set; } = false;
-
+        
+        // 전투 직후 다음 스테이지로 진행하는지
+        public bool IsStageStartedImmediately { get; private set; }
+        
         public Action OnStageChanged;
         public Action OnStartCombat;
         public Action OnEndCombat;
@@ -133,12 +136,14 @@ namespace Client
             else return;
 
             Debug.Log($"{charType} 타입의 모든 캐릭터가 제거되었습니다.");
-
+            CharManager.Instance.SleepAllCharAI(); // AI 전부 turnoff
             // 제거된 타입이 내가 베팅한 팀이 아닌 경우 -> 승리
             bool isWin = MyTeam != charType;
 
             GetReward(isWin);
-            MoveToNextStage();
+            
+            if(IsStageStartedImmediately)
+                MoveToNextStage();
         }
 
         /// <summary>

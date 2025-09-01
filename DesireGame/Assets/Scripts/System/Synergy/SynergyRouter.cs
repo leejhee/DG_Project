@@ -30,7 +30,7 @@ namespace Client
         public void ApplyAll(SynergyContainer ct)
         {
             (eCharType Side, eSynergy Synergy) key = (ct.Side, ct.Synergy);
-            if (_records.TryGetValue(key, out var memRecords))
+            if (_records.TryGetValue(key, out List<SynergyBuffRecord> memRecords))
             {
                 foreach(var r in memRecords) r?.KillSynergyBuff();
                 memRecords.Clear();

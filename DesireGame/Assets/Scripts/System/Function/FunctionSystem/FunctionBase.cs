@@ -109,7 +109,10 @@ namespace Client
         
         #region Condition Control
         private ConditionBase _condition = null;
-
+        
+        /// <summary>
+        /// 해당 function에 종속된 condition을 만들고, 관리하도록 컨테이너에 등록
+        /// </summary>
         public void CheckFollowingCondition()
         {
             if (_FunctionData.ConditionCheck == 0)

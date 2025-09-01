@@ -39,11 +39,15 @@ namespace Client
                 DamageParameter param = casterStat.SendDamage(calculated, casterStat.DamageType);
                 target.CharStat.ReceiveDamage(param);
                 Vector3 targetPos = target.transform.position;
-                Instantiate(
-                    effect,
-                    new Vector3(targetPos.x - offset.y, targetPos.y, targetPos.z + offset.x),
-                    Quaternion.Euler(-90f, 90f, 0),
-                    target.transform);
+                if (effect)
+                {
+                    Instantiate(
+                        effect,
+                        new Vector3(targetPos.x - offset.y, targetPos.y, targetPos.z + offset.x),
+                        Quaternion.Euler(-90f, 90f, 0),
+                        target.transform);
+                }
+                
             }
         }
 

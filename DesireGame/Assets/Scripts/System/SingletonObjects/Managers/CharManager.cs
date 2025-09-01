@@ -328,6 +328,18 @@ namespace Client
             }
         }
 
+        public void SleepAllCharAI()
+        {
+            foreach (var kvp in _cache)
+            {
+                foreach(var unit in kvp.Value)
+                {
+                    Debug.Log($"AI - uid: {unit.Value.GetID()} 캐릭터 이름: {unit.Value.CharData.charKorName}");
+                    unit.Value.AISwitch(false);
+                }
+            }
+        }
+        
         public void ClearAllChar()
         {
             if (_cache == null)

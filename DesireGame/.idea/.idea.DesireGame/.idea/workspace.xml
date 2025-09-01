@@ -5,24 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Object/EffectBehaviour.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/System/Object/EffectBehaviour.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX Pack/Demo/Hit/hit001.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX Pack/Demo/Hit/hit001.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX Pack/Demo/Hit/hit002.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX Pack/Demo/Hit/hit002.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX Pack/Demo/Slash/S0101_anim.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX Pack/Demo/Slash/S0101_anim.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FX Pack/Prefabs/Hit/hit_00210.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FX Pack/Prefabs/Hit/hit_00210.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Char/Yuna_Enemy_Prefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Char/Yuna_Enemy_Prefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Char/Yuna_Prefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Char/Yuna_Prefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/K_AA.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/K_AA.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TimeLine/YUNA_AA.playable" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/TimeLine/YUNA_AA.playable" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Projectile/Projectile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Function/FunctionSystem/FunctionBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/StageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/StageManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Synergy/SynergyRouter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerPinpointDamage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerPinpointDamage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerShotProjectal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/TimeLine/Marker/SkillMarkerShotProjectal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/StageTool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tool/InGameTool/StageTool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +267,10 @@
       <workItem from="1755670747563" duration="7278000" />
       <workItem from="1755779820451" duration="7863000" />
       <workItem from="1756213280181" duration="1223000" />
-      <workItem from="1756298375334" duration="9226000" />
+      <workItem from="1756298375334" duration="9852000" />
+      <workItem from="1756385600946" duration="1793000" />
+      <workItem from="1756465862182" duration="1000" />
+      <workItem from="1756712939894" duration="9271000" />
     </task>
     <servers />
   </component>
