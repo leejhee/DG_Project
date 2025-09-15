@@ -74,7 +74,8 @@ namespace Client
             {
                 DeleteSynergy(leaver, synergy);
             }
-            
+
+            if (_synergyMembers[side] == null) return;
             var others = _synergyMembers[side].Keys.Except(leaver.SynergyList).ToList();
             foreach (var other in others)
             {

@@ -13,7 +13,7 @@ namespace Client
     #endregion
 
     #region CharBase
-
+    
     public class PlayerMove : MessageSystemParam
     {
         public int beforeTileIndex = default;
@@ -28,4 +28,16 @@ namespace Client
     }
 
     #endregion
+
+    public class OnSynergyChange : MessageSystemParam
+    {
+        public SystemEnum.eCharType Team;
+        public List<SynergyData> Synergy;
+
+        public OnSynergyChange(SystemEnum.eCharType team, List<SynergyData> synergy)
+        {
+            Team = team; Synergy = synergy;
+        }
+    }
+    
 }
