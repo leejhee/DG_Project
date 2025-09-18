@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="904936f0-c59d-4c8f-9a5f-0ae3c652fc0d" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/GameSceneUI/GameSceneSynergyTab.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/GameSceneUI/GameSceneSynergyTab.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DesireGame/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Message/MessageParam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Message/MessageParam.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/SynergyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/Char/CharBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/System/SingletonObjects/Managers/CharManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +21,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../AngelBeat/Assets/Core/Scripts/GameSave/IO/SlotIO.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../AngelBeat/Assets/Core/Scripts/GameSave/IO/SlotIO.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/CharAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAI/Target/TargettingStrategyBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/System/Char/CharAction/CharAction.cs" root0="FORCE_HIGHLIGHTING" />
@@ -277,7 +274,8 @@
       <workItem from="1756809145426" duration="510000" />
       <workItem from="1756817426396" duration="1718000" />
       <workItem from="1757092135265" duration="680000" />
-      <workItem from="1757954342238" duration="1979000" />
+      <workItem from="1757954342238" duration="2191000" />
+      <workItem from="1758185024508" duration="1084000" />
     </task>
     <servers />
   </component>

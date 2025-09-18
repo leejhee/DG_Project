@@ -313,7 +313,7 @@ namespace Client
             {                
                 _coroutine = StartCoroutine(CharAI.UpdateAI(_currentState));
             }
-            else
+            else if(_coroutine != null)
             {
                 StopCoroutine(_coroutine);
             }
@@ -343,7 +343,7 @@ namespace Client
         public Action OnRealDead;
         public virtual void Dead()
         {
-            SynergyManager.Instance.DeleteCharSynergy(_lightWeightInfo);
+            //SynergyManager.Instance.DeleteCharSynergy(_lightWeightInfo);
             CharDead();
             OnRealDead?.Invoke();
             Destroy(gameObject);

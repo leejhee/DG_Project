@@ -364,12 +364,17 @@ namespace Client
         public void HardClearAll()
         {
             SynergyManager.Instance.Reset();
+            
+            var toKill = new List<CharBase>();
             foreach (var charDict in _cache.Values)
             {
-                foreach (var character in charDict.Values)
-                {
-                    character?.Dead();
-                }
+                if (charDict == null) continue;
+                toKill.AddRange(charDict.Values);
+            }
+
+            foreach (var ch in toKill)
+            {
+                ch?.Dead();
             }
             _cache.Clear();
         }
